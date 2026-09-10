@@ -133,7 +133,7 @@ export default function Leaders({ onSelectLeader }) {
         <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} style={{ flex: 1, minWidth: '140px', fontSize: '13px' }}>
           <option value="">All States</option>
           {STATES.map(s => (
-            <option key={s.code} value={s.code}>{s.name.toUpperCase()}</option>
+            <option key={s.code} value={s.name}>{s.name.toUpperCase()}</option>
           ))}
         </select>
 
