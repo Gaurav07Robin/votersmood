@@ -1,7 +1,13 @@
 import express from 'express';
 import { db } from '../config/firebase.js';
 import { collection, doc, setDoc, getDocs, getDoc, deleteDoc, updateDoc } from 'firebase/firestore';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { verifyAuthToken, requireAdmin } from '../middleware/auth.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 
@@ -46,12 +52,39 @@ export const incrementLeaderQuestionCounts = async (leaderId, delta = 1) => {
 
 // Async Sync from Cloud Firestore DB
 const syncLeadersFromDB = async () => {
+  const cacheFilePath = path.join(__dirname, '../data/leaders_cache.json');
+  
+  // 1. Try loading from local JSON file
+  if (fs.existsSync(cacheFilePath)) {
+    try {
+      const data = fs.readFileSync(cacheFilePath, 'utf-8');
+      LEADERS_CACHE = JSON.parse(data);
+      console.log(`📦 Local Cache: Loaded ${LEADERS_CACHE.length} leader profiles from leaders_cache.json (Saved Firestore Reads)`);
+      return;
+    } catch (e) {
+      console.warn('⚠️ Local cache read error:', e.message);
+    }
+  }
+
+  // 2. Fallback to Firestore if local cache doesn't exist
   if (db) {
     try {
       const snap = await getDocs(collection(db, 'leaders'));
       if (snap.docs.length > 0) {
         LEADERS_CACHE = snap.docs.map(docSnap => ({ id: docSnap.id, ...docSnap.data() }));
         console.log(`🔥 Firestore DB: Synchronized ${LEADERS_CACHE.length} leader profiles from database`);
+        
+        // Save to local cache file for future restarts
+        try {
+          const dataDir = path.dirname(cacheFilePath);
+          if (!fs.existsSync(dataDir)) {
+            fs.mkdirSync(dataDir, { recursive: true });
+          }
+          fs.writeFileSync(cacheFilePath, JSON.stringify(LEADERS_CACHE, null, 2), 'utf-8');
+          console.log(`📦 Local Cache: Saved leaders to leaders_cache.json`);
+        } catch (fsErr) {
+          console.warn('⚠️ Could not save leaders_cache.json:', fsErr.message);
+        }
       }
     } catch (e) {
       console.warn('⚠️ Firestore leaders sync warning:', e.message);
@@ -66,7 +99,7 @@ syncLeadersFromDB();
 router.get('/', async (req, res) => {
   const { state, party, type, search, page, limit, sort } = req.query;
   
-  if (db) {
+  if (db && LEADERS_CACHE.length === 0) {
     await syncLeadersFromDB();
   }
 
@@ -222,6 +255,13 @@ router.post('/', verifyAuthToken, requireAdmin, async (req, res) => {
   } else {
     LEADERS_CACHE.unshift(newLeader);
   }
+
+  try {
+    const cacheFilePath = path.join(__dirname, '../data/leaders_cache.json');
+    if (fs.existsSync(cacheFilePath)) {
+      fs.writeFileSync(cacheFilePath, JSON.stringify(LEADERS_CACHE, null, 2), 'utf-8');
+    }
+  } catch (e) {}
 
   res.status(201).json(newLeader);
 });

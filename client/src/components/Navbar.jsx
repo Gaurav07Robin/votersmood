@@ -105,6 +105,7 @@ export default function Navbar({ activeTab = 'discussions', setActiveTab, openRe
                 { id: 'discussions', label: 'Discussions', icon: EditorialFeed },
                 { id: 'polls', label: 'Election Polls', icon: BallotBox },
                 { id: 'directory', label: 'Directory', icon: AssemblyPillar },
+                { id: 'elections', label: 'Elections', icon: AssemblyPillar },
                 { id: 'trending', label: 'Trending', icon: SignalPulse },
               ].map((tab) => {
                 const IconComp = tab.icon;
@@ -282,6 +283,7 @@ export default function Navbar({ activeTab = 'discussions', setActiveTab, openRe
                 { id: 'discussions', label: 'Discussions', icon: EditorialFeed },
                 { id: 'polls', label: 'Election Polls', icon: BallotBox },
                 { id: 'directory', label: 'Directory', icon: AssemblyPillar },
+                { id: 'elections', label: 'Elections', icon: AssemblyPillar },
                 { id: 'trending', label: 'Trending', icon: SignalPulse },
               ].map((tab) => {
                 const IconComp = tab.icon;

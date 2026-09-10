@@ -49,13 +49,27 @@ service cloud.firestore {
       allow write: if isAdmin();
     }
 
+    // Elections Collections
+    match /elections_metadata/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /elections_constituencies/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
     // Posts Collection
     match /posts/{postId} {
       allow read: if resource.data.isApproved == true || isAdmin() || (isAuth() && resource.data.authorId == request.auth.uid);
       allow create: if isAuth() && 
                     request.resource.data.content.size() <= 500 &&
-                    request.resource.data.authorId == request.auth.uid;
-      allow update, delete: if isAdmin() || (isAuth() && resource.data.authorId == request.auth.uid);
+                    request.resource.data.authorId == request.auth.uid &&
+                    (!('isApproved' in request.resource.data) || request.resource.data.isApproved == false || isAdmin());
+      allow update: if isAdmin() || (isAuth() && resource.data.authorId == request.auth.uid && 
+                    (!('isApproved' in request.resource.data) || request.resource.data.isApproved == resource.data.isApproved));
+      allow delete: if isAdmin() || (isAuth() && resource.data.authorId == request.auth.uid);
 
       // Post Comments Subcollection
       match /comments/{commentId} {
@@ -65,8 +79,11 @@ service cloud.firestore {
                       (
                         (request.resource.data.isReply == true && request.resource.data.content.size() <= 50) ||
                         ((!('isReply' in request.resource.data) || request.resource.data.isReply == false) && request.resource.data.content.size() <= 500)
-                      );
-        allow update, delete: if isAdmin() || (isAuth() && resource.data.authorId == request.auth.uid);
+                      ) &&
+                      (!('isApproved' in request.resource.data) || request.resource.data.isApproved == false || isAdmin());
+        allow update: if isAdmin() || (isAuth() && resource.data.authorId == request.auth.uid && 
+                      (!('isApproved' in request.resource.data) || request.resource.data.isApproved == resource.data.isApproved));
+        allow delete: if isAdmin() || (isAuth() && resource.data.authorId == request.auth.uid);
       }
     }
 
@@ -87,7 +104,10 @@ service cloud.firestore {
                     request.resource.data.creatorId == request.auth.uid &&
                     (!('isFeatured' in request.resource.data) || request.resource.data.isFeatured == false || isAdmin()) &&
                     (!('isElectionPoll' in request.resource.data) || request.resource.data.isElectionPoll == false || isAdmin());
-      allow update, delete: if isAdmin() || (isAuth() && resource.data.creatorId == request.auth.uid);
+      allow update: if isAdmin() || (isAuth() && resource.data.creatorId == request.auth.uid && 
+                    (!('isFeatured' in request.resource.data) || request.resource.data.isFeatured == resource.data.isFeatured) &&
+                    (!('isElectionPoll' in request.resource.data) || request.resource.data.isElectionPoll == resource.data.isElectionPoll));
+      allow delete: if isAdmin() || (isAuth() && resource.data.creatorId == request.auth.uid);
 
       // Poll Votes Subcollection
       match /votes/{userId} {

@@ -53,10 +53,10 @@ export default function Home({ openRegisterModal }) {
     setPosts(prev => [newPost, ...(Array.isArray(prev) ? prev : [])]);
   };
 
-  // SEO-friendly Navigation for Featured Leaders in Home Discussions Sidebar (e.g. /devendra-fadnavis)
+  // SEO-friendly Navigation for Featured Leaders in Home Discussions Sidebar (e.g. /directory/devendra-fadnavis)
   const handleSelectLeader = (leaderIdOrSlug) => {
     const cleanSlug = String(leaderIdOrSlug).toLowerCase().trim().replace(/[^a-z0-9]+/g, '-');
-    window.history.pushState({}, '', `/${cleanSlug}`);
+    window.history.pushState({}, '', `/directory/${cleanSlug}`);
     window.dispatchEvent(new Event('popstate'));
   };
 

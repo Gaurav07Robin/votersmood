@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { STATES, PARTIES } from '../../../server/data/states';
+import { STATES, PARTIES, getDistrictsForState, getConstituencies } from '../../../server/data/states';
 
 const POSITIONS_LIST = [
   'Prime Minister', 'Chief Minister', 'Deputy Chief Minister', 'Cabinet Minister',
@@ -51,6 +51,7 @@ export default function RepresentativeFormModal({ isOpen, onClose, onSave, editi
 
   // Geographic & Dynamic Specs
   const [stateCode, setStateCode] = useState(editingRepresentative?.state || 'MH');
+  const [district, setDistrict] = useState(editingRepresentative?.district || '');
   const [constituency, setConstituency] = useState(editingRepresentative?.constituency || '');
   const [seatType, setSeatType] = useState(editingRepresentative?.seatType || 'General');
   const [electionYear, setElectionYear] = useState(editingRepresentative?.electionYear || '2024');
@@ -155,6 +156,7 @@ export default function RepresentativeFormModal({ isOpen, onClose, onSave, editi
       type: finalType,
       repType: finalType,
       state: stateCode,
+      district: district,
       constituency: (finalType === 'MP_RS' || finalType === 'OTHER') && !constituency.trim() ? 'State Wide' : constituency.trim(),
       seatType,
       electionYear,
@@ -347,12 +349,26 @@ export default function RepresentativeFormModal({ isOpen, onClose, onSave, editi
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
               <div>
                 <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 600 }}>STATE / UNION TERRITORY</label>
-                <select value={stateCode} onChange={(e) => setStateCode(e.target.value)}>
+                <select value={stateCode} onChange={(e) => { setStateCode(e.target.value); setDistrict(''); setConstituency(''); }}>
+                  <option value="">Select State</option>
                   {STATES.map(s => (
-                    <option key={s.code} value={s.code}>{s.name.toUpperCase()}</option>
+                    <option key={s.code} value={s.name}>{s.name.toUpperCase()}</option>
                   ))}
                 </select>
               </div>
+
+              {/* District Field */}
+              {repType !== 'MP_RS' && (
+                <div>
+                  <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 600 }}>DISTRICT</label>
+                  <select value={district} onChange={(e) => { setDistrict(e.target.value); setConstituency(''); }}>
+                    <option value="">Select District</option>
+                    {getDistrictsForState(stateCode).map(d => (
+                      <option key={d} value={d}>{d}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
 
               {/* Conditional Constituency Field */}
               {repType !== 'MP_RS' && (
@@ -360,7 +376,12 @@ export default function RepresentativeFormModal({ isOpen, onClose, onSave, editi
                   <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 600 }}>
                     {repType === 'MP_LS' ? 'PARLIAMENTARY CONSTITUENCY *' : 'ASSEMBLY / LOCAL CONSTITUENCY'}
                   </label>
-                  <input type="text" value={constituency} onChange={(e) => setConstituency(e.target.value)} placeholder="e.g. Nagpur South West" />
+                  <select value={constituency} onChange={(e) => setConstituency(e.target.value)}>
+                    <option value="">{repType.startsWith('MP_') ? 'Select Parliamentary Constituency' : 'Select Assembly Constituency'}</option>
+                    {getConstituencies(stateCode, district, repType).map(c => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
                 </div>
               )}
 

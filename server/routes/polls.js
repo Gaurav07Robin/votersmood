@@ -1,6 +1,6 @@
 import express from 'express';
 import { db } from '../config/firebase.js';
-import { collection, doc, setDoc, addDoc, getDocs, getDoc, deleteDoc, updateDoc, query, where, orderBy } from 'firebase/firestore';
+import { collection, doc, setDoc, addDoc, getDocs, getDoc, deleteDoc, updateDoc, query, where, orderBy, limit } from 'firebase/firestore';
 import { verifyAuthToken, requireAuth, requireAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -54,10 +54,8 @@ router.get('/signals', async (req, res) => {
 
     if (db) {
       try {
-        // 1. Calculate live polling stats from official_elections
-        const snapElections = await getDocs(collection(db, 'official_elections'));
-        snapElections.docs.forEach(docSnap => {
-          const d = docSnap.data();
+        // 1. Calculate live polling stats from official_elections (USE CACHE)
+        officialElectionsCache.forEach(d => {
           const rVotes = Object.values(d.residentVotes || {}).reduce((a, b) => a + b, 0);
           const oVotes = Object.values(d.observerVotes || {}).reduce((a, b) => a + b, 0);
           residentTotal += rVotes;
@@ -65,9 +63,9 @@ router.get('/signals', async (req, res) => {
           totalVotes += (d.totalVotes || (rVotes + oVotes));
         });
 
-        // 2. Fetch recent vote activity from votes collection
-        const snapVotes = await getDocs(query(collection(db, 'votes'), orderBy('votedAt', 'desc')));
-        recentActivity = snapVotes.docs.slice(0, 5).map(docSnap => {
+        // 2. Fetch recent vote activity from votes collection (USE LIMIT)
+        const snapVotes = await getDocs(query(collection(db, 'votes'), orderBy('votedAt', 'desc'), limit(5)));
+        recentActivity = snapVotes.docs.map(docSnap => {
           const v = docSnap.data();
           const voterType = v.isResident !== false ? 'Verified Resident' : 'Observer';
           const loc = v.constituency ? `${v.constituency}` : `${v.state || 'MH'} Region`;
@@ -81,8 +79,8 @@ router.get('/signals', async (req, res) => {
           return `• ${voterType} from ${loc} voted ${timeAgo}`;
         });
 
-        // 3. Calculate most discussed constituencies from posts
-        const snapPosts = await getDocs(collection(db, 'posts'));
+        // 3. Calculate most discussed constituencies from posts (USE LIMIT)
+        const snapPosts = await getDocs(query(collection(db, 'posts'), limit(100)));
         snapPosts.docs.forEach(docSnap => {
           const p = docSnap.data();
           if (p.topicTag) hashtags.add(`#${p.topicTag.replace(/^#/, '')}`);

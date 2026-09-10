@@ -87,10 +87,16 @@ export default function PostCard({ post, onDelete }) {
     if (!tagText) return;
     const cleanName = tagText.split('(')[0].trim();
     const slug = cleanName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    window.history.pushState({}, '', `/${slug}`);
+    window.history.pushState({}, '', `/directory/${slug}`);
     window.dispatchEvent(new Event('popstate'));
   };
 
+  const navigateToLeader = (e) => {
+    e.stopPropagation();
+    const slug = (post.targetLeaderId || post.targetLeaderName).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    window.history.pushState({}, '', `/directory/${slug}`);
+    window.dispatchEvent(new Event('popstate'));
+  };
   // Ultra-Fast 0ms Optimistic UI Reaction Toggle Engine for Posts
   const handleReaction = (type) => {
     if (!user) {

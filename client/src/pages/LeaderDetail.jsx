@@ -40,7 +40,32 @@ export default function LeaderDetail({ leaderId, onBack }) {
         if (isMounted) {
           setLeader(leaderData);
           if (leaderData?.name) {
-            document.title = `${leaderData.name} (${leaderData.party} • ${leaderData.constituency}) - JanMat Gazette`;
+            // 1. Generate SEO-optimized text
+            const pageTitle = `${leaderData.name} - Political Profile & Career History | VotersMood`;
+            const pageDesc = `View the complete political career, election timeline, and ask open questions to ${leaderData.name}, ${leaderData.party} leader from ${leaderData.constituency}, ${leaderData.state}.`;
+            
+            // 2. Update Document Title
+            document.title = pageTitle;
+            
+            // 3. Update Standard Meta Description
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) metaDesc.setAttribute('content', pageDesc);
+
+            // 4. Update Open Graph (Social) Tags dynamically
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            if (ogTitle) ogTitle.setAttribute('content', pageTitle);
+            
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+            if (ogDesc) ogDesc.setAttribute('content', pageDesc);
+
+            const ogUrl = document.querySelector('meta[property="og:url"]');
+            if (ogUrl) ogUrl.setAttribute('content', window.location.href);
+
+            const photoUrl = leaderData.profilePhoto || leaderData.profilePhotoUrl || leaderData.photoURL;
+            if (photoUrl) {
+              const ogImage = document.querySelector('meta[property="og:image"]');
+              if (ogImage) ogImage.setAttribute('content', photoUrl);
+            }
           }
           
           let filtered = postsData.filter(p => p.isOpenQuestion === true || p.targetLeaderId === leaderId || p.targetLeaderId === leaderData?.id);
@@ -149,25 +174,66 @@ export default function LeaderDetail({ leaderId, onBack }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px', marginTop: '20px', backgroundColor: '#FDF6ED', border: '1px solid #F5E5D3', borderRadius: '8px', padding: '16px', textAlign: 'center' }}>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, color: 'var(--accent-primary)' }}>OPEN QUESTIONS</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.openQuestionsCount || 24}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.openQuestionsCount || 0}</div>
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, color: 'var(--color-success)' }}>ANSWERED</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.answeredCount || 6}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.answeredCount || 0}</div>
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, color: 'var(--color-warning)' }}>PENDING</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.pendingCount || 18}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.pendingCount || 0}</div>
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, color: 'var(--text-secondary)' }}>TOTAL REACTIONS</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{(leader.totalReactionsCount || 4382).toLocaleString()}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{(leader.totalReactionsCount || 0).toLocaleString()}</div>
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, color: 'var(--text-secondary)' }}>TOTAL COMMENTS</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{(leader.totalCommentsCount || 1245).toLocaleString()}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{(leader.totalCommentsCount || 0).toLocaleString()}</div>
             </div>
           </div>
+
+          {/* POLITICAL PROFILE & TIMELINE */}
+          {leader.careerTimeline && leader.careerTimeline.length > 0 && (
+            <div style={{ marginTop: '32px', borderTop: '1px solid var(--border-subtle)', paddingTop: '24px' }}>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '24px' }}>
+                📜 Political Profile & Career History
+              </h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', position: 'relative', marginLeft: '8px' }}>
+                {/* Vertical Line */}
+                <div style={{ position: 'absolute', left: '11px', top: '8px', bottom: '8px', width: '2px', backgroundColor: '#E2E8F0', zIndex: 0 }}></div>
+                
+                {leader.careerTimeline.map((milestone, idx) => (
+                  <div key={idx} style={{ display: 'flex', gap: '24px', position: 'relative', zIndex: 1 }}>
+                    {/* Timeline Node */}
+                    <div style={{ width: '24px', height: '24px', borderRadius: '50%', backgroundColor: '#0284C7', flexShrink: 0, marginTop: '2px', border: '4px solid #FFFFFF', boxShadow: '0 0 0 1px #CBD5E1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <div style={{ width: '6px', height: '6px', backgroundColor: '#FFFFFF', borderRadius: '50%' }}></div>
+                    </div>
+                    {/* Timeline Content */}
+                    <div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '6px' }}>
+                        <div style={{ display: 'inline-block', fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 800, color: '#0369A1', backgroundColor: '#F0F9FF', padding: '2px 8px', borderRadius: '4px' }}>
+                          {milestone.year}
+                        </div>
+                        {milestone.place && (
+                          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 600, color: 'var(--text-muted)' }}>
+                            📍 {milestone.place}
+                          </div>
+                        )}
+                      </div>
+                      <div style={{ fontFamily: 'var(--font-sans)', fontSize: '16px', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '6px' }}>
+                        {milestone.title}
+                      </div>
+                      <div style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.6' }}>
+                        {milestone.description}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
 

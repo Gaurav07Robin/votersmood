@@ -46,35 +46,36 @@ const incrementLeaderQuestionCounts = async (leaderId, delta) => {
   }
 };
 
+let POSTS_CACHE_FETCHED = false;
+
 // GET /api/posts - Fetch Posts / Discussions from Cloud Firestore DB
 router.get('/', async (req, res) => {
   const { leaderId, isOpenQuestion, category, topic, leader, sort } = req.query;
   try {
-    let posts = [];
-
-    if (db) {
+    if (db && !POSTS_CACHE_FETCHED) {
       try {
         const postsRef = collection(db, 'posts');
         const snap = await getDocs(postsRef);
-        posts = snap.docs.map(docSnap => {
-          const d = docSnap.data();
-          return {
-            id: docSnap.id,
-            ...d,
-            agreeCount: Math.max(0, d.agreeCount || 0),
-            funnyCount: Math.max(0, d.funnyCount || 0),
-            commentCount: Math.max(0, d.commentCount || 0)
-          };
-        });
-        console.log(`🔥 Firestore DB: Retrieved ${posts.length} posts from database`);
+        if (snap.docs.length > 0) {
+          IN_MEMORY_POSTS = snap.docs.map(docSnap => {
+            const d = docSnap.data();
+            return {
+              id: docSnap.id,
+              ...d,
+              agreeCount: Math.max(0, d.agreeCount || 0),
+              funnyCount: Math.max(0, d.funnyCount || 0),
+              commentCount: Math.max(0, d.commentCount || 0)
+            };
+          });
+          POSTS_CACHE_FETCHED = true;
+          console.log(`🔥 Firestore DB: Synchronized ${IN_MEMORY_POSTS.length} posts from database`);
+        }
       } catch (dbErr) {
         console.warn('⚠️ Firestore read posts warning:', dbErr.message);
       }
     }
 
-    if (posts.length === 0) {
-      posts = IN_MEMORY_POSTS;
-    }
+    let posts = IN_MEMORY_POSTS;
 
     // Filter logic
     let filtered = [...posts];
