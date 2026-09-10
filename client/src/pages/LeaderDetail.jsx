@@ -174,23 +174,23 @@ export default function LeaderDetail({ leaderId, onBack }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '12px', marginTop: '20px', backgroundColor: '#FDF6ED', border: '1px solid #F5E5D3', borderRadius: '8px', padding: '16px', textAlign: 'center' }}>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, color: 'var(--accent-primary)' }}>OPEN QUESTIONS</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.openQuestionsCount || 24}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.openQuestionsCount || 0}</div>
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, color: 'var(--color-success)' }}>ANSWERED</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.answeredCount || 6}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.answeredCount || 0}</div>
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, color: 'var(--color-warning)' }}>PENDING</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.pendingCount || 18}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{leader.pendingCount || 0}</div>
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, color: 'var(--text-secondary)' }}>TOTAL REACTIONS</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{(leader.totalReactionsCount || 4382).toLocaleString()}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{(leader.totalReactionsCount || 0).toLocaleString()}</div>
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', fontWeight: 700, color: 'var(--text-secondary)' }}>TOTAL COMMENTS</div>
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{(leader.totalCommentsCount || 1245).toLocaleString()}</div>
+              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '22px', fontWeight: 800, color: 'var(--text-primary)' }}>{(leader.totalCommentsCount || 0).toLocaleString()}</div>
             </div>
           </div>
 

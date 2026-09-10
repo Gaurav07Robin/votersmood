@@ -1,51 +1,58 @@
 import { db } from '../config/firebase.js';
-import { doc, setDoc, collection, getDocs } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
-
-// ==========================================
-// 🤖 VOTERSMOOD AI DATA AGENT (FREE TIER)
-// ==========================================
-// To run: node scripts/ai_agent.js
+import * as cheerio from 'cheerio';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
-// 🔴 PASTE YOUR FREE API KEYS HERE OR USE .env FILE:
 const GROQ_API_KEY = process.env.GROQ_API_KEY || 'YOUR_GROQ_API_KEY_HERE';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || 'YOUR_GEMINI_API_KEY_HERE';
 
-// 👉 CHOOSE YOUR PROVIDER ('groq' or 'gemini')
 let AI_PROVIDER = 'gemini'; 
 
-// 1. WIKIPEDIA SCRAPER
-export async function getWikipediaText(searchQuery) {
+// ==========================================
+// 1. MYNETA.INFO SCRAPER FALLBACK
+// ==========================================
+export async function getMyNetaText(searchQuery) {
   try {
-    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchQuery)}&utf8=&format=json`;
-    const searchRes = await fetch(searchUrl);
-    const searchData = await searchRes.json();
-
-    if (!searchData.query.search || searchData.query.search.length === 0) return null;
-
-    const pageId = searchData.query.search[0].pageid;
-    const textUrl = `https://en.wikipedia.org/w/api.php?action=query&prop=extracts&explaintext=1&pageids=${pageId}&format=json`;
+    const url = `https://myneta.info/search_myneta.php?q=${encodeURIComponent(searchQuery)}`;
+    const searchRes = await fetch(url);
+    const searchHtml = await searchRes.text();
+    const $ = cheerio.load(searchHtml);
     
-    const textRes = await fetch(textUrl);
-    const textData = await textRes.json();
-    return textData.query.pages[pageId].extract;
+    // Find the first link to a candidate profile
+    const firstLink = $('table.w3-table a[href*="candidate.php"]').first().attr('href');
+    if (!firstLink) return null;
+    
+    const profileUrl = firstLink.startsWith('http') ? firstLink : `https://myneta.info${firstLink.startsWith('/') ? '' : '/'}${firstLink}`;
+    
+    const profileRes = await fetch(profileUrl);
+    const profileHtml = await profileRes.text();
+    const $profile = cheerio.load(profileHtml);
+    
+    // Remove heavy and irrelevant tags to reduce token size
+    $profile('script, style, noscript, nav, footer, iframe, img, head').remove();
+    const rawText = $profile('body').text().replace(/\s+/g, ' ').trim();
+    
+    return rawText;
   } catch (error) {
-    console.error(`❌ Wikipedia Error for ${searchQuery}:`, error.message);
+    console.error(`❌ MyNeta Error for ${searchQuery}:`, error.message);
     return null;
   }
 }
 
-// 2. AI BRAIN 
+// ==========================================
+// 2. AI TIMELINE EXTRACTOR
+// ==========================================
 export async function extractTimelineWithAI(rawText) {
   const systemPrompt = `
-You are a political data extractor. Read the provided text about an Indian politician and extract their political timeline.
+You are a political data extractor. Read the provided text which is extracted from a candidate's affidavit on MyNeta.info.
+Extract their political timeline (elections contested, positions held, criminal cases if any major ones are mentioned).
 Return ONLY a valid JSON object with a single key "timeline" containing an array of objects.
 Do not include markdown formatting.
 Follow these strict rules for each object in the array:
@@ -77,11 +84,9 @@ Follow these strict rules for each object in the array:
       });
       const data = await res.json();
       
-      // Auto-stop on Quota Limit
       if (data.error) {
         if (data.error.message.toLowerCase().includes('rate limit') || data.error.message.toLowerCase().includes('quota') || res.status === 429) {
            console.log(`\n🛑 [QUOTA REACHED] Groq Free Tier Limit Hit! Stopping script safely.`);
-           console.log(`Error message: ${data.error.message}`);
            process.exit(0);
         }
         throw new Error(data.error.message);
@@ -101,7 +106,6 @@ Follow these strict rules for each object in the array:
       });
       const data = await res.json();
       
-      // Auto-stop on Quota Limit
       if (data.error) {
         if (data.error.message.toLowerCase().includes('quota') || data.error.message.toLowerCase().includes('exhausted') || res.status === 429) {
            console.log(`\n⚠️ [QUOTA REACHED] Gemini Free Tier Limit Hit! Switching automatically to Groq...`);
@@ -115,14 +119,15 @@ Follow these strict rules for each object in the array:
       const parsedData = JSON.parse(jsonString);
       return parsedData.timeline || [];
     }
-
   } catch (error) {
     console.error(`❌ AI Processing Error:`, error.message);
     return null;
   }
 }
 
+// ==========================================
 // 3. DATABASE INJECTION
+// ==========================================
 export async function saveTimelineToDB(leaderId, timelineArray) {
   try {
     const ref = doc(db, 'leaders', leaderId);
@@ -137,51 +142,41 @@ export async function saveTimelineToDB(leaderId, timelineArray) {
 // 🚀 RUN THE PIPELINE FOR ALL 4,109 POLITICIANS
 // ==========================================
 async function runBatch() {
-  if (AI_PROVIDER === 'groq' && GROQ_API_KEY === 'YOUR_GROQ_API_KEY_HERE') {
-    console.log("⚠️ PLEASE STOP: Paste your Groq API Key at the top of this file!");
-    return;
-  }
-  if (AI_PROVIDER === 'gemini' && GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
-    console.log("⚠️ PLEASE STOP: Paste your Gemini API Key at the top of this file!");
-    return;
-  }
-
-  // 1. Fetch current status efficiently using a LOCAL tracker file (0 Database Reads!)
-  const progressFile = path.join(__dirname, 'scraping_progress.json');
+  const progressFile = path.join(__dirname, 'myneta_progress.json');
   let completedIds = new Set();
   
   if (fs.existsSync(progressFile)) {
     const savedProgress = JSON.parse(fs.readFileSync(progressFile, 'utf-8'));
     completedIds = new Set(savedProgress);
-    console.log(`✅ Loaded ${completedIds.size} completed politicians from local tracker.`);
+    console.log(`✅ Loaded ${completedIds.size} completed politicians from MyNeta local tracker.`);
   }
 
-  // 2. Load all 4109 leaders from cache
-  const cacheFilePath = path.join(__dirname, '../data/leaders_cache.json');
-  if (!fs.existsSync(cacheFilePath)) {
-    console.log("❌ Could not find leaders_cache.json.");
-    return;
-  }
-
-  const allLeaders = JSON.parse(fs.readFileSync(cacheFilePath, 'utf-8'));
+  console.log(`\n📥 Fetching all leaders from Firestore to check who is missing timelines...`);
+  const { getDocs, collection } = await import('firebase/firestore');
+  const snapshot = await getDocs(collection(db, 'leaders'));
+  const allDbLeaders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   
-  // 3. Filter out the ones we already did
-  const leadersToProcess = allLeaders.filter(l => !completedIds.has(l.id));
+  // Filter for those that don't have a timeline or have an empty one
+  const missingTimelineLeaders = allDbLeaders.filter(l => !l.careerTimeline || l.careerTimeline.length === 0);
+  console.log(`📊 Found ${missingTimelineLeaders.length} leaders missing timelines out of ${allDbLeaders.length}.`);
 
-  console.log(`\n🚀 Starting ${AI_PROVIDER.toUpperCase()} AI Data Agent Pipeline...`);
+  const leadersToProcess = missingTimelineLeaders.filter(l => !completedIds.has(l.id));
+
+  console.log(`\n🚀 Starting MyNeta Fallback Scraper...`);
   console.log(`📊 Processing ${leadersToProcess.length} remaining leaders...`);
 
   let count = 1;
   for (const leader of leadersToProcess) {
     console.log(`\n[${count}/${leadersToProcess.length}] 🔍 Processing: ${leader.name} (${leader.state || 'Unknown State'})...`);
     
-    console.log(`   📥 Scraping Wikipedia...`);
-    const text = await getWikipediaText(`${leader.name} politician India ${leader.state || ''}`);
+    console.log(`   📥 Scraping MyNeta.info...`);
+    // Search strictly with name and state for better accuracy on MyNeta
+    const text = await getMyNetaText(`${leader.name} ${leader.state || ''}`);
     
     if (!text) {
-      console.log(`   ⚠️ Could not find Wikipedia page. Skipping.`);
+      console.log(`   ⚠️ Could not find MyNeta page. Skipping.`);
     } else {
-      console.log(`   🧠 Sending raw text to ${AI_PROVIDER.toUpperCase()}...`);
+      console.log(`   🧠 Sending MyNeta data to ${AI_PROVIDER.toUpperCase()}...`);
       const timeline = await extractTimelineWithAI(text);
 
       if (timeline && timeline.length > 0) {
@@ -206,7 +201,7 @@ async function runBatch() {
     count++;
   }
   
-  console.log(`\n🎉 Pipeline Batch Complete! All possible timelines have been upgraded.`);
+  console.log(`\n🎉 MyNeta Pipeline Batch Complete!`);
   process.exit(0);
 }
 
