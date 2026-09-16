@@ -28,6 +28,7 @@ export default function Admin() {
     { name: '', party: 'BJP', color: '#D97706' },
     { name: '', party: 'INC', color: '#2E7D32' }
   ]);
+  const [pollType, setPollType] = useState('election');
   const [hasNota, setHasNota] = useState(true);
   const [officialElections, setOfficialElections] = useState([]);
 
@@ -127,6 +128,9 @@ export default function Admin() {
     e.preventDefault();
     if (!electionTitle.trim() || candidatesList.filter(c => c.name.trim()).length < 2) return;
 
+    const finalCandidates = candidatesList.filter(c => c.name.trim()).map(c => 
+      pollType === 'survey' ? { ...c, party: 'Survey Option', color: '#475569' } : c
+    );
     try {
       await api.createOfficialElection({
         title: electionTitle.trim(),
@@ -134,7 +138,7 @@ export default function Admin() {
         description: electionDesc.trim() || `Official ${electionCategory.toUpperCase()} Election Poll`,
         state: electionState,
         constituencies: [electionConstituency],
-        candidates: candidatesList.filter(c => c.name.trim()),
+        candidates: finalCandidates,
         hasNota
       });
 
@@ -330,6 +334,21 @@ export default function Admin() {
           <form onSubmit={handleCreateOfficialElection} className="gazette-card" style={{ display: 'flex', flexDirection: 'column', gap: '12px', height: 'fit-content' }}>
             <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', margin: 0 }}>🏛 Dynamic Election Creator</h3>
 
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+              <button 
+                type="button" 
+                onClick={() => setPollType('election')} 
+                className={pollType === 'election' ? 'btn-primary' : 'btn-ghost'} 
+                style={{ fontSize: '11px', padding: '6px 12px', flex: 1 }}
+              >🗳️ CANDIDATE ELECTION</button>
+              <button 
+                type="button" 
+                onClick={() => setPollType('survey')} 
+                className={pollType === 'survey' ? 'btn-primary' : 'btn-ghost'} 
+                style={{ fontSize: '11px', padding: '6px 12px', flex: 1 }}
+              >📋 ISSUE SURVEY</button>
+            </div>
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700 }}>ELECTION CATEGORY</label>
               <select value={electionCategory} onChange={(e) => setElectionCategory(e.target.value)}>
@@ -363,9 +382,9 @@ export default function Admin() {
             )}
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700 }}>CANDIDATES & PARTIES LIST</label>
+              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700 }}>{pollType === 'election' ? 'CANDIDATES & PARTIES LIST' : 'SURVEY OPTIONS'}</label>
               {candidatesList.map((cand, idx) => (
-                <div key={idx} style={{ display: 'grid', gridTemplateColumns: '1fr 80px', gap: '6px' }}>
+                <div key={idx} style={{ display: 'grid', gridTemplateColumns: pollType === 'election' ? '1fr 80px' : '1fr', gap: '6px' }}>
                   <input
                     type="text"
                     placeholder={`Candidate ${idx + 1} Name`}
@@ -386,7 +405,7 @@ export default function Admin() {
               ))}
 
               <button type="button" onClick={handleAddCandidateRow} className="btn-ghost" style={{ fontSize: '11px', color: 'var(--accent-primary)', alignSelf: 'flex-start' }}>
-                + Add Candidate
+                {pollType === 'election' ? '+ Add Candidate' : '+ Add Option'}
               </button>
             </div>
 

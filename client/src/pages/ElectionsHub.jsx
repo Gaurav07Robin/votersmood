@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { List } from 'lucide-react';
+import { List, ChevronDown } from 'lucide-react';
 import { getPartyColor, getPartySymbol, getPartyFlag } from '../utils/party_utils';
 
 const CustomXAxisTick = ({ x, y, payload }) => {
@@ -17,9 +17,44 @@ const CustomXAxisTick = ({ x, y, payload }) => {
 };
 
 export default function ElectionsHub({ onSelectYear }) {
-  const [activeYear, setActiveYear] = useState(2024);
-  const [historicalData, setHistoricalData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [electionType, setElectionType] = useState('LOK_SABHA');
+  
+  // Lok Sabha State
+  const [activeYearLS, setActiveYearLS] = useState(2024);
+  const [historicalData, setHistoricalData] = useState([]);
+  
+  // Assembly State
+  const [activeYearAS, setActiveYearAS] = useState(0);
+  const [stateElectionData, setStateElectionData] = useState([]);
+  const [selectedState, setSelectedState] = useState('Uttar Pradesh');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const scrollRef = React.useRef(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    
+    // Prevent vertical page scroll when hovering timeline
+    const onWheel = (e) => {
+      if (e.deltaY !== 0) {
+        e.preventDefault(); // This stops the whole page from scrolling
+        el.scrollLeft += e.deltaY; // Scroll horizontally instead
+      }
+    };
+    
+    // { passive: false } is REQUIRED so we can call e.preventDefault()
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, [electionType]); // Rebind if view changes
+
+  
+
+
+
+ // Re-bind just in case DOM reconstructs
+
+
 
   useEffect(() => {
     async function fetchData() {
@@ -31,19 +66,13 @@ export default function ElectionsHub({ onSelectYear }) {
           data.push(doc.data());
         });
         
-        // Define major Lok Sabha election years
         const LOK_SABHA_YEARS = [1952, 1957, 1962, 1967, 1971, 1977, 1980, 1984, 1989, 1991, 1996, 1998, 1999, 2004, 2009, 2014, 2019, 2024];
-        
-        // Filter out by-election years (which have very few seats) to only keep General Elections
         const majorElections = data.filter(d => LOK_SABHA_YEARS.includes(d.year) || d.total_seats > 400);
-        
-        // Sort chronologically
         majorElections.sort((a, b) => a.year - b.year);
         
-        // Flatten data for Recharts (extract INC, BJP, and Others)
         const chartData = majorElections.map(d => {
           const incSeats = d.party_wins?.['INC'] || 0;
-          const bjpSeats = (d.party_wins?.['BJP'] || 0) + (d.party_wins?.['BJS'] || 0); // Include BJS (precursor to BJP)
+          const bjpSeats = (d.party_wins?.['BJP'] || 0) + (d.party_wins?.['BJS'] || 0);
           const othersSeats = d.total_seats - incSeats - bjpSeats;
           return {
             ...d,
@@ -55,7 +84,9 @@ export default function ElectionsHub({ onSelectYear }) {
         
         if (chartData.length > 0) {
           setHistoricalData(chartData);
-          setActiveYear(chartData[chartData.length - 1].year);
+          if (activeYearLS === 2024 && !chartData.find(m => m.year === 2024)) {
+             setActiveYearLS(chartData[chartData.length - 1].year);
+          }
         }
       } catch (error) {
         console.error("Error fetching historical data:", error);
@@ -64,19 +95,62 @@ export default function ElectionsHub({ onSelectYear }) {
       }
     }
     fetchData();
-  }, []);
+  }, [activeYearLS]);
+
+  useEffect(() => {
+    if (electionType === 'ASSEMBLY' && stateElectionData.length === 0) {
+      async function fetchStateData() {
+        const q = collection(db, 'state_elections_metadata');
+        const querySnapshot = await getDocs(q);
+        const data = [];
+        querySnapshot.forEach(doc => { data.push(doc.data()); });
+        setStateElectionData(data);
+      }
+      fetchStateData();
+    }
+  }, [electionType, stateElectionData.length]);
+
+  const uniqueStates = [...new Set(stateElectionData.map(d => d.state))].sort();
+  const filteredStateData = stateElectionData
+    .filter(d => d.state === selectedState)
+    .sort((a, b) => a.year - b.year)
+    .map(d => {
+        const total = d.totalSeats || 0;
+        const inc = d.partyWins?.['INC'] || 0;
+        const bjp = (d.partyWins?.['BJP'] || 0) + (d.partyWins?.['BJS'] || 0);
+        const rest = total - inc - bjp;
+        return {
+            ...d,
+            total_seats: total,
+            party_wins: d.partyWins,
+            INC: inc,
+            BJP: bjp,
+            Others: rest > 0 ? rest : 0
+        };
+    });
+
+  useEffect(() => {
+    if (filteredStateData.length > 0) {
+        if (!filteredStateData.find(d => d.year === activeYearAS)) {
+            setActiveYearAS(filteredStateData[filteredStateData.length - 1].year);
+        }
+    }
+  }, [selectedState, filteredStateData, activeYearAS]);
+
+  const isLS = electionType === 'LOK_SABHA';
+  const isAS = electionType === 'ASSEMBLY';
+  const currentData = isLS ? historicalData : (isAS ? filteredStateData : []);
+  const activeYear = isLS ? activeYearLS : activeYearAS;
+  const setActiveYearFunc = isLS ? setActiveYearLS : setActiveYearAS;
 
   const getTopParties = (year) => {
-    const yearData = historicalData.find(d => d.year === year);
-    if (!yearData) return [];
+    const yearData = currentData.find(d => d.year === year);
+    if (!yearData || !yearData.party_wins) return [];
     
-    // Sort parties by seats won
-    const sortedParties = Object.entries(yearData.party_wins)
+    return Object.entries(yearData.party_wins)
       .map(([party, seats]) => ({ party, seats, total: yearData.total_seats }))
       .sort((a, b) => b.seats - a.seats)
       .slice(0, 10);
-    
-    return sortedParties;
   };
 
   const topParties = getTopParties(activeYear);
@@ -86,28 +160,111 @@ export default function ElectionsHub({ onSelectYear }) {
     return <div style={{ color: '#fff', padding: '40px' }}>Loading historical archive...</div>;
   }
 
+  // Calculate dynamic width for timeline to prevent cramping
+  // We just want it to fit 100% now without horizontal scroll
+  const timelineWidth = 100;
+
   return (
     <div style={{ backgroundColor: '#18181B', minHeight: '100vh', color: '#E4E4E7', padding: '24px', overflowX: 'hidden', fontFamily: 'Inter, sans-serif' }}>
       
+      {/* CSS to hide scrollbar but keep it functional */}
+      <style dangerouslySetInnerHTML={{__html: `
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+      `}} />
+
       {/* HEADER SECTION */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '32px' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px', marginBottom: '32px' }}>
         <div>
           <h1 style={{ fontSize: '36px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.5px' }}>
-            Lok Sabha Historical Results
+            {electionType === 'LOK_SABHA' ? 'Lok Sabha Historical Results' : 
+             electionType === 'ASSEMBLY' ? 'State Assembly Elections' :
+             electionType === 'MUNICIPAL' ? 'Municipal Elections' : 'By-Elections'}
           </h1>
           <p style={{ color: '#A1A1AA', fontSize: '16px', margin: '8px 0 0 0' }}>
-            A 75-year timeline of India's parliamentary elections
+            {electionType === 'LOK_SABHA' ? "A 75-year timeline of India's parliamentary elections" :
+             "State and local election historical data mapping"}
           </p>
+        </div>
+
+        {/* ELECTION TYPE SWITCHER UI */}
+        <div style={{ display: 'flex', gap: '4px', backgroundColor: '#27272A', padding: '6px', borderRadius: '12px', border: '1px solid #3F3F46', flexWrap: 'wrap' }}>
+          {[
+            { id: 'LOK_SABHA', label: 'Lok Sabha', icon: '🏛️' },
+            { id: 'ASSEMBLY', label: 'State Assembly', icon: '🗺️' },
+            { id: 'MUNICIPAL', label: 'Municipal', icon: '🏙️' },
+            { id: 'BY_ELECTION', label: 'By-Election', icon: '🔄' }
+          ].map(type => (
+            <button
+              key={type.id}
+              onClick={() => setElectionType(type.id)}
+              style={{
+                backgroundColor: electionType === type.id ? '#3F3F46' : 'transparent',
+                color: electionType === type.id ? '#FFFFFF' : '#A1A1AA',
+                border: 'none',
+                borderRadius: '8px',
+                padding: '8px 14px',
+                fontSize: '13px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                transition: 'all 0.2s',
+                boxShadow: electionType === type.id ? '0 2px 4px rgba(0,0,0,0.2)' : 'none'
+              }}
+            >
+              <span style={{ fontSize: '14px' }}>{type.icon}</span> {type.label}
+            </button>
+          ))}
         </div>
       </div>
 
+      {!isLS && (
+        <div style={{ textAlign: 'center', padding: '40px', backgroundColor: '#27272A', borderRadius: '12px', color: '#A1A1AA', marginBottom: '24px' }}>
+          <h3 style={{ color: '#FFFFFF', fontSize: '20px', marginBottom: '8px' }}>Module Active</h3>
+          <p>This section is currently being mapped with historical data.</p>
+        </div>
+      )}
+
+      {isLS && (<>
       {/* TOP CHART: ALL-TIME TREND */}
       <div style={{ backgroundColor: '#27272A', borderRadius: '12px', padding: '24px', marginBottom: '24px', height: '350px' }}>
-        <div style={{ fontSize: '14px', color: '#A1A1AA', marginBottom: '8px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
-          All-Time Historical Trend
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <div style={{ fontSize: '14px', color: '#A1A1AA', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
+            {isLS ? 'All-Time Historical Trend' : 'State Historical Trend'}
+          </div>
+          {isAS && (
+            <div style={{ position: 'relative', zIndex: 50 }}>
+              <div 
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                style={{ backgroundColor: '#18181B', color: '#fff', border: '1px solid #3F3F46', borderRadius: '8px', padding: '8px 16px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px', minWidth: '220px', justifyContent: 'space-between', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
+              >
+                <span style={{ fontWeight: 600, fontSize: '14px' }}>{selectedState}</span>
+                <ChevronDown size={16} color="#A1A1AA" />
+              </div>
+              {dropdownOpen && (
+                <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '8px', backgroundColor: '#18181B', border: '1px solid #3F3F46', borderRadius: '8px', maxHeight: '300px', overflowY: 'auto', zIndex: 100, boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }} className="hide-scroll">
+                  {uniqueStates.map(s => (
+                    <div 
+                      key={s} 
+                      onClick={() => { setSelectedState(s); setDropdownOpen(false); }}
+                      style={{ padding: '12px 16px', cursor: 'pointer', backgroundColor: s === selectedState ? '#27272A' : 'transparent', color: s === selectedState ? '#fff' : '#A1A1AA', transition: 'background 0.2s', fontSize: '14px', fontWeight: 500 }}
+                      onMouseEnter={(e) => { if(s !== selectedState) { e.currentTarget.style.backgroundColor = '#27272A'; e.currentTarget.style.color = '#fff'; } }}
+                      onMouseLeave={(e) => { if(s !== selectedState) { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#A1A1AA'; } }}
+                    >
+                      {s}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </div>
+        
+        {currentData.length > 0 ? (
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={historicalData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <LineChart data={currentData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="#3F3F46" vertical={false} />
             <XAxis dataKey="year" stroke="#A1A1AA" tickLine={false} axisLine={false} />
             <YAxis stroke="#A1A1AA" tickLine={false} axisLine={false} tick={{fill: '#71717A'}} />
@@ -118,26 +275,38 @@ export default function ElectionsHub({ onSelectYear }) {
             <Legend wrapperStyle={{ paddingTop: '20px' }} />
             <Line type="monotone" dataKey="INC" name="INC Seats" stroke={getPartyColor('INC')} strokeWidth={3} dot={{r: 4, fill: getPartyColor('INC')}} activeDot={{r: 6}} />
             <Line type="monotone" dataKey="BJP" name="BJP Seats" stroke={getPartyColor('BJP')} strokeWidth={3} dot={{r: 4, fill: getPartyColor('BJP')}} activeDot={{r: 6}} />
+            {isAS && <Line type="monotone" dataKey="party_wins.TMC" name="TMC Seats" stroke="#22C55E" strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />}
+            {isAS && <Line type="monotone" dataKey="party_wins.SP" name="SP Seats" stroke="#EF4444" strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />}
+            {isAS && <Line type="monotone" dataKey="party_wins.AAP" name="AAP Seats" stroke="#06B6D4" strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />}
             <Line type="monotone" dataKey="Others" name="Other Parties" stroke="#71717A" strokeWidth={2} strokeDasharray="5 5" dot={false} />
           </LineChart>
         </ResponsiveContainer>
+        ) : (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '250px', color: '#A1A1AA' }}>
+             Loading data...
+          </div>
+        )}
       </div>
 
       {/* TIMELINE SCRUBBER */}
       <div style={{ backgroundColor: '#27272A', borderRadius: '12px', padding: '24px', marginBottom: '24px' }}>
         <div style={{ fontSize: '16px', fontWeight: 600, color: '#FFFFFF', marginBottom: '24px' }}>
-          Timeline of Lok Sabha Elections <span style={{ color: '#71717A', fontWeight: 400 }}>({historicalData[0]?.year || 1951} - {historicalData[historicalData.length-1]?.year || 2024})</span>
+          Timeline of {isLS ? 'Lok Sabha' : selectedState} Elections <span style={{ color: '#71717A', fontWeight: 400 }}>({currentData[0]?.year || 1951} - {currentData[currentData.length-1]?.year || 2024})</span>
         </div>
         
-        <div style={{ overflowX: 'hidden', overflowY: 'hidden', paddingBottom: '32px', paddingTop: '10px', minHeight: '60px' }}>
-          <div style={{ position: 'relative', height: '4px', backgroundColor: '#3F3F46', borderRadius: '2px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 20px', minWidth: '100%' }}>
-            {historicalData.map((data) => {
+                <div 
+          ref={scrollRef}
+          className="hide-scroll" 
+          style={{ overflowX: 'auto', overflowY: 'hidden', paddingBottom: '32px', paddingTop: '10px', minHeight: '60px' }}
+        >
+          <div style={{ position: 'relative', height: '4px', backgroundColor: '#3F3F46', borderRadius: '2px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: '0 20px', minWidth: `${timelineWidth}%` }}>
+            {currentData.map((data, idx) => {
               const isActive = data.year === activeYear;
               return (
                 <div 
                   key={data.year} 
                   onClick={() => {
-                    setActiveYear(data.year);
+                    setActiveYearFunc(data.year);
                   }}
                   style={{ position: 'relative', cursor: 'pointer', flex: 1, display: 'flex', justifyContent: 'center' }}
                 >
@@ -223,7 +392,7 @@ export default function ElectionsHub({ onSelectYear }) {
                 <div>
                   <div style={{ fontSize: '22px', color: '#FFFFFF', fontWeight: 700 }}>{data.seats} <span style={{ color: '#A1A1AA', fontSize: '14px', fontWeight: 400 }}>seats</span></div>
                   <div style={{ fontSize: '14px', color: themeColor, marginTop: '4px', fontWeight: 'bold' }}>
-                    {((data.seats / data.total) * 100).toFixed(1)}% of Lok Sabha
+                    {((data.seats / data.total) * 100).toFixed(1)}% of {isLS ? 'Lok Sabha' : 'State Assembly'}
                   </div>
                 </div>
               </div>
@@ -257,8 +426,9 @@ export default function ElectionsHub({ onSelectYear }) {
         onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.backgroundColor = '#2563EB'; }}
         onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.backgroundColor = '#3B82F6'; }}
       >
-        <List size={20} /> Explore {activeYear} Directory
+        <List size={20} /> Explore {activeYear} {isLS ? 'Lok Sabha' : selectedState} Directory
       </button>
+      </>)}
 
     </div>
   );

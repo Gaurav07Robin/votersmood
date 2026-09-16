@@ -128,7 +128,7 @@ function CommentBubble({ comment, allComments, onReplySubmit, onDeleteComment, u
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', marginTop: level > 0 ? '4px' : '8px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '2px', marginTop: level > 0 ? '2px' : '6px' }}>
       
       {/* Clean Minimal Comment Item */}
       <div 
@@ -137,19 +137,19 @@ function CommentBubble({ comment, allComments, onReplySubmit, onDeleteComment, u
           backgroundColor: isTopLevel ? '#F8F9FA' : '#FAFAFA',
           border: '1px solid #F1F5F9',
           borderRadius: '8px',
-          padding: '10px 14px',
+          padding: '8px 12px',
           transition: 'background-color 150ms ease',
         }}
       >
         {/* Comment Author Header & 2D Avatar */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px', gap: '8px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px', gap: '8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <img 
               src={avatarUrl} 
               alt={comment.authorName} 
               style={{ 
-                width: '26px', 
-                height: '26px', 
+                width: '24px', 
+                height: '24px', 
                 borderRadius: '50%', 
                 backgroundColor: '#FFFFFF', 
                 border: '1px solid #E2E8F0',
@@ -163,10 +163,10 @@ function CommentBubble({ comment, allComments, onReplySubmit, onDeleteComment, u
               </span>
 
               {/* Catchy 7-Day Active Streak Tick Badge with Hover Popover */}
-              {showVerifiedTick && <StreakBadge isVerified={true} size="15px" fontSize="9px" />}
+              {showVerifiedTick && <StreakBadge isVerified={true} size="14px" fontSize="8px" />}
 
-              {/* Time: 8px */}
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: 'var(--text-muted)' }}>
+              {/* Time: 9px */}
+              <span style={{ fontFamily: 'var(--font-sans)', fontSize: '9px', color: 'var(--text-muted)' }}>
                 • {formatCommentDate(comment.createdAt)}
               </span>
             </div>
@@ -183,8 +183,8 @@ function CommentBubble({ comment, allComments, onReplySubmit, onDeleteComment, u
           )}
         </div>
 
-        {/* Comment Message Text: 18px */}
-        <div style={{ fontFamily: 'var(--font-sans)', fontSize: '18px', lineHeight: 1.55, color: '#1E293B', marginBottom: '8px', wordBreak: 'break-word', paddingLeft: '34px' }}>
+        {/* Comment Message Text: 14px */}
+        <div style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.5, color: '#334155', marginBottom: '6px', wordBreak: 'break-word', paddingLeft: '32px' }}>
           {comment.content}
         </div>
 
@@ -316,7 +316,7 @@ export default function CommentThread({ postId }) {
   const [comments, setComments] = useState([]);
   const [newTopComment, setNewTopComment] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [showMainInput, setShowMainInput] = useState(false);
+  const [showMainInput, setShowMainInput] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
@@ -394,27 +394,7 @@ export default function CommentThread({ postId }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
       
-      {/* Horizontally Aligned Action Row: Pen Icon Write Option & Bubble Icon Insights */}
-      <div style={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center', gap: '16px' }}>
-        <button 
-          onClick={() => setShowMainInput(!showMainInput)}
-          className="btn-ghost" 
-          style={{ 
-            fontSize: '11px', 
-            fontFamily: 'var(--font-mono)',
-            padding: '2px 4px', 
-            display: 'inline-flex', 
-            alignItems: 'center', 
-            gap: '4px',
-            color: 'var(--bg-navy-authority)',
-            fontWeight: 700
-          }}
-        >
-          <span>✏️</span> {showMainInput ? 'Hide' : 'Write Insight'}
-        </button>
-      </div>
-
-      {/* Top Level Comment Input Box (Starts at 2 rows height & auto-expands height dynamically as text grows!) */}
+            {/* Top Level Comment Input Box (Starts at 2 rows height & auto-expands height dynamically as text grows!) */}
       {showMainInput && (
         <form 
           onSubmit={handleTopSubmit} 
@@ -436,7 +416,7 @@ export default function CommentThread({ postId }) {
             maxLength={500}
             disabled={!user}
             autoFocus
-            rows={2}
+            rows={1}
             style={{ 
               flex: 1, 
               border: 'none !important', 
@@ -444,10 +424,10 @@ export default function CommentThread({ postId }) {
               boxShadow: 'none !important',
               background: 'transparent', 
               backgroundColor: 'transparent',
-              fontSize: '15px', 
+              fontSize: '14px', 
               lineHeight: 1.5,
               padding: '4px 0', 
-              minHeight: '48px',
+              minHeight: '32px',
               color: 'var(--text-primary)',
               resize: 'none',
               overflow: 'hidden'

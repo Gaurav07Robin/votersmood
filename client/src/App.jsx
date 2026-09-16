@@ -137,11 +137,7 @@ function AppContent() {
         {activeTab === 'admin' && <Admin />}
       </main>
 
-      <footer style={{ backgroundColor: 'var(--bg-navbar)', color: 'var(--text-muted)', borderTop: '1px solid #222222', padding: '24px 0', marginTop: '64px', textAlign: 'center', fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
-        <div className="container">
-          JanMat Official Gazette Political Portal • Security Isolated Decoupled Express API Backend & React UI
-        </div>
-      </footer>
+      
 
       <RegisterModal isOpen={isRegisterOpen} onClose={closeRegisterModal} />
     </div>

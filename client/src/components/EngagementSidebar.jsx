@@ -1,141 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import { api } from '../api/client';
 
-export default function EngagementSidebar() {
-  const [signals, setSignals] = useState(null);
-  const [loading, setLoading] = useState(true);
+const TARGET_SCOPES = [
+  { value: 'mh2024', label: 'Maharashtra 2024 Assembly Elections' },
+  { value: 'delhi2025', label: 'Delhi 2025 Assembly Elections' },
+  { value: 'bihar2025', label: 'Bihar 2025 Assembly Elections' },
+  { value: 'wb2026', label: 'West Bengal 2026 Assembly Elections' },
+  { value: 'up2027', label: 'Uttar Pradesh 2027 Assembly Elections' },
+  { value: 'central', label: 'Central Government Administration' }
+];
 
-  const fetchSignals = () => {
-    api.getPollingSignals()
-      .then((data) => {
-        setSignals(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.warn('Error fetching polling signals:', err);
-        setLoading(false);
-      });
-  };
+export default function EngagementSidebar() {
+  const [trending, setTrending] = useState([]);
 
   useEffect(() => {
-    fetchSignals();
-    // Auto-refresh signals every 15 seconds to sync with live DB votes & posts
-    const interval = setInterval(fetchSignals, 15000);
-    return () => clearInterval(interval);
+    api.getCommunityPolls().then(data => {
+      const pollsList = Array.isArray(data) ? data : (data?.polls || []);
+      const counts = {};
+      pollsList.forEach(p => {
+        if (p.targetElection) {
+          counts[p.targetElection] = (counts[p.targetElection] || 0) + 1;
+        }
+      });
+      
+      const sorted = Object.entries(counts).sort((a,b) => b[1] - a[1]).slice(0, 5);
+      setTrending(sorted);
+    }).catch(console.error);
   }, []);
 
-  const stats = signals?.pollingStats || {
-    totalVotes: 8260,
-    residentVoters: 5370,
-    residentPct: 65,
-    observerVoters: 2890,
-    observerPct: 35
+  const getLabel = (val) => {
+    const found = TARGET_SCOPES.find(s => s.value === val);
+    return found ? found.label : val;
   };
 
-  const activity = signals?.recentActivity || [
-    '• Verified Resident from Nagpur South West voted 2 mins ago',
-    '• Observer from Delhi voted 5 mins ago',
-    '• Verified Resident from Mumbai South voted 9 mins ago',
-    '• Observer from Bengaluru voted 14 mins ago'
-  ];
-
-  const constituencies = signals?.discussedConstituencies || [
-    { name: 'Nagpur South West (MH)', count: 142 },
-    { name: 'Rae Bareli (UP)', count: 98 },
-    { name: 'Gorakhpur Urban (UP)', count: 76 }
-  ];
-
-  const hashtags = signals?.trendingHashtags || [
-    '#MAHARASHTRAELECTIONS2026',
-    '#UNIONBUDGET2026',
-    '#GORAKHPURBYELECTION',
-    '#ROADSANDMETRO',
-    '#CMFACE2026'
-  ];
-
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%', maxWidth: '100%', overflow: 'hidden' }}>
-      
-      {/* 1. Live Polling Statistics (Synced with Cloud Firestore DB) */}
-      <div className="gazette-card" style={{ padding: '16px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '0.06em' }}>
-            ⚡ LIVE POLLING SIGNALS
-          </div>
-          <span className="badge badge-published" style={{ fontSize: '9px' }}>● LIVE DB SYNC</span>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <div className="gazette-card" style={{ padding: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+          <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
+            📈 Trending Polls
+          </h3>
         </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--text-primary)' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '6px' }}>
-            <span>TOTAL ELECTION VOTES</span>
-            <strong style={{ color: 'var(--text-primary)' }}>{stats.totalVotes.toLocaleString()}</strong>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid var(--border-subtle)', paddingBottom: '6px' }}>
-            <span>RESIDENT VOTERS</span>
-            <strong>{stats.residentVoters.toLocaleString()} ({stats.residentPct}%)</strong>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <span>OBSERVER VOTERS</span>
-            <strong>{stats.observerVoters.toLocaleString()} ({stats.observerPct}%)</strong>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Recently Voted Anonymous Activity (Synced with Cloud Firestore DB) */}
-      <div className="gazette-card" style={{ padding: '16px' }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.06em', marginBottom: '10px' }}>
-          🕒 RECENT ANONYMOUS VOTING ACTIVITY
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)' }}>
-          {activity.map((act, idx) => (
-            <div key={idx}>{act}</div>
-          ))}
-        </div>
-      </div>
-
-      {/* 3. Most Discussed Constituencies & Candidates (Synced with Cloud Firestore DB) */}
-      <div className="gazette-card" style={{ padding: '16px' }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '0.06em', marginBottom: '10px' }}>
-          📍 MOST DISCUSSED CONSTITUENCIES
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontFamily: 'var(--font-mono)', fontSize: '12px' }}>
-          {constituencies.map((c, i) => (
-            <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
-              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                {i + 1}. {c.name}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {trending.length > 0 ? trending.map(([election, count], idx) => (
+            <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '12px', borderBottom: idx !== trending.length - 1 ? '1px solid #F1F5F9' : 'none' }}>
+              <span style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', fontWeight: 600, color: '#0369A1', wordBreak: 'break-word', display: 'inline-block', lineHeight: 1.3, paddingRight: '12px' }}>
+                {getLabel(election)}
               </span>
-              <span className="badge badge-trending" style={{ fontSize: '9px', whiteSpace: 'nowrap' }}>
-                {c.count} INSIGHTS
+              <span className="badge badge-trending" style={{ fontSize: '10px', flexShrink: 0 }}>
+                {count} POLLS
               </span>
             </div>
-          ))}
+          )) : (
+            <div style={{ fontSize: '13px', color: '#94A3B8' }}>No polls trending yet.</div>
+          )}
         </div>
       </div>
-
-      {/* 4. Popular Hashtags (Synced with Cloud Firestore DB) */}
-      <div className="gazette-card" style={{ padding: '16px', overflow: 'hidden' }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '0.06em', marginBottom: '10px' }}>
-          🔥 TRENDING ELECTION HASHTAGS
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', width: '100%' }}>
-          {hashtags.map((tag, i) => (
-            <span 
-              key={i} 
-              className="badge badge-verified" 
-              style={{ 
-                fontSize: '10px', 
-                wordBreak: 'break-all', 
-                whiteSpace: 'normal',
-                lineHeight: 1.3,
-                maxWidth: '100%' 
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-
     </div>
   );
 }

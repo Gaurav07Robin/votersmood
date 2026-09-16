@@ -26,6 +26,7 @@ export const api = {
   signup: (data) => apiClient.post('/auth/register', data).then(r => r.data),
   getMe: () => apiClient.get('/auth/me').then(r => r.data),
   getLocations: () => apiClient.get('/auth/locations').then(r => r.data),
+  updateProfile: (data) => apiClient.put('/auth/profile', data).then(r => r.data),
   updateAvatar: (data) => apiClient.put('/auth/profile/avatar', data).then(r => r.data),
 
   // Official Election Polls & Live Signals (Synced with Cloud Firestore DB)

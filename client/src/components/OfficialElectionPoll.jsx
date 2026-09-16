@@ -11,7 +11,8 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
   const { showSuccess, showError } = useToast();
   
   // 5-Step Guided Voting Flow States:
-  const [step, setStep] = useState(1);
+  const isSurvey = election?.candidates?.[0]?.party === 'Survey Option';
+  const [step, setStep] = useState(isSurvey ? 4 : 1);
   const [isResident, setIsResident] = useState(true);
   const [selectedState, setSelectedState] = useState(election?.state || 'MH');
   const [selectedConstituency, setSelectedConstituency] = useState(election?.constituencies?.[0] || 'Mumbai South');
@@ -136,18 +137,23 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
 
   const handleStep4Candidate = (candidateId) => {
     setSelectedCandidateId(candidateId);
-    setStep(5);
+    if (isSurvey) {
+      handleConfirmVoteSubmit(candidateId);
+    } else {
+      setStep(5);
+    }
   };
 
-  const handleConfirmVoteSubmit = async () => {
-    if (!user || !selectedCandidateId || isSubmitting) return;
+  const handleConfirmVoteSubmit = async (overrideCandId = null) => {
+    const finalCandId = overrideCandId && typeof overrideCandId === 'string' ? overrideCandId : selectedCandidateId;
+    if (!user || !finalCandId || isSubmitting) return;
 
     setIsSubmitting(true);
     setVoteErrorMsg('');
     try {
       const response = await api.voteOfficialElection({
         electionId: activePoll?.id || 'election-mh-2026',
-        candidateId: selectedCandidateId,
+        candidateId: finalCandId,
         isResident,
         state: selectedState,
         constituency: selectedConstituency
@@ -157,7 +163,7 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
         setActivePoll(response.election);
       }
 
-      const voteRecord = { candidateId: selectedCandidateId, isResident, electionId: activePoll.id };
+      const voteRecord = { candidateId: finalCandId, isResident, electionId: activePoll.id };
       localStorage.setItem(`janmat_vote_${activePoll.id}`, JSON.stringify(voteRecord));
 
       setJustVoted(true);
@@ -186,6 +192,85 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
   const residentTotal = Object.values(activePoll?.residentVotes || {}).reduce((a, b) => a + b, 0);
   const observerTotal = Object.values(activePoll?.observerVotes || {}).reduce((a, b) => a + b, 0);
 
+  if (isSurvey) {
+    const totalVotes = activePoll?.totalVotes || (residentTotal + observerTotal) || 0;
+    
+    return (
+      <div 
+        id={`poll-${activePoll.id}`}
+        ref={cardRef}
+        className={`gazette-card ${justVoted ? 'animate-vote-success' : ''}`}
+        style={{ 
+          backgroundColor: '#FFFFFF', 
+          border: '1px solid var(--border-main)', 
+          borderRadius: '8px', 
+          padding: '18px',
+          marginBottom: '32px',
+          maxWidth: '420px',
+          transition: 'all 200ms ease'
+        }}
+      >
+
+
+        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '17px', fontWeight: 700, margin: '0 0 20px 0', color: 'var(--text-primary)', lineHeight: 1.4 }}>
+          {activePoll?.title}
+        </h3>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px' }}>
+          {activePoll?.candidates?.map(cand => {
+            const votes = (activePoll?.residentVotes?.[cand.id] || 0) + (activePoll?.observerVotes?.[cand.id] || 0);
+            const pct = totalVotes > 0 ? Math.round((votes / totalVotes) * 100) : 0;
+            const isSelected = selectedCandidateId === cand.id || hasVotedBefore; // Simplified for now, just checking if voted
+
+            // Check if THIS is the candidate the user voted for
+            const isYourCandidate = selectedCandidateId === cand.id;
+
+            return (
+              <div 
+                key={cand.id}
+                onClick={() => !hasVotedBefore && handleStep4Candidate(cand.id)}
+                style={{
+                  backgroundColor: isYourCandidate ? '#ECFDF5' : 'var(--bg-secondary)',
+                  border: isYourCandidate ? '2px solid #059669' : '1px solid var(--border-divider)',
+                  borderRadius: '6px',
+                  padding: '8px 12px',
+                  cursor: hasVotedBefore ? 'default' : 'pointer',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px',
+                  transition: 'all 150ms ease'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'var(--text-primary)', fontWeight: isYourCandidate ? 700 : 500 }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    {isYourCandidate && <span style={{ color: '#059669', fontWeight: 800 }}>✓</span>}
+                    {cand.name}
+                    {isYourCandidate && <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#059669', fontWeight: 700 }}>(YOUR CHOICE)</span>}
+                  </span>
+                  {(hasVotedBefore || step === 6) && (
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700 }}>{pct}%</span>
+                  )}
+                </div>
+                {(hasVotedBefore || step === 6) && (
+                  <div style={{ height: '5px', backgroundColor: '#E5E2DC', borderRadius: '3px', overflow: 'hidden' }}>
+                    <div style={{ height: '100%', width: `${pct}%`, backgroundColor: isYourCandidate ? '#059669' : 'var(--accent-primary)', transition: 'width 300ms ease' }} />
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-divider)', paddingTop: '12px', fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-muted)' }}>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+            🗳️ {totalVotes} CITIZEN VOTES
+          </span>
+
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <div 
@@ -207,7 +292,7 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
             <span className="badge badge-featured" style={{ fontSize: '11px', padding: '4px 8px' }}>
-              🏛 OFFICIAL ELECTION POLL (ADMIN CONTROLLED)
+              {isSurvey ? '📋 OFFICIAL ADMIN SURVEY' : '🗳️ OFFICIAL ELECTION POLL (ADMIN CONTROLLED)'}
             </span>
             {hasVotedBefore ? (
               <span className="badge badge-published animate-bounce-in" style={{ fontSize: '11px', padding: '4px 8px', backgroundColor: '#ECFDF5', color: '#059669', border: '1px solid #A7F3D0' }}>
@@ -221,9 +306,11 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--text-muted)' }}>
-              CATEGORY: {activePoll?.category?.toUpperCase() || 'NATIONAL'} ELECTION
-            </span>
+            {!isSurvey && (
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--text-muted)' }}>
+                CATEGORY: {activePoll?.category?.toUpperCase() || 'NATIONAL'} ELECTION
+              </span>
+            )}
 
             {/* Broadcast Loudspeaker Share Poll Button in Top Row Right Hand Side */}
             <button
@@ -252,7 +339,7 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
         </div>
 
         {/* Official Election Title */}
-        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '30px', fontWeight: 800, color: 'var(--text-primary)', margin: '0 0 8px 0', lineHeight: 1.25 }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: isSurvey ? '20px' : '30px', fontWeight: 800, color: 'var(--text-primary)', margin: '0 0 8px 0', lineHeight: 1.25 }}>
           {activePoll?.title}
         </h1>
 
@@ -268,10 +355,10 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
             </div>
             <div>
               <div style={{ fontFamily: 'var(--font-mono)', fontWeight: 800, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                VOTE CONFIRMED & PERSISTED TO CLOUD FIRESTORE DB!
+                VOTE CONFIRMED
               </div>
               <div style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', marginTop: '2px' }}>
-                Your vote for <strong>{selectedCandidateObj?.name || 'Selected Candidate'} ({selectedCandidateObj?.party || ''})</strong> has been securely logged.
+                Your vote for <strong>{selectedCandidateObj?.name || 'Selected Candidate'} {!isSurvey && `(${selectedCandidateObj?.party || ''})`}</strong> has been securely logged.
               </div>
             </div>
           </div>
@@ -337,7 +424,7 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
         {step === 4 && (
           <div style={{ backgroundColor: 'var(--bg-secondary)', border: '1px solid var(--border-divider)', borderRadius: 'var(--radius-input)', padding: '20px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', fontWeight: 700, color: 'var(--text-primary)' }}>
-              STEP 4 OF 5: SELECT YOUR PREFERRED CANDIDATE / PARTY
+              {isSurvey ? 'SELECT YOUR PREFERRED SURVEY OPTION' : 'STEP 4 OF 5: SELECT YOUR PREFERRED CANDIDATE / PARTY'}
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '10px' }}>
               {activePoll?.candidates?.map(cand => (
@@ -379,12 +466,12 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
               <div>VOTER TYPE: <strong>{isResident ? 'LOCAL REGISTERED RESIDENT' : 'OUTSIDE OBSERVER'}</strong></div>
               <div>STATE: <strong>{selectedState}</strong></div>
               <div>CONSTITUENCY: <strong>{selectedConstituency}</strong></div>
-              <div>SELECTED CANDIDATE: <strong style={{ color: 'var(--accent-primary)' }}>{selectedCandidateObj?.name} ({selectedCandidateObj?.party})</strong></div>
+              <div>SELECTED CANDIDATE: <strong style={{ color: 'var(--accent-primary)' }}>{selectedCandidateObj?.name} {!isSurvey && `(${selectedCandidateObj?.party})`}</strong></div>
             </div>
 
             <div style={{ display: 'flex', gap: '12px', marginTop: '10px' }}>
               <button onClick={handleConfirmVoteSubmit} disabled={isSubmitting} className="btn-primary" style={{ padding: '12px 24px', fontSize: '14px' }}>
-                🔒 {isSubmitting ? 'CONFIRMING VOTE & SYNCING DB...' : 'CONFIRM & SUBMIT OFFICIAL VOTE'}
+                {isSubmitting ? 'Submitting vote...' : 'Confirm Vote'}
               </button>
               <button onClick={() => setStep(4)} className="btn-secondary" style={{ padding: '12px 18px', fontSize: '13px' }}>
                 Change Selection
@@ -398,27 +485,27 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
           <div style={{ marginTop: '20px', borderTop: '2px solid var(--border-main)', paddingTop: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '14px', fontWeight: 700, color: 'var(--text-primary)' }}>
-                OFFICIAL ELECTION RESULTS (TOTAL VOTES: {activePoll?.totalVotes || residentTotal + observerTotal})
+                {isSurvey ? `📊 SURVEY RESULTS (TOTAL VOTES: ${activePoll?.totalVotes || residentTotal + observerTotal})` : `OFFICIAL ELECTION RESULTS (TOTAL VOTES: ${activePoll?.totalVotes || residentTotal + observerTotal})`}
               </span>
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button onClick={refreshLiveResults} className="btn-secondary" style={{ fontSize: '11px', padding: '4px 10px' }}>
                   🔄 REFRESH LIVE DB
                 </button>
                 {!hasVotedBefore && (
-                  <button onClick={() => { setStep(1); setVoteErrorMsg(''); setJustVoted(false); }} className="btn-ghost" style={{ fontSize: '12px', color: 'var(--accent-primary)', fontWeight: 700 }}>
-                    Vote Again / Change Mode
+                  <button onClick={() => { setStep(isSurvey ? 4 : 1); setVoteErrorMsg(''); setJustVoted(false); }} className="btn-ghost" style={{ fontSize: '12px', color: 'var(--accent-primary)', fontWeight: 700 }}>
+                    Vote Again
                   </button>
                 )}
               </div>
             </div>
 
             {/* TWO SEPARATE RESULTS COLUMNS: RESIDENT VOTES vs OBSERVER VOTES */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: isSurvey ? '1fr' : '1fr 1fr', gap: '24px' }}>
               
               {/* COLUMN A: RESIDENT VOTES */}
               <div style={{ backgroundColor: '#F9F8F6', border: '1px solid var(--border-divider)', borderRadius: '8px', padding: '16px' }}>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, color: 'var(--accent-primary)', marginBottom: '12px', borderBottom: '1px solid var(--border-divider)', paddingBottom: '6px' }}>
-                  🏠 LOCAL RESIDENT VOTES ({residentTotal})
+                  🏠 {isSurvey ? `SURVEY RESULTS (${activePoll?.totalVotes || residentTotal + observerTotal})` : `LOCAL RESIDENT VOTES (${residentTotal})`}
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -428,17 +515,29 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
                     const isYourCandidate = selectedCandidateId === cand.id;
 
                     return (
-                      <div key={cand.id} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-sans)', fontSize: '13px', fontWeight: isYourCandidate ? 700 : 600 }}>
-                          <span style={{ color: isYourCandidate ? '#059669' : 'var(--text-primary)' }}>
-                            {isYourCandidate && '✓ '}
-                            {cand.name} ({cand.party})
-                            {isYourCandidate && ' (YOUR VOTE)'}
+                      <div 
+                      key={cand.id} 
+                      style={isSurvey ? {
+                        backgroundColor: isYourCandidate ? '#ECFDF5' : 'var(--bg-secondary)',
+                        border: isYourCandidate ? '2px solid #059669' : '1px solid var(--border-divider)',
+                        borderRadius: '6px',
+                        padding: '8px 12px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '4px'
+                      } : { display: 'flex', flexDirection: 'column', gap: '4px' }}
+                    >
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-sans)', fontSize: '13px', fontWeight: isYourCandidate ? 700 : (isSurvey ? 500 : 600) }}>
+                          <span style={{ display: 'flex', alignItems: 'center', gap: '6px', color: (isYourCandidate && !isSurvey) ? '#059669' : 'var(--text-primary)' }}>
+                            {isYourCandidate && <span style={{ color: '#059669', fontWeight: 800 }}>✓</span>}
+                            {cand.name} {!isSurvey && `(${cand.party})`}
+                            {isYourCandidate && !isSurvey && ' (YOUR VOTE)'}
+                            {isYourCandidate && isSurvey && <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: '#059669', fontWeight: 700 }}>(YOUR CHOICE)</span>}
                           </span>
-                          <span style={{ fontFamily: 'var(--font-mono)' }}>{pct}% ({votes})</span>
+                          <span style={{ fontFamily: 'var(--font-mono)', fontSize: isSurvey ? '11px' : '13px', fontWeight: isSurvey ? 700 : 400 }}>{pct}% {!isSurvey && `(${votes})`}</span>
                         </div>
-                        <div style={{ height: '8px', backgroundColor: '#E5E2DC', borderRadius: '4px', overflow: 'hidden' }}>
-                          <div style={{ height: '100%', width: `${pct}%`, backgroundColor: isYourCandidate ? '#059669' : (cand.color || 'var(--accent-primary)'), transition: 'width 400ms ease' }} />
+                        <div style={{ height: isSurvey ? '5px' : '8px', backgroundColor: '#E5E2DC', borderRadius: isSurvey ? '3px' : '4px', overflow: 'hidden' }}>
+                          <div style={{ height: '100%', width: `${pct}%`, backgroundColor: isYourCandidate ? '#059669' : (isSurvey ? 'var(--accent-primary)' : (cand.color || 'var(--accent-primary)')), transition: 'width 400ms ease' }} />
                         </div>
                       </div>
                     );
@@ -447,9 +546,10 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
               </div>
 
               {/* COLUMN B: OBSERVER VOTES */}
+              {!isSurvey && (
               <div style={{ backgroundColor: '#F9F8F6', border: '1px solid var(--border-divider)', borderRadius: '8px', padding: '16px' }}>
                 <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, color: 'var(--text-secondary)', marginBottom: '12px', borderBottom: '1px solid var(--border-divider)', paddingBottom: '6px' }}>
-                  🌐 OUTSIDE OBSERVER VOTES ({observerTotal})
+                  🌐 {!isSurvey ? `OUTSIDE OBSERVER VOTES (${observerTotal})` : ""}
                 </div>
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -460,7 +560,7 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
                     return (
                       <div key={cand.id} style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'var(--font-sans)', fontSize: '13px', fontWeight: 600 }}>
-                          <span>{cand.name} ({cand.party})</span>
+                          <span>{cand.name} {!isSurvey && `(${cand.party})`}</span>
                           <span style={{ fontFamily: 'var(--font-mono)' }}>{pct}% ({votes})</span>
                         </div>
                         <div style={{ height: '8px', backgroundColor: '#E5E2DC', borderRadius: '4px', overflow: 'hidden' }}>
@@ -471,6 +571,7 @@ export default function OfficialElectionPoll({ election, openRegisterModal }) {
                   })}
                 </div>
               </div>
+              )}
 
             </div>
           </div>

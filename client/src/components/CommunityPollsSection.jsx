@@ -127,14 +127,9 @@ export default function CommunityPollsSection({ openRegisterModal }) {
       
       {/* Header Banner */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
-        <div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, color: 'var(--accent-primary)', letterSpacing: '0.06em' }}>
-            💬 CITIZEN OPINION & COMMUNITY DISCUSSIONS
-          </div>
-          <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '24px', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
-            Election Surveys & Community Mini Polls
-          </h2>
-        </div>
+        <h2 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
+          🗣️ Community Issue Polls
+        </h2>
 
         <button 
           onClick={() => {
@@ -169,14 +164,10 @@ export default function CommunityPollsSection({ openRegisterModal }) {
             >
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--text-muted)' }}>
-                  {poll.authorName}
+                  {poll.authorName?.replace(' (Verified Citizen)', '')}
                 </span>
                 <div style={{ display: 'flex', gap: '6px' }}>
-                  {userVotedOpt && (
-                    <span className="badge badge-published animate-bounce-in" style={{ fontSize: '9px' }}>
-                      ✓ VOTE CONFIRMED
-                    </span>
-                  )}
+
                   {poll.isFeatured && (
                     <span className="badge badge-featured" style={{ fontSize: '9px' }}>★ FEATURED SURVEY</span>
                   )}
@@ -243,19 +234,6 @@ export default function CommunityPollsSection({ openRegisterModal }) {
             </div>
           );
         })}
-      </div>
-
-      {/* Community Election Discussions Section */}
-      <div style={{ marginTop: '32px' }}>
-        <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '22px', fontWeight: 700, marginBottom: '16px', color: 'var(--text-primary)' }}>
-          💬 Election Discussions & Constituency Feedback
-        </h3>
-
-        <PostComposer onPostCreated={(p) => setPosts(prev => [p, ...(Array.isArray(prev) ? prev : [])])} openRegisterModal={openRegisterModal} />
-
-        {safePosts.map(p => (
-          <PostCard key={p.id} post={p} onDelete={(id) => setPosts(prev => (Array.isArray(prev) ? prev : []).filter(item => item.id !== id))} />
-        ))}
       </div>
 
       <CreateCommunityPollModal 

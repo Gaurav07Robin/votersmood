@@ -2,10 +2,20 @@ import React, { useState } from 'react';
 import { api } from '../api/client';
 import { useAuth } from '../context/AuthContext';
 
+const TARGET_SCOPES = [
+  { value: 'mh2024', label: 'Maharashtra 2024 Assembly Elections' },
+  { value: 'delhi2025', label: 'Delhi 2025 Assembly Elections' },
+  { value: 'bihar2025', label: 'Bihar 2025 Assembly Elections' },
+  { value: 'wb2026', label: 'West Bengal 2026 Assembly Elections' },
+  { value: 'up2027', label: 'Uttar Pradesh 2027 Assembly Elections' },
+  { value: 'central', label: 'Central Government Administration' }
+];
+
 export default function CreateCommunityPollModal({ isOpen, onClose, onCreated }) {
   const { user } = useAuth();
   const [question, setQuestion] = useState('');
   const [options, setOptions] = useState(['', '']);
+  const [targetScope, setTargetScope] = useState('mh2024');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!isOpen) return null;
@@ -29,7 +39,8 @@ export default function CreateCommunityPollModal({ isOpen, onClose, onCreated })
     try {
       const created = await api.createCommunityPoll({
         question: question.trim(),
-        options: validOptions
+        options: validOptions,
+        targetElection: targetScope
       });
       onCreated(created);
       onClose();
@@ -53,6 +64,20 @@ export default function CreateCommunityPollModal({ isOpen, onClose, onCreated })
         </h2>
 
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+            <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700 }}>TARGET ELECTION</label>
+            <select 
+              value={targetScope} 
+              onChange={(e) => setTargetScope(e.target.value)} 
+              style={{ padding: '8px', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}
+            >
+              {TARGET_SCOPES.map(scope => (
+                <option key={scope.value} value={scope.value}>{scope.label}</option>
+              ))}
+            </select>
+          </div>
+
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700 }}>SURVEY QUESTION / ISSUE</label>
             <input 
