@@ -126,8 +126,19 @@ export default function RegisterModal({ isOpen, onClose }) {
     } catch (err) {
       const serverErr = err.response?.data?.error;
       if (serverErr) {
-        setErrorMsg(serverErr);
-        if (serverErr.includes('already exists')) setMainTab('signin');
+        if (serverErr.includes('already exists')) {
+          // Auto-login instead of making the user click twice
+          try {
+            setIsSubmitting(true);
+            await login(email, password);
+            onClose();
+          } catch (loginErr) {
+            setErrorMsg('Account exists, but incorrect password. Please try again.');
+            setMainTab('signin');
+          }
+        } else {
+          setErrorMsg(serverErr);
+        }
       } else {
         setErrorMsg(mainTab === 'signin' ? 'Invalid email or password.' : 'Registration failed.');
       }
