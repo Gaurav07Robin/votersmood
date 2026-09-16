@@ -3,7 +3,7 @@ import { getAuth, GoogleAuthProvider, TwitterAuthProvider, signInWithPopup, Reca
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  apiKey: "AIzaSyBlmppRcdQK9B8UVUp5zqFAG9f0EBbsCUM",
   authDomain: "votersmood78.firebaseapp.com",
   projectId: "votersmood78",
   storageBucket: "votersmood78.firebasestorage.app",
