@@ -1,5 +1,4 @@
-import { db } from '../config/firebase.js';
-import { doc, setDoc, collection, getDocs } from 'firebase/firestore';
+import { getDb } from '../config/firebase-admin.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -192,8 +191,8 @@ Follow these strict rules for each object in the array:
 // 3. DATABASE INJECTION
 export async function saveTimelineToDB(leaderId, timelineArray) {
   try {
-    const ref = doc(db, 'leaders', leaderId);
-    await setDoc(ref, { careerTimeline: timelineArray }, { merge: true });
+    const db = await getDb();
+    await db.collection('leaders').doc(leaderId).set({ careerTimeline: timelineArray }, { merge: true });
     console.log(`✅ Successfully saved structured timeline for [${leaderId}] to Firestore!`);
   } catch (error) {
     console.error(`❌ DB Error for ${leaderId}:`, error.message);

@@ -1,5 +1,4 @@
-import { db } from '../config/firebase.js';
-import { collection, getDocs } from 'firebase/firestore';
+import { getDb } from '../config/firebase-admin.js';
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 import dotenv from 'dotenv';
@@ -71,7 +70,9 @@ Return a strictly valid JSON array of objects in this exact format:
     const data = await geminiRes.json();
     if (data.error) throw new Error(data.error.message);
     
-    const elections = JSON.parse(data.candidates[0].content.parts[0].text);
+    let textResult = data.candidates[0].content.parts[0].text;
+    textResult = textResult.replace(/```json/g, '').replace(/```/g, '').trim();
+    const elections = JSON.parse(textResult);
     console.log(`🤖 AI discovered ${elections.length} major elections for ${year}.`);
     return elections;
   } catch (err) {
@@ -89,10 +90,11 @@ async function runAutonomousTracker() {
   const currentYear = new Date().getFullYear();
   
   // Get currently tracked elections from Firestore
-  console.log(`\n📚 Checking existing database records...`);
+  console.log(`\n⏳ Checking existing database records...`);
   const existingDocs = new Set();
   try {
-    const snap = await getDocs(collection(db, 'live_elections'));
+    const db = await getDb();
+    const snap = await db.collection('live_elections').get();
     snap.forEach(doc => existingDocs.add(doc.id));
     console.log(`Found ${existingDocs.size} elections currently tracked in DB.`);
   } catch (e) {

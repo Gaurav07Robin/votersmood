@@ -1,21 +1,24 @@
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.join(__dirname, '../.env') });
 
 let db = null;
 let auth = null;
+let initPromise = null;
 
-// Safe lazy loading for Firebase Admin SDK to prevent ERR_REQUIRE_ESM in Vercel Serverless Functions
 const initAdminSDK = async () => {
   if (process.env.VERCEL === '1' || process.env.VERCEL_ENV) {
-    // Vercel Serverless uses Client Web SDK (server/config/firebase.js)
     return;
   }
 
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
   const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
 
-  if (clientEmail && privateKey && !privateKey.includes('MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC...')) {
+  if (clientEmail && privateKey) {
     try {
       const { initializeApp, getApps, cert } = await import('firebase-admin/app');
       const { getFirestore } = await import('firebase-admin/firestore');
@@ -29,16 +32,27 @@ const initAdminSDK = async () => {
             privateKey,
           }),
         });
-        console.log('✔ Initialized Firebase Admin SDK with Service Account');
+        console.log('🔥 Initialized Firebase Admin SDK with Service Account');
       }
       db = getFirestore();
       auth = getAuth();
     } catch (error) {
       console.warn('⚠️ Firebase Admin SDK serverless bypass active:', error.message);
     }
+  } else {
+    console.warn('⚠️ FIREBASE_CLIENT_EMAIL or FIREBASE_PRIVATE_KEY is missing from environment variables.');
   }
 };
 
-initAdminSDK();
+export const getDb = async () => {
+  if (!initPromise) initPromise = initAdminSDK();
+  await initPromise;
+  if (!db) throw new Error("Firebase Admin DB not initialized. Check your Service Account keys.");
+  return db;
+};
 
-export { db, auth };
+export const getAuthAdmin = async () => {
+  if (!initPromise) initPromise = initAdminSDK();
+  await initPromise;
+  return auth;
+};

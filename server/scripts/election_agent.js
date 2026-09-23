@@ -1,5 +1,4 @@
-import { db } from '../config/firebase.js';
-import { doc, setDoc } from 'firebase/firestore';
+import { getDb } from '../config/firebase-admin.js';
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 import dotenv from 'dotenv';
@@ -39,7 +38,7 @@ async function getTopUrls(query) {
 // 2. Scrape raw text and tables from an article
 async function scrapeArticle(url) {
   try {
-    console.log(`   🕸️ Scraping: ${url}`);
+    console.log(`   🌐 Scraping: ${url}`);
     const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
     const html = await res.text();
     const $ = cheerio.load(html);
@@ -101,7 +100,9 @@ Only return valid JSON without markdown wrapping. If constituency-wise data is m
     const data = await res.json();
     if (data.error) throw new Error(data.error.message);
     
-    return JSON.parse(data.candidates[0].content.parts[0].text);
+    let textResult = data.candidates[0].content.parts[0].text;
+    textResult = textResult.replace(/```json/g, '').replace(/```/g, '').trim();
+    return JSON.parse(textResult);
   } catch (error) {
     console.error(`   ❌ AI Error:`, error.message);
     return null;
@@ -140,11 +141,12 @@ export async function runElectionScraper(electionType, electionName, state, year
     console.log(`   🏆 Standings:`, structuredData.partyStandings);
     console.log(`   📍 Constituencies Found: ${structuredData.constituencyResults.length}`);
 
-    // Save to Firestore
+    // Save to Firestore using Admin SDK
+    const db = await getDb();
     const docId = `${state.toLowerCase()}-${electionName.toLowerCase().replace(/\s+/g, '-')}-${year}`;
-    const collectionName = 'live_elections'; // generic collection for all these elections
+    const collectionName = 'live_elections';
     
-    await setDoc(doc(db, collectionName, docId), structuredData);
+    await db.collection(collectionName).doc(docId).set(structuredData, { merge: true });
     console.log(`💾 Saved to Firestore '${collectionName}/${docId}'`);
     return structuredData;
   }
