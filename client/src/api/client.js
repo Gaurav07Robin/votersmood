@@ -71,6 +71,10 @@ export const api = {
   // Topics
   getTopics: (params) => apiClient.get('/topics', { params }).then(r => r.data),
 
+  // Insights & Autonomous News Room
+  getInsights: () => apiClient.get('/insights').then(r => r.data),
+  getLiveElections: () => apiClient.get('/insights/live-elections').then(r => r.data),
+
   // Admin
   getAdminStats: () => apiClient.get('/admin/stats').then(r => r.data),
   getAppConfig: () => apiClient.get('/admin/config').then(r => r.data),

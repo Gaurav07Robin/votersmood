@@ -26,7 +26,7 @@ jobs:
     - name: Run Crawler Script
       working-directory: ./server
       # Replace 'autonomous_tracker.js' with your exact crawler script name if different
-      run: node scripts/autonomous_tracker.js
+      run: node scripts/central_brain.js
       env:
         # Add your secrets here
         # You must add these exact secrets in your GitHub Repository Settings -> Secrets and variables -> Actions

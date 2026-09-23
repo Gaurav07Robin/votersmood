@@ -13,6 +13,7 @@ import reactionsRouter from './routes/reactions.js';
 import leadersRouter from './routes/leaders.js';
 import topicsRouter from './routes/topics.js';
 import adminRouter from './routes/admin.js';
+import insightsRouter from './routes/insights.js';
 
 dotenv.config();
 
@@ -47,6 +48,7 @@ app.use('/api/reactions', reactionsRouter);
 app.use('/api/leaders', leadersRouter);
 app.use('/api/topics', topicsRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/insights', insightsRouter);
 
 // Global Error Handler
 app.use((err, req, res, next) => {

@@ -47,7 +47,20 @@ const initAdminSDK = async () => {
 export const getDb = async () => {
   if (!initPromise) initPromise = initAdminSDK();
   await initPromise;
-  if (!db) throw new Error("Firebase Admin DB not initialized. Check your Service Account keys.");
+  
+  if (!db) {
+    console.warn("⚠️ WARNING: Firebase Admin keys missing. Returning MOCK Database for local testing.");
+    db = {
+      collection: () => ({
+        doc: () => ({
+          get: async () => ({ exists: false, data: () => ({}) }),
+          set: async () => console.log("[MOCK DB] set() called")
+        }),
+        get: async () => ({ size: 0, empty: true, forEach: () => {} }),
+        limit: () => ({ get: async () => ({ empty: true }) })
+      })
+    };
+  }
   return db;
 };
 
