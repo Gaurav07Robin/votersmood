@@ -1,5 +1,5 @@
 import express from 'express';
-import { db } from '../config/firebase-admin.js';
+import { getDb } from '../config/firebase-admin.js';
 
 const router = express.Router();
 
@@ -61,6 +61,7 @@ router.get('/', async (req, res) => {
   try {
     let topicsMap = new Map();
 
+    const db = await getDb();
     if (db) {
       const postsSnap = await withTimeout(
         db.collection('posts').where('createdAt', '>=', cutoffTime).get(),

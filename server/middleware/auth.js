@@ -1,4 +1,4 @@
-import { auth } from '../config/firebase-admin.js';
+import { getAuthAdmin } from '../config/firebase-admin.js';
 import { db } from '../config/firebase.js';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
@@ -72,6 +72,7 @@ export const verifyAuthToken = async (req, res, next) => {
 
   // Standard Firebase Auth Token fallback
   try {
+    const auth = await getAuthAdmin();
     if (auth && typeof auth.verifyIdToken === 'function') {
       const decodedToken = await auth.verifyIdToken(token);
       req.user = decodedToken;
