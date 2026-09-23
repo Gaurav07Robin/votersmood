@@ -12,26 +12,37 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
-// 1. Fetch URLs from DDG Search
+// 1. Fetch URLs using Wikipedia API (Bypasses GitHub Actions DataCenter blocks)
 async function getTopUrls(query) {
   try {
-    const url = `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}`;
-    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-    const html = await res.text();
-    const $ = cheerio.load(html);
+    // Simplify query for Wikipedia
+    const cleanQuery = query.replace('ward wise winning candidates', '').trim();
+    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(cleanQuery)}&utf8=&format=json`;
     
-    let links = [];
-    $('.result__a').each((i, el) => {
-      let href = $(el).attr('href');
-      if (href) {
-        // clean duckduckgo redirect url
-        href = decodeURIComponent(href.replace('//duckduckgo.com/l/?uddg=', '').split('&rut=')[0]);
-        if (href.startsWith('http') && !href.includes('youtube')) links.push(href);
+    // Wikipedia API REQUIRES a User-Agent header for automated requests
+    const res = await fetch(searchUrl, {
+      headers: {
+        'User-Agent': 'VotersmoodBot/1.0 (https://github.com/Gaurav07Robin/votersmood)'
       }
     });
-    return links.slice(0, 3); // Top 3 links
+    
+    if (!res.ok) {
+      console.error(`Wikipedia API HTTP Error: ${res.status}`);
+      return [];
+    }
+    
+    const data = await res.json();
+    
+    if (!data.query || !data.query.search || data.query.search.length === 0) return [];
+    
+    // Get top 2 wikipedia pages
+    let links = [];
+    for(let i=0; i<Math.min(2, data.query.search.length); i++) {
+      links.push(`https://en.wikipedia.org/wiki/?curid=${data.query.search[i].pageid}`);
+    }
+    return links;
   } catch (e) {
-    console.error("DDG Error:", e.message);
+    console.error("Wikipedia API Error:", e.message);
     return [];
   }
 }
