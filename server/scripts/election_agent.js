@@ -17,7 +17,19 @@ async function getTopUrls(query) {
     // Simplify query for Wikipedia
     const cleanQuery = query.replace('constituency wise winning candidates', '').trim();
     const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(cleanQuery)}&utf8=&format=json`;
-    const res = await fetch(searchUrl);
+    
+    // Wikipedia API REQUIRES a User-Agent header for automated requests, otherwise it returns 403 Forbidden on server IPs
+    const res = await fetch(searchUrl, {
+      headers: {
+        'User-Agent': 'VotersmoodBot/1.0 (https://github.com/Gaurav07Robin/votersmood)'
+      }
+    });
+    
+    if (!res.ok) {
+      console.error(`Wikipedia API HTTP Error: ${res.status}`);
+      return [];
+    }
+    
     const data = await res.json();
     
     if (!data.query || !data.query.search || data.query.search.length === 0) return [];
