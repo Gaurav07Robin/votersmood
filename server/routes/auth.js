@@ -92,41 +92,44 @@ export const trackUserActivity = async (userEmail, userUid) => {
 // In-memory fallback user store when Firestore database is offline
 const IN_MEMORY_USERS = new Map();
 
-// 0. GET /api/auth/locations (FETCHED 100% DIRECTLY FROM CLOUD FIRESTORE DB)
+// 0. GET /api/auth/locations (FETCHED 100% DIRECTLY FROM CLOUD FIRESTORE DB OR LOCAL)
 router.get('/locations', async (req, res) => {
   try {
-    let locationData = null;
+    const geoPath = path.join(__dirname, '..', 'data', 'geography.json');
+    const geoRaw = fs.readFileSync(geoPath, 'utf-8');
+    const geographyData = JSON.parse(geoRaw);
 
-    // 1. Fetch from Cloud Firestore DB document [locations/master]
-    if (db) {
-      try {
-        const locSnap = await getDoc(doc(db, 'locations', 'master'));
-        if (locSnap.exists()) {
-          locationData = locSnap.data();
-          console.log(`🔥 Cloud Firestore DB: Fetched master location dataset (${locationData.totalLeadersCount || 4110} leader constituencies)`);
-        }
-      } catch (e) {
-        console.warn('⚠️ Firestore location fetch warning:', e.message);
-      }
-    }
+    const states = [];
+    const districtsByState = {};
+    const constituenciesByDistrict = {};
+    
+    const knownCodes = {
+      'Maharashtra': 'MH',
+      'Uttar Pradesh': 'UP',
+      'West Bengal': 'WB'
+    };
 
-    // 2. Local JSON Cache fallback if DB is offline
-    if (!locationData) {
-      const localCachePath = path.join(__dirname, '..', 'data', 'locations_master.json');
-      if (fs.existsSync(localCachePath)) {
-        const raw = fs.readFileSync(localCachePath, 'utf-8');
-        locationData = JSON.parse(raw);
-        console.log('📁 Loaded locations from local server JSON cache.');
-      }
-    }
+    geographyData.forEach(state => {
+      // Use known code for backward compatibility, otherwise use full name to prevent collisions
+      const stateCode = knownCodes[state.name] || state.name;
+      states.push({ code: stateCode, name: state.name });
+      
+      const dists = Object.keys(state.districts || {});
+      districtsByState[stateCode] = dists;
+      
+      dists.forEach(dist => {
+        const consts = state.districts[dist].map(c => c.name);
+        constituenciesByDistrict[dist] = consts;
+      });
+    });
 
-    if (!locationData) {
-      return res.status(500).json({ error: 'Location dataset unavailable' });
-    }
-
-    return res.json(locationData);
+    return res.json({
+      states,
+      districtsByState,
+      constituenciesByDistrict
+    });
   } catch (err) {
-    console.error('Error fetching locations from DB:', err);
+    console.error('Error fetching locations:', err);
     res.status(500).json({ error: err.message || 'Failed to fetch location dataset' });
   }
 });
@@ -416,6 +419,80 @@ router.put('/profile/avatar', async (req, res) => {
   } catch (error) {
     console.error('Avatar update error:', error);
     res.status(500).json({ error: error.message || 'Failed to update avatar' });
+  }
+});
+
+// Update Profile
+router.put('/profile', async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    const parts = token.split('_');
+    const emailBase64 = parts[3];
+    if (!emailBase64) {
+      return res.status(401).json({ error: 'Invalid token' });
+    }
+
+    const email = Buffer.from(emailBase64, 'base64').toString('utf-8').toLowerCase().trim();
+    const { name, state, district, block, constituency, isRegisteredVoter } = req.body;
+
+    let userDocId = null;
+    let existingData = null;
+
+    const updates = {};
+    if (name) updates.displayName = name;
+    if (state) updates.state = state;
+    if (district) updates.district = district;
+    if (block) updates.block = block;
+    if (constituency) updates.constituency = constituency;
+    if (typeof isRegisteredVoter === 'boolean') updates.isRegisteredVoter = isRegisteredVoter;
+
+    if (db) {
+      try {
+        const usersRef = collection(db, 'users');
+        const q = query(usersRef, where('email', '==', email));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          userDocId = snap.docs[0].id;
+          existingData = snap.docs[0].data();
+          const userRef = doc(db, 'users', userDocId);
+          await setDoc(userRef, updates, { merge: true });
+          console.log(`🔥 Firebase DB: Updated profile for [${email}]`);
+        }
+      } catch (dbErr) {
+        console.warn('⚠️ Firestore update profile warning:', dbErr.message);
+      }
+    }
+
+    if (IN_MEMORY_USERS.has(email)) {
+      const memUser = IN_MEMORY_USERS.get(email);
+      Object.assign(memUser, updates);
+      IN_MEMORY_USERS.set(email, memUser);
+      existingData = memUser;
+    }
+
+    if (!existingData && !IN_MEMORY_USERS.has(email)) {
+       return res.status(404).json({ error: 'User not found' });
+    }
+
+    const updatedUser = {
+      ...(existingData || {}),
+      ...updates
+    };
+    delete updatedUser.passwordHash;
+
+    return res.json({
+      success: true,
+      message: 'Profile updated successfully',
+      user: updatedUser
+    });
+  } catch (error) {
+    console.error('Profile update error:', error);
+    res.status(500).json({ error: error.message || 'Failed to update profile' });
   }
 });
 

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import AvatarSelectionModal from './AvatarSelectionModal';
+import ProfileModal from './ProfileModal';
 import StreakBadge from './StreakBadge';
 
 // Official Gazette Icons
@@ -44,6 +45,7 @@ export default function Navbar({ activeTab = 'discussions', setActiveTab, openRe
   const { user, userProfile, logout, isAdmin, openRegisterModal: contextOpenRegisterModal } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -211,16 +213,23 @@ export default function Navbar({ activeTab = 'discussions', setActiveTab, openRe
                       </div>
 
                       {/* Citizen Details Strip */}
-                      <div style={{ backgroundColor: '#F8FAFC', borderRadius: '6px', padding: '8px 10px', marginBottom: '8px', fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#475569', display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                        <div>📍 {userProfile?.constituency || 'Mumbai South'}, {userProfile?.state || 'MH'}</div>
-                        <div style={{ color: isVerifiedStreak ? '#0284C7' : '#D97706', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <span>🔥 Streak: {streakCount} Days</span>
-                          <StreakBadge isVerified={isVerifiedStreak} size="15px" fontSize="9px" />
+                      <div style={{ backgroundColor: '#F8FAFC', borderRadius: '6px', padding: '10px', marginBottom: '8px', fontSize: '13px', fontFamily: 'var(--font-sans)', color: '#475569', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <span>📍</span> 
+                          <span style={{ fontWeight: 500 }}>{userProfile?.constituency || 'Mumbai South'}, {userProfile?.state || 'MH'}</span>
                         </div>
                       </div>
 
                       {/* Menu Actions */}
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        <button 
+                          onClick={() => { setProfileModalOpen(true); setProfileDropdownOpen(false); }}
+                          className="btn-ghost"
+                          style={{ width: '100%', textAlign: 'left', fontSize: '12.5px', padding: '8px 10px', borderRadius: '6px', display: 'flex', alignItems: 'center', gap: '8px', color: '#1E293B', fontWeight: 600 }}
+                        >
+                          <span>✏️</span> Edit Profile
+                        </button>
+                        
                         <button 
                           onClick={() => { setAvatarModalOpen(true); setProfileDropdownOpen(false); }}
                           className="btn-ghost"
@@ -270,10 +279,9 @@ export default function Navbar({ activeTab = 'discussions', setActiveTab, openRe
                   <div>
                     <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <span>{userProfile?.displayName || user.email?.split('@')[0]}</span>
-                      {isVerifiedStreak && <StreakBadge isVerified={true} size="15px" fontSize="9px" />}
                     </div>
-                    <div style={{ fontSize: '10px', color: 'var(--accent-copper-text)' }}>
-                      🎨 Tap to change 2D Avatar (Streak: 🔥 {streakCount}d)
+                    <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>
+                      🎨 Tap to change 2D Avatar
                     </div>
                   </div>
                 </div>
@@ -320,9 +328,14 @@ export default function Navbar({ activeTab = 'discussions', setActiveTab, openRe
                 )}
 
                 {user ? (
-                  <button onClick={logout} className="btn-secondary" style={{ width: '100%', height: '38px', fontSize: '13px', color: '#DC2626', fontWeight: 700 }}>
-                    🚪 Sign Out ({user.email?.split('@')[0]})
-                  </button>
+                  <>
+                    <button onClick={() => { setProfileModalOpen(true); setMobileMenuOpen(false); }} className="btn-secondary" style={{ width: '100%', height: '38px', fontSize: '13px', color: '#1E293B', fontWeight: 600 }}>
+                      ✏️ Edit Profile
+                    </button>
+                    <button onClick={logout} className="btn-secondary" style={{ width: '100%', height: '38px', fontSize: '13px', color: '#DC2626', fontWeight: 700 }}>
+                      🚪 Sign Out ({user.email?.split('@')[0]})
+                    </button>
+                  </>
                 ) : (
                   <button onClick={() => { if (handleRegisterClick) handleRegisterClick(); setMobileMenuOpen(false); }} className="btn-primary" style={{ width: '100%', height: '38px', fontSize: '13px' }}>
                     🔑 REGISTER VOTER
@@ -338,6 +351,11 @@ export default function Navbar({ activeTab = 'discussions', setActiveTab, openRe
       <AvatarSelectionModal 
         isOpen={avatarModalOpen}
         onClose={() => setAvatarModalOpen(false)}
+      />
+
+      <ProfileModal 
+        isOpen={profileModalOpen}
+        onClose={() => setProfileModalOpen(false)}
       />
     </>
   );

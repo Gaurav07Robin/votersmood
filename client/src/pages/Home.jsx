@@ -43,7 +43,21 @@ export default function Home({ openRegisterModal }) {
       loadData(false);
     }, 60000);
 
-    return () => {
+    const getTrending = (arr) => {
+    const counts = {};
+    arr.forEach(item => {
+      if (item && item.trim()) {
+        const val = item.trim().toUpperCase();
+        counts[val] = (counts[val] || 0) + 1;
+      }
+    });
+    return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  };
+
+  const trendingIssues = getTrending(safePosts.map(p => p.questionCategory).filter(Boolean));
+  const trendingElections = getTrending(safePosts.map(p => p.topicTag).filter(Boolean));
+
+  return () => {
       isMounted = false;
       clearInterval(intervalId);
     };
@@ -63,23 +77,32 @@ export default function Home({ openRegisterModal }) {
   const safePosts = Array.isArray(posts) ? posts : [];
   const safeFeaturedLeaders = Array.isArray(featuredLeaders) ? featuredLeaders : [];
 
+  const getTrending = (arr) => {
+    const counts = {};
+    arr.forEach(item => {
+      if (item && item.trim()) {
+        const val = item.trim().toUpperCase();
+        counts[val] = (counts[val] || 0) + 1;
+      }
+    });
+    return Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  };
+
+  const trendingIssues = getTrending(safePosts.map(p => p.questionCategory).filter(Boolean));
+  const trendingElections = getTrending(safePosts.map(p => p.topicTag).filter(Boolean));
+
   return (
     <div className="container page-main-container" style={{ padding: '32px 24px' }}>
       
       {/* Title Header Card */}
       <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-main)', borderRadius: 'var(--radius-card)', padding: '24px', marginBottom: '28px', boxShadow: 'var(--shadow-card)' }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700, color: 'var(--accent-primary)', letterSpacing: '0.08em', marginBottom: '4px' }}>
-          🏛 OFFICIAL GAZETTE CIVIC DISCUSSIONS
-        </div>
+        
         <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '32px', fontWeight: 800, margin: '0 0 8px 0', color: 'var(--text-primary)' }}>
           Citizen Discussions & Public Open Questions
         </h1>
-        <p style={{ fontFamily: 'var(--font-sans)', fontSize: '15px', color: 'var(--text-secondary)', margin: 0 }}>
-          Verified constituency feedback, leader open questions, and political performance insights.
-        </p>
       </div>
 
-      <div className="two-column-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '32px' }}>
+      <div className="two-column-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 380px', gap: '32px' }}>
         
         {/* Main Feed Column */}
         <div>
@@ -110,32 +133,56 @@ export default function Home({ openRegisterModal }) {
           )}
         </div>
 
-        {/* Sidebar Column: Top 5 Featured Representatives Ranked by Open Questions */}
+        {/* Sidebar Column: Trending Topics and Elections */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+          
+          {/* Trending Issues Module */}
           <div className="gazette-card" style={{ padding: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
-                🏛 Featured Representatives (Top 5)
+                🔥 Trending Issues
               </h3>
-              <span className="badge badge-featured" style={{ fontSize: '9px', textTransform: 'uppercase' }}>
-                RANKED BY OPEN QUESTIONS
-              </span>
             </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              {safeFeaturedLeaders.map((l, index) => (
-                <LeaderCard 
-                  key={l.id} 
-                  leader={l} 
-                  rank={index + 1} 
-                  onSelect={handleSelectLeader}
-                  openRegisterModal={openRegisterModal}
-                />
-              ))}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {trendingIssues.length > 0 ? trendingIssues.map(([issue, count], idx) => (
+                <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '12px', borderBottom: idx !== trendingIssues.length - 1 ? '1px solid #F1F5F9' : 'none' }}>
+                  <span style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', fontWeight: 600, color: '#334155' }}>
+                    {idx + 1}. {issue}
+                  </span>
+                  <span className="badge badge-verified" style={{ fontSize: '10px' }}>
+                    {count} POSTS
+                  </span>
+                </div>
+              )) : (
+                <div style={{ fontSize: '13px', color: '#94A3B8' }}>No issues trending yet.</div>
+              )}
             </div>
           </div>
-        </div>
 
+          {/* Trending Elections Module */}
+          <div className="gazette-card" style={{ padding: '20px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
+                🗳️ Trending Elections
+              </h3>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {trendingElections.length > 0 ? trendingElections.map(([election, count], idx) => (
+                <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '12px', borderBottom: idx !== trendingElections.length - 1 ? '1px solid #F1F5F9' : 'none' }}>
+                  <span style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', fontWeight: 600, color: '#0369A1', wordBreak: 'break-word', display: 'inline-block', lineHeight: 1.3 }}>
+                    {election.startsWith('#') ? election : `#${election}`}
+                  </span>
+                  <span className="badge badge-trending" style={{ fontSize: '10px' }}>
+                    {count} POSTS
+                  </span>
+                </div>
+              )) : (
+                <div style={{ fontSize: '13px', color: '#94A3B8' }}>No elections trending yet.</div>
+              )}
+            </div>
+          </div>
+
+        </div>
       </div>
     </div>
   );

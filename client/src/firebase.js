@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, TwitterAuthProvider, signInWithPopup, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -12,13 +12,13 @@ const firebaseConfig = {
   measurementId: "G-KHJVV6ECP2"
 };
 
-// Initialize Firebase App for Client SDK
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const googleProvider = new GoogleAuthProvider();
-// Force Google popup to prompt account selection every time
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 
-export { signInWithPopup };
+export const twitterProvider = new TwitterAuthProvider();
+
+export { signInWithPopup, RecaptchaVerifier, signInWithPhoneNumber };

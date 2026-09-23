@@ -284,7 +284,7 @@ router.post('/official/vote', verifyAuthToken, requireAuth, async (req, res) => 
 router.post('/official', verifyAuthToken, requireAdmin, async (req, res) => {
   const { title, category, description, state, states, constituencies, candidates, startDate, endDate, hasNota } = req.body;
 
-  if (!title || !category || !candidates || candidates.length < 2) {
+  if (!title || typeof title !== 'string' || !category || typeof category !== 'string' || !candidates || candidates.length < 2) {
     return res.status(400).json({ error: 'Title, Category, and at least 2 Candidates are required' });
   }
 
@@ -379,20 +379,21 @@ router.get('/community', async (req, res) => {
 
 // POST /api/polls/community - User Creates Community Mini Issue Poll (Persisted to Firestore DB)
 router.post('/community', verifyAuthToken, requireAuth, async (req, res) => {
-  const { question, options } = req.body;
+  const { question, options, targetElection } = req.body;
 
-  if (!question || !options || !Array.isArray(options) || options.length < 2) {
+  if (!question || typeof question !== 'string' || !options || !Array.isArray(options) || options.length < 2) {
     return res.status(400).json({ error: 'Question and at least 2 options are required' });
   }
 
   const newPoll = {
     question: question.trim(),
+    targetElection: targetElection || 'General',
     options: options.map((opt, i) => ({
       id: `opt-${i}`,
       text: typeof opt === 'string' ? opt.trim() : opt.text,
       votes: 0
     })),
-    authorName: (req.user.name || req.user.displayName || 'VERIFIED CITIZEN') + ' (Verified Citizen)',
+    authorName: (req.user.name || req.user.displayName || 'VERIFIED CITIZEN'),
     authorRole: 'user',
     isFeatured: false,
     isLocked: false,

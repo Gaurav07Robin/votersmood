@@ -6,30 +6,7 @@ import { trackUserActivity } from './auth.js';
 
 const router = express.Router();
 
-let IN_MEMORY_POSTS = [
-  {
-    id: 'w3k9tvLmOzjT4GxYaSkp',
-    content: 'When will the 24x7 water pipeline augmentation project in our constituency be fully commissioned? Citizens are experiencing low pressure during morning supply hours.',
-    authorId: 'voter_1',
-    authorName: 'SURESH PATIL',
-    authorAvatar: 'https://api.dicebear.com/10.x/avataaars/svg?seed=Suresh',
-    isVerified: true,
-    isOpenQuestion: true,
-    targetLeaderId: null,
-    targetLeaderName: 'Elected Representative',
-    questionCategory: 'Water Supply',
-    responseStatus: 'pending',
-    officialResponse: null,
-    leaderTag: 'CONSTITUENCY QUESTION',
-    topicTag: 'CITIZENVOICE',
-    poll: null,
-    agreeCount: 1,
-    funnyCount: 0,
-    commentCount: 3,
-    isApproved: true,
-    createdAt: Date.now() - 3600000,
-  }
-];
+let IN_MEMORY_POSTS = [];
 
 // Helper to increment/decrement leader openQuestionsCount & pendingCount in Cloud Firestore DB
 const incrementLeaderQuestionCounts = async (leaderId, delta) => {
@@ -140,7 +117,7 @@ router.post('/', verifyAuthToken, requireAuth, async (req, res) => {
   const isVerified = streakInfo ? streakInfo.isVerifiedStreak : false;
 
   let formattedPoll = null;
-  if (poll && poll.question && Array.isArray(poll.options) && poll.options.length >= 2) {
+  if (poll && poll.question && typeof poll.question === 'string' && Array.isArray(poll.options) && poll.options.length >= 2) {
     formattedPoll = {
       id: 'poll-post-' + Date.now(),
       question: poll.question.trim(),

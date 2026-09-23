@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../api/client';
-import SearchableSelect from './SearchableSelect';
+
 
 const QUESTION_CATEGORIES = [
   'Education',
@@ -21,6 +21,15 @@ const QUESTION_CATEGORIES = [
   'Other'
 ];
 
+const TARGET_SCOPES = [
+  { value: 'mh2024', label: 'Maharashtra 2024 Assembly Elections', rawName: 'MH 2024 Election' },
+  { value: 'delhi2025', label: 'Delhi 2025 Assembly Elections', rawName: 'Delhi 2025 Election' },
+  { value: 'bihar2025', label: 'Bihar 2025 Assembly Elections', rawName: 'Bihar 2025 Election' },
+  { value: 'wb2026', label: 'West Bengal 2026 Assembly Elections', rawName: 'WB 2026 Election' },
+  { value: 'up2027', label: 'Uttar Pradesh 2027 Assembly Elections', rawName: 'UP 2027 Election' },
+  { value: 'central', label: 'Central Government Administration', rawName: 'Central Govt' }
+];
+
 export default function PostComposer({ onPostCreated, openRegisterModal }) {
   const { user } = useAuth();
   const [content, setContent] = useState('');
@@ -28,28 +37,9 @@ export default function PostComposer({ onPostCreated, openRegisterModal }) {
   
   // Open Question state
   const [isOpenQuestion, setIsOpenQuestion] = useState(false);
-  const [targetLeaderId, setTargetLeaderId] = useState('');
-  const [targetLeaderName, setTargetLeaderName] = useState('');
+  const [targetScopeId, setTargetScopeId] = useState(TARGET_SCOPES[0].value);
+  const [targetScopeName, setTargetScopeName] = useState(TARGET_SCOPES[0].rawName);
   const [questionCategory, setQuestionCategory] = useState('Water Supply');
-
-  // Leaders dropdown list dynamically fetched from DB
-  const [leaders, setLeaders] = useState([]);
-
-  useEffect(() => {
-    api.getLeaders({ limit: 100 }).then(res => {
-      const data = Array.isArray(res) ? res : (res.leaders || []);
-      if (data && data.length > 0) {
-        const formatted = data.map(l => ({
-          value: l.id,
-          label: `${l.name} (${l.party} • ${l.constituency})`,
-          rawName: `${l.name} (${l.type || l.repType})`
-        }));
-        setLeaders(formatted);
-        setTargetLeaderId(formatted[0].value);
-        setTargetLeaderName(formatted[0].rawName);
-      }
-    }).catch(() => {});
-  }, []);
 
   const handleTextareaInput = (e) => {
     setContent(e.target.value.slice(0, 500));
@@ -68,14 +58,18 @@ export default function PostComposer({ onPostCreated, openRegisterModal }) {
 
     setIsSubmitting(true);
     try {
+      // Dynamically extract the first hashtag from the content to use as the topic tag
+      const hashtagsMatch = content.trim().match(/#[\w]+/g);
+      const extractedTag = hashtagsMatch ? hashtagsMatch[0].replace('#', '').toUpperCase() : 'GENERAL';
+
       const created = await api.createPost({
         content: content.trim(),
         isOpenQuestion,
-        targetLeaderId: isOpenQuestion ? targetLeaderId : null,
-        targetLeaderName: isOpenQuestion ? targetLeaderName : null,
+        targetLeaderId: isOpenQuestion ? targetScopeId : null,
+        targetLeaderName: isOpenQuestion ? targetScopeName : null,
         questionCategory: isOpenQuestion ? questionCategory : null,
-        leaderTag: isOpenQuestion ? targetLeaderName.toUpperCase() : 'GENERAL FEEDBACK',
-        topicTag: 'POLITICALDISCUSSIONS',
+        leaderTag: isOpenQuestion ? targetScopeName.toUpperCase() : 'GENERAL FEEDBACK',
+        topicTag: extractedTag,
       });
 
       setContent('');
@@ -109,10 +103,10 @@ export default function PostComposer({ onPostCreated, openRegisterModal }) {
         value={content}
         onChange={handleTextareaInput}
         onClick={() => { if (!user && openRegisterModal) openRegisterModal(); }}
-        placeholder={user ? "Write your insight or ask an open question to a leader (max 500 chars)..." : "🔒 Click to register as Verified Citizen & post an insight (max 500 chars)..."}
+        placeholder={user ? "Write your insight or raise a public issue (max 500 chars)..." : "Sign in to post an insight (max 500 chars)..."}
         disabled={isSubmitting}
         maxLength={500}
-        rows={2}
+        rows={1}
         style={{ 
           width: '100%', 
           border: 'none !important', 
@@ -120,12 +114,12 @@ export default function PostComposer({ onPostCreated, openRegisterModal }) {
           boxShadow: 'none !important',
           background: 'transparent', 
           backgroundColor: 'transparent',
-          fontSize: '15px', 
+          fontSize: '14px', 
           lineHeight: 1.5,
           color: 'var(--text-primary)', 
           cursor: user ? 'text' : 'pointer',
           padding: '4px 0',
-          minHeight: '48px',
+          minHeight: '32px',
           resize: 'none',
           overflow: 'hidden'
         }}
@@ -142,7 +136,7 @@ export default function PostComposer({ onPostCreated, openRegisterModal }) {
             style={{ width: '16px', height: '16px', accentColor: 'var(--accent-primary)', cursor: 'pointer' }}
           />
           <label htmlFor="openQuestionCheck" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 600, color: 'var(--accent-copper-text)', cursor: 'pointer' }}>
-            ❓ MARK THIS POST AS AN OPEN QUESTION TO A LEADER
+            ❓ MARK THIS POST AS A PUBLIC ISSUE
           </label>
         </div>
       )}
@@ -153,18 +147,21 @@ export default function PostComposer({ onPostCreated, openRegisterModal }) {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
               <label style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', fontWeight: 700, color: 'var(--text-primary)' }}>
-                ATTACH POLITICAL LEADER
+                TARGET ELECTION
               </label>
-              <SearchableSelect
-                options={leaders}
-                value={targetLeaderId}
-                onChange={(val) => {
-                  setTargetLeaderId(val);
-                  const found = leaders.find(l => l.value === val);
-                  if (found) setTargetLeaderName(found.rawName || found.label);
+              <select
+                value={targetScopeId}
+                onChange={(e) => {
+                  setTargetScopeId(e.target.value);
+                  const found = TARGET_SCOPES.find(s => s.value === e.target.value);
+                  if (found) setTargetScopeName(found.rawName);
                 }}
-                placeholder="Search Representative from DB..."
-              />
+                style={{ fontSize: '13px', border: '1px solid var(--border-subtle)', padding: '6px', borderRadius: '4px' }}
+              >
+                {TARGET_SCOPES.map(scope => (
+                  <option key={scope.value} value={scope.value}>{scope.label}</option>
+                ))}
+              </select>
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
@@ -174,7 +171,7 @@ export default function PostComposer({ onPostCreated, openRegisterModal }) {
               <select
                 value={questionCategory}
                 onChange={(e) => setQuestionCategory(e.target.value)}
-                style={{ fontSize: '13px', border: '1px solid var(--border-subtle)' }}
+                style={{ fontSize: '13px', border: '1px solid var(--border-subtle)', padding: '6px', borderRadius: '4px' }}
               >
                 {QUESTION_CATEGORIES.map(cat => (
                   <option key={cat} value={cat}>{cat}</option>
@@ -197,7 +194,7 @@ export default function PostComposer({ onPostCreated, openRegisterModal }) {
           className="btn-primary"
           style={{ fontSize: '12px', height: '36px', padding: '0 18px', borderRadius: '18px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
         >
-          <span>✈</span> {isSubmitting ? 'POSTING...' : isOpenQuestion ? 'POST OPEN QUESTION' : 'POST INSIGHT'}
+          <span>✈️</span> {isSubmitting ? 'POSTING...' : isOpenQuestion ? 'POST PUBLIC ISSUE' : 'POST INSIGHT'}
         </button>
       </div>
     </form>

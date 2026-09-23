@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { api } from '../api/client';
-import { auth, googleProvider, signInWithPopup } from '../firebase';
+import { auth, googleProvider, twitterProvider, signInWithPopup } from '../firebase';
 
 const AuthContext = createContext({
   user: null,
@@ -13,6 +13,9 @@ const AuthContext = createContext({
   login: async () => {},
   signup: async () => {},
   loginWithGoogle: async () => {},
+  loginWithTwitter: async () => {},
+  loginWithPhone: async () => {},
+  updateUserProfile: async () => {},
   updateUserAvatar: async () => {},
   logout: () => {},
 });
@@ -157,6 +160,103 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const loginWithTwitter = async (
+    state = 'MH', 
+    constituency = 'Nagpur South West', 
+    district = 'Nagpur', 
+    block = 'Nagpur Urban'
+  ) => {
+    try {
+      const result = await signInWithPopup(auth, twitterProvider);
+      const twitterUser = result.user;
+      
+      const email = twitterUser.email || `${twitterUser.providerData[0].uid}@twitter.com`;
+      const name = twitterUser.displayName || `Twitter User ${twitterUser.uid.substring(0, 4)}`;
+      const password = `twitter_oauth_${twitterUser.uid.substring(0, 10)}`;
+
+      let res;
+      try {
+        res = await api.login({ email, password });
+      } catch (loginErr) {
+        res = await api.signup({
+          name,
+          email,
+          password,
+          state,
+          district,
+          block,
+          constituency,
+          isRegisteredVoter: true
+        });
+      }
+
+      if (res && res.token && res.user) {
+        localStorage.setItem('janmat_token', res.token);
+        localStorage.setItem('janmat_user', JSON.stringify(res.user));
+        setUser(res.user);
+        setUserProfile(res.user);
+        setIsAdmin(res.user.isAdmin === true);
+        setIsRegisterOpen(false);
+        return res.user;
+      }
+    } catch (error) {
+      console.error('Twitter Sign In error:', error);
+      throw error;
+    }
+  };
+
+  const loginWithPhone = async (phoneNumber, uid) => {
+    try {
+      const email = `${phoneNumber.replace('+', '')}@janmat.in`;
+      const name = `User ${phoneNumber.slice(-4)}`;
+      const password = `phone_oauth_${uid.substring(0, 10)}`;
+
+      let res;
+      try {
+        res = await api.login({ email, password });
+      } catch (loginErr) {
+        res = await api.signup({
+          name,
+          email,
+          password,
+          state: 'MH',
+          district: 'Nagpur',
+          block: 'Nagpur Urban',
+          constituency: 'Nagpur South West',
+          isRegisteredVoter: true
+        });
+      }
+
+      if (res && res.token && res.user) {
+        localStorage.setItem('janmat_token', res.token);
+        localStorage.setItem('janmat_user', JSON.stringify(res.user));
+        setUser(res.user);
+        setUserProfile(res.user);
+        setIsAdmin(res.user.isAdmin === true);
+        setIsRegisterOpen(false);
+        return res.user;
+      }
+    } catch (error) {
+      console.error('Phone Sign In error:', error);
+      throw error;
+    }
+  };
+
+  const updateUserProfile = async (profileData) => {
+    try {
+      const res = await api.updateProfile(profileData);
+      if (res && res.user) {
+        setUser(res.user);
+        setUserProfile(res.user);
+        localStorage.setItem('janmat_user', JSON.stringify(res.user));
+        return res.user;
+      }
+    } catch (error) {
+      console.error('Update profile error:', error);
+      throw error;
+    }
+  };
+
   const updateUserAvatar = async (avatarUrl, avatarStyle = 'avataaars') => {
     try {
       const res = await api.updateAvatar({ avatarUrl, avatarStyle });
@@ -192,6 +292,9 @@ export const AuthProvider = ({ children }) => {
       login, 
       signup, 
       loginWithGoogle, 
+      loginWithTwitter,
+      loginWithPhone,
+      updateUserProfile,
       updateUserAvatar, 
       logout 
     }}>
