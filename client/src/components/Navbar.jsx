@@ -89,12 +89,10 @@ export default function Navbar({ activeTab = 'discussions', setActiveTab, openRe
               style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}
             >
               <div style={{ color: 'var(--bg-navy-authority)', display: 'flex', alignItems: 'center' }}>
-                <GazetteLogo size={26} />
+                <img src="/opinar_logo.png" alt="Opinar" style={{ height: "36px", objectFit: "contain" }} />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <span className="brand-logo-text" style={{ fontFamily: 'var(--font-brand)', fontSize: '24px', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--text-primary)', lineHeight: 1 }}>
-                  THE STATE UNION
-                </span>
+                
                 <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.15em', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
                   जनमत • PUBLIC VOICE PORTAL
                 </span>
