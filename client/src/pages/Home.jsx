@@ -136,29 +136,6 @@ export default function Home({ openRegisterModal }) {
         {/* Sidebar Column: Trending Topics and Elections */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           
-          {/* Trending Issues Module */}
-          <div className="gazette-card" style={{ padding: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
-                🔥 Trending Issues
-              </h3>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-              {trendingIssues.length > 0 ? trendingIssues.map(([issue, count], idx) => (
-                <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '12px', borderBottom: idx !== trendingIssues.length - 1 ? '1px solid #F1F5F9' : 'none' }}>
-                  <span style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', fontWeight: 600, color: '#334155' }}>
-                    {idx + 1}. {issue}
-                  </span>
-                  <span className="badge badge-verified" style={{ fontSize: '10px' }}>
-                    {count} POSTS
-                  </span>
-                </div>
-              )) : (
-                <div style={{ fontSize: '13px', color: '#94A3B8' }}>No issues trending yet.</div>
-              )}
-            </div>
-          </div>
-
           {/* Trending Elections Module */}
           <div className="gazette-card" style={{ padding: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>

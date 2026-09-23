@@ -5,15 +5,15 @@ import Navbar from './components/Navbar';
 import RegisterModal from './components/RegisterModal';
 import Home from './pages/Home';
 import Polls from './pages/Polls';
+import Insights from './pages/Insights';
 import Leaders from './pages/Leaders';
 import LeaderDetail from './pages/LeaderDetail';
-import Trending from './pages/Trending';
 import Admin from './pages/Admin';
 import ElectionsHub from './pages/ElectionsHub';
 import ElectionYearDetail from './pages/ElectionYearDetail';
 import ConstituencyResult from './pages/ConstituencyResult';
 
-const KNOWN_TABS = ['discussions', 'polls', 'directory', 'trending', 'admin', 'elections'];
+const KNOWN_TABS = ['discussions', 'polls', 'insights', 'directory', 'trending', 'admin', 'elections'];
 
 function AppContent() {
   const { isRegisterOpen, openRegisterModal, closeRegisterModal } = useAuth();
@@ -107,6 +107,7 @@ function AppContent() {
       <main style={{ flex: 1 }}>
         {activeTab === 'discussions' && <Home openRegisterModal={openRegisterModal} />}
         {activeTab === 'polls' && <Polls />}
+        {activeTab === 'insights' && <Insights />}
         {activeTab === 'directory' && <Leaders onSelectLeader={handleSelectLeader} />}
         {activeTab === 'elections' && <ElectionsHub onSelectYear={handleSelectYear} />}
         
@@ -133,7 +134,6 @@ function AppContent() {
             onBack={() => handleTabChange('directory')} 
           />
         )}
-        {activeTab === 'trending' && <Trending openRegisterModal={openRegisterModal} />}
         {activeTab === 'admin' && <Admin />}
       </main>
 

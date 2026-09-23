@@ -1,5 +1,4 @@
-import { db } from '../config/firebase.js';
-import { collection, getDocs } from 'firebase/firestore';
+import { getDb } from '../config/firebase-admin.js';
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 import dotenv from 'dotenv';
@@ -14,8 +13,8 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 // 1. Discover Ongoing/Recent Elections autonomously using Wikipedia
-async function discoverElections(year) {
-  console.log(`\n🔍 Scanning web for elections in ${year}...`);
+async function discoverElections(year, mode = 'LIVE') {
+  console.log(`\n🔍 Scanning web for elections in ${year} (Mode: ${mode})...`);
   try {
     const wikiUrl = `https://en.wikipedia.org/wiki/${year}_elections_in_India`;
     const res = await fetch(wikiUrl);
@@ -29,17 +28,20 @@ async function discoverElections(year) {
     });
     const textData = $('#mw-content-text').text().replace(/\s+/g, ' ').substring(0, 40000); // 40k chars max
 
+    const includeInstruction = mode === 'LIVE' 
+      ? `- "ASSEMBLY" (State Legislative Assembly)\n- "LOK_SABHA" (General Elections)\n- "MUNICIPAL" (Municipal Corporation / Mahanagar Palika)\n- "BY_ELECTION" (Lok Sabha or Assembly By-elections)`
+      : `- "ASSEMBLY" (State Legislative Assembly)\n- "LOK_SABHA" (General Elections)`;
+
     const systemPrompt = `
 You are an autonomous AI agent for an election tracking platform.
 I am providing you with the Wikipedia page text for "Elections in India ${year}".
 Analyze the text and extract all major state and local elections that have occurred recently or are ongoing this year.
 
 Exclude: Panchayat, Zila Parishad, Gram Panchayat.
+If mode is HISTORICAL, also exclude Municipal and By-elections. We only want major state/national data for history.
+
 Include ONLY: 
-- "ASSEMBLY" (State Legislative Assembly)
-- "LOK_SABHA" (General Elections)
-- "MUNICIPAL" (Municipal Corporation / Mahanagar Palika)
-- "BY_ELECTION" (Lok Sabha or Assembly By-elections)
+${includeInstruction}
 
 Return a strictly valid JSON array of objects in this exact format:
 [
@@ -71,7 +73,9 @@ Return a strictly valid JSON array of objects in this exact format:
     const data = await geminiRes.json();
     if (data.error) throw new Error(data.error.message);
     
-    const elections = JSON.parse(data.candidates[0].content.parts[0].text);
+    let textResult = data.candidates[0].content.parts[0].text;
+    textResult = textResult.replace(/```json/g, '').replace(/```/g, '').trim();
+    const elections = JSON.parse(textResult);
     console.log(`🤖 AI discovered ${elections.length} major elections for ${year}.`);
     return elections;
   } catch (err) {
@@ -81,26 +85,25 @@ Return a strictly valid JSON array of objects in this exact format:
 }
 
 // 2. Main Autonomous Loop
-async function runAutonomousTracker() {
+export async function runAutonomousTracker(targetYear = new Date().getFullYear(), mode = 'LIVE') {
   console.log('=============================================');
-  console.log('🤖 AUTONOMOUS ELECTION TRACKER INITIALIZING');
+  console.log(`🤖 AUTONOMOUS ELECTION TRACKER INITIALIZING FOR YEAR: ${targetYear} (Mode: ${mode})`);
   console.log('=============================================');
 
-  const currentYear = new Date().getFullYear();
-  
   // Get currently tracked elections from Firestore
-  console.log(`\n📚 Checking existing database records...`);
+  console.log(`\n⏳ Checking existing database records...`);
   const existingDocs = new Set();
   try {
-    const snap = await getDocs(collection(db, 'live_elections'));
+    const db = await getDb();
+    const snap = await db.collection('live_elections').get();
     snap.forEach(doc => existingDocs.add(doc.id));
     console.log(`Found ${existingDocs.size} elections currently tracked in DB.`);
   } catch (e) {
     console.log(`⚠️ Warning: Could not read Firestore live_elections collection.`, e.message);
   }
 
-  // Find elections for the current year
-  const discoveredElections = await discoverElections(currentYear);
+  // Find elections for the target year
+  const discoveredElections = await discoverElections(targetYear, mode);
   
   let newElectionsCount = 0;
   for (const election of discoveredElections) {
@@ -126,9 +129,11 @@ async function runAutonomousTracker() {
   console.log(`✅ TRACKER CYCLE COMPLETE.`);
   console.log(`   Processed ${newElectionsCount} new/updated elections.`);
   console.log(`=============================================`);
-  
-  // Explicit exit since Firebase keeps connection open
-  process.exit(0);
 }
 
-runAutonomousTracker();
+// Execute logic based on command line arguments if run directly
+if (import.meta.url === `file://${process.argv[1]}`) {
+  const args = process.argv.slice(2);
+  const targetYear = args[0] ? parseInt(args[0]) : new Date().getFullYear();
+  runAutonomousTracker(targetYear).then(() => process.exit(0));
+}
