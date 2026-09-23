@@ -89,7 +89,7 @@ export default function Navbar({ activeTab = 'discussions', setActiveTab, openRe
               style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer' }}
             >
               <div style={{ color: 'var(--bg-navy-authority)', display: 'flex', alignItems: 'center' }}>
-                <img src="/opinar_logo.png" alt="Opinar" style={{ height: "36px", objectFit: "contain" }} />
+                <img src="/opinar_logo_vector.svg" alt="Opinar Logo" style={{ height: '42px', objectFit: 'contain' }} />
               </div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 
