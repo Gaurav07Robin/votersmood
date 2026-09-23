@@ -19,18 +19,21 @@ export async function runJournalistAgent() {
   try {
     const db = await getDb();
     
-    // 1. Fetch ALL unblogged elections (No Upper Limit)
+    // 1. Fetch ALL elections and filter in memory to bypass Firestore missing-field index limits
     console.log("📊 Gathering unblogged intelligence...");
-    const snap = await db.collection('live_elections').where('blogged', '!=', true).get();
+    const snap = await db.collection('live_elections').get();
     
-    if (snap.empty) {
+    // Filter out ones that are already blogged
+    const unbloggedDocs = snap.docs.filter(doc => doc.data().blogged !== true);
+
+    if (unbloggedDocs.length === 0) {
       console.log("⏭️ No new unblogged elections available. Journalist agent sleeping.");
       return;
     }
 
-    console.log(`🧠 AI Editor found ${snap.size} new events. Writing individual articles...`);
+    console.log(`🧠 AI Editor found ${unbloggedDocs.length} new events. Writing individual articles...`);
 
-    for (const doc of snap.docs) {
+    for (const doc of unbloggedDocs) {
       const electionData = doc.data();
       console.log(`\n✍️  Drafting article for: ${electionData.electionName}...`);
 
@@ -107,7 +110,7 @@ Output STRICT JSON matching this schema:
     }
 
     console.log('\n=============================================');
-    console.log(`✅ Journalist Agent finished publishing ${snap.size} articles.`);
+    console.log(`✅ Journalist Agent finished publishing ${unbloggedDocs.length} articles.`);
 
   } catch (error) {
     console.error("❌ Journalist Agent Failed:", error.message);
