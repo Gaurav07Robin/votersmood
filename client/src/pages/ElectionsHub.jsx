@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { api } from '../api/client';
 import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
@@ -17,7 +18,16 @@ const CustomXAxisTick = ({ x, y, payload }) => {
 };
 
 export default function ElectionsHub({ onSelectYear }) {
+  useEffect(() => {
+    let isMounted = true;
+    api.getLiveElections().then(data => {
+      if (isMounted) setLiveElections(data || []);
+    }).catch(e => console.error(e));
+    return () => { isMounted = false; };
+  }, []);
+
   const [loading, setLoading] = useState(true);
+  const [liveElections, setLiveElections] = useState([]);
   const [electionType, setElectionType] = useState('LOK_SABHA');
   
   // Lok Sabha State
