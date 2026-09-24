@@ -155,7 +155,19 @@ export async function runElectionScraper(electionType, electionName, state, year
     // Save to Firestore using Admin SDK
     const db = await getDb();
     const docId = `${state.toLowerCase()}-${electionName.toLowerCase().replace(/\s+/g, '-')}-${year}`;
-    const collectionName = 'live_elections';
+    let collectionName = 'live_elections';
+      if (electionType === 'ASSEMBLY') collectionName = 'state_elections_metadata';
+      if (electionType === 'LOK_SABHA') collectionName = 'elections_metadata';
+
+      if (collectionName !== 'live_elections') {
+        const partyWins = {};
+        if (structuredData.partyStandings) {
+          structuredData.partyStandings.forEach(p => partyWins[p.party] = p.seatsWon);
+        }
+        structuredData.partyWins = partyWins;
+        structuredData.year = parseInt(structuredData.year) || year;
+        structuredData.totalSeats = parseInt(structuredData.totalSeats) || 0;
+      }
     
     await db.collection(collectionName).doc(docId).set(structuredData, { merge: true });
     console.log(`💾 Saved to Firestore '${collectionName}/${docId}'`);
