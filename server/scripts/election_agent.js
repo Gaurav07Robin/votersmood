@@ -10,181 +10,187 @@ const __dirname = path.dirname(__filename);
 dotenv.config({ path: path.join(__dirname, '../.env') });
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const SERPER_API_KEY = process.env.SERPER_API_KEY;
 
-// 1. Fetch URLs using Wikipedia API (Bypasses GitHub Actions DataCenter blocks)
-async function getTopUrls(query) {
+// 1. Serper API Search (Custom Google Search)
+async function searchWeb(query) {
   try {
-    // Simplify query for Wikipedia
-    const cleanQuery = query.replace('constituency wise winning candidates', '').trim();
-    const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(cleanQuery)}&utf8=&format=json`;
-    
-    // Wikipedia API REQUIRES a User-Agent header for automated requests, otherwise it returns 403 Forbidden on server IPs
-    const res = await fetch(searchUrl, {
+    console.log(`[SERPER] Searching for: "${query}"`);
+    const res = await fetch('https://google.serper.dev/search', {
+      method: 'POST',
       headers: {
-        'User-Agent': 'VotersmoodBot/1.0 (https://github.com/Gaurav07Robin/votersmood)'
-      }
+        'X-API-KEY': SERPER_API_KEY,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ q: query, num: 3 })
     });
     
     if (!res.ok) {
-      console.error(`Wikipedia API HTTP Error: ${res.status}`);
+      console.error(`[SERPER] HTTP Error: ${res.status}`);
       return [];
     }
     
     const data = await res.json();
-    
-    if (!data.query || !data.query.search || data.query.search.length === 0) return [];
-    
-    // Get top 2 wikipedia pages
-    let links = [];
-    for(let i=0; i<Math.min(2, data.query.search.length); i++) {
-      links.push(`https://en.wikipedia.org/wiki/?curid=${data.query.search[i].pageid}`);
-    }
-    return links;
+    return data.organic?.map(r => r.link) || [];
   } catch (e) {
-    console.error("Wikipedia API Error:", e.message);
+    console.error("[SERPER] Error:", e.message);
     return [];
   }
 }
 
-// 2. Scrape raw text and tables from an article
-async function scrapeArticle(url) {
+// 2. Fetch content (handles HTML and attempts to read raw CSV if small)
+async function fetchContent(url) {
   try {
-    console.log(`   🌐 Scraping: ${url}`);
-    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-    const html = await res.text();
-    const $ = cheerio.load(html);
+    console.log(`[FETCH] Downloading from: ${url}`);
+    const res = await fetch(url, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }
+    });
     
-    // Remove scripts, styles, nav, footer
-    $('script, style, nav, footer, header, aside').remove();
+    const contentType = res.headers.get('content-type') || '';
     
-    // Extract main text and tables
-    let content = $('body').text().replace(/\s+/g, ' ').trim();
-    return content;
-  } catch (e) {
+    if (contentType.includes('text/csv') || url.endsWith('.csv')) {
+      const text = await res.text();
+      // Truncate CSV if it's absurdly large (over 50,000 chars) to prevent payload crash
+      return text.substring(0, 50000); 
+    } else if (contentType.includes('application/pdf')) {
+      return `[PDF File Detected at ${url} - Skipping raw text extraction]`;
+    } else {
+      const html = await res.text();
+      const $ = cheerio.load(html);
+      let text = $('table').text() + '\n' + $('p').text();
+      return text.replace(/\s+/g, ' ').substring(0, 25000);
+    }
+  } catch(e) {
     return "";
   }
 }
 
-// 3. AI Data Structuring (Using Gemini 3.5 Flash)
-async function extractElectionData(rawText, electionType, electionName, state, year) {
-  const systemPrompt = `
-You are a political data engineer. You are given raw, unstructured HTML text scraped from news articles about election results.
-Election Details:
-- Type: ${electionType} (MUNICIPAL, ASSEMBLY, LOK_SABHA, or BY_ELECTION)
-- Name: ${electionName}
-- State: ${state}
-- Year: ${year}
-
-Your goal is to extract the detailed constituency/ward-wise and overall results.
-
-Extract a JSON object with this exact schema:
-{
-  "electionType": "${electionType}",
-  "electionName": "${electionName}",
-  "state": "${state}",
-  "year": "${year}",
-  "totalSeats": 0,
-  "partyStandings": [
-    { "party": "BJP", "seatsWon": 0 }
-  ],
-  "constituencyResults": [
-    { "constituencyOrWardName": "Ward 1 / Amethi", "winningParty": "BJP", "winningCandidate": "Name" }
-  ]
-}
-
-Only return valid JSON without markdown wrapping. If constituency-wise data is missing, leave the array empty but provide the overall party standings.
-`;
-
+// 3. Resilient Gemini API Call
+async function callGemini(prompt, retries = 1) {
+  const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
+  const cfUrl = `https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ACCOUNT_ID}/ai/run/@cf/meta/llama-3.1-8b-instruct`;
+  
   try {
-    const safeText = rawText.substring(0, 30000); // Send up to 30k chars
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
-    
-    const res = await fetch(url, {
+    const res = await fetch(geminiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: systemPrompt + "\n\nRaw Text:\n" + safeText }] }],
-        generationConfig: { response_mime_type: "application/json" }
-      })
+      body: JSON.stringify({ contents: [{ parts: [{ text: prompt.substring(0, 50000) }] }] })
     });
-    
     const data = await res.json();
-    if (data.error) throw new Error(data.error.message);
-    
-    let textResult = data.candidates[0].content.parts[0].text;
-    textResult = textResult.replace(/```json/g, '').replace(/```/g, '').trim();
-    return JSON.parse(textResult);
-  } catch (error) {
-    console.error(`   ❌ AI Error:`, error.message);
-    return null;
+    if (!data.error && data.candidates) {
+      let text = data.candidates[0].content.parts[0].text.replace(/`json/g, '').replace(/`/g, '').trim();
+      return JSON.parse(text);
+    }
+    console.error('[DEBUG GEMINI] Error data:', data); throw new Error('Gemini failed or busy');
+  } catch(e) {
+    console.log('[AI ROUTER] Gemini failed. Hot-swapping to Cloudflare Llama 3.1...');
+    const res = await fetch(cfUrl, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${process.env.CLOUDFLARE_API_TOKEN}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: [{ role: 'user', content: prompt.substring(0, 15000) }], max_tokens: 1000 })
+    });
+    const data = await res.json();
+    if (data.result && data.result.response) {
+      let text = data.result.response.replace(/`json/g, '').replace(/`/g, '').trim();
+      // Simple parse attempt for Llama 3 JSON
+      try { return JSON.parse(text); } catch(err) { throw new Error('Cloudflare JSON parse failed'); }
+    }
+    console.error('[DEBUG CLOUDFLARE] Error e:', e.message, data); throw new Error('Both Gemini and Cloudflare failed.');
   }
 }
 
-export async function runElectionScraper(electionType, electionName, state, year) {
-  console.log(`\n🚀 Starting Election Agent for [${electionType}] ${electionName}, ${state} (${year})`);
-  
-  let query = "";
-  if (electionType === "MUNICIPAL") {
-    query = `${electionName} municipal corporation election results ${year} ward wise winning candidates`;
-  } else if (electionType === "BY_ELECTION") {
-    query = `${electionName} by-election results ${year} winning candidate margin`;
-  } else {
-    query = `${electionName} ${electionType.toLowerCase()} election results ${year} constituency wise winning candidates`;
-  }
-  
-  console.log(`🔍 Searching Web: "${query}"`);
-  
-  const urls = await getTopUrls(query);
-  if (urls.length === 0) return console.log("❌ No search results found.");
+// 4. Main Agent Function
+export async function runElectionAgent(state, year, type) {
+  console.log(`=============================================`);
+  console.log(`🕵️ OPINAR ELECTION AGENT (Powered by Serper)`);
+  console.log(`📡 Target: ${state} ${year} ${type}`);
+  console.log(`=============================================`);
 
-  let combinedRawText = "";
-  for (const url of urls) {
-    const articleText = await scrapeArticle(url);
-    combinedRawText += articleText + "\n\n";
-  }
-
-  console.log(`🧠 Feeding ${combinedRawText.length} characters of unstructured news data to AI...`);
-  const structuredData = await extractElectionData(combinedRawText, electionType, electionName, state, year);
-
-  if (structuredData) {
-    console.log(`✅ Success! Extracted data:`);
-    console.log(`   📊 Total Seats: ${structuredData.totalSeats}`);
-    console.log(`   🏆 Standings:`, structuredData.partyStandings);
-    console.log(`   📍 Constituencies Found: ${structuredData.constituencyResults.length}`);
-
-    // Save to Firestore using Admin SDK
+  try {
     const db = await getDb();
-    const docId = `${state.toLowerCase()}-${electionName.toLowerCase().replace(/\s+/g, '-')}-${year}`;
-    let collectionName = 'live_elections';
-      if (electionType === 'ASSEMBLY') collectionName = 'state_elections_metadata';
-      if (electionType === 'LOK_SABHA') collectionName = 'elections_metadata';
-
-      if (collectionName !== 'live_elections') {
-        const partyWins = {};
-        if (structuredData.partyStandings) {
-          structuredData.partyStandings.forEach(p => partyWins[p.party] = p.seatsWon);
-        }
-        structuredData.partyWins = partyWins;
-        structuredData.year = parseInt(structuredData.year) || year;
-        structuredData.totalSeats = parseInt(structuredData.totalSeats) || 0;
-      }
     
-    await db.collection(collectionName).doc(docId).set(structuredData, { merge: true });
-    console.log(`💾 Saved to Firestore '${collectionName}/${docId}'`);
-    return structuredData;
+    // Build an advanced "Google Dork" query
+    const query = `${state} ${year} ${type} election constituency wise results filetype:csv OR site:ashoka.edu.in OR site:eci.gov.in OR site:wikipedia.org`;
+    
+    const links = await searchWeb(query);
+    if (links.length === 0) {
+      console.log("❌ No sources found.");
+      return;
+    }
+
+    let combinedData = "";
+    for (const link of links) {
+      const text = await fetchContent(link);
+      if (text.length > 500) {
+        combinedData += `\n\n--- SOURCE: ${link} ---\n${text}`;
+      }
+    }
+
+    if (combinedData.length < 500) {
+      console.log("❌ Failed to extract enough usable data from sources.");
+      return;
+    }
+
+    console.log("[AI] Analyzing raw data with Gemini...");
+    const prompt = `You are an expert political data analyst for India.
+I have scraped data from Google for the ${state} ${year} ${type} elections.
+Extract the exact total seats and party standings.
+
+RAW DATA:
+${combinedData}
+
+Return ONLY a valid JSON object matching this schema EXACTLY:
+{
+  "state": "${state}",
+  "year": ${year},
+  "total_seats": 403,
+  "party_wins": {
+    "BJP": 255,
+    "SP": 111,
+    "INC": 2
   }
-  return null;
+}`;
+
+    const structuredData = await callGemini(prompt);
+    console.log("\n✅ AI Extracted Structured Data:");
+    console.log(structuredData);
+
+    const docId = type === 'ASSEMBLY' 
+      ? `STATE_${state.toLowerCase().replace(/ /g, '_')}_${year}` 
+      : `LS_${year}`;
+      
+    const collectionName = type === 'ASSEMBLY' ? 'state_elections_metadata' : 'elections_metadata';
+    
+    // Safety Mapping (timeline chart expects totalSeats and partyWins instead of snake_case)
+    const finalDoc = {
+      state: structuredData.state,
+      stateSlug: structuredData.state.toLowerCase().replace(/ /g, '-'),
+      year: structuredData.year,
+      totalSeats: structuredData.total_seats,
+      partyWins: structuredData.party_wins,
+      updatedAt: new Date().toISOString()
+    };
+
+    console.log(`[DB] Writing to ${collectionName}/${docId}...`);
+    await db.collection(collectionName).doc(docId).set(finalDoc, { merge: true });
+    console.log("🎉 Successfully saved to Firestore!");
+
+  } catch (error) {
+    console.error("❌ Election Agent Failed:", error.message);
+  }
 }
 
-// Execute logic based on command line arguments if run directly
-if (import.meta.url === `file://${process.argv[1]}`) {
-  const args = process.argv.slice(2);
-  if (args.length >= 4) {
-    const [type, name, state, year] = args;
-    runElectionScraper(type, name, state, year);
-  } else {
-    console.log("Running demo cases...");
-    runElectionScraper("BY_ELECTION", "Wayanad Lok Sabha", "Kerala", "2024");
-    runElectionScraper("ASSEMBLY", "Haryana Assembly", "Haryana", "2024");
-  }
+// Manual Execution block
+if (import.meta.url === `file://${process.argv[1]}` || process.argv[1].endsWith('election_agent.js')) {
+  // Let's test it with a fresh election
+  runElectionAgent('Goa', 2022, 'ASSEMBLY').then(() => process.exit(0));
 }
+
+
+
+
+
+
+
+
+

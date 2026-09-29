@@ -26,8 +26,10 @@ Here is the current state of our database:
 - Historical Sync Year Pointer: ${stats.historicalSyncYear}
 - Articles Published: ${stats.publishedArticles}
 
-Analyze the database state. If Phase 1 is not complete (pointer hasn't reached 1951), you MUST prioritize Phase 1. 
-If Phase 1 is complete, you should advance to the next phase.
+Analyze the database state and the current political climate. 
+CRITICAL RULE: Your absolute #1 priority is always to capture CURRENT LIVE ELECTIONS and BREAKING NEWS to maximize SEO value. 
+If it is a heavy news day or election season, you MUST prioritize SCRAPE_LIVE or WRITE_INSIGHTS to generate high-SEO blog posts. 
+Historical scraping (Phase 1) is your background task—only do it when the news cycle is quiet.
 
 Choose EXACTLY ONE task to execute today to optimize our API usage and progress the roadmap:
 1. "SCRAPE_LIVE": Scrape the current year (${new Date().getFullYear()}) for any breaking news.
@@ -118,3 +120,4 @@ async function startCentralBrain() {
 }
 
 startCentralBrain();
+

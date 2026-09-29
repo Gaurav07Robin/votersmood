@@ -12,7 +12,7 @@ const slugify = (text) => text.toString().toLowerCase().trim()
 // ---------------------------------------------------------
 // MAIN COMPONENT
 // ---------------------------------------------------------
-export default function ElectionYearDetail({ year, onBack, onSelectConstituency }) {
+export default function ElectionYearDetail({ year, isLS = true, state = null, onBack, onSelectConstituency }) {
   const [constituencies, setConstituencies] = useState([]);
   const [loading, setLoading] = useState(true);
   
@@ -93,7 +93,7 @@ export default function ElectionYearDetail({ year, onBack, onSelectConstituency 
 
   const filtered = useMemo(() => {
     return constituencies.filter(c => {
-      const matchState = selectedState === 'All' || c.state === selectedState;
+      const matchState = (selectedState === 'All' || c.state === selectedState) && (isLS ? (c.electionType !== 'ASSEMBLY') : (c.state === state && c.electionType === 'ASSEMBLY'));
       const matchParty = selectedParty === 'All' || c.candidates[0]?.party === selectedParty;
       const matchSearch = c.constituency.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           (c.candidates[0] && c.candidates[0].name.toLowerCase().includes(searchQuery.toLowerCase()));

@@ -230,14 +230,14 @@ export default function ElectionsHub({ onSelectYear }) {
         </div>
       </div>
 
-      {!isLS && (
+      {!isLS && !isAS && (
         <div style={{ textAlign: 'center', padding: '40px', backgroundColor: '#27272A', borderRadius: '12px', color: '#A1A1AA', marginBottom: '24px' }}>
           <h3 style={{ color: '#FFFFFF', fontSize: '20px', marginBottom: '8px' }}>Module Active</h3>
           <p>This section is currently being mapped with historical data.</p>
         </div>
       )}
 
-      {isLS && (<>
+      {(isLS || isAS) && (<>
       {/* TOP CHART: ALL-TIME TREND */}
       <div style={{ backgroundColor: '#27272A', borderRadius: '12px', padding: '24px', marginBottom: '24px', height: '350px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
@@ -413,7 +413,7 @@ export default function ElectionsHub({ onSelectYear }) {
 
       {/* FLOATING ACTION BUTTON */}
       <button
-        onClick={() => onSelectYear(activeYear)}
+        onClick={() => onSelectYear(activeYear, isLS, selectedState)}
         style={{
           position: 'fixed',
           bottom: '40px',

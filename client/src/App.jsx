@@ -12,6 +12,7 @@ import Admin from './pages/Admin';
 import ElectionsHub from './pages/ElectionsHub';
 import ElectionYearDetail from './pages/ElectionYearDetail';
 import ConstituencyResult from './pages/ConstituencyResult';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 const KNOWN_TABS = ['discussions', 'polls', 'insights', 'directory', 'trending', 'admin', 'elections'];
 
@@ -35,7 +36,7 @@ function AppContent() {
         const slug = path.split('directory/')[1];
         setSelectedLeaderSlug(slug);
         setActiveTab('leader-detail');
-      } else if (path.startsWith('elections/lok-sabha/')) {
+      } else if (path.startsWith('elections/lok-sabha/') || path.startsWith('elections/state/')) {
         const parts = path.split('/');
         const year = parts[2];
         const stateSlug = parts[3];
@@ -84,10 +85,15 @@ function AppContent() {
     window.history.pushState({}, '', newPath);
   };
 
-  const handleSelectYear = (year) => {
-    setSelectedElection({ year });
+  const handleSelectYear = (year, isLS = true, state = null) => {
+    setSelectedElection({ year, isLS, state });
     setActiveTab('election-year-detail');
-    window.history.pushState({}, '', `/elections/lok-sabha/${year}`);
+    if (isLS) {
+      window.history.pushState({}, '', `/elections/lok-sabha/${year}`);
+    } else {
+      const stateSlug = state.toLowerCase().replace(/ /g, '-');
+      window.history.pushState({}, '', `/elections/state/${stateSlug}/${year}`);
+    }
   };
 
   const handleSelectConstituency = (year, stateSlug, constituencySlug) => {
@@ -114,6 +120,8 @@ function AppContent() {
         {activeTab === 'election-year-detail' && selectedElection?.year && (
           <ElectionYearDetail 
             year={selectedElection.year} 
+            isLS={selectedElection.isLS}
+            state={selectedElection.state}
             onBack={() => handleTabChange('elections')}
             onSelectConstituency={handleSelectConstituency}
           />
@@ -145,6 +153,10 @@ function AppContent() {
 }
 
 export default function App() {
+  if (window.location.pathname.includes('/privacy-policy')) {
+    return <PrivacyPolicy />;
+  }
+
   return (
     <AuthProvider>
       <ToastProvider>
