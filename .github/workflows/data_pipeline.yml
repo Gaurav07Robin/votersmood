@@ -2,8 +2,8 @@ name: Master Orchestrator Data Pipeline
 
 on:
   schedule:
-    # Runs every hour at minute 0
-    - cron: '0 * * * *'
+    # Runs every day at 00:00 UTC (once a day)
+    - cron: '0 0 * * *'
   workflow_dispatch: # Allows manual trigger from the GitHub Actions UI
 
 jobs:

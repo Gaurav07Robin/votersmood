@@ -79,9 +79,9 @@ async function ingestTCPD() {
                 await db.collection('system_metadata').doc('tcpd_ingest_state').set({ lastProcessedRow: currentRow }, { merge: true });
             }
             
-            // Limit to 500 writes per cycle to respect Firebase Free Tier (20k/day)
-            if (ingestedThisRun >= 500) {
-                console.log("[Data Ingestor] Reached 500 limit for this hourly cycle. Pausing.");
+            // Limit to 12000 writes per cycle to respect Firebase Free Tier (20k/day)
+            if (ingestedThisRun >= 12000) {
+                console.log("[Data Ingestor] Reached 12000 limit for this daily cycle. Pausing.");
                 break;
             }
         }
