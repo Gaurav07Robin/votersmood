@@ -1,9 +1,9 @@
-import { exec } from 'child_process';
+import { spawn } from 'child_process';
 import util from 'util';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const execAsync = util.promisify(exec);
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -12,10 +12,19 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function runScript(scriptName) {
     console.log(`[Orchestrator] Launching ${scriptName}...`);
     try {
-        const { stdout, stderr } = await execAsync(`node ${path.join(__dirname, scriptName)}`);
-        if (stdout) console.log(`[${scriptName}] ${stdout.trim()}`);
-        if (stderr) console.error(`[${scriptName}] ERR: ${stderr.trim()}`);
-        return true;
+        return new Promise((resolve) => {
+            const child = spawn('node', [path.join(__dirname, scriptName)]);
+            child.stdout.on('data', data => process.stdout.write(`[${scriptName}] ${data}`));
+            child.stderr.on('data', data => process.stderr.write(`[${scriptName}] ERR: ${data}`));
+            child.on('close', code => {
+                if (code !== 0) {
+                    console.error(`[Orchestrator] ${scriptName} exited with code ${code}`);
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            });
+        });
     } catch (e) {
         console.error(`[Orchestrator] Fatal error running ${scriptName}:`, e.message);
         return false;

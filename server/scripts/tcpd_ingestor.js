@@ -80,9 +80,9 @@ async function ingestTCPD() {
                 fs.writeFileSync(STATE_FILE, JSON.stringify({ lastProcessedRow: currentRow }));
             }
             
-            // Limit to 2000 writes per cycle to respect Firebase Free Tier (20k/day)
-            if (ingestedThisRun >= 2000) {
-                console.log("[Data Ingestor] Reached 2000 limit for this hourly cycle. Pausing.");
+            // Limit to 500 writes per cycle to respect Firebase Free Tier (20k/day)
+            if (ingestedThisRun >= 500) {
+                console.log("[Data Ingestor] Reached 500 limit for this hourly cycle. Pausing.");
                 break;
             }
         }
