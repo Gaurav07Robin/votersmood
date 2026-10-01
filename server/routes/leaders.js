@@ -140,18 +140,14 @@ router.get('/', async (req, res) => {
   const paginatedLeaders = filtered.slice(startIndex, endIndex);
   const hasMore = endIndex < total;
 
-  if (page || limit) {
-    return res.json({
+      return res.json({
       leaders: paginatedLeaders,
       total,
       hasMore,
       page: pageNum,
       totalPages: Math.ceil(total / limitNum)
     });
-  }
-
-  res.json(filtered);
-});
+  });
 
 // GET /api/leaders/:id (Instant SEO Slug / ID Server Lookup from DB)
 router.get('/:id', async (req, res) => {
