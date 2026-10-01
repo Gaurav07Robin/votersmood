@@ -38,7 +38,7 @@ async function startBrain() {
 
     let cycleCount = 0;
 
-    while (true) {
+    if (true) {
         cycleCount++;
         console.log(`\n[Orchestrator] Starting cycle ${cycleCount} at ${new Date().toISOString()}`);
 
@@ -67,7 +67,7 @@ async function startBrain() {
         }
 
         console.log("\n[Orchestrator] Cycle complete. Sleeping for 1 hour to prevent API limits...");
-        await delay(3600000); // 1 hour
+        console.log('[Orchestrator] Run complete. Exiting.'); process.exit(0);
     }
 }
 

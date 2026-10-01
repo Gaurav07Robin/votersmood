@@ -8,19 +8,18 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const STATE_FILE = path.join(__dirname, 'tcpd_ingest_state.json');
+
 
 async function ingestTCPD() {
     console.log("[Data Ingestor] Initiating TCPD Master Archive Download...");
     const url = 'https://raw.githubusercontent.com/tcpd/tcpd-ld-data-archive/main/downloads/All_States/All_States_AE.csv.gz';
     
-    let lastProcessedRow = 0;
-    if (fs.existsSync(STATE_FILE)) {
-        try {
-            const state = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
-            lastProcessedRow = state.lastProcessedRow || 0;
-        } catch (e) {}
-    }
+    const db = await getDb();
+      let lastProcessedRow = 0;
+      try {
+          const stateDoc = await db.collection('system_metadata').doc('tcpd_ingest_state').get();
+          if (stateDoc.exists) lastProcessedRow = stateDoc.data().lastProcessedRow || 0;
+      } catch(e) { console.error('Error reading state:', e); }
 
     try {
         const response = await fetch(url);
@@ -77,7 +76,7 @@ async function ingestTCPD() {
                 console.log(`[Data Ingestor] Committed batch ${commits} (Total imported this run: ${ingestedThisRun})`);
                 batch = db.batch();
                 batchCount = 0;
-                fs.writeFileSync(STATE_FILE, JSON.stringify({ lastProcessedRow: currentRow }));
+                await db.collection('system_metadata').doc('tcpd_ingest_state').set({ lastProcessedRow: currentRow }, { merge: true });
             }
             
             // Limit to 500 writes per cycle to respect Firebase Free Tier (20k/day)
@@ -89,7 +88,7 @@ async function ingestTCPD() {
         
         if (batchCount > 0) {
             await batch.commit();
-            fs.writeFileSync(STATE_FILE, JSON.stringify({ lastProcessedRow: currentRow }));
+            await db.collection('system_metadata').doc('tcpd_ingest_state').set({ lastProcessedRow: currentRow }, { merge: true });
         }
         
         console.log(`[Data Ingestor] ✅ SUCCESS! Ingested ${ingestedThisRun} TCPD records in this cycle.`);
