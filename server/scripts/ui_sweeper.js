@@ -6,9 +6,9 @@ async function runSweeper() {
   const page = await browser.newPage();
   
   const routes = [
-    { url: 'http://localhost:3000/', name: 'Home/Discussions' },
-    { url: 'http://localhost:3000/elections/state/bihar/2020', name: 'Bihar 2020 State Results' },
-    { url: 'http://localhost:3000/insights', name: 'Insights Blog' }
+    { url: 'https://www.opinar.in/', name: 'Home/Discussions' },
+    { url: 'https://www.opinar.in/elections/state/bihar/2020', name: 'Bihar 2020 State Results' },
+    { url: 'https://www.opinar.in/insights', name: 'Insights Blog' }
   ];
 
   let errors = 0;

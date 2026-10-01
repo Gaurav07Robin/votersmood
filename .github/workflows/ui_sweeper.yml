@@ -1,0 +1,29 @@
+name: Frontend UI QA Sweeper
+
+on:
+  schedule:
+    # Runs every 2 hours at minute 15
+    - cron: '15 */2 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-ui-sweeper:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        working-directory: ./server
+        # We need puppeteer specifically installed or restored
+        run: npm install
+
+      - name: Run Puppeteer UI Sweeper
+        working-directory: ./server
+        run: node scripts/ui_sweeper.js
