@@ -1,7 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { db } from '../firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
-import { Search, ArrowRight, ArrowLeft, LayoutGrid, List, Moon, Sun } from 'lucide-react';
+import Search from 'lucide-react/dist/esm/icons/search';
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
+import ArrowLeft from 'lucide-react/dist/esm/icons/arrow-left';
+import LayoutGrid from 'lucide-react/dist/esm/icons/layout-grid';
+import List from 'lucide-react/dist/esm/icons/list';
+import Moon from 'lucide-react/dist/esm/icons/moon';
+import Sun from 'lucide-react/dist/esm/icons/sun';
 import { getPartyColor, getPartySymbol, getPartyFlag } from '../utils/party_utils';
 
 const slugify = (text) => text.toString().toLowerCase().trim()
@@ -66,7 +72,15 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
       try {
         const q = query(collection(db, 'elections_constituencies'), where('year', '==', parseInt(year)));
         const snapshot = await getDocs(q);
-        const data = snapshot.docs.map(doc => doc.data());
+        const data = snapshot.docs.map(doc => {
+          const d = doc.data();
+          if (!d.candidates || d.candidates.length === 0) {
+            d.candidates = [
+              { name: d.winner || 'Unknown', party: d.party || 'IND' }
+            ];
+          }
+          return d;
+        });
         data.sort((a, b) => a.constituency.localeCompare(b.constituency));
         setConstituencies(data);
       } catch (error) {
@@ -107,38 +121,7 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
       {/* HEADER WITH CONTROLS */}
       <div style={{ maxWidth: '1400px', margin: '0 auto', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <div>
-          <button onClick={onBack} style={{ background: 'transparent', border: 'none', color: t.subText, cursor: 'pointer', marginBottom: '16px', fontSize: '14px', display: 'flex', alignItems: 'center', gap: '8px', padding: 0 }}>
-            <ArrowLeft size={16} /> Back to Timeline
-          </button>
-          <h1 style={{ fontSize: '32px', fontWeight: 800, color: t.text, margin: 0, letterSpacing: '-0.5px' }}>
-            {year} Lok Sabha Results
-          </h1>
-          <p style={{ color: t.subText, fontSize: '15px', marginTop: '4px' }}>
-            Explore the verdict from {constituencies.length} constituencies across India.
-          </p>
-        </div>
-
-        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-          {/* View Toggle */}
-          <div style={{ display: 'flex', backgroundColor: t.cardBg, borderRadius: '24px', border: `1px solid ${t.border}`, padding: '4px' }}>
-            <button 
-              onClick={() => setViewMode('grid')}
-              style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '20px', border: 'none', cursor: 'pointer', backgroundColor: viewMode === 'grid' ? t.hover : 'transparent', color: viewMode === 'grid' ? t.text : t.subText, fontWeight: 600, fontSize: '13px' }}
-            >
-              <LayoutGrid size={16} /> Grid
-            </button>
-            <button 
-              onClick={() => setViewMode('table')}
-              style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '6px 12px', borderRadius: '20px', border: 'none', cursor: 'pointer', backgroundColor: viewMode === 'table' ? t.hover : 'transparent', color: viewMode === 'table' ? t.text : t.subText, fontWeight: 600, fontSize: '13px' }}
-            >
-              <List size={16} /> Table
-            </button>
-          </div>
-
-          {/* Theme Toggle */}
-          <button 
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            style={{ width: '36px', height: '36px', borderRadius: '50%', border: `1px solid ${t.border}`, backgroundColor: t.cardBg, display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', color: t.text }}
+          <button aria-label="Toggle Theme" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} style={{ width: '36px', height: '36px', borderRadius: '50%', border: `1px solid ${t.border}`, backgroundColor: t.cardBg, display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', color: t.text }}
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
@@ -155,7 +138,7 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
           
           {/* LEFT SIDEBAR: STATE SELECTION */}
           <div style={{ width: '280px', flexShrink: 0 }}>
-            <h3 style={{ color: t.subText, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>Filter by State</h3>
+            <h2 style={{ color: t.subText, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>Filter by State</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', maxHeight: '75vh', overflowY: 'auto', paddingRight: '8px', scrollbarWidth: 'thin', scrollbarColor: `${t.border} transparent` }}>
               {states.map(state => {
                 // If a party is selected, count only seats for that party in the state

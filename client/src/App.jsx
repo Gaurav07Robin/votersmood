@@ -4,15 +4,15 @@ import { ToastProvider } from './components/Toast';
 import Navbar from './components/Navbar';
 import RegisterModal from './components/RegisterModal';
 import Home from './pages/Home';
-import Polls from './pages/Polls';
-import Insights from './pages/Insights';
-import Leaders from './pages/Leaders';
-import LeaderDetail from './pages/LeaderDetail';
-import Admin from './pages/Admin';
-import ElectionsHub from './pages/ElectionsHub';
-import ElectionYearDetail from './pages/ElectionYearDetail';
-import ConstituencyResult from './pages/ConstituencyResult';
-import PrivacyPolicy from './pages/PrivacyPolicy';
+const Polls = React.lazy(() => import('./pages/Polls'));
+const Insights = React.lazy(() => import('./pages/Insights'));
+const Leaders = React.lazy(() => import('./pages/Leaders'));
+const LeaderDetail = React.lazy(() => import('./pages/LeaderDetail'));
+const Admin = React.lazy(() => import('./pages/Admin'));
+const ElectionsHub = React.lazy(() => import('./pages/ElectionsHub'));
+const ElectionYearDetail = React.lazy(() => import('./pages/ElectionYearDetail'));
+const ConstituencyResult = React.lazy(() => import('./pages/ConstituencyResult'));
+const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 
 const KNOWN_TABS = ['discussions', 'polls', 'insights', 'directory', 'trending', 'admin', 'elections'];
 
@@ -111,6 +111,7 @@ function AppContent() {
       />
 
       <main style={{ flex: 1 }}>
+        <React.Suspense fallback={<div style={{padding:"40px", textAlign:"center", fontFamily:"var(--font-mono)", fontSize:"12px"}}>LOADING MODULE...</div>}>
         {activeTab === 'discussions' && <Home openRegisterModal={openRegisterModal} />}
         {activeTab === 'polls' && <Polls />}
         {activeTab === 'insights' && <Insights />}
@@ -143,6 +144,7 @@ function AppContent() {
           />
         )}
         {activeTab === 'admin' && <Admin />}
+              </React.Suspense>
       </main>
 
       
@@ -154,7 +156,7 @@ function AppContent() {
 
 export default function App() {
   if (window.location.pathname.includes('/privacy-policy')) {
-    return <PrivacyPolicy />;
+    return <React.Suspense fallback={<div>Loading...</div>}><PrivacyPolicy /></React.Suspense>;
   }
 
   return (

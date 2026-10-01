@@ -3,7 +3,8 @@ import { api } from '../api/client';
 import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { List, ChevronDown } from 'lucide-react';
+import List from 'lucide-react/dist/esm/icons/list';
+import ChevronDown from 'lucide-react/dist/esm/icons/chevron-down';
 import { getPartyColor, getPartySymbol, getPartyFlag } from '../utils/party_utils';
 
 const CustomXAxisTick = ({ x, y, payload }) => {

@@ -139,9 +139,9 @@ export default function Home({ openRegisterModal }) {
           {/* Trending Elections Module */}
           <div className="gazette-card" style={{ padding: '20px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
+              <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "18px", fontWeight: 700, margin: 0, color: "var(--text-primary)" }}>
                 🗳️ Trending Elections
-              </h3>
+              </h2>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {trendingElections.length > 0 ? trendingElections.map(([election, count], idx) => (
