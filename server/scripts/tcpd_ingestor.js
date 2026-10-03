@@ -32,6 +32,7 @@ async function ingestTCPD() {
         let ingestedThisRun = 0;
         let batch = db.batch();
         let batchCount = 0;
+        let stateAggregations = {};
         let commits = 0;
 
         const parser = response.body.pipe(createGunzip()).pipe(parse({
