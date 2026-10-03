@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import React, { useState, useEffect } from 'react';
 import { api } from '../api/client';
 import { db } from '../firebase';
@@ -177,6 +178,13 @@ export default function ElectionsHub({ onSelectYear }) {
 
   return (
     <div style={{ backgroundColor: '#18181B', minHeight: '100vh', color: '#E4E4E7', padding: '24px', overflowX: 'hidden', fontFamily: 'Inter, sans-serif' }}>
+
+      <Helmet>
+        <title>Elections Hub | Opinar</title>
+        <meta name="description" content="Explore historical and live election results across India." />
+        <link rel="canonical" href="https://www.opinar.in/elections" />
+      </Helmet>
+
       
       {/* CSS to hide scrollbar but keep it functional */}
       <style dangerouslySetInnerHTML={{__html: `

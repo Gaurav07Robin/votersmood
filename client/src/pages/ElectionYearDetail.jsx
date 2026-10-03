@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import React, { useState, useEffect, useMemo } from 'react';
 import { db } from '../firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
@@ -117,6 +118,13 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
 
   return (
     <div style={{ backgroundColor: t.bg, minHeight: '100vh', color: t.text, padding: '24px', fontFamily: 'Inter, sans-serif', transition: 'background-color 0.2s ease, color 0.2s ease' }}>
+
+      <Helmet>
+        <title>{`Assembly Elections ${year} | Opinar`}</title>
+        <meta name="description" content="View full assembly election results, party vote shares, and winning MLAs." />
+        <link rel="canonical" href="{`https://www.opinar.in/elections/state/${stateSlug}/${year}`}" />
+      </Helmet>
+
       
       {/* HEADER WITH CONTROLS */}
       <div style={{ maxWidth: '1400px', margin: '0 auto', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>

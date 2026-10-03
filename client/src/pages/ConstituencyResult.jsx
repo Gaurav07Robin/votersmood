@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
@@ -34,6 +35,13 @@ export default function ConstituencyResult({ year, stateSlug, constituencySlug, 
 
   return (
     <div className="container" style={{ padding: '40px 0' }}>
+
+      <Helmet>
+        <title>{`${constituency} Election Results | Opinar`}</title>
+        <meta name="description" content="View historical election results and runner-ups for this constituency." />
+        <link rel="canonical" href="{`https://www.opinar.in/elections/state/${stateSlug}/${year}/${constituency}`}" />
+      </Helmet>
+
       <button 
         onClick={onBack}
         style={{ background: 'transparent', border: 'none', color: 'var(--accent-primary)', cursor: 'pointer', marginBottom: '24px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}

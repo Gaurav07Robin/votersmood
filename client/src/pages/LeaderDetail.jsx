@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import React, { useState, useEffect } from 'react';
 import { api } from '../api/client';
 import PostCard from '../components/PostCard';
@@ -105,6 +106,13 @@ export default function LeaderDetail({ leaderId, onBack }) {
 
   return (
     <div className="container page-main-container" style={{ padding: '32px 24px', maxWidth: '1000px' }}>
+
+      <Helmet>
+        <title>{leader?.name ? `${leader.name} | ${leader.portfolio || 'Politician'} - Opinar` : 'Leader Profile | Opinar'}</title>
+        <meta name="description" content="{leader?.name ? `Ask ${leader.name} a question, track their performance, and participate in civic discussions on Opinar.` : 'Track leader performance on Opinar.'}" />
+        <link rel="canonical" href="{`https://www.opinar.in/leaders/${leader?.id || ''}`}" />
+      </Helmet>
+
       
       {/* SEO Friendly Back Navigation Bar */}
       <button onClick={onBack} className="btn-ghost" style={{ marginBottom: '16px', fontSize: '13px', fontFamily: 'var(--font-mono)' }}>
