@@ -108,13 +108,17 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
 
   const filtered = useMemo(() => {
     return constituencies.filter(c => {
-      const matchState = (selectedState === 'All' || c.state === selectedState) && (isLS ? (c.electionType !== 'ASSEMBLY') : (c.state === state && c.electionType === 'ASSEMBLY'));
+      const cleanCState = (c.state || '').replace(/_/g, ' ').toLowerCase();
+      const cleanTargetState = (state || selectedState || '').replace(/_/g, ' ').toLowerCase();
+      const matchState = selectedState === 'All' && !state ? true : 
+                         (isLS ? (selectedState === 'All' || cleanCState === cleanTargetState) :
+                                 (cleanCState === cleanTargetState));
       const matchParty = selectedParty === 'All' || c.candidates[0]?.party === selectedParty;
-      const matchSearch = c.constituency.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          (c.candidates[0] && c.candidates[0].name.toLowerCase().includes(searchQuery.toLowerCase()));
+      const matchSearch = (c.constituency || '').toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          (c.candidates[0] && (c.candidates[0].name || '').toLowerCase().includes(searchQuery.toLowerCase()));
       return matchState && matchParty && matchSearch;
     });
-  }, [constituencies, selectedState, selectedParty, searchQuery]);
+  }, [constituencies, selectedState, selectedParty, searchQuery, isLS, state]);
 
   return (
     <div style={{ backgroundColor: t.bg, minHeight: '100vh', color: t.text, padding: '24px', fontFamily: 'Inter, sans-serif', transition: 'background-color 0.2s ease, color 0.2s ease' }}>

@@ -122,19 +122,20 @@ export default function ElectionsHub({ onSelectYear }) {
     }
   }, [electionType, stateElectionData.length]);
 
-  const uniqueStates = [...new Set(stateElectionData.map(d => d.state))].sort();
+  const uniqueStates = [...new Set(stateElectionData.map(d => (d.state || '').replace(/_/g, ' ').trim()).filter(Boolean))].sort();
   const filteredStateData = stateElectionData
-    .filter(d => d.state === selectedState)
+    .filter(d => (d.state || '').replace(/_/g, ' ').trim().toLowerCase() === (selectedState || '').trim().toLowerCase())
     .sort((a, b) => a.year - b.year)
     .map(d => {
-        const total = d.totalSeats || 0;
-        const inc = d.partyWins?.['INC'] || 0;
-        const bjp = (d.partyWins?.['BJP'] || 0) + (d.partyWins?.['BJS'] || 0);
+        const total = d.totalSeats || d.total_seats || 0;
+        const pw = d.partyWins || d.party_wins || {};
+        const inc = pw['INC'] || 0;
+        const bjp = (pw['BJP'] || 0) + (pw['BJS'] || 0);
         const rest = total - inc - bjp;
         return {
             ...d,
             total_seats: total,
-            party_wins: d.partyWins,
+            party_wins: pw,
             INC: inc,
             BJP: bjp,
             Others: rest > 0 ? rest : 0

@@ -26,6 +26,10 @@ async function ingestTCPD() {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         
         console.log(`[Data Ingestor] Resuming from row offset: ${lastProcessedRow}`);
+        if (lastProcessedRow >= 483565) {
+            console.log("[Data Ingestor] ✅ All historical TCPD archive records are fully ingested (483,565 rows complete). Archive complete!");
+            return;
+        }
         const db = await getDb();
         
         let currentRow = 0;

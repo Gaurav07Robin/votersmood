@@ -38,15 +38,29 @@ function AppContent() {
         setActiveTab('leader-detail');
       } else if (path.startsWith('elections/lok-sabha/') || path.startsWith('elections/state/')) {
         const parts = path.split('/');
-        const year = parts[2];
-        const stateSlug = parts[3];
-        const constituencySlug = parts[4];
-        if (constituencySlug) {
-            setSelectedElection({ year, stateSlug, constituencySlug });
-            setActiveTab('constituency-result');
-        } else if (year) {
-            setSelectedElection({ year });
-            setActiveTab('election-year-detail');
+        if (parts[1] === 'lok-sabha') {
+          const year = parts[2];
+          const stateSlug = parts[3];
+          const constituencySlug = parts[4];
+          if (constituencySlug) {
+              setSelectedElection({ year, stateSlug, constituencySlug, isLS: true });
+              setActiveTab('constituency-result');
+          } else if (year) {
+              setSelectedElection({ year, isLS: true });
+              setActiveTab('election-year-detail');
+          }
+        } else if (parts[1] === 'state') {
+          const stateSlug = parts[2];
+          const year = parts[3];
+          const constituencySlug = parts[4];
+          const state = stateSlug ? stateSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : null;
+          if (constituencySlug) {
+              setSelectedElection({ year, stateSlug, constituencySlug, state, isLS: false });
+              setActiveTab('constituency-result');
+          } else if (year) {
+              setSelectedElection({ year, stateSlug, state, isLS: false });
+              setActiveTab('election-year-detail');
+          }
         }
       } else if (path === 'elections') {
         setActiveTab('elections');
