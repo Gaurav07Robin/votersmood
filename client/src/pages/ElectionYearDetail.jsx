@@ -9,30 +9,26 @@ import LayoutGrid from 'lucide-react/dist/esm/icons/layout-grid';
 import List from 'lucide-react/dist/esm/icons/list';
 import Moon from 'lucide-react/dist/esm/icons/moon';
 import Sun from 'lucide-react/dist/esm/icons/sun';
-import { getPartyColor, getPartySymbol, getPartyFlag } from '../utils/party_utils';
+import { getPartyColor, getPartySymbol } from '../utils/party_utils';
 
 const slugify = (text) => text.toString().toLowerCase().trim()
   .replace(/\s+/g, '-')
   .replace(/[^\w\-]+/g, '')
   .replace(/\-\-+/g, '-');
 
-// ---------------------------------------------------------
-// MAIN COMPONENT
-// ---------------------------------------------------------
 export default function ElectionYearDetail({ year, isLS = true, state = null, onBack, onSelectConstituency }) {
   const [constituencies, setConstituencies] = useState([]);
   const [loading, setLoading] = useState(true);
   
-  // Filter States - default to provided state prop if available
+  // Filter States
   const [selectedState, setSelectedState] = useState(state || 'All');
   const [selectedParty, setSelectedParty] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
   // UI States
-  const [viewMode, setViewMode] = useState('grid'); // 'grid' or 'table'
-  const [theme, setTheme] = useState('dark'); // 'dark' or 'light'
+  const [viewMode, setViewMode] = useState('grid');
+  const [theme, setTheme] = useState('dark');
 
-  // Scroll Ref for horizontal party pills
   const scrollRef = React.useRef(null);
 
   useEffect(() => {
@@ -46,22 +42,18 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
     if (el) {
       const onWheel = (e) => {
         if (e.deltaY === 0) return;
-        
         const isAtLeft = el.scrollLeft === 0;
         const isAtRight = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
-
-        if (e.deltaY > 0 && isAtRight) return; // let page scroll down
-        if (e.deltaY < 0 && isAtLeft) return; // let page scroll up
-        
+        if (e.deltaY > 0 && isAtRight) return;
+        if (e.deltaY < 0 && isAtLeft) return;
         e.preventDefault();
         el.scrollLeft += e.deltaY;
       };
       el.addEventListener('wheel', onWheel, { passive: false });
       return () => el.removeEventListener('wheel', onWheel);
     }
-  }, [loading]); // re-bind when loading finishes and DOM exists
+  }, [loading]);
 
-  // Theme Colors
   const t = {
     bg: theme === 'dark' ? '#18181B' : '#F8FAFC',
     cardBg: theme === 'dark' ? '#27272A' : '#FFFFFF',
@@ -79,7 +71,7 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
       try {
         const q = query(collection(db, 'elections_constituencies'), where('year', '==', parseInt(year)));
         const snapshot = await getDocs(q);
-        const data = snapshot.docs.map(doc => {
+        let data = snapshot.docs.map(doc => {
           const d = doc.data();
           const winnerName = d.winner || d.candidates?.[0]?.name || 'Unknown';
           const winnerParty = d.party || d.candidates?.[0]?.party || 'IND';
@@ -95,6 +87,13 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
             ]
           };
         });
+
+        // CRITICAL: If this is a State Assembly election, strictly filter for this state's assembly seats!
+        if (!isLS && state) {
+          const cleanTarget = state.replace(/_/g, ' ').trim().toLowerCase();
+          data = data.filter(c => c.state.replace(/_/g, ' ').trim().toLowerCase() === cleanTarget);
+        }
+
         data.sort((a, b) => a.constituency.localeCompare(b.constituency));
         setConstituencies(data);
       } catch (error) {
@@ -104,56 +103,61 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
       }
     }
     fetchData();
-  }, [year]);
+  }, [year, isLS, state]);
 
+  // States list (used only when viewing national Lok Sabha elections)
   const states = useMemo(() => {
     const set = new Set(constituencies.map(c => c.state).filter(Boolean));
     return ['All', ...Array.from(set).sort()];
   }, [constituencies]);
 
-  // When a state is selected, scope constituencies strictly to that state
-  const stateScopedConstituencies = useMemo(() => {
-    if (selectedState === 'All') return constituencies;
-    const cleanTarget = (selectedState || '').replace(/_/g, ' ').trim().toLowerCase();
-    return constituencies.filter(c => (c.state || '').replace(/_/g, ' ').trim().toLowerCase() === cleanTarget);
-  }, [constituencies, selectedState]);
+  // Scoped constituencies:
+  // For Lok Sabha: respects selectedState if not 'All'
+  // For State Assembly: all constituencies are already scoped to the target state
+  const scopedConstituencies = useMemo(() => {
+    if (!isLS || selectedState === 'All') return constituencies;
+    const cleanTarget = selectedState.replace(/_/g, ' ').trim().toLowerCase();
+    return constituencies.filter(c => c.state.replace(/_/g, ' ').trim().toLowerCase() === cleanTarget);
+  }, [constituencies, selectedState, isLS]);
 
-  // Parties are derived dynamically from the active state scope
+  // Dynamic party counts based on scoped constituencies
   const parties = useMemo(() => {
     const counts = {};
-    stateScopedConstituencies.forEach(c => {
+    scopedConstituencies.forEach(c => {
       const p = c.party || c.candidates?.[0]?.party;
       if (p) counts[p] = (counts[p] || 0) + 1;
     });
-    return Object.entries(counts).sort((a, b) => b[1] - a[1]); // Sort by seats descending
-  }, [stateScopedConstituencies]);
+    return Object.entries(counts).sort((a, b) => b[1] - a[1]);
+  }, [scopedConstituencies]);
 
-  // Reset selected party whenever active state changes
+  // Reset selected party when selected state changes
   useEffect(() => {
     setSelectedParty('All');
   }, [selectedState]);
 
-  // Final filtered list of constituencies matching state, party, and search query
+  // Filter by party and search query
   const filtered = useMemo(() => {
-    return stateScopedConstituencies.filter(c => {
+    return scopedConstituencies.filter(c => {
       const party = c.party || c.candidates?.[0]?.party;
       const matchParty = selectedParty === 'All' || party === selectedParty;
       const matchSearch = (c.constituency || '').toLowerCase().includes(searchQuery.toLowerCase()) || 
                           (c.winner || c.candidates?.[0]?.name || '').toLowerCase().includes(searchQuery.toLowerCase());
       return matchParty && matchSearch;
     });
-  }, [stateScopedConstituencies, selectedParty, searchQuery]);
+  }, [scopedConstituencies, selectedParty, searchQuery]);
+
+  const activeTitle = isLS ? `Lok Sabha ${year}` : `${state || selectedState} Assembly ${year}`;
 
   return (
     <div style={{ backgroundColor: t.bg, minHeight: '100vh', color: t.text, padding: '24px', fontFamily: 'Inter, sans-serif', transition: 'background-color 0.2s ease, color 0.2s ease' }}>
 
       <Helmet>
-        <title>{`${selectedState !== 'All' ? selectedState : 'Assembly'} Elections ${year} | Opinar`}</title>
+        <title>{`${activeTitle} | Opinar`}</title>
         <meta name="description" content="View full assembly election results, party vote shares, and winning MLAs." />
       </Helmet>
 
       {/* HEADER WITH CONTROLS */}
-      <div style={{ maxWidth: '1400px', margin: '0 auto', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '16px' }}>
         <div>
           <button 
             onClick={onBack}
@@ -162,12 +166,12 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
             <ArrowLeft size={16} /> Back to Elections Timeline
           </button>
           
-          <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px', flexWrap: 'wrap' }}>
             <h1 style={{ fontSize: '32px', fontWeight: 800, margin: 0, color: t.text }}>
-              {isLS ? 'Lok Sabha' : (selectedState !== 'All' ? selectedState : (state || 'State Assembly'))} {year}
+              {activeTitle}
             </h1>
             <span style={{ fontSize: '18px', color: t.subText, fontWeight: 500 }}>
-              {stateScopedConstituencies.length} Constituencies
+              {scopedConstituencies.length} Constituencies
             </span>
           </div>
         </div>
@@ -204,36 +208,82 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
       ) : (
         <div style={{ display: 'flex', gap: '32px', maxWidth: '1400px', margin: '0 auto' }}>
           
-          {/* LEFT SIDEBAR: STATE SELECTION */}
+          {/* LEFT SIDEBAR */}
           <div style={{ width: '280px', flexShrink: 0 }}>
-            <h2 style={{ color: t.subText, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>Filter by State</h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', maxHeight: '75vh', overflowY: 'auto', paddingRight: '8px', scrollbarWidth: 'thin', scrollbarColor: `${t.border} transparent` }}>
-              {states.map(s => {
-                const cleanS = (s || '').replace(/_/g, ' ').trim().toLowerCase();
-                const stateCount = s === 'All' 
-                  ? constituencies.length 
-                  : constituencies.filter(c => (c.state || '').replace(/_/g, ' ').trim().toLowerCase() === cleanS).length;
-                
-                const isSelected = selectedState.replace(/_/g, ' ').trim().toLowerCase() === s.replace(/_/g, ' ').trim().toLowerCase();
-                  
-                return (
+            {isLS ? (
+              /* LOK SABHA: FILTER BY STATE */
+              <div>
+                <h2 style={{ color: t.subText, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>Filter by State</h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', maxHeight: '75vh', overflowY: 'auto', paddingRight: '8px', scrollbarWidth: 'thin', scrollbarColor: `${t.border} transparent` }}>
+                  {states.map(s => {
+                    const cleanS = (s || '').replace(/_/g, ' ').trim().toLowerCase();
+                    const stateCount = s === 'All' 
+                      ? constituencies.length 
+                      : constituencies.filter(c => (c.state || '').replace(/_/g, ' ').trim().toLowerCase() === cleanS).length;
+                    const isSelected = selectedState.replace(/_/g, ' ').trim().toLowerCase() === cleanS;
+                    return (
+                      <button
+                        key={s}
+                        onClick={() => setSelectedState(s)}
+                        style={{
+                          textAlign: 'left', padding: '10px 14px', borderRadius: '8px', border: 'none', fontSize: '14px', fontWeight: 500, cursor: 'pointer',
+                          backgroundColor: isSelected ? t.hover : 'transparent',
+                          color: isSelected ? t.text : t.subText,
+                          display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                        }}
+                      >
+                        <span>{s}</span>
+                        <span style={{ fontSize: '12px', color: isSelected ? t.text : t.subText }}>{stateCount}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              /* STATE ASSEMBLY: FILTER BY PARTY DIRECTLY IN SIDEBAR */
+              <div>
+                <h2 style={{ color: t.subText, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
+                  Filter by Party
+                </h2>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '75vh', overflowY: 'auto', paddingRight: '8px', scrollbarWidth: 'thin', scrollbarColor: `${t.border} transparent` }}>
                   <button
-                    key={s}
-                    onClick={() => setSelectedState(s)}
+                    onClick={() => setSelectedParty('All')}
                     style={{
-                      textAlign: 'left', padding: '10px 14px', borderRadius: '8px', border: 'none', fontSize: '14px', fontWeight: 500, cursor: 'pointer',
-                      backgroundColor: isSelected ? t.hover : 'transparent',
-                      color: isSelected ? t.text : (stateCount === 0 ? t.emptyPill : t.subText),
-                      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                      transition: 'background-color 0.1s ease'
+                      textAlign: 'left', padding: '10px 14px', borderRadius: '8px', border: 'none', fontSize: '14px', fontWeight: 600, cursor: 'pointer',
+                      backgroundColor: selectedParty === 'All' ? t.hover : 'transparent',
+                      color: selectedParty === 'All' ? t.text : t.subText,
+                      display: 'flex', justifyContent: 'space-between', alignItems: 'center'
                     }}
                   >
-                    <span>{s.replace(/_/g, ' ')}</span>
-                    <span style={{ fontSize: '12px', color: isSelected ? t.text : t.subText }}>{stateCount}</span>
+                    <span>All Parties</span>
+                    <span style={{ fontSize: '12px', color: selectedParty === 'All' ? t.text : t.subText }}>{constituencies.length}</span>
                   </button>
-                )
-              })}
-            </div>
+                  {parties.map(([party, seatCount]) => {
+                    const isSelected = selectedParty === party;
+                    const pColor = getPartyColor(party);
+                    return (
+                      <button
+                        key={party}
+                        onClick={() => setSelectedParty(isSelected ? 'All' : party)}
+                        style={{
+                          textAlign: 'left', padding: '10px 14px', borderRadius: '8px', border: 'none', fontSize: '14px', fontWeight: 500, cursor: 'pointer',
+                          backgroundColor: isSelected ? `${pColor}20` : 'transparent',
+                          color: isSelected ? pColor : t.subText,
+                          display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                          borderLeft: isSelected ? `3px solid ${pColor}` : '3px solid transparent'
+                        }}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: pColor }}></span>
+                          <span style={{ fontWeight: isSelected ? 700 : 500 }}>{party}</span>
+                        </div>
+                        <span style={{ fontSize: '12px', fontWeight: 600, color: isSelected ? pColor : t.subText }}>{seatCount}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* RIGHT PANEL: SEARCH, PARTY PILLS & CONTENT */}
@@ -241,8 +291,8 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
             
             {/* Search Bar aligned top right */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h2 style={{ fontSize: '22px', color: t.text, margin: 0 }}>
-                {selectedState === 'All' ? 'All Constituencies' : selectedState.replace(/_/g, ' ')}
+              <h2 style={{ fontSize: '20px', color: t.text, margin: 0, fontWeight: 700 }}>
+                {selectedParty === 'All' ? 'All Constituencies' : `${selectedParty} Won Constituencies`}
               </h2>
               
               <div style={{ position: 'relative', width: '280px' }}>
@@ -257,7 +307,7 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
               </div>
             </div>
 
-            {/* Horizontal Party Pills */}
+            {/* Horizontal Party Pills for quick mobile/desktop selection */}
             <div ref={scrollRef} style={{ display: 'flex', overflowX: 'auto', gap: '8px', paddingBottom: '12px', marginBottom: '20px', borderBottom: `1px solid ${t.border}`, scrollbarWidth: 'thin', scrollbarColor: `${t.border} transparent`, width: '100%' }}>
               <button
                 onClick={() => setSelectedParty('All')}
@@ -268,7 +318,7 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
                   borderColor: selectedParty === 'All' ? t.text : t.border
                 }}
               >
-                All Parties ({stateScopedConstituencies.length})
+                All Parties ({scopedConstituencies.length})
               </button>
               {parties.map(([party, seatCount]) => {
                 const themeColor = getPartyColor(party);
