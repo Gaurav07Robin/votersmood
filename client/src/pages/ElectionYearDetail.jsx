@@ -23,8 +23,8 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
   const [constituencies, setConstituencies] = useState([]);
   const [loading, setLoading] = useState(true);
   
-  // Filter States
-  const [selectedState, setSelectedState] = useState('All');
+  // Filter States - default to provided state prop if available
+  const [selectedState, setSelectedState] = useState(state || 'All');
   const [selectedParty, setSelectedParty] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -34,6 +34,12 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
 
   // Scroll Ref for horizontal party pills
   const scrollRef = React.useRef(null);
+
+  useEffect(() => {
+    if (state) {
+      setSelectedState(state);
+    }
+  }, [state]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -75,12 +81,19 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
         const snapshot = await getDocs(q);
         const data = snapshot.docs.map(doc => {
           const d = doc.data();
-          if (!d.candidates || d.candidates.length === 0) {
-            d.candidates = [
-              { name: d.winner || 'Unknown', party: d.party || 'IND' }
-            ];
-          }
-          return d;
+          const winnerName = d.winner || d.candidates?.[0]?.name || 'Unknown';
+          const winnerParty = d.party || d.candidates?.[0]?.party || 'IND';
+          return {
+            ...d,
+            id: doc.id,
+            constituency: d.constituency || doc.id.split('_').slice(-1)[0].replace(/-/g, ' ').toUpperCase(),
+            state: (d.state || '').replace(/_/g, ' ').trim(),
+            winner: winnerName,
+            party: winnerParty,
+            candidates: d.candidates && d.candidates.length > 0 ? d.candidates : [
+              { name: winnerName, party: winnerParty, position: 1, votes: d.votes || 0 }
+            ]
+          };
         });
         data.sort((a, b) => a.constituency.localeCompare(b.constituency));
         setConstituencies(data);
@@ -94,45 +107,88 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
   }, [year]);
 
   const states = useMemo(() => {
-    return ['All', ...new Set(constituencies.map(c => c.state))].sort();
+    const set = new Set(constituencies.map(c => c.state).filter(Boolean));
+    return ['All', ...Array.from(set).sort()];
   }, [constituencies]);
 
+  // When a state is selected, scope constituencies strictly to that state
+  const stateScopedConstituencies = useMemo(() => {
+    if (selectedState === 'All') return constituencies;
+    const cleanTarget = (selectedState || '').replace(/_/g, ' ').trim().toLowerCase();
+    return constituencies.filter(c => (c.state || '').replace(/_/g, ' ').trim().toLowerCase() === cleanTarget);
+  }, [constituencies, selectedState]);
+
+  // Parties are derived dynamically from the active state scope
   const parties = useMemo(() => {
     const counts = {};
-    constituencies.forEach(c => {
-      const p = c.candidates[0]?.party;
+    stateScopedConstituencies.forEach(c => {
+      const p = c.party || c.candidates?.[0]?.party;
       if (p) counts[p] = (counts[p] || 0) + 1;
     });
     return Object.entries(counts).sort((a, b) => b[1] - a[1]); // Sort by seats descending
-  }, [constituencies]);
+  }, [stateScopedConstituencies]);
 
+  // Reset selected party whenever active state changes
+  useEffect(() => {
+    setSelectedParty('All');
+  }, [selectedState]);
+
+  // Final filtered list of constituencies matching state, party, and search query
   const filtered = useMemo(() => {
-    return constituencies.filter(c => {
-      const cleanCState = (c.state || '').replace(/_/g, ' ').toLowerCase();
-      const cleanTargetState = (state || selectedState || '').replace(/_/g, ' ').toLowerCase();
-      const matchState = selectedState === 'All' && !state ? true : 
-                         (isLS ? (selectedState === 'All' || cleanCState === cleanTargetState) :
-                                 (cleanCState === cleanTargetState));
-      const matchParty = selectedParty === 'All' || c.candidates[0]?.party === selectedParty;
+    return stateScopedConstituencies.filter(c => {
+      const party = c.party || c.candidates?.[0]?.party;
+      const matchParty = selectedParty === 'All' || party === selectedParty;
       const matchSearch = (c.constituency || '').toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          (c.candidates[0] && (c.candidates[0].name || '').toLowerCase().includes(searchQuery.toLowerCase()));
-      return matchState && matchParty && matchSearch;
+                          (c.winner || c.candidates?.[0]?.name || '').toLowerCase().includes(searchQuery.toLowerCase());
+      return matchParty && matchSearch;
     });
-  }, [constituencies, selectedState, selectedParty, searchQuery, isLS, state]);
+  }, [stateScopedConstituencies, selectedParty, searchQuery]);
 
   return (
     <div style={{ backgroundColor: t.bg, minHeight: '100vh', color: t.text, padding: '24px', fontFamily: 'Inter, sans-serif', transition: 'background-color 0.2s ease, color 0.2s ease' }}>
 
       <Helmet>
-        <title>{`Assembly Elections ${year} | Opinar`}</title>
+        <title>{`${selectedState !== 'All' ? selectedState : 'Assembly'} Elections ${year} | Opinar`}</title>
         <meta name="description" content="View full assembly election results, party vote shares, and winning MLAs." />
-        <link rel="canonical" href="{`https://www.opinar.in/elections/state/${stateSlug}/${year}`}" />
       </Helmet>
 
-      
       {/* HEADER WITH CONTROLS */}
       <div style={{ maxWidth: '1400px', margin: '0 auto', marginBottom: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <div>
+          <button 
+            onClick={onBack}
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'none', border: 'none', color: t.subText, cursor: 'pointer', fontSize: '14px', marginBottom: '12px', padding: 0 }}
+          >
+            <ArrowLeft size={16} /> Back to Elections Timeline
+          </button>
+          
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: '16px' }}>
+            <h1 style={{ fontSize: '32px', fontWeight: 800, margin: 0, color: t.text }}>
+              {isLS ? 'Lok Sabha' : (selectedState !== 'All' ? selectedState : (state || 'State Assembly'))} {year}
+            </h1>
+            <span style={{ fontSize: '18px', color: t.subText, fontWeight: 500 }}>
+              {stateScopedConstituencies.length} Constituencies
+            </span>
+          </div>
+        </div>
+
+        {/* View Mode & Theme Switcher */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{ display: 'flex', backgroundColor: t.cardBg, padding: '4px', borderRadius: '8px', border: `1px solid ${t.border}` }}>
+            <button 
+              onClick={() => setViewMode('grid')}
+              style={{ padding: '6px', border: 'none', borderRadius: '6px', cursor: 'pointer', backgroundColor: viewMode === 'grid' ? t.hover : 'transparent', color: viewMode === 'grid' ? t.text : t.subText }}
+            >
+              <LayoutGrid size={18} />
+            </button>
+            <button 
+              onClick={() => setViewMode('table')}
+              style={{ padding: '6px', border: 'none', borderRadius: '6px', cursor: 'pointer', backgroundColor: viewMode === 'table' ? t.hover : 'transparent', color: viewMode === 'table' ? t.text : t.subText }}
+            >
+              <List size={18} />
+            </button>
+          </div>
+
           <button aria-label="Toggle Theme" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} style={{ width: '36px', height: '36px', borderRadius: '50%', border: `1px solid ${t.border}`, backgroundColor: t.cardBg, display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', color: t.text }}
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -152,26 +208,28 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
           <div style={{ width: '280px', flexShrink: 0 }}>
             <h2 style={{ color: t.subText, fontSize: '12px', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>Filter by State</h2>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', maxHeight: '75vh', overflowY: 'auto', paddingRight: '8px', scrollbarWidth: 'thin', scrollbarColor: `${t.border} transparent` }}>
-              {states.map(state => {
-                // If a party is selected, count only seats for that party in the state
-                const stateCount = state === 'All' 
-                  ? (selectedParty === 'All' ? constituencies.length : constituencies.filter(c => c.candidates[0]?.party === selectedParty).length)
-                  : constituencies.filter(c => c.state === state && (selectedParty === 'All' || c.candidates[0]?.party === selectedParty)).length;
+              {states.map(s => {
+                const cleanS = (s || '').replace(/_/g, ' ').trim().toLowerCase();
+                const stateCount = s === 'All' 
+                  ? constituencies.length 
+                  : constituencies.filter(c => (c.state || '').replace(/_/g, ' ').trim().toLowerCase() === cleanS).length;
+                
+                const isSelected = selectedState.replace(/_/g, ' ').trim().toLowerCase() === s.replace(/_/g, ' ').trim().toLowerCase();
                   
                 return (
                   <button
-                    key={state}
-                    onClick={() => setSelectedState(state)}
+                    key={s}
+                    onClick={() => setSelectedState(s)}
                     style={{
                       textAlign: 'left', padding: '10px 14px', borderRadius: '8px', border: 'none', fontSize: '14px', fontWeight: 500, cursor: 'pointer',
-                      backgroundColor: selectedState === state ? t.hover : 'transparent',
-                      color: selectedState === state ? t.text : (stateCount === 0 ? t.emptyPill : t.subText),
+                      backgroundColor: isSelected ? t.hover : 'transparent',
+                      color: isSelected ? t.text : (stateCount === 0 ? t.emptyPill : t.subText),
                       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
                       transition: 'background-color 0.1s ease'
                     }}
                   >
-                    <span>{state.replace(/_/g, ' ')}</span>
-                    <span style={{ fontSize: '12px', color: selectedState === state ? t.subText : t.subText }}>{stateCount}</span>
+                    <span>{s.replace(/_/g, ' ')}</span>
+                    <span style={{ fontSize: '12px', color: isSelected ? t.text : t.subText }}>{stateCount}</span>
                   </button>
                 )
               })}
@@ -191,7 +249,7 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
                 <Search size={18} color={t.subText} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)' }} />
                 <input 
                   type="text"
-                  placeholder="Search candidate..."
+                  placeholder="Search candidate or constituency..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   style={{ width: '100%', backgroundColor: t.inputBg, border: `1px solid ${t.border}`, borderRadius: '30px', padding: '10px 16px 10px 44px', fontSize: '14px', color: t.text, outline: 'none' }}
@@ -199,7 +257,7 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
               </div>
             </div>
 
-            {/* Horizontal Party Pills - Made strictly scrollable without warping */}
+            {/* Horizontal Party Pills */}
             <div ref={scrollRef} style={{ display: 'flex', overflowX: 'auto', gap: '8px', paddingBottom: '12px', marginBottom: '20px', borderBottom: `1px solid ${t.border}`, scrollbarWidth: 'thin', scrollbarColor: `${t.border} transparent`, width: '100%' }}>
               <button
                 onClick={() => setSelectedParty('All')}
@@ -210,33 +268,28 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
                   borderColor: selectedParty === 'All' ? t.text : t.border
                 }}
               >
-                All Parties
+                All Parties ({stateScopedConstituencies.length})
               </button>
-              {parties.map(([party, totalCount]) => {
-                // If a state is selected, count only seats for that party in the state
-                const activeCount = selectedState === 'All' 
-                  ? totalCount 
-                  : constituencies.filter(c => c.state === selectedState && c.candidates[0]?.party === party).length;
-                
+              {parties.map(([party, seatCount]) => {
                 const themeColor = getPartyColor(party);
                 const isSelected = selectedParty === party;
                 
                 return (
                   <button
                     key={party}
-                    onClick={() => setSelectedParty(party)}
+                    onClick={() => setSelectedParty(selectedParty === party ? 'All' : party)}
                     style={{
                       flexShrink: 0, display: 'flex', alignItems: 'center', gap: '6px',
                       padding: '6px 14px', borderRadius: '20px', border: '1px solid', fontSize: '13px', fontWeight: 600, cursor: 'pointer',
-                      backgroundColor: isSelected ? `${themeColor}15` : t.pillBg,
-                      color: isSelected ? themeColor : (activeCount === 0 ? t.emptyPill : t.subText),
+                      backgroundColor: isSelected ? `${themeColor}20` : t.pillBg,
+                      color: isSelected ? themeColor : t.subText,
                       borderColor: isSelected ? themeColor : t.border
                     }}
                   >
                     <span>{getPartySymbol(party)}</span>
                     <span>{party}</span>
                     <span style={{ fontSize: '11px', padding: '2px 6px', borderRadius: '10px', backgroundColor: isSelected ? themeColor : t.border, color: isSelected ? '#FFF' : t.subText }}>
-                      {activeCount}
+                      {seatCount}
                     </span>
                   </button>
                 );
@@ -251,80 +304,86 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
             ) : viewMode === 'grid' ? (
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
                 {filtered.map(c => {
-                  const winner = c.candidates[0]; 
-                  const pColor = getPartyColor(winner?.party);
+                  const winnerName = c.winner || c.candidates?.[0]?.name || 'Unknown';
+                  const partyName = c.party || c.candidates?.[0]?.party || 'IND';
+                  const pColor = getPartyColor(partyName);
                   return (
                     <div 
-                      key={`${c.state}-${c.constituency}`}
+                      key={`${c.state}-${c.constituency}-${c.id}`}
                       onClick={() => onSelectConstituency(year, slugify(c.state), slugify(c.constituency))}
                       style={{ 
-                        backgroundColor: t.cardBg, borderRadius: '12px', padding: '20px', border: `1px solid ${t.border}`, cursor: 'pointer', position: 'relative', overflow: 'hidden',
-                        transition: 'transform 0.1s ease, box-shadow 0.1s ease, border-color 0.1s ease'
+                        backgroundColor: t.cardBg, borderRadius: '12px', border: `1px solid ${t.border}`, padding: '20px',
+                        cursor: 'pointer', transition: 'all 0.2s ease', display: 'flex', flexDirection: 'column', gap: '16px'
                       }}
-                      onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = `0 8px 16px rgba(0,0,0,0.1)`; e.currentTarget.style.borderColor = pColor; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; e.currentTarget.style.borderColor = t.border; }}
+                      onMouseEnter={(e) => { e.currentTarget.style.borderColor = pColor; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.borderColor = t.border; e.currentTarget.style.transform = 'translateY(0)'; }}
                     >
-                      <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', backgroundColor: pColor }} />
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                        <div style={{ color: t.subText, fontSize: '11px', fontWeight: 600, letterSpacing: '0.5px' }}>{c.state.replace(/_/g, ' ')}</div>
-                      </div>
-                      <h2 style={{ fontSize: '20px', fontWeight: 800, color: t.text, margin: '0 0 16px 0', letterSpacing: '-0.5px' }}>{c.constituency}</h2>
-                      {winner && (
-                        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
-                          <div style={{ width: '40px', height: '40px', backgroundColor: t.bg, borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', flexShrink: 0 }}>
-                            <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: pColor }} />
-                          </div>
-                          <div>
-                            <div style={{ fontSize: '11px', color: t.subText, marginBottom: '2px', textTransform: 'uppercase', fontWeight: 600 }}>Winner</div>
-                            <div style={{ fontSize: '14px', fontWeight: 700, color: t.text, marginBottom: '4px' }}>{winner.name}</div>
-                            <div style={{ fontSize: '13px', color: pColor, fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                              {winner.party} 
-                              {getPartyFlag(winner.party) ? <img src={getPartyFlag(winner.party)} alt="flag" style={{ height: '12px', borderRadius: '2px' }} /> : getPartySymbol(winner.party)}
-                              <span style={{ color: t.subText, fontWeight: 400, marginLeft: '2px' }}>({winner.percentage}%)</span>
-                            </div>
-                          </div>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                        <div>
+                          <div style={{ fontSize: '12px', color: t.subText, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{c.state}</div>
+                          <div style={{ fontSize: '18px', fontWeight: 700, color: t.text, marginTop: '2px' }}>{c.constituency}</div>
                         </div>
-                      )}
+                        <span style={{ backgroundColor: `${pColor}15`, color: pColor, padding: '4px 10px', borderRadius: '12px', fontSize: '12px', fontWeight: 700, border: `1px solid ${pColor}40` }}>
+                          {partyName}
+                        </span>
+                      </div>
+
+                      <div style={{ backgroundColor: t.bg, padding: '12px', borderRadius: '8px', border: `1px solid ${t.border}` }}>
+                        <div style={{ fontSize: '11px', color: t.subText }}>Elected Representative (MLA)</div>
+                        <div style={{ fontSize: '15px', fontWeight: 600, color: t.text, marginTop: '2px' }}>
+                          {winnerName}
+                        </div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '6px', fontSize: '12px', color: t.subText }}>
+                          <span>Margin: {typeof c.margin === 'number' ? c.margin.toLocaleString() : (c.margin || 'N/A')}</span>
+                          {c.votes ? <span>Votes: {c.votes.toLocaleString()}</span> : null}
+                        </div>
+                      </div>
+
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '4px', fontSize: '13px', color: t.subText, marginTop: 'auto' }}>
+                        <span>View Details</span>
+                        <ArrowRight size={14} />
+                      </div>
                     </div>
                   );
                 })}
               </div>
             ) : (
               <div style={{ backgroundColor: t.cardBg, borderRadius: '12px', border: `1px solid ${t.border}`, overflow: 'hidden' }}>
-                <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '14px' }}>
                   <thead>
-                    <tr style={{ borderBottom: `2px solid ${t.border}`, backgroundColor: t.hover, color: t.subText, textAlign: 'left', fontSize: '12px', textTransform: 'uppercase' }}>
-                      <th style={{ padding: '16px', fontWeight: 600 }}>Constituency</th>
-                      <th style={{ padding: '16px', fontWeight: 600 }}>State</th>
-                      <th style={{ padding: '16px', fontWeight: 600 }}>Winner</th>
-                      <th style={{ padding: '16px', fontWeight: 600 }}>Party</th>
-                      <th style={{ padding: '16px', fontWeight: 600 }}>Vote %</th>
-                      <th style={{ padding: '16px' }}></th>
+                    <tr style={{ borderBottom: `1px solid ${t.border}`, color: t.subText }}>
+                      <th style={{ padding: '14px 16px', fontWeight: 600 }}>Constituency</th>
+                      <th style={{ padding: '14px 16px', fontWeight: 600 }}>State</th>
+                      <th style={{ padding: '14px 16px', fontWeight: 600 }}>Winner</th>
+                      <th style={{ padding: '14px 16px', fontWeight: 600 }}>Party</th>
+                      <th style={{ padding: '14px 16px', fontWeight: 600, textAlign: 'right' }}>Margin</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filtered.map(c => {
-                      const winner = c.candidates[0];
-                      const pColor = getPartyColor(winner?.party);
+                      const winnerName = c.winner || c.candidates?.[0]?.name || 'Unknown';
+                      const partyName = c.party || c.candidates?.[0]?.party || 'IND';
                       return (
-                        <tr key={`${c.state}-${c.constituency}`} style={{ borderBottom: `1px solid ${t.border}` }}>
-                          <td style={{ padding: '16px', fontWeight: 700, color: t.text }}>{c.constituency}</td>
-                          <td style={{ padding: '16px', color: t.subText }}>{c.state.replace(/_/g, ' ')}</td>
-                          <td style={{ padding: '16px', color: t.text }}>{winner?.name}</td>
-                          <td style={{ padding: '16px', color: pColor, fontWeight: 600 }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                              {getPartyFlag(winner?.party) ? <img src={getPartyFlag(winner?.party)} alt="flag" style={{ height: '14px', borderRadius: '2px' }} /> : getPartySymbol(winner?.party)}
-                              {winner?.party}
-                            </div>
+                        <tr 
+                          key={`${c.state}-${c.constituency}-${c.id}`}
+                          onClick={() => onSelectConstituency(year, slugify(c.state), slugify(c.constituency))}
+                          style={{ borderBottom: `1px solid ${t.border}`, cursor: 'pointer', transition: 'background-color 0.1s ease' }}
+                          onMouseEnter={(e) => e.currentTarget.style.backgroundColor = t.hover}
+                          onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                        >
+                          <td style={{ padding: '14px 16px', fontWeight: 600, color: t.text }}>{c.constituency}</td>
+                          <td style={{ padding: '14px 16px', color: t.subText }}>{c.state}</td>
+                          <td style={{ padding: '14px 16px', color: t.text }}>{winnerName}</td>
+                          <td style={{ padding: '14px 16px' }}>
+                            <span style={{ color: getPartyColor(partyName), fontWeight: 600 }}>
+                              {partyName}
+                            </span>
                           </td>
-                          <td style={{ padding: '16px', color: t.subText }}>{winner?.percentage}%</td>
-                          <td style={{ padding: '16px', textAlign: 'right' }}>
-                             <button onClick={() => onSelectConstituency(year, slugify(c.state), slugify(c.constituency))} style={{ background: t.hover, border: 'none', padding: '6px 12px', borderRadius: '4px', cursor: 'pointer', color: t.text, fontWeight: 600, fontSize: '12px' }}>
-                               View Details
-                             </button>
+                          <td style={{ padding: '14px 16px', textAlign: 'right', color: t.subText }}>
+                            {typeof c.margin === 'number' ? c.margin.toLocaleString() : (c.margin || '—')}
                           </td>
                         </tr>
-                      )
+                      );
                     })}
                   </tbody>
                 </table>

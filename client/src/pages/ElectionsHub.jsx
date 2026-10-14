@@ -123,8 +123,12 @@ export default function ElectionsHub({ onSelectYear }) {
   }, [electionType, stateElectionData.length]);
 
   const uniqueStates = [...new Set(stateElectionData.map(d => (d.state || '').replace(/_/g, ' ').trim()).filter(Boolean))].sort();
-  const filteredStateData = stateElectionData
-    .filter(d => (d.state || '').replace(/_/g, ' ').trim().toLowerCase() === (selectedState || '').trim().toLowerCase())
+  // Calculate max seats for selected state to guarantee any by-election (< 40% seats) is excluded
+  const stateDocs = stateElectionData.filter(d => (d.state || '').replace(/_/g, ' ').trim().toLowerCase() === (selectedState || '').trim().toLowerCase());
+  const maxStateSeats = stateDocs.reduce((max, d) => Math.max(max, d.totalSeats || d.total_seats || 0), 0);
+
+  const filteredStateData = stateDocs
+    .filter(d => (d.totalSeats || d.total_seats || 0) >= Math.max(15, maxStateSeats * 0.4))
     .sort((a, b) => a.year - b.year)
     .map(d => {
         const total = d.totalSeats || d.total_seats || 0;
