@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { api } from '../api/client';
 import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
@@ -7,6 +7,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Responsi
 import List from 'lucide-react/dist/esm/icons/list';
 import ChevronDown from 'lucide-react/dist/esm/icons/chevron-down';
 import { getPartyColor, getPartySymbol, getPartyFlag } from '../utils/party_utils';
+import localStateMetadata from '../data/state_elections_metadata.json';
 
 const CustomXAxisTick = ({ x, y, payload }) => {
   const symbol = getPartySymbol(payload.value);
@@ -19,7 +20,29 @@ const CustomXAxisTick = ({ x, y, payload }) => {
   );
 };
 
-export default function ElectionsHub({ onSelectYear }) {
+const historicalStateMap = {
+  'madras': 'Tamil Nadu',
+  'mysore': 'Karnataka',
+  'orissa': 'Odisha',
+  'pondicherry': 'Puducherry',
+  'uttaranchal': 'Uttarakhand'
+};
+
+const normalizeStateName = (name) => {
+  if (!name) return '';
+  const clean = name.replace(/_/g, ' ').trim();
+  return historicalStateMap[clean.toLowerCase()] || clean;
+};
+
+export default function ElectionsHub({ 
+  onSelectYear,
+  initialType = 'LOK_SABHA',
+  initialSelectedState = 'Uttar Pradesh',
+  initialSelectedYear = 2026,
+  onTypeChange,
+  onStateChange,
+  onYearChange
+}) {
   useEffect(() => {
     let isMounted = true;
     api.getLiveElections().then(data => {
@@ -30,18 +53,32 @@ export default function ElectionsHub({ onSelectYear }) {
 
   const [loading, setLoading] = useState(true);
   const [liveElections, setLiveElections] = useState([]);
-  const [electionType, setElectionType] = useState('LOK_SABHA');
+  const [electionType, setElectionType] = useState(initialType || 'LOK_SABHA');
   
   // Lok Sabha State
   const [activeYearLS, setActiveYearLS] = useState(2024);
   const [historicalData, setHistoricalData] = useState([]);
   
-  // Assembly State
-  const [activeYearAS, setActiveYearAS] = useState(0);
-  const [stateElectionData, setStateElectionData] = useState([]);
-  const [selectedState, setSelectedState] = useState('Uttar Pradesh');
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  // State Assembly State: Year is primary (default 2026), State is filtered by selected year
+  const [selectedYearAS, setSelectedYearAS] = useState(initialSelectedYear || 2026);
+  const [selectedState, setSelectedState] = useState(initialSelectedState || 'Uttar Pradesh');
+  const [stateElectionData, setStateElectionData] = useState(localStateMetadata || []);
+  
+  const [yearDropdownOpen, setYearDropdownOpen] = useState(false);
+  const [stateDropdownOpen, setStateDropdownOpen] = useState(false);
   const scrollRef = React.useRef(null);
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!e.target.closest?.('.election-dropdown-container')) {
+        setYearDropdownOpen(false);
+        setStateDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -50,24 +87,16 @@ export default function ElectionsHub({ onSelectYear }) {
     // Prevent vertical page scroll when hovering timeline
     const onWheel = (e) => {
       if (e.deltaY !== 0) {
-        e.preventDefault(); // This stops the whole page from scrolling
-        el.scrollLeft += e.deltaY; // Scroll horizontally instead
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
       }
     };
     
-    // { passive: false } is REQUIRED so we can call e.preventDefault()
     el.addEventListener('wheel', onWheel, { passive: false });
     return () => el.removeEventListener('wheel', onWheel);
-  }, [electionType]); // Rebind if view changes
+  }, [electionType]);
 
-  
-
-
-
- // Re-bind just in case DOM reconstructs
-
-
-
+  // Fetch Lok Sabha historical data from Firestore
   useEffect(() => {
     async function fetchData() {
       try {
@@ -109,56 +138,135 @@ export default function ElectionsHub({ onSelectYear }) {
     fetchData();
   }, [activeYearLS]);
 
+  // Optional background refresh of state metadata if Firestore is available
   useEffect(() => {
-    if (electionType === 'ASSEMBLY' && stateElectionData.length === 0) {
+    if (electionType === 'ASSEMBLY' && stateElectionData.length <= localStateMetadata.length) {
       async function fetchStateData() {
-        const q = collection(db, 'state_elections_metadata');
-        const querySnapshot = await getDocs(q);
-        const data = [];
-        querySnapshot.forEach(doc => { data.push(doc.data()); });
-        setStateElectionData(data);
+        try {
+          const q = collection(db, 'state_elections_metadata');
+          const querySnapshot = await getDocs(q);
+          const data = [];
+          querySnapshot.forEach(doc => { data.push(doc.data()); });
+          if (data.length > 0) {
+            setStateElectionData(data);
+          }
+        } catch (err) {
+          // Gracefully fallback to localStateMetadata already set
+        }
       }
       fetchStateData();
     }
   }, [electionType, stateElectionData.length]);
 
-  const uniqueStates = [...new Set(stateElectionData.map(d => (d.state || '').replace(/_/g, ' ').trim()).filter(Boolean))].sort();
-  // Calculate max seats for selected state to guarantee any by-election (< 40% seats) is excluded
-  const stateDocs = stateElectionData.filter(d => (d.state || '').replace(/_/g, ' ').trim().toLowerCase() === (selectedState || '').trim().toLowerCase());
-  const maxStateSeats = stateDocs.reduce((max, d) => Math.max(max, d.totalSeats || d.total_seats || 0), 0);
+  // Available election years descending (from 2026 down to 1952)
+  const availableYearsAS = useMemo(() => {
+    const set = new Set();
+    set.add(2026);
+    stateElectionData.forEach(d => {
+      if (d.year) set.add(d.year);
+    });
+    return Array.from(set).sort((a, b) => b - a);
+  }, [stateElectionData]);
 
-  const filteredStateData = stateDocs
-    .filter(d => (d.totalSeats || d.total_seats || 0) >= Math.max(15, maxStateSeats * 0.4))
-    .sort((a, b) => a.year - b.year)
-    .map(d => {
-        const total = d.totalSeats || d.total_seats || 0;
-        const pw = d.partyWins || d.party_wins || {};
-        const inc = pw['INC'] || 0;
-        const bjp = (pw['BJP'] || 0) + (pw['BJS'] || 0);
-        const rest = total - inc - bjp;
-        return {
-            ...d,
-            total_seats: total,
-            party_wins: pw,
-            INC: inc,
-            BJP: bjp,
-            Others: rest > 0 ? rest : 0
-        };
+  // Available states holding elections in the chosen year
+  const availableStatesForYear = useMemo(() => {
+    const statesInYear = new Set();
+    stateElectionData.forEach(d => {
+      if (d.year === selectedYearAS) {
+        const norm = normalizeStateName(d.state);
+        if (norm) statesInYear.add(norm);
+      }
     });
 
-  useEffect(() => {
-    if (filteredStateData.length > 0) {
-        if (!filteredStateData.find(d => d.year === activeYearAS)) {
-            setActiveYearAS(filteredStateData[filteredStateData.length - 1].year);
-        }
+    // Fallback for 2026 if not populated
+    if (selectedYearAS === 2026 && statesInYear.size === 0) {
+      ['Assam', 'Kerala', 'Puducherry', 'Tamil Nadu', 'West Bengal'].forEach(s => statesInYear.add(s));
     }
-  }, [selectedState, filteredStateData, activeYearAS]);
+
+    return Array.from(statesInYear).sort();
+  }, [stateElectionData, selectedYearAS]);
+
+  // If currently selected state didn't have an election in selectedYearAS, auto-pick first available state
+  useEffect(() => {
+    if (availableStatesForYear.length > 0) {
+      if (!availableStatesForYear.includes(selectedState)) {
+        const nextState = availableStatesForYear[0];
+        setSelectedState(nextState);
+        onStateChange?.(nextState);
+      }
+    }
+  }, [availableStatesForYear, selectedState, onStateChange]);
+
+  const handleYearSelect = (year) => {
+    setSelectedYearAS(year);
+    onYearChange?.(year);
+    setYearDropdownOpen(false);
+  };
+
+  const handleStateSelect = (st) => {
+    setSelectedState(st);
+    onStateChange?.(st);
+    setStateDropdownOpen(false);
+  };
+
+  const handleTypeSwitch = (typeId) => {
+    setElectionType(typeId);
+    onTypeChange?.(typeId);
+  };
+
+  // State docs for the entire historical timeline of the selected state
+  const stateDocs = useMemo(() => {
+    const target = (selectedState || '').toLowerCase().trim();
+    return stateElectionData.filter(d => normalizeStateName(d.state).toLowerCase() === target);
+  }, [stateElectionData, selectedState]);
+
+  const maxStateSeats = stateDocs.reduce((max, d) => Math.max(max, d.totalSeats || d.total_seats || 0), 0);
+
+  const filteredStateData = useMemo(() => {
+    return stateDocs
+      .filter(d => (d.totalSeats || d.total_seats || 0) >= Math.max(15, maxStateSeats * 0.4))
+      .sort((a, b) => a.year - b.year)
+      .map(d => {
+          const total = d.totalSeats || d.total_seats || 0;
+          const pw = d.partyWins || d.party_wins || {};
+          const inc = pw['INC'] || 0;
+          const bjp = (pw['BJP'] || 0) + (pw['BJS'] || 0);
+          const rest = total - inc - bjp;
+          return {
+              ...d,
+              total_seats: total,
+              party_wins: pw,
+              INC: inc,
+              BJP: bjp,
+              Others: rest > 0 ? rest : 0
+          };
+      });
+  }, [stateDocs, maxStateSeats]);
 
   const isLS = electionType === 'LOK_SABHA';
   const isAS = electionType === 'ASSEMBLY';
   const currentData = isLS ? historicalData : (isAS ? filteredStateData : []);
+
+  // In State Assembly mode, the active year is selectedYearAS (or the closest available year in filteredStateData)
+  const activeYearAS = useMemo(() => {
+    if (filteredStateData.find(d => d.year === selectedYearAS)) {
+      return selectedYearAS;
+    }
+    if (selectedYearAS === 2026) return 2026;
+    if (filteredStateData.length > 0) {
+      return filteredStateData[filteredStateData.length - 1].year;
+    }
+    return selectedYearAS;
+  }, [selectedYearAS, filteredStateData]);
+
   const activeYear = isLS ? activeYearLS : activeYearAS;
-  const setActiveYearFunc = isLS ? setActiveYearLS : setActiveYearAS;
+  const setActiveYearFunc = (year) => {
+    if (isLS) {
+      setActiveYearLS(year);
+    } else {
+      handleYearSelect(year);
+    }
+  };
 
   const getTopParties = (year) => {
     const yearData = currentData.find(d => d.year === year);
@@ -221,7 +329,7 @@ export default function ElectionsHub({ onSelectYear }) {
           ].map(type => (
             <button
               key={type.id}
-              onClick={() => setElectionType(type.id)}
+              onClick={() => handleTypeSwitch(type.id)}
               style={{
                 backgroundColor: electionType === type.id ? '#3F3F46' : 'transparent',
                 color: electionType === type.id ? '#FFFFFF' : '#A1A1AA',
@@ -253,35 +361,99 @@ export default function ElectionsHub({ onSelectYear }) {
 
       {(isLS || isAS) && (<>
       {/* TOP CHART: ALL-TIME TREND */}
-      <div style={{ backgroundColor: '#27272A', borderRadius: '12px', padding: '24px', marginBottom: '24px', height: '350px' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+      <div style={{ backgroundColor: '#27272A', borderRadius: '12px', padding: '24px', marginBottom: '24px', minHeight: '350px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '16px' }}>
           <div style={{ fontSize: '14px', color: '#A1A1AA', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '1px' }}>
-            {isLS ? 'All-Time Historical Trend' : 'State Historical Trend'}
+            {isLS ? 'All-Time Historical Trend' : `${selectedState} Historical Trend`}
           </div>
+          
           {isAS && (
-            <div style={{ position: 'relative', zIndex: 50 }}>
-              <div 
-                onClick={() => setDropdownOpen(!dropdownOpen)}
-                style={{ backgroundColor: '#18181B', color: '#fff', border: '1px solid #3F3F46', borderRadius: '8px', padding: '8px 16px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px', minWidth: '220px', justifyContent: 'space-between', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}
-              >
-                <span style={{ fontWeight: 600, fontSize: '14px' }}>{selectedState}</span>
-                <ChevronDown size={16} color="#A1A1AA" />
-              </div>
-              {dropdownOpen && (
-                <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '8px', backgroundColor: '#18181B', border: '1px solid #3F3F46', borderRadius: '8px', maxHeight: '300px', overflowY: 'auto', zIndex: 100, boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }} className="hide-scroll">
-                  {uniqueStates.map(s => (
-                    <div 
-                      key={s} 
-                      onClick={() => { setSelectedState(s); setDropdownOpen(false); }}
-                      style={{ padding: '12px 16px', cursor: 'pointer', backgroundColor: s === selectedState ? '#27272A' : 'transparent', color: s === selectedState ? '#fff' : '#A1A1AA', transition: 'background 0.2s', fontSize: '14px', fontWeight: 500 }}
-                      onMouseEnter={(e) => { if(s !== selectedState) { e.currentTarget.style.backgroundColor = '#27272A'; e.currentTarget.style.color = '#fff'; } }}
-                      onMouseLeave={(e) => { if(s !== selectedState) { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#A1A1AA'; } }}
-                    >
-                      {s}
-                    </div>
-                  ))}
+            <div className="election-dropdown-container" style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap', position: 'relative', zIndex: 50 }}>
+              
+              {/* DROPDOWN 1: YEAR FIRST (Default: 2026, spans 2026 to 1952) */}
+              <div style={{ position: 'relative' }}>
+                <div 
+                  onClick={() => { setYearDropdownOpen(!yearDropdownOpen); setStateDropdownOpen(false); }}
+                  style={{ 
+                    backgroundColor: '#18181B', color: '#fff', border: '1px solid #3F3F46', borderRadius: '8px', 
+                    padding: '8px 14px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px', 
+                    minWidth: '135px', justifyContent: 'space-between', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' 
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontSize: '12px', color: '#A1A1AA' }}>Year:</span>
+                    <span style={{ fontWeight: 700, fontSize: '14px', color: '#3B82F6' }}>{selectedYearAS}</span>
+                  </div>
+                  <ChevronDown size={16} color="#A1A1AA" />
                 </div>
-              )}
+                {yearDropdownOpen && (
+                  <div style={{ position: 'absolute', top: '100%', left: 0, marginTop: '6px', width: '165px', backgroundColor: '#18181B', border: '1px solid #3F3F46', borderRadius: '8px', maxHeight: '280px', overflowY: 'auto', zIndex: 100, boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }} className="hide-scroll">
+                    {availableYearsAS.map(y => (
+                      <div 
+                        key={y} 
+                        onClick={() => handleYearSelect(y)}
+                        style={{ 
+                          padding: '10px 14px', cursor: 'pointer', 
+                          backgroundColor: y === selectedYearAS ? '#27272A' : 'transparent', 
+                          color: y === selectedYearAS ? '#3B82F6' : '#E4E4E7', 
+                          fontWeight: y === selectedYearAS ? 700 : 500, fontSize: '14px',
+                          display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                        }}
+                        onMouseEnter={(e) => { if (y !== selectedYearAS) { e.currentTarget.style.backgroundColor = '#27272A'; } }}
+                        onMouseLeave={(e) => { if (y !== selectedYearAS) { e.currentTarget.style.backgroundColor = 'transparent'; } }}
+                      >
+                        <span>{y}</span>
+                        {y === 2026 && <span style={{ fontSize: '10px', color: '#10B981', backgroundColor: '#10B98120', padding: '1px 5px', borderRadius: '4px' }}>Upcoming</span>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* DROPDOWN 2: STATE SECOND (Filtered by selected year) */}
+              <div style={{ position: 'relative' }}>
+                <div 
+                  onClick={() => { setStateDropdownOpen(!stateDropdownOpen); setYearDropdownOpen(false); }}
+                  style={{ 
+                    backgroundColor: '#18181B', color: '#fff', border: '1px solid #3F3F46', borderRadius: '8px', 
+                    padding: '8px 16px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '12px', 
+                    minWidth: '220px', justifyContent: 'space-between', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' 
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontSize: '12px', color: '#A1A1AA' }}>State:</span>
+                    <span style={{ fontWeight: 600, fontSize: '14px', color: '#FFFFFF' }}>{selectedState}</span>
+                  </div>
+                  <ChevronDown size={16} color="#A1A1AA" />
+                </div>
+                {stateDropdownOpen && (
+                  <div style={{ position: 'absolute', top: '100%', left: 0, right: 0, marginTop: '6px', backgroundColor: '#18181B', border: '1px solid #3F3F46', borderRadius: '8px', maxHeight: '280px', overflowY: 'auto', zIndex: 100, boxShadow: '0 10px 25px rgba(0,0,0,0.5)' }} className="hide-scroll">
+                    {availableStatesForYear.length === 0 ? (
+                      <div style={{ padding: '12px 16px', color: '#71717A', fontSize: '13px' }}>
+                        No assemblies in {selectedYearAS}
+                      </div>
+                    ) : (
+                      availableStatesForYear.map(s => (
+                        <div 
+                          key={s} 
+                          onClick={() => handleStateSelect(s)}
+                          style={{ 
+                            padding: '10px 16px', cursor: 'pointer', 
+                            backgroundColor: s === selectedState ? '#27272A' : 'transparent', 
+                            color: s === selectedState ? '#3B82F6' : '#A1A1AA', 
+                            fontWeight: s === selectedState ? 700 : 500, fontSize: '14px' 
+                          }}
+                          onMouseEnter={(e) => { if (s !== selectedState) { e.currentTarget.style.backgroundColor = '#27272A'; e.currentTarget.style.color = '#fff'; } }}
+                          onMouseLeave={(e) => { if (s !== selectedState) { e.currentTarget.style.backgroundColor = 'transparent'; e.currentTarget.style.color = '#A1A1AA'; } }}
+                        >
+                          {s}
+                        </div>
+                      ))
+                    )}
+                  </div>
+                )}
+              </div>
+
             </div>
           )}
         </div>

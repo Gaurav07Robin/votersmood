@@ -21,6 +21,9 @@ function AppContent() {
   const [activeTab, setActiveTab] = useState('discussions');
   const [selectedLeaderSlug, setSelectedLeaderSlug] = useState(null);
   const [selectedElection, setSelectedElection] = useState(null); // { year, stateSlug, constituencySlug }
+  const [electionCategory, setElectionCategory] = useState('LOK_SABHA');
+  const [lastSelectedState, setLastSelectedState] = useState('Uttar Pradesh');
+  const [lastSelectedYear, setLastSelectedYear] = useState(2026);
 
   // Sync client route with window.location.pathname
   useEffect(() => {
@@ -39,6 +42,7 @@ function AppContent() {
       } else if (path.startsWith('elections/lok-sabha/') || path.startsWith('elections/state/')) {
         const parts = path.split('/');
         if (parts[1] === 'lok-sabha') {
+          setElectionCategory('LOK_SABHA');
           const year = parts[2];
           const stateSlug = parts[3];
           const constituencySlug = parts[4];
@@ -50,19 +54,26 @@ function AppContent() {
               setActiveTab('election-year-detail');
           }
         } else if (parts[1] === 'state') {
+          setElectionCategory('ASSEMBLY');
           const stateSlug = parts[2];
           const year = parts[3];
           const constituencySlug = parts[4];
           const state = stateSlug ? stateSlug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()) : null;
+          if (state) setLastSelectedState(state);
+          if (year) setLastSelectedYear(parseInt(year, 10));
           if (constituencySlug) {
               setSelectedElection({ year, stateSlug, constituencySlug, state, isLS: false });
               setActiveTab('constituency-result');
           } else if (year) {
               setSelectedElection({ year, stateSlug, state, isLS: false });
               setActiveTab('election-year-detail');
+          } else {
+              setActiveTab('elections');
           }
         }
-      } else if (path === 'elections') {
+      } else if (path === 'elections' || path === 'elections/lok-sabha' || path === 'elections/state') {
+        if (path === 'elections/state') setElectionCategory('ASSEMBLY');
+        if (path === 'elections/lok-sabha') setElectionCategory('LOK_SABHA');
         setActiveTab('elections');
         setSelectedElection(null);
       } else if (KNOWN_TABS.includes(path)) {
@@ -103,11 +114,24 @@ function AppContent() {
     setSelectedElection({ year, isLS, state });
     setActiveTab('election-year-detail');
     if (isLS) {
+      setElectionCategory('LOK_SABHA');
+      setLastSelectedYear(year);
       window.history.pushState({}, '', `/elections/lok-sabha/${year}`);
     } else {
+      setElectionCategory('ASSEMBLY');
+      if (state) setLastSelectedState(state);
+      setLastSelectedYear(year);
       const stateSlug = state.toLowerCase().replace(/ /g, '-');
       window.history.pushState({}, '', `/elections/state/${stateSlug}/${year}`);
     }
+  };
+
+  const handleBackFromElection = () => {
+    const isStateAssembly = selectedElection?.isLS === false || electionCategory === 'ASSEMBLY';
+    setSelectedElection(null);
+    setActiveTab('elections');
+    const path = isStateAssembly ? '/elections/state' : '/elections/lok-sabha';
+    window.history.pushState({}, '', path);
   };
 
   const handleSelectConstituency = (year, stateSlug, constituencySlug) => {
@@ -130,14 +154,24 @@ function AppContent() {
         {activeTab === 'polls' && <Polls />}
         {activeTab === 'insights' && <Insights />}
         {activeTab === 'directory' && <Leaders onSelectLeader={handleSelectLeader} />}
-        {activeTab === 'elections' && <ElectionsHub onSelectYear={handleSelectYear} />}
+        {activeTab === 'elections' && (
+          <ElectionsHub 
+            onSelectYear={handleSelectYear} 
+            initialType={electionCategory}
+            initialSelectedState={lastSelectedState}
+            initialSelectedYear={lastSelectedYear}
+            onTypeChange={setElectionCategory}
+            onStateChange={setLastSelectedState}
+            onYearChange={setLastSelectedYear}
+          />
+        )}
         
         {activeTab === 'election-year-detail' && selectedElection?.year && (
           <ElectionYearDetail 
             year={selectedElection.year} 
             isLS={selectedElection.isLS}
             state={selectedElection.state}
-            onBack={() => handleTabChange('elections')}
+            onBack={handleBackFromElection}
             onSelectConstituency={handleSelectConstituency}
           />
         )}
