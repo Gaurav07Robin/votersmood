@@ -1066,9 +1066,10 @@
       "DMK": 22,
       "TDP": 16,
       "JD(U)": 12,
-      "SHS": 7,
       "SS(UBT)": 9,
       "NCPSP": 8,
+      "SHS": 7,
+      "LJPRV": 5,
       "CPI(M)": 4,
       "RJD": 4,
       "YSRCP": 4,
@@ -1076,9 +1077,14 @@
       "IUML": 3,
       "JMM": 3,
       "JSP": 2,
-      "CPM": 2,
+      "JD(S)": 2,
+      "CPI(ML)L": 2,
       "CPI": 2,
-      "Others": 36
+      "RLD": 2,
+      "JKNC": 2,
+      "VCK": 2,
+      "IND": 7,
+      "Others": 17
     },
     "party_wins": {
       "BJP": 240,
@@ -1088,9 +1094,10 @@
       "DMK": 22,
       "TDP": 16,
       "JD(U)": 12,
-      "SHS": 7,
       "SS(UBT)": 9,
       "NCPSP": 8,
+      "SHS": 7,
+      "LJPRV": 5,
       "CPI(M)": 4,
       "RJD": 4,
       "YSRCP": 4,
@@ -1098,9 +1105,14 @@
       "IUML": 3,
       "JMM": 3,
       "JSP": 2,
-      "CPM": 2,
+      "JD(S)": 2,
+      "CPI(ML)L": 2,
       "CPI": 2,
-      "Others": 36
+      "RLD": 2,
+      "JKNC": 2,
+      "VCK": 2,
+      "IND": 7,
+      "Others": 17
     }
   }
 ]
