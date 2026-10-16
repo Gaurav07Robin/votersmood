@@ -37,14 +37,15 @@ const normalizeStateName = (name) => {
 };
 
 const formattedLocalLS = (localLokSabhaMetadata || []).map(d => {
-  const incSeats = d.party_wins?.['INC'] || d.partyWins?.['INC'] || 0;
-  const bjpSeats = (d.party_wins?.['BJP'] || d.partyWins?.['BJP'] || 0) + (d.party_wins?.['BJS'] || d.partyWins?.['BJS'] || 0);
+  const pw = d.party_wins || d.partyWins || {};
+  const incSeats = (pw['INC'] || 0) + (pw['INC(I)'] || 0) + (pw['INC(R)'] || 0);
+  const bjpSeats = (pw['BJP'] || 0) + (pw['BJS'] || 0);
   const total = d.total_seats || d.totalSeats || 543;
   const othersSeats = total - incSeats - bjpSeats;
   return {
     ...d,
     total_seats: total,
-    party_wins: d.party_wins || d.partyWins || {},
+    party_wins: pw,
     INC: incSeats,
     BJP: bjpSeats,
     Others: othersSeats > 0 ? othersSeats : 0
@@ -125,16 +126,32 @@ export default function ElectionsHub({
         });
         
         const LOK_SABHA_YEARS = [1952, 1957, 1962, 1967, 1971, 1977, 1980, 1984, 1989, 1991, 1996, 1998, 1999, 2004, 2009, 2014, 2019, 2024];
-        const majorElections = data.filter(d => LOK_SABHA_YEARS.includes(d.year) || d.total_seats > 400);
-        majorElections.sort((a, b) => a.year - b.year);
+        
+        // CRITICAL: Filter for authentic General Elections (total seats >= 400) and deduplicate by year (taking max seats)
+        const mapByYear = {};
+        data.forEach(d => {
+          const total = d.total_seats || d.totalSeats || 0;
+          if (total >= 400 && LOK_SABHA_YEARS.includes(d.year)) {
+            const existingTotal = mapByYear[d.year] ? (mapByYear[d.year].total_seats || mapByYear[d.year].totalSeats || 0) : 0;
+            if (!mapByYear[d.year] || existingTotal < total) {
+              mapByYear[d.year] = d;
+            }
+          }
+        });
+
+        const majorElections = Object.values(mapByYear).sort((a, b) => a.year - b.year);
         
         if (majorElections.length > 0) {
           const chartData = majorElections.map(d => {
-            const incSeats = d.party_wins?.['INC'] || 0;
-            const bjpSeats = (d.party_wins?.['BJP'] || 0) + (d.party_wins?.['BJS'] || 0);
-            const othersSeats = d.total_seats - incSeats - bjpSeats;
+            const pw = d.party_wins || d.partyWins || {};
+            const incSeats = (pw['INC'] || 0) + (pw['INC(I)'] || 0) + (pw['INC(R)'] || 0);
+            const bjpSeats = (pw['BJP'] || 0) + (pw['BJS'] || 0);
+            const total = d.total_seats || d.totalSeats || 543;
+            const othersSeats = total - incSeats - bjpSeats;
             return {
               ...d,
+              total_seats: total,
+              party_wins: pw,
               INC: incSeats,
               BJP: bjpSeats,
               Others: othersSeats > 0 ? othersSeats : 0
@@ -272,17 +289,29 @@ export default function ElectionsHub({
   const maxStateSeats = stateDocs.reduce((max, d) => Math.max(max, d.totalSeats || d.total_seats || 0), 0);
 
   const filteredStateData = useMemo(() => {
-    return stateDocs
-      .filter(d => (d.totalSeats || d.total_seats || 0) >= Math.max(15, maxStateSeats * 0.4))
-      .sort((a, b) => a.year - b.year)
+    // Map to ensure each year only has 1 general election entry (taking the one with max seats)
+    const map = {};
+    stateDocs.forEach(d => {
+      const y = d.year || d.Year;
+      const total = d.totalSeats || d.total_seats || 0;
+      if (y && total >= Math.max(15, maxStateSeats * 0.4)) {
+        if (!map[y] || (map[y].totalSeats || map[y].total_seats || 0) < total) {
+          map[y] = d;
+        }
+      }
+    });
+
+    return Object.values(map)
+      .sort((a, b) => (a.year || a.Year) - (b.year || b.Year))
       .map(d => {
           const total = d.totalSeats || d.total_seats || 0;
           const pw = d.partyWins || d.party_wins || {};
-          const inc = pw['INC'] || 0;
+          const inc = (pw['INC'] || 0) + (pw['INC(I)'] || 0) + (pw['INC(R)'] || 0);
           const bjp = (pw['BJP'] || 0) + (pw['BJS'] || 0);
           const rest = total - inc - bjp;
           return {
               ...d,
+              year: d.year || d.Year,
               total_seats: total,
               party_wins: pw,
               INC: inc,
