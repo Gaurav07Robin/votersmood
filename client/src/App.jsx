@@ -23,8 +23,8 @@ function AppContent() {
   const [selectedInsightSlug, setSelectedInsightSlug] = useState(null);
   const [selectedElection, setSelectedElection] = useState(null); // { year, stateSlug, constituencySlug }
   const [electionCategory, setElectionCategory] = useState('LOK_SABHA');
-  const [lastSelectedState, setLastSelectedState] = useState('Uttar Pradesh');
-  const [lastSelectedYear, setLastSelectedYear] = useState(2026);
+  const [lastSelectedState, setLastSelectedState] = useState('Maharashtra');
+  const [lastSelectedYear, setLastSelectedYear] = useState(2024);
 
   // Sync client route with window.location.pathname
   useEffect(() => {
