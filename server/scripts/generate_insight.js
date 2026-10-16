@@ -1,124 +1,210 @@
 import { getDb } from '../config/firebase-admin.js';
 import { askAI } from '../utils/ai_router.js';
 import Parser from 'rss-parser';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const parser = new Parser();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const REELS_CACHE_PATH = path.join(__dirname, '../data/reels_cache.json');
 
-// ------------------------------------------------------------------
-// DESK 1: REAL-TIME TRENDS (Google News)
-// ------------------------------------------------------------------
-async function getTrendingTopic() {
-    console.log("[Insight Agent] 📡 Mode: REAL-TIME TRENDS");
-    try {
-        const feed = await parser.parseURL('https://news.google.com/rss/search?q=India+politics+elections+OR+policy&hl=en-IN&gl=IN&ceid=IN:en');
-        const headlines = feed.items.slice(0, 15).map(item => item.title);
-        
-        const prompt = `
-        You are a political editor. Here are today's headlines:
-        ${headlines.map(h => `- ${h}`).join('\n')}
-        Select the most impactful topic and formulate a 1-sentence prompt for a journalist to write about it.
-        `;
-        const topic = await askAI(prompt);
-        return topic.trim();
-    } catch (e) {
-        return "the most critical political debate in India today";
-    }
-}
+const parser = new Parser({
+  headers: {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+  }
+});
 
 // ------------------------------------------------------------------
-// DESK 2: LONG-TERM VISION & DEMOGRAPHICS
+// MULTI-CHANNEL CRAWLER: Google News, YouTube & Reddit Political Feeds
 // ------------------------------------------------------------------
-const VISIONARY_TOPICS = [
-    "the long-term impact of the 2026 Delimitation exercise on the political power balance between North and South India",
-    "how the changing demographics of Gen-Z and first-time voters will fundamentally reshape the 2029 Lok Sabha elections",
-    "the future of regional alliances and whether the INDIA bloc can sustain long-term relevance against national parties",
-    "the shifting voting patterns of women across rural India and how gender-specific welfare is replacing traditional caste math",
-    "the impending crisis of urban voter apathy in metropolitan cities and its effect on local governance by 2030",
-    "predictive analysis on how climate change, agrarian distress, and farm laws will dictate the future of Punjab and Haryana politics",
-    "the evolution of the 'Double Engine' government pitch and its diminishing returns in future state assembly elections",
-    "how deepfakes and AI-driven propaganda will completely alter the landscape of Indian election campaigns by 2029"
+const LIVE_SOURCES = [
+  // 1. Google News: Targeted Investigative & Political Breaking Topics
+  {
+    type: 'Google News',
+    name: 'CJP & Activist Cases',
+    url: 'https://news.google.com/rss/search?q=(CJP+OR+"Citizens+for+Justice"+OR+"Teesta+Setalvad"+OR+"activist+arrest"+OR+"police+detained")+when:2d&hl=en-IN&gl=IN&ceid=IN:en'
+  },
+  {
+    type: 'Google News',
+    name: 'EC & Gyanesh Kumar',
+    url: 'https://news.google.com/rss/search?q=("Gyanesh+Kumar"+OR+"Election+Commissioner"+OR+"ECI+press+conference"+OR+"seizures")+when:2d&hl=en-IN&gl=IN&ceid=IN:en'
+  },
+  {
+    type: 'Google News',
+    name: 'AAP Detentions & ED Raids',
+    url: 'https://news.google.com/rss/search?q=(AAP+OR+"Arvind+Kejriwal"+OR+"Sanjay+Singh"+OR+"Atishi"+OR+"protest+detained"+OR+"ED+court")+when:2d&hl=en-IN&gl=IN&ceid=IN:en'
+  },
+  {
+    type: 'Google News',
+    name: 'Dhruv Rathee & Viral Narratives',
+    url: 'https://news.google.com/rss/search?q=("Dhruv+Rathee"+OR+"press+conference"+OR+"viral+video"+OR+"BJP+spokesperson")+when:3d&hl=en-IN&gl=IN&ceid=IN:en'
+  },
+  {
+    type: 'Google News',
+    name: 'Modi Rallies & Deep State Debates',
+    url: 'https://news.google.com/rss/search?q=(Modi+rally+speech+attack+OR+"deep+state"+OR+"foreign+funded"+OR+"George+Soros"+OR+"opposition+plot")+when:3d&hl=en-IN&gl=IN&ceid=IN:en'
+  },
+  {
+    type: 'Google News',
+    name: 'Maharashtra & Jharkhand Elections',
+    url: 'https://news.google.com/rss/search?q=("Maharashtra+election"+OR+"Jharkhand+election"+OR+"Mahayuti"+OR+"MVA"+OR+"seat+sharing")+when:1d&hl=en-IN&gl=IN&ceid=IN:en'
+  },
+
+  // 2. YouTube RSS Feeds for Real-Time Soundbites & Viral Pressers
+  {
+    type: 'YouTube',
+    name: 'Dhruv Rathee Channel',
+    url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UC9Pla4vI1_jSbg311p_w4xA'
+  },
+  {
+    type: 'YouTube',
+    name: 'ANI News Political Bureau',
+    url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCtF0WJbWstgYPrqF6P_yU1w'
+  },
+  {
+    type: 'YouTube',
+    name: 'The Lallantop Politics',
+    url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UCx8Z14PpntdaxCt2hakbQLQ'
+  },
+
+  // 3. Reddit Indian Politics Trending RSS
+  {
+    type: 'Reddit',
+    name: 'r/india Politics Hot',
+    url: 'https://www.reddit.com/r/india/search.rss?q=flair:Politics&sort=hot&restrict_sr=1'
+  },
+  {
+    type: 'Reddit',
+    name: 'r/IndiaSpeaks Politics Hot',
+    url: 'https://www.reddit.com/r/IndiaSpeaks/search.rss?q=flair:Politics&sort=hot&restrict_sr=1'
+  }
 ];
 
-function getVisionaryTopic() {
-    console.log("[Insight Agent] 🔭 Mode: LONG-TERM VISION & DEMOGRAPHICS");
-    return VISIONARY_TOPICS[Math.floor(Math.random() * VISIONARY_TOPICS.length)];
-}
+async function crawlAllSources() {
+  console.log("[Multi-Source Radar] Crawling Google News, YouTube channels, and Reddit feeds...");
+  const rawItems = [];
 
-// ------------------------------------------------------------------
-// DESK 3: STATE-BY-STATE DEEP DIVE
-// ------------------------------------------------------------------
-const STATES = ["Uttar Pradesh", "Maharashtra", "Bihar", "West Bengal", "Tamil Nadu", "Karnataka", "Gujarat", "Kerala", "Assam"];
-function getStateDeepDiveTopic() {
-    console.log("[Insight Agent] 🗺️ Mode: REGIONAL DEEP DIVE");
-    const state = STATES[Math.floor(Math.random() * STATES.length)];
-    return `a deep-dive analysis into the unique micro-demographics, caste equations, and anti-incumbency factors shaping the future of ${state} politics`;
-}
-
-// ------------------------------------------------------------------
-// MAIN ROUTER
-// ------------------------------------------------------------------
-async function writeInsight() {
-  console.log("=========================================");
-  console.log("📰 OPINAR MULTI-DESK NEWSROOM INITIATED");
-  console.log("=========================================\n");
-  
-  // Randomly assign the AI to one of the 3 "Desks"
-  const deskRoll = Math.random();
-  let dynamicTopic = "";
-  let deskName = "";
-
-  if (deskRoll < 0.4) {
-      // 40% chance of Breaking News
-      dynamicTopic = await getTrendingTopic();
-      deskName = "Trending News";
-  } else if (deskRoll < 0.7) {
-      // 30% chance of Future Vision / Demographics
-      dynamicTopic = getVisionaryTopic();
-      deskName = "Demographics & Future Vision";
-  } else {
-      // 30% chance of State Deep Dive
-      dynamicTopic = getStateDeepDiveTopic();
-      deskName = "Regional Analysis";
+  for (const src of LIVE_SOURCES) {
+    try {
+      const feed = await parser.parseURL(src.url);
+      const items = (feed.items || []).slice(0, 5).map(it => {
+        const title = (it.title || '').replace(/<[^>]+>/g, '').trim();
+        const snippet = (it.contentSnippet || it.summary || '').substring(0, 150).replace(/\s+/g, ' ');
+        return `[${src.name}]: ${title} ${snippet ? `(${snippet})` : ''}`;
+      });
+      rawItems.push(...items);
+    } catch (err) {
+      // Gracefully continue through other sources if one feed is blocked or slow
+      console.warn(`[Multi-Source Radar] Warning on ${src.name}:`, err.message);
+    }
   }
 
-  console.log(`[Insight Agent] Final Selected Topic: ${dynamicTopic}`);
+  return rawItems.filter(Boolean).slice(0, 35);
+}
+
+// Helper to remove any hashtags (#), asterisks (*), and emojis
+const cleanText = (str) => {
+  return String(str || '')
+    .replace(/[#*]/g, '')
+    .replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F1E6}-\u{1F1FF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}]/gu, '')
+    .trim();
+};
+
+// ------------------------------------------------------------------
+// GENERATE FACT-PACKED, REAL-TIME POLITICAL STORY
+// ------------------------------------------------------------------
+async function generateHourlyInsight() {
+  console.log("=========================================");
+  console.log("⚡ OPINAR REAL-TIME RADAR: HOURLY DISPATCH");
+  console.log("=========================================\n");
+
+  const liveFeeds = await crawlAllSources();
+
+  console.log(`[Radar] Aggregated ${liveFeeds.length} live signals from YouTube, Reddit, and Newsdesks.`);
 
   const prompt = `
-  You are 'Opinar AI Journalist', a completely neutral, highly analytical political data journalist in India.
-  Write a comprehensive, engaging 500-word blog post analyzing the following topic:
-  "${dynamicTopic}"
-  
-  Your analysis MUST be data-driven, visionary, and look at the bigger picture (historical context or future implications).
-  Include bold headers and bullet points. Do not use markdown backticks around the whole text, just write the article using markdown for formatting.
-  Your title should be catchy.
-  Return it strictly as a JSON object: { "title": "Catchy Title", "content": "Full markdown content..." }
-  `;
+You are the Chief Investigative Political Editor for Opinar.
+You write SHARP, FACT-DENSE, UNCOMPROMISING news snippets on Indian politics.
+
+STRICT INSTRUCTIONS:
+- NO generic philosophical essays ("Democracy is important", "Elections are a festival").
+- Include SPECIFIC NAMES: Mention individuals directly like Gyanesh Kumar (CEC), Arvind Kejriwal, Sanjay Singh, Dhruv Rathee, CJP (Citizens for Justice and Peace), Narendra Modi, Amit Shah, Rahul Gandhi, Devendra Fadnavis, Hemant Soren.
+- Include SPECIFIC FACTS & DATA: Exact numbers, FIR sections, court observations, polling dates, seat tallies (Maharashtra 288, Jharkhand 81, UP 10 bypolls), seizure amounts, or video claim points.
+- Highlight REAL CONTROVERSIES: Police detentions, press conferences, anti-defection petitions, ED raids, deep state / foreign interference accusations, and ground alliance revolts.
+- STRICTLY NO hashtags (#) and NO asterisks (*).
+- STRICTLY NO emojis.
+- Write in 3 direct, punchy, fact-loaded sentences/paragraphs.
+
+Here is the real-time stream of headlines from the past hours:
+${liveFeeds.map(f => `- ${f}`).join('\n')}
+
+Select the most explosive or significant real-world political development and format STRICTLY as JSON:
+{
+  "title": "Clear, Fact-First Headline (Max 12 words)",
+  "subtitle": "Immediate context and what is at stake (Max 18 words)",
+  "category": "RALLIES & SPEECHES" | "CJI & COURTS" | "BJP VS OPPOSITION" | "CASTE CALCULUS" | "STATE BATTLEGROUNDS",
+  "tag": "Short Topic Tag without hash (e.g. AAP Protests, Gyanesh Kumar ECI, Dhruv Rathee Video, Maharashtra 2024)",
+  "bullets": [
+    "Fact-packed point 1 stating exactly what happened, who was detained/arrested/addressed, and where.",
+    "Fact-packed point 2 stating the political strategy, legal section, or reaction from rival parties.",
+    "Fact-packed point 3 stating the electoral impact, vote numbers, seat numbers, or court date."
+  ],
+  "slug": "url-friendly-slug-with-hyphens"
+}
+
+Output ONLY valid JSON. No markdown fences.
+`;
 
   try {
-      let text = await askAI(prompt);
-      
-      if (text.startsWith('\`\`\`json')) text = text.replace(/\`\`\`json/g, '').replace(/\`\`\`/g, '').trim();
-      if (text.startsWith('\`\`\`')) text = text.replace(/\`\`\`/g, '').trim();
-      
-      const blog = JSON.parse(text);
-      
+    let aiResponse = await askAI(prompt);
+
+    if (aiResponse.startsWith('```json')) aiResponse = aiResponse.replace(/```json/g, '').replace(/```/g, '').trim();
+    if (aiResponse.startsWith('```')) aiResponse = aiResponse.replace(/```/g, '').trim();
+
+    const raw = JSON.parse(aiResponse);
+
+    const cleanReel = {
+      id: `live-${Date.now()}`,
+      slug: cleanText(raw.slug || raw.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, ''),
+      title: cleanText(raw.title),
+      subtitle: cleanText(raw.subtitle),
+      category: cleanText(raw.category || 'POLITICS').toUpperCase(),
+      tag: cleanText(raw.tag || 'Breaking'),
+      timeAgo: 'Just now',
+      bullets: (raw.bullets || []).map(cleanText),
+      createdAt: new Date().toISOString(),
+      source: 'HOURLY_LIVE_RADAR',
+      type: 'REEL_STORY'
+    };
+
+    // 1. Save to local reels cache (offline & free-tier quota immunity)
+    let localCache = [];
+    try {
+      if (fs.existsSync(REELS_CACHE_PATH)) {
+        localCache = JSON.parse(fs.readFileSync(REELS_CACHE_PATH, 'utf8'));
+      }
+    } catch (_) {}
+
+    localCache = [cleanReel, ...localCache.filter(r => r.slug !== cleanReel.slug)].slice(0, 30);
+    fs.writeFileSync(REELS_CACHE_PATH, JSON.stringify(localCache, null, 2));
+    console.log(`[Hourly Dispatch] Saved to local cache: ${cleanReel.title}`);
+
+    // 2. Save to Firestore
+    try {
       const db = await getDb();
-      await db.collection('insights').add({
-        title: blog.title,
-        content: blog.content,
-        createdAt: new Date(),
-        author: 'Opinar AI Journalist',
-        type: 'EDITORIAL',
-        desk: deskName,
-        topic_seed: dynamicTopic
-      });
-      
-      console.log(`[Insight Agent] Successfully published: "${blog.title}"`);
-      process.exit(0);
-  } catch(e) {
-      console.error("[Insight Agent] Fatal Error (All APIs Exhausted):", e);
-      process.exit(1);
+      await db.collection('insights').doc(cleanReel.slug).set(cleanReel, { merge: true });
+      console.log(`[Hourly Dispatch] Successfully pushed to Firestore insights/${cleanReel.slug}`);
+    } catch (dbErr) {
+      console.warn("[Hourly Dispatch] Firestore write bypassed (Quota or serverless offline):", dbErr.message);
+    }
+
+    console.log("⚡ Hourly newsroom cycle complete!");
+    process.exit(0);
+  } catch (err) {
+    console.error("[Hourly Dispatch] Error during newsroom run:", err.message);
+    process.exit(1);
   }
 }
 
-writeInsight();
+generateHourlyInsight();

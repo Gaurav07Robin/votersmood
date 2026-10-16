@@ -8,6 +8,7 @@ import List from 'lucide-react/dist/esm/icons/list';
 import ChevronDown from 'lucide-react/dist/esm/icons/chevron-down';
 import { getPartyColor, getPartySymbol, getPartyFlag } from '../utils/party_utils';
 import localStateMetadata from '../data/state_elections_metadata.json';
+import localLokSabhaMetadata from '../data/lok_sabha_metadata.json';
 
 const CustomXAxisTick = ({ x, y, payload }) => {
   const symbol = getPartySymbol(payload.value);
@@ -34,6 +35,21 @@ const normalizeStateName = (name) => {
   return historicalStateMap[clean.toLowerCase()] || clean;
 };
 
+const formattedLocalLS = (localLokSabhaMetadata || []).map(d => {
+  const incSeats = d.party_wins?.['INC'] || d.partyWins?.['INC'] || 0;
+  const bjpSeats = (d.party_wins?.['BJP'] || d.partyWins?.['BJP'] || 0) + (d.party_wins?.['BJS'] || d.partyWins?.['BJS'] || 0);
+  const total = d.total_seats || d.totalSeats || 543;
+  const othersSeats = total - incSeats - bjpSeats;
+  return {
+    ...d,
+    total_seats: total,
+    party_wins: d.party_wins || d.partyWins || {},
+    INC: incSeats,
+    BJP: bjpSeats,
+    Others: othersSeats > 0 ? othersSeats : 0
+  };
+});
+
 export default function ElectionsHub({ 
   onSelectYear,
   initialType = 'LOK_SABHA',
@@ -51,13 +67,13 @@ export default function ElectionsHub({
     return () => { isMounted = false; };
   }, []);
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [liveElections, setLiveElections] = useState([]);
   const [electionType, setElectionType] = useState(initialType || 'LOK_SABHA');
   
-  // Lok Sabha State
+  // Lok Sabha State (Initialized with 18 historical general elections)
   const [activeYearLS, setActiveYearLS] = useState(2024);
-  const [historicalData, setHistoricalData] = useState([]);
+  const [historicalData, setHistoricalData] = useState(formattedLocalLS);
   
   // State Assembly State: Year is primary (default 2026), State is filtered by selected year
   const [selectedYearAS, setSelectedYearAS] = useState(initialSelectedYear || 2026);
@@ -96,7 +112,7 @@ export default function ElectionsHub({
     return () => el.removeEventListener('wheel', onWheel);
   }, [electionType]);
 
-  // Fetch Lok Sabha historical data from Firestore
+  // Fetch Lok Sabha historical data from Firestore (merging on top of local data)
   useEffect(() => {
     async function fetchData() {
       try {
@@ -111,32 +127,26 @@ export default function ElectionsHub({
         const majorElections = data.filter(d => LOK_SABHA_YEARS.includes(d.year) || d.total_seats > 400);
         majorElections.sort((a, b) => a.year - b.year);
         
-        const chartData = majorElections.map(d => {
-          const incSeats = d.party_wins?.['INC'] || 0;
-          const bjpSeats = (d.party_wins?.['BJP'] || 0) + (d.party_wins?.['BJS'] || 0);
-          const othersSeats = d.total_seats - incSeats - bjpSeats;
-          return {
-            ...d,
-            INC: incSeats,
-            BJP: bjpSeats,
-            Others: othersSeats > 0 ? othersSeats : 0
-          };
-        });
-        
-        if (chartData.length > 0) {
+        if (majorElections.length > 0) {
+          const chartData = majorElections.map(d => {
+            const incSeats = d.party_wins?.['INC'] || 0;
+            const bjpSeats = (d.party_wins?.['BJP'] || 0) + (d.party_wins?.['BJS'] || 0);
+            const othersSeats = d.total_seats - incSeats - bjpSeats;
+            return {
+              ...d,
+              INC: incSeats,
+              BJP: bjpSeats,
+              Others: othersSeats > 0 ? othersSeats : 0
+            };
+          });
           setHistoricalData(chartData);
-          if (activeYearLS === 2024 && !chartData.find(m => m.year === 2024)) {
-             setActiveYearLS(chartData[chartData.length - 1].year);
-          }
         }
       } catch (error) {
-        console.error("Error fetching historical data:", error);
-      } finally {
-        setLoading(false);
+        // Fallback to formattedLocalLS already initialized
       }
     }
     fetchData();
-  }, [activeYearLS]);
+  }, []);
 
   // Optional background refresh of state metadata if Firestore is available
   useEffect(() => {
@@ -459,27 +469,29 @@ export default function ElectionsHub({
         </div>
         
         {currentData.length > 0 ? (
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={currentData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#3F3F46" vertical={false} />
-            <XAxis dataKey="year" stroke="#A1A1AA" tickLine={false} axisLine={false} />
-            <YAxis stroke="#A1A1AA" tickLine={false} axisLine={false} tick={{fill: '#71717A'}} />
-            <Tooltip 
-              contentStyle={{ backgroundColor: '#18181B', border: '1px solid #3F3F46', borderRadius: '8px', color: '#fff' }}
-              itemStyle={{ fontWeight: 'bold' }}
-            />
-            <Legend wrapperStyle={{ paddingTop: '20px' }} />
-            <Line type="monotone" dataKey="INC" name="INC Seats" stroke={getPartyColor('INC')} strokeWidth={3} dot={{r: 4, fill: getPartyColor('INC')}} activeDot={{r: 6}} />
-            <Line type="monotone" dataKey="BJP" name="BJP Seats" stroke={getPartyColor('BJP')} strokeWidth={3} dot={{r: 4, fill: getPartyColor('BJP')}} activeDot={{r: 6}} />
-            {isAS && <Line type="monotone" dataKey="party_wins.TMC" name="TMC Seats" stroke="#22C55E" strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />}
-            {isAS && <Line type="monotone" dataKey="party_wins.SP" name="SP Seats" stroke="#EF4444" strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />}
-            {isAS && <Line type="monotone" dataKey="party_wins.AAP" name="AAP Seats" stroke="#06B6D4" strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />}
-            <Line type="monotone" dataKey="Others" name="Other Parties" stroke="#71717A" strokeWidth={2} strokeDasharray="5 5" dot={false} />
-          </LineChart>
-        </ResponsiveContainer>
+        <div style={{ width: '100%', height: '300px' }}>
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={currentData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#3F3F46" vertical={false} />
+              <XAxis dataKey="year" stroke="#A1A1AA" tickLine={false} axisLine={false} />
+              <YAxis stroke="#A1A1AA" tickLine={false} axisLine={false} tick={{fill: '#71717A'}} />
+              <Tooltip 
+                contentStyle={{ backgroundColor: '#18181B', border: '1px solid #3F3F46', borderRadius: '8px', color: '#fff' }}
+                itemStyle={{ fontWeight: 'bold' }}
+              />
+              <Legend wrapperStyle={{ paddingTop: '20px' }} />
+              <Line type="monotone" dataKey="INC" name="INC Seats" stroke={getPartyColor('INC')} strokeWidth={3} dot={{r: 4, fill: getPartyColor('INC')}} activeDot={{r: 6}} />
+              <Line type="monotone" dataKey="BJP" name="BJP Seats" stroke={getPartyColor('BJP')} strokeWidth={3} dot={{r: 4, fill: getPartyColor('BJP')}} activeDot={{r: 6}} />
+              {isAS && <Line type="monotone" dataKey="party_wins.TMC" name="TMC Seats" stroke="#22C55E" strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />}
+              {isAS && <Line type="monotone" dataKey="party_wins.SP" name="SP Seats" stroke="#EF4444" strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />}
+              {isAS && <Line type="monotone" dataKey="party_wins.AAP" name="AAP Seats" stroke="#06B6D4" strokeWidth={3} dot={{r: 4}} activeDot={{r: 6}} />}
+              <Line type="monotone" dataKey="Others" name="Other Parties" stroke="#71717A" strokeWidth={2} strokeDasharray="5 5" dot={false} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
         ) : (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '250px', color: '#A1A1AA' }}>
-             Loading data...
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '300px', color: '#A1A1AA' }}>
+             No historical data available for {isLS ? 'Lok Sabha' : selectedState}.
           </div>
         )}
       </div>

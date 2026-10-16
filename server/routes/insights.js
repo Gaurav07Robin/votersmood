@@ -4,6 +4,14 @@ import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
 
 const router = express.Router();
 
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const REELS_CACHE_PATH = path.join(__dirname, '../data/reels_cache.json');
+
 router.get('/', async (req, res) => {
   try {
     const q = query(collection(db, 'insights'), orderBy('createdAt', 'desc'), limit(50));
@@ -12,11 +20,24 @@ router.get('/', async (req, res) => {
     snapshot.forEach(doc => {
       insights.push({ id: doc.id, ...doc.data() });
     });
-    res.json(insights);
+    if (insights.length > 0) {
+      return res.json(insights);
+    }
   } catch (error) {
-    console.warn("No insights collection yet or error:", error.message);
-    res.json([]);
+    console.warn("Firestore insights read error/quota:", error.message);
   }
+
+  // Fallback to local reels cache
+  try {
+    if (fs.existsSync(REELS_CACHE_PATH)) {
+      const cached = JSON.parse(fs.readFileSync(REELS_CACHE_PATH, 'utf8'));
+      return res.json(cached);
+    }
+  } catch (fsErr) {
+    console.warn("Error reading reels cache:", fsErr.message);
+  }
+
+  res.json([]);
 });
 
 router.get('/live-elections', async (req, res) => {

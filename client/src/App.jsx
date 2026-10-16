@@ -20,6 +20,7 @@ function AppContent() {
   const { isRegisterOpen, openRegisterModal, closeRegisterModal } = useAuth();
   const [activeTab, setActiveTab] = useState('discussions');
   const [selectedLeaderSlug, setSelectedLeaderSlug] = useState(null);
+  const [selectedInsightSlug, setSelectedInsightSlug] = useState(null);
   const [selectedElection, setSelectedElection] = useState(null); // { year, stateSlug, constituencySlug }
   const [electionCategory, setElectionCategory] = useState('LOK_SABHA');
   const [lastSelectedState, setLastSelectedState] = useState('Uttar Pradesh');
@@ -76,10 +77,18 @@ function AppContent() {
         if (path === 'elections/lok-sabha') setElectionCategory('LOK_SABHA');
         setActiveTab('elections');
         setSelectedElection(null);
+      } else if (path.startsWith('insights/')) {
+        const slug = path.split('insights/')[1];
+        setSelectedInsightSlug(slug);
+        setActiveTab('insights');
+        setSelectedLeaderSlug(null);
+        setSelectedElection(null);
+        document.title = `Political Reel • Opinar`;
       } else if (KNOWN_TABS.includes(path)) {
         setActiveTab(path);
         setSelectedLeaderSlug(null);
         setSelectedElection(null);
+        setSelectedInsightSlug(null);
         document.title = `JanMat Gazette • ${path.toUpperCase()}`;
       } else {
         // Fallback for old URLs
@@ -105,6 +114,7 @@ function AppContent() {
   const handleTabChange = (tab) => {
     setSelectedLeaderSlug(null);
     setSelectedElection(null);
+    setSelectedInsightSlug(null);
     setActiveTab(tab);
     const newPath = tab === 'discussions' ? '/' : `/${tab}`;
     window.history.pushState({}, '', newPath);
@@ -152,7 +162,19 @@ function AppContent() {
         <React.Suspense fallback={<div style={{padding:"40px", textAlign:"center", fontFamily:"var(--font-mono)", fontSize:"12px"}}>LOADING MODULE...</div>}>
         {activeTab === 'discussions' && <Home openRegisterModal={openRegisterModal} />}
         {activeTab === 'polls' && <Polls />}
-        {activeTab === 'insights' && <Insights />}
+        {activeTab === 'insights' && (
+          <Insights 
+            initialSlug={selectedInsightSlug}
+            onSelectSlug={(slug) => {
+              setSelectedInsightSlug(slug);
+              if (slug) {
+                window.history.pushState({}, '', `/insights/${slug}`);
+              } else {
+                window.history.pushState({}, '', `/insights`);
+              }
+            }}
+          />
+        )}
         {activeTab === 'directory' && <Leaders onSelectLeader={handleSelectLeader} />}
         {activeTab === 'elections' && (
           <ElectionsHub 
