@@ -1,14 +1,14 @@
 import { db } from '../config/firebase.js';
 import { doc, deleteDoc, getDoc } from 'firebase/firestore';
 
-const DUMMY_LEADER_IDS = [
-  'rahul-gandhi',
-  'mamata-banerjee',
-  'devendra-fadnavis',
-  'nitin-gadkari',
-  'shashi-tharoor',
-  'akhilesh-yadav'
-];
+// const DUMMY_LEADER_IDS = [
+//   'rahul-gandhi',
+//   'mamata-banerjee',
+//   'devendra-fadnavis',
+//   'nitin-gadkari',
+//   'shashi-tharoor',
+//   'akhilesh-yadav'
+// ];
 
 const removeDummyLeadersFromDB = async () => {
   console.log('📂 Checking and deleting dummy leader documents from Cloud Firestore DB...');
