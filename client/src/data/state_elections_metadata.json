@@ -1,0 +1,10411 @@
+[
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 2026,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 126,
+    "total_seats": 126,
+    "partyWins": {
+      "BJP": 0,
+      "INC": 0,
+      "AGP": 0,
+      "AIUDF": 0
+    },
+    "party_wins": {
+      "BJP": 0,
+      "INC": 0,
+      "AGP": 0,
+      "AIUDF": 0
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 2026,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "CPI(M)": 0,
+      "INC": 0,
+      "CPI": 0,
+      "IUML": 0,
+      "BJP": 0
+    },
+    "party_wins": {
+      "CPI(M)": 0,
+      "INC": 0,
+      "CPI": 0,
+      "IUML": 0,
+      "BJP": 0
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 2026,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "AINRC": 0,
+      "BJP": 0,
+      "DMK": 0,
+      "INC": 0
+    },
+    "party_wins": {
+      "AINRC": 0,
+      "BJP": 0,
+      "DMK": 0,
+      "INC": 0
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 2026,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "DMK": 0,
+      "AIADMK": 0,
+      "INC": 0,
+      "BJP": 0,
+      "PMK": 0
+    },
+    "party_wins": {
+      "DMK": 0,
+      "AIADMK": 0,
+      "INC": 0,
+      "BJP": 0,
+      "PMK": 0
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 2026,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "TMC": 0,
+      "BJP": 0,
+      "INC": 0,
+      "CPI(M)": 0
+    },
+    "party_wins": {
+      "TMC": 0,
+      "BJP": 0,
+      "INC": 0,
+      "CPI(M)": 0
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 2024,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 175,
+    "total_seats": 175,
+    "partyWins": {
+      "TDP": 135,
+      "JSP": 21,
+      "BJP": 8,
+      "YSRCP": 11
+    },
+    "party_wins": {
+      "TDP": 135,
+      "JSP": 21,
+      "BJP": 8,
+      "YSRCP": 11
+    }
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "year": 2024,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "BJP": 46,
+      "NPEP": 5,
+      "NCP": 3,
+      "PPA": 2,
+      "IND": 3,
+      "INC": 1
+    },
+    "party_wins": {
+      "BJP": 46,
+      "NPEP": 5,
+      "NCP": 3,
+      "PPA": 2,
+      "IND": 3,
+      "INC": 1
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 2024,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "BJP": 48,
+      "INC": 37,
+      "INLD": 2,
+      "IND": 3
+    },
+    "party_wins": {
+      "BJP": 48,
+      "INC": 37,
+      "INLD": 2,
+      "IND": 3
+    }
+  },
+  {
+    "state": "Jammu and Kashmir",
+    "stateSlug": "jammu-and-kashmir",
+    "year": 2024,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "JKNC": 42,
+      "BJP": 29,
+      "INC": 6,
+      "JKPDP": 3,
+      "CPI(M)": 1,
+      "AAP": 1,
+      "IND": 7
+    },
+    "party_wins": {
+      "JKNC": 42,
+      "BJP": 29,
+      "INC": 6,
+      "JKPDP": 3,
+      "CPI(M)": 1,
+      "AAP": 1,
+      "IND": 7
+    }
+  },
+  {
+    "state": "Jharkhand",
+    "stateSlug": "jharkhand",
+    "year": 2024,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 81,
+    "total_seats": 81,
+    "partyWins": {
+      "JMM": 34,
+      "INC": 16,
+      "RJD": 4,
+      "CPI(ML)L": 2,
+      "BJP": 21,
+      "AJSU": 1,
+      "JLKM": 1,
+      "LJPRV": 1,
+      "IND": 1
+    },
+    "party_wins": {
+      "JMM": 34,
+      "INC": 16,
+      "RJD": 4,
+      "CPI(ML)L": 2,
+      "BJP": 21,
+      "AJSU": 1,
+      "JLKM": 1,
+      "LJPRV": 1,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 2024,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "BJP": 132,
+      "SHS": 57,
+      "NCP": 41,
+      "INC": 16,
+      "SS(UBT)": 20,
+      "NCP(SP)": 10,
+      "Others": 12
+    },
+    "party_wins": {
+      "BJP": 132,
+      "SHS": 57,
+      "NCP": 41,
+      "INC": 16,
+      "SS(UBT)": 20,
+      "NCP(SP)": 10,
+      "Others": 12
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 2024,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 147,
+    "total_seats": 147,
+    "partyWins": {
+      "BJP": 78,
+      "BJD": 51,
+      "INC": 14,
+      "CPI(M)": 1,
+      "IND": 3
+    },
+    "party_wins": {
+      "BJP": 78,
+      "BJD": 51,
+      "INC": 14,
+      "CPI(M)": 1,
+      "IND": 3
+    }
+  },
+  {
+    "state": "Sikkim",
+    "stateSlug": "sikkim",
+    "year": 2024,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 32,
+    "total_seats": 32,
+    "partyWins": {
+      "SKM": 31,
+      "SDF": 1
+    },
+    "party_wins": {
+      "SKM": 31,
+      "SDF": 1
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 2023,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 224,
+    "total_seats": 224,
+    "partyWins": {
+      "BJP": 66,
+      "INC": 135,
+      "JD(S)": 19,
+      "Kalyana Rajya Pragathi Paksha": 1,
+      "IND": 2,
+      "Sarvodaya Karnataka Paksha": 1
+    },
+    "party_wins": {
+      "BJP": 66,
+      "INC": 135,
+      "JD(S)": 19,
+      "Kalyana Rajya Pragathi Paksha": 1,
+      "IND": 2,
+      "Sarvodaya Karnataka Paksha": 1
+    }
+  },
+  {
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "year": 2023,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 59,
+    "total_seats": 59,
+    "partyWins": {
+      "NPP": 26,
+      "United Democratic Party": 11,
+      "INC": 5,
+      "Voice of the People Party": 4,
+      "BJP": 2,
+      "AITC": 5,
+      "People's Democratic Front": 2,
+      "Hill State People's Democratic Party": 2,
+      "IND": 2
+    },
+    "party_wins": {
+      "NPP": 26,
+      "United Democratic Party": 11,
+      "INC": 5,
+      "Voice of the People Party": 4,
+      "BJP": 2,
+      "AITC": 5,
+      "People's Democratic Front": 2,
+      "Hill State People's Democratic Party": 2,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 2023,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "BJP": 12,
+      "NDPP": 25,
+      "NCP": 7,
+      "NPP": 5,
+      "Janata Dal(United)": 1,
+      "Lok Janshakti Party(Ram Vilas)": 2,
+      "IND": 4,
+      "NPF": 2,
+      "RPI(A)": 2
+    },
+    "party_wins": {
+      "BJP": 12,
+      "NDPP": 25,
+      "NCP": 7,
+      "NPP": 5,
+      "Janata Dal(United)": 1,
+      "Lok Janshakti Party(Ram Vilas)": 2,
+      "IND": 4,
+      "NPF": 2,
+      "RPI(A)": 2
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 2023,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "Tipra Motha Party": 13,
+      "BJP": 32,
+      "Communist Party of India(Marxist)": 11,
+      "INC": 3,
+      "Indigenous People's Front of Tripura": 1
+    },
+    "party_wins": {
+      "Tipra Motha Party": 13,
+      "BJP": 32,
+      "Communist Party of India(Marxist)": 11,
+      "INC": 3,
+      "Indigenous People's Front of Tripura": 1
+    }
+  },
+  {
+    "state": "Goa",
+    "stateSlug": "goa",
+    "year": 2022,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "MAG": 2,
+      "BJP": 20,
+      "IND": 3,
+      "INC": 11,
+      "RGP": 1,
+      "GFP": 1,
+      "AAAP": 2
+    },
+    "party_wins": {
+      "MAG": 2,
+      "BJP": 20,
+      "IND": 3,
+      "INC": 11,
+      "RGP": 1,
+      "GFP": 1,
+      "AAAP": 2
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 2022,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 182,
+    "total_seats": 182,
+    "partyWins": {
+      "BJP": 156,
+      "INC": 17,
+      "IND": 3,
+      "AAAP": 5,
+      "SP": 1
+    },
+    "party_wins": {
+      "BJP": 156,
+      "INC": 17,
+      "IND": 3,
+      "AAAP": 5,
+      "SP": 1
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 2022,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 68,
+    "total_seats": 68,
+    "partyWins": {
+      "BJP": 25,
+      "INC": 40,
+      "IND": 3
+    },
+    "party_wins": {
+      "BJP": 25,
+      "INC": 40,
+      "IND": 3
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 2022,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 5,
+      "BJP": 32,
+      "NPP": 7,
+      "JD(U)": 6,
+      "IND": 3,
+      "NPF": 5,
+      "KPA": 2
+    },
+    "party_wins": {
+      "INC": 5,
+      "BJP": 32,
+      "NPP": 7,
+      "JD(U)": 6,
+      "IND": 3,
+      "NPF": 5,
+      "KPA": 2
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 2022,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 117,
+    "total_seats": 117,
+    "partyWins": {
+      "INC": 18,
+      "AAAP": 92,
+      "BJP": 2,
+      "SAD": 3,
+      "IND": 1,
+      "BSP": 1
+    },
+    "party_wins": {
+      "INC": 18,
+      "AAAP": 92,
+      "BJP": 2,
+      "SAD": 3,
+      "IND": 1,
+      "BSP": 1
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 2022,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 403,
+    "total_seats": 403,
+    "partyWins": {
+      "SP": 111,
+      "BJP": 255,
+      "RLD": 8,
+      "ADS": 12,
+      "INC": 2,
+      "JDL": 2,
+      "SBSP": 6,
+      "NINSHAD": 6,
+      "BSP": 1
+    },
+    "party_wins": {
+      "SP": 111,
+      "BJP": 255,
+      "RLD": 8,
+      "ADS": 12,
+      "INC": 2,
+      "JDL": 2,
+      "SBSP": 6,
+      "NINSHAD": 6,
+      "BSP": 1
+    }
+  },
+  {
+    "state": "Uttarakhand",
+    "stateSlug": "uttarakhand",
+    "year": 2022,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 70,
+    "total_seats": 70,
+    "partyWins": {
+      "BJP": 47,
+      "IND": 2,
+      "INC": 19,
+      "BSP": 2
+    },
+    "party_wins": {
+      "BJP": 47,
+      "IND": 2,
+      "INC": 19,
+      "BSP": 2
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 2021,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 126,
+    "total_seats": 126,
+    "partyWins": {
+      "BJP": 60,
+      "INC": 29,
+      "AIUDF": 16,
+      "BOPF": 4,
+      "UPPL": 6,
+      "AGP": 9,
+      "CPM": 1,
+      "IND": 1
+    },
+    "party_wins": {
+      "BJP": 60,
+      "INC": 29,
+      "AIUDF": 16,
+      "BOPF": 4,
+      "UPPL": 6,
+      "AGP": 9,
+      "CPM": 1,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 2021,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "IUML": 15,
+      "CPM": 62,
+      "CPI": 17,
+      "INC": 21,
+      "C(S)": 1,
+      "LJD": 1,
+      "RMPOI": 1,
+      "NCP": 2,
+      "INL": 1,
+      "IND": 6,
+      "NSC": 1,
+      "JD(S)": 2,
+      "KEC(J)": 1,
+      "KEC": 2,
+      "KEC(M)": 5,
+      "KEC(B)": 1,
+      "Janadhipathiya Kerala Congress": 1
+    },
+    "party_wins": {
+      "IUML": 15,
+      "CPM": 62,
+      "CPI": 17,
+      "INC": 21,
+      "C(S)": 1,
+      "LJD": 1,
+      "RMPOI": 1,
+      "NCP": 2,
+      "INL": 1,
+      "IND": 6,
+      "NSC": 1,
+      "JD(S)": 2,
+      "KEC(J)": 1,
+      "KEC": 2,
+      "KEC(M)": 5,
+      "KEC(B)": 1,
+      "Janadhipathiya Kerala Congress": 1
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 2021,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "BJP": 6,
+      "IND": 6,
+      "AINRC": 10,
+      "DMK": 6,
+      "INC": 2
+    },
+    "party_wins": {
+      "BJP": 6,
+      "IND": 6,
+      "AINRC": 10,
+      "DMK": 6,
+      "INC": 2
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 2021,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "DMK": 133,
+      "INC": 18,
+      "VCK": 4,
+      "ADMK": 66,
+      "CPI": 2,
+      "PMK": 5,
+      "BJP": 4,
+      "CPM": 2
+    },
+    "party_wins": {
+      "DMK": 133,
+      "INC": 18,
+      "VCK": 4,
+      "ADMK": 66,
+      "CPI": 2,
+      "PMK": 5,
+      "BJP": 4,
+      "CPM": 2
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 2021,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "AITC": 215,
+      "BJP": 77,
+      "IND": 1,
+      "RSSCMJP": 1
+    },
+    "party_wins": {
+      "AITC": 215,
+      "BJP": 77,
+      "IND": 1,
+      "RSSCMJP": 1
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 2020,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 243,
+    "total_seats": 243,
+    "partyWins": {
+      "JD(U)": 43,
+      "BJP": 74,
+      "CPI(ML)(L)": 12,
+      "RJD": 75,
+      "INC": 19,
+      "AIMIM": 5,
+      "VSIP": 4,
+      "CPIM": 2,
+      "CPI": 2,
+      "LJP": 1,
+      "BSP": 1,
+      "HAMS": 4,
+      "IND": 1
+    },
+    "party_wins": {
+      "JD(U)": 43,
+      "BJP": 74,
+      "CPI(ML)(L)": 12,
+      "RJD": 75,
+      "INC": 19,
+      "AIMIM": 5,
+      "VSIP": 4,
+      "CPIM": 2,
+      "CPI": 2,
+      "LJP": 1,
+      "BSP": 1,
+      "HAMS": 4,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Delhi",
+    "stateSlug": "delhi",
+    "year": 2020,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 70,
+    "total_seats": 70,
+    "partyWins": {
+      "AAAP": 62,
+      "BJP": 8
+    },
+    "party_wins": {
+      "AAAP": 62,
+      "BJP": 8
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 2019,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 175,
+    "total_seats": 175,
+    "partyWins": {
+      "TDP": 23,
+      "YSRCP": 151,
+      "JnP": 1
+    },
+    "party_wins": {
+      "TDP": 23,
+      "YSRCP": 151,
+      "JnP": 1
+    }
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "year": 2019,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "BJP": 41,
+      "JD(U)": 7,
+      "NPEP": 5,
+      "INC": 4,
+      "PPA": 1,
+      "IND": 2
+    },
+    "party_wins": {
+      "BJP": 41,
+      "JD(U)": 7,
+      "NPEP": 5,
+      "INC": 4,
+      "PPA": 1,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 2019,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "INC": 31,
+      "BJP": 40,
+      "JNJP": 10,
+      "IND": 7,
+      "HaLP": 1,
+      "INLD": 1
+    },
+    "party_wins": {
+      "INC": 31,
+      "BJP": 40,
+      "JNJP": 10,
+      "IND": 7,
+      "HaLP": 1,
+      "INLD": 1
+    }
+  },
+  {
+    "state": "Jharkhand",
+    "stateSlug": "jharkhand",
+    "year": 2019,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 81,
+    "total_seats": 81,
+    "partyWins": {
+      "BJP": 25,
+      "JMM": 30,
+      "INC": 16,
+      "JVM": 3,
+      "IND": 2,
+      "RJD": 1,
+      "CPI(ML)(L)": 1,
+      "AJSUP": 2,
+      "NCP": 1
+    },
+    "party_wins": {
+      "BJP": 25,
+      "JMM": 30,
+      "INC": 16,
+      "JVM": 3,
+      "IND": 2,
+      "RJD": 1,
+      "CPI(ML)(L)": 1,
+      "AJSUP": 2,
+      "NCP": 1
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 2019,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "INC": 44,
+      "BJP": 105,
+      "IND": 13,
+      "AIMIM": 2,
+      "SHS": 56,
+      "NCP": 54,
+      "PHJSP": 2,
+      "SWP": 1,
+      "PWPI": 1,
+      "RSPS": 1,
+      "CPIM": 1,
+      "BVA": 3,
+      "SP": 2,
+      "MNS": 1,
+      "KTSTP": 1,
+      "JSS": 1
+    },
+    "party_wins": {
+      "INC": 44,
+      "BJP": 105,
+      "IND": 13,
+      "AIMIM": 2,
+      "SHS": 56,
+      "NCP": 54,
+      "PHJSP": 2,
+      "SWP": 1,
+      "PWPI": 1,
+      "RSPS": 1,
+      "CPIM": 1,
+      "BVA": 3,
+      "SP": 2,
+      "MNS": 1,
+      "KTSTP": 1,
+      "JSS": 1
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 2019,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 146,
+    "total_seats": 146,
+    "partyWins": {
+      "BJD": 112,
+      "BJP": 23,
+      "INC": 9,
+      "CPM": 1,
+      "IND": 1
+    },
+    "party_wins": {
+      "BJD": 112,
+      "BJP": 23,
+      "INC": 9,
+      "CPM": 1,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Sikkim",
+    "stateSlug": "sikkim",
+    "year": 2019,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 32,
+    "total_seats": 32,
+    "partyWins": {
+      "SKM": 17,
+      "SDF": 15
+    },
+    "party_wins": {
+      "SKM": 17,
+      "SDF": 15
+    }
+  },
+  {
+    "state": "Chhattisgarh",
+    "stateSlug": "chhattisgarh",
+    "year": 2018,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "INC": 68,
+      "BJP": 15,
+      "JCC(J)": 5,
+      "BSP": 2
+    },
+    "party_wins": {
+      "INC": 68,
+      "BJP": 15,
+      "JCC(J)": 5,
+      "BSP": 2
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 2018,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 224,
+    "total_seats": 224,
+    "partyWins": {
+      "BJP": 104,
+      "INC": 80,
+      "JD(S)": 37,
+      "KPJP": 1,
+      "IND": 1,
+      "BSP": 1
+    },
+    "party_wins": {
+      "BJP": 104,
+      "INC": 80,
+      "JD(S)": 37,
+      "KPJP": 1,
+      "IND": 1,
+      "BSP": 1
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 2018,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 230,
+    "total_seats": 230,
+    "partyWins": {
+      "INC": 114,
+      "BJP": 109,
+      "BSP": 2,
+      "SP": 1,
+      "IND": 4
+    },
+    "party_wins": {
+      "INC": 114,
+      "BJP": 109,
+      "BSP": 2,
+      "SP": 1,
+      "IND": 4
+    }
+  },
+  {
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "year": 2018,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "NPEP": 19,
+      "UDP": 6,
+      "INC": 21,
+      "PDF": 4,
+      "BJP": 2,
+      "KHNAM": 1,
+      "IND": 3,
+      "HSPDP": 2,
+      "NPP": 1,
+      "NCP": 1
+    },
+    "party_wins": {
+      "NPEP": 19,
+      "UDP": 6,
+      "INC": 21,
+      "PDF": 4,
+      "BJP": 2,
+      "KHNAM": 1,
+      "IND": 3,
+      "HSPDP": 2,
+      "NPP": 1,
+      "NCP": 1
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 2018,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "INC": 5,
+      "MNF": 26,
+      "IND": 8,
+      "BJP": 1
+    },
+    "party_wins": {
+      "INC": 5,
+      "MNF": 26,
+      "IND": 8,
+      "BJP": 1
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 2018,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "BJP": 12,
+      "NPF": 26,
+      "NDPP": 18,
+      "NPEP": 2,
+      "IND": 1,
+      "JD(U)": 1
+    },
+    "party_wins": {
+      "BJP": 12,
+      "NPF": 26,
+      "NDPP": 18,
+      "NPEP": 2,
+      "IND": 1,
+      "JD(U)": 1
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 2018,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 199,
+    "total_seats": 199,
+    "partyWins": {
+      "INC": 99,
+      "IND": 13,
+      "BJP": 73,
+      "CPM": 2,
+      "BSP": 6,
+      "RLD": 1,
+      "RaLtP": 3,
+      "BTP": 2
+    },
+    "party_wins": {
+      "INC": 99,
+      "IND": 13,
+      "BJP": 73,
+      "CPM": 2,
+      "BSP": 6,
+      "RLD": 1,
+      "RaLtP": 3,
+      "BTP": 2
+    }
+  },
+  {
+    "state": "Telangana",
+    "stateSlug": "telangana",
+    "year": 2018,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 119,
+    "total_seats": 119,
+    "partyWins": {
+      "TRS": 88,
+      "INC": 19,
+      "AIFB": 1,
+      "AIMIM": 7,
+      "BJP": 1,
+      "IND": 1,
+      "TDP": 2
+    },
+    "party_wins": {
+      "TRS": 88,
+      "INC": 19,
+      "AIFB": 1,
+      "AIMIM": 7,
+      "BJP": 1,
+      "IND": 1,
+      "TDP": 2
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 2018,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "IPFT": 8,
+      "BJP": 36,
+      "CPM": 16
+    },
+    "party_wins": {
+      "IPFT": 8,
+      "BJP": 36,
+      "CPM": 16
+    }
+  },
+  {
+    "state": "Goa",
+    "stateSlug": "goa",
+    "year": 2017,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "INC": 17,
+      "MAG": 3,
+      "BJP": 13,
+      "GFP": 3,
+      "IND": 3,
+      "NCP": 1
+    },
+    "party_wins": {
+      "INC": 17,
+      "MAG": 3,
+      "BJP": 13,
+      "GFP": 3,
+      "IND": 3,
+      "NCP": 1
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 2017,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 182,
+    "total_seats": 182,
+    "partyWins": {
+      "INC": 77,
+      "BJP": 99,
+      "IND": 3,
+      "NCP": 1,
+      "BTP": 2
+    },
+    "party_wins": {
+      "INC": 77,
+      "BJP": 99,
+      "IND": 3,
+      "NCP": 1,
+      "BTP": 2
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 2017,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 68,
+    "total_seats": 68,
+    "partyWins": {
+      "BJP": 44,
+      "INC": 21,
+      "IND": 2,
+      "CPM": 1
+    },
+    "party_wins": {
+      "BJP": 44,
+      "INC": 21,
+      "IND": 2,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 2017,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 28,
+      "BJP": 21,
+      "NPEP": 4,
+      "LJP": 1,
+      "AITC": 1,
+      "IND": 1,
+      "NPF": 4
+    },
+    "party_wins": {
+      "INC": 28,
+      "BJP": 21,
+      "NPEP": 4,
+      "LJP": 1,
+      "AITC": 1,
+      "IND": 1,
+      "NPF": 4
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 2017,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 117,
+    "total_seats": 117,
+    "partyWins": {
+      "BJP": 3,
+      "INC": 77,
+      "SAD": 15,
+      "AAAP": 20,
+      "LIP": 2
+    },
+    "party_wins": {
+      "BJP": 3,
+      "INC": 77,
+      "SAD": 15,
+      "AAAP": 20,
+      "LIP": 2
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 2017,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 403,
+    "total_seats": 403,
+    "partyWins": {
+      "INC": 7,
+      "BJP": 312,
+      "SP": 47,
+      "RLD": 1,
+      "BSP": 19,
+      "ADAL": 9,
+      "IND": 3,
+      "SBSP": 4,
+      "NINSHAD": 1
+    },
+    "party_wins": {
+      "INC": 7,
+      "BJP": 312,
+      "SP": 47,
+      "RLD": 1,
+      "BSP": 19,
+      "ADAL": 9,
+      "IND": 3,
+      "SBSP": 4,
+      "NINSHAD": 1
+    }
+  },
+  {
+    "state": "Uttarakhand",
+    "stateSlug": "uttarakhand",
+    "year": 2017,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 70,
+    "total_seats": 70,
+    "partyWins": {
+      "INC": 11,
+      "BJP": 57,
+      "IND": 2
+    },
+    "party_wins": {
+      "INC": 11,
+      "BJP": 57,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 2016,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 126,
+    "total_seats": 126,
+    "partyWins": {
+      "BJP": 60,
+      "INC": 26,
+      "AIUDF": 13,
+      "BOPF": 12,
+      "AGP": 14,
+      "IND": 1
+    },
+    "party_wins": {
+      "BJP": 60,
+      "INC": 26,
+      "AIUDF": 13,
+      "BOPF": 12,
+      "AGP": 14,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 2016,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "IUML": 18,
+      "CPM": 58,
+      "CPI": 19,
+      "INC": 22,
+      "C(S)": 1,
+      "JD(S)": 3,
+      "NCP": 2,
+      "IND": 6,
+      "NSC": 1,
+      "KEC(J)": 1,
+      "KEC(M)": 6,
+      "CMPKSC": 1,
+      "KEC(B)": 1,
+      "BJP": 1
+    },
+    "party_wins": {
+      "IUML": 18,
+      "CPM": 58,
+      "CPI": 19,
+      "INC": 22,
+      "C(S)": 1,
+      "JD(S)": 3,
+      "NCP": 2,
+      "IND": 6,
+      "NSC": 1,
+      "KEC(J)": 1,
+      "KEC(M)": 6,
+      "CMPKSC": 1,
+      "KEC(B)": 1,
+      "BJP": 1
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 2016,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "AINRC": 9,
+      "INC": 14,
+      "ADMK": 4,
+      "DMK": 2,
+      "IND": 1
+    },
+    "party_wins": {
+      "AINRC": 9,
+      "INC": 14,
+      "ADMK": 4,
+      "DMK": 2,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 2016,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 232,
+    "total_seats": 232,
+    "partyWins": {
+      "ADMK": 134,
+      "DMK": 89,
+      "INC": 8,
+      "IUML": 1
+    },
+    "party_wins": {
+      "ADMK": 134,
+      "DMK": 89,
+      "INC": 8,
+      "IUML": 1
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 2016,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "AITC": 211,
+      "AIFB": 2,
+      "BJP": 3,
+      "INC": 44,
+      "GOJAM": 3,
+      "CPM": 26,
+      "RSP": 3,
+      "IND": 1,
+      "CPI": 1
+    },
+    "party_wins": {
+      "AITC": 211,
+      "AIFB": 2,
+      "BJP": 3,
+      "INC": 44,
+      "GOJAM": 3,
+      "CPM": 26,
+      "RSP": 3,
+      "IND": 1,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 2015,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 243,
+    "total_seats": 243,
+    "partyWins": {
+      "IND": 4,
+      "BJP": 53,
+      "INC": 27,
+      "JD(U)": 71,
+      "RJD": 80,
+      "LJP": 2,
+      "BLSP": 2,
+      "CPI(ML)(L)": 3,
+      "HAMS": 1
+    },
+    "party_wins": {
+      "IND": 4,
+      "BJP": 53,
+      "INC": 27,
+      "JD(U)": 71,
+      "RJD": 80,
+      "LJP": 2,
+      "BLSP": 2,
+      "CPI(ML)(L)": 3,
+      "HAMS": 1
+    }
+  },
+  {
+    "state": "Delhi",
+    "stateSlug": "delhi",
+    "year": 2015,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 70,
+    "total_seats": 70,
+    "partyWins": {
+      "AAAP": 67,
+      "BJP": 3
+    },
+    "party_wins": {
+      "AAAP": 67,
+      "BJP": 3
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 2014,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 175,
+    "total_seats": 175,
+    "partyWins": {
+      "TDP": 102,
+      "YSRCP": 67,
+      "BJP": 4,
+      "IND": 1,
+      "NPT": 1
+    },
+    "party_wins": {
+      "TDP": 102,
+      "YSRCP": 67,
+      "BJP": 4,
+      "IND": 1,
+      "NPT": 1
+    }
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "year": 2014,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 42,
+      "IND": 2,
+      "BJP": 11,
+      "PPA": 5
+    },
+    "party_wins": {
+      "INC": 42,
+      "IND": 2,
+      "BJP": 11,
+      "PPA": 5
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 2014,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "BJP": 47,
+      "INLD": 19,
+      "IND": 5,
+      "INC": 15,
+      "SAD": 1,
+      "HJCBL": 2,
+      "BSP": 1
+    },
+    "party_wins": {
+      "BJP": 47,
+      "INLD": 19,
+      "IND": 5,
+      "INC": 15,
+      "SAD": 1,
+      "HJCBL": 2,
+      "BSP": 1
+    }
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "stateSlug": "jammu---kashmir",
+    "year": 2014,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 87,
+    "total_seats": 87,
+    "partyWins": {
+      "JKPDP": 28,
+      "JPC": 2,
+      "IND": 3,
+      "JKN": 15,
+      "INC": 12,
+      "JKPDF": 1,
+      "CPM": 1,
+      "BJP": 25
+    },
+    "party_wins": {
+      "JKPDP": 28,
+      "JPC": 2,
+      "IND": 3,
+      "JKN": 15,
+      "INC": 12,
+      "JKPDF": 1,
+      "CPM": 1,
+      "BJP": 25
+    }
+  },
+  {
+    "state": "Jharkhand",
+    "stateSlug": "jharkhand",
+    "year": 2014,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 81,
+    "total_seats": 81,
+    "partyWins": {
+      "BJP": 37,
+      "JMM": 19,
+      "INC": 6,
+      "JVM": 8,
+      "AJSUP": 5,
+      "CPI(M (L)L)": 1,
+      "MCO": 1,
+      "JBSP": 1,
+      "JKP": 1,
+      "BSP": 1,
+      "NSAM": 1
+    },
+    "party_wins": {
+      "BJP": 37,
+      "JMM": 19,
+      "INC": 6,
+      "JVM": 8,
+      "AJSUP": 5,
+      "CPI(M (L)L)": 1,
+      "MCO": 1,
+      "JBSP": 1,
+      "JKP": 1,
+      "BSP": 1,
+      "NSAM": 1
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 2014,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "INC": 42,
+      "BJP": 122,
+      "SHS": 63,
+      "IND": 7,
+      "NCP": 41,
+      "BBM": 1,
+      "AIMIM": 2,
+      "CPM": 1,
+      "BVA": 3,
+      "SP": 1,
+      "PWPI": 3,
+      "MNS": 1,
+      "RSPS": 1
+    },
+    "party_wins": {
+      "INC": 42,
+      "BJP": 122,
+      "SHS": 63,
+      "IND": 7,
+      "NCP": 41,
+      "BBM": 1,
+      "AIMIM": 2,
+      "CPM": 1,
+      "BVA": 3,
+      "SP": 1,
+      "PWPI": 3,
+      "MNS": 1,
+      "RSPS": 1
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 2014,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 147,
+    "total_seats": 147,
+    "partyWins": {
+      "BJP": 10,
+      "INC": 16,
+      "BJD": 117,
+      "SKD": 1,
+      "CPM": 1,
+      "IND": 2
+    },
+    "party_wins": {
+      "BJP": 10,
+      "INC": 16,
+      "BJD": 117,
+      "SKD": 1,
+      "CPM": 1,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Sikkim",
+    "stateSlug": "sikkim",
+    "year": 2014,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 32,
+    "total_seats": 32,
+    "partyWins": {
+      "SDF": 22,
+      "SKM": 10
+    },
+    "party_wins": {
+      "SDF": 22,
+      "SKM": 10
+    }
+  },
+  {
+    "state": "Telangana",
+    "stateSlug": "telangana",
+    "year": 2014,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 119,
+    "total_seats": 119,
+    "partyWins": {
+      "BSP": 2,
+      "TRS": 63,
+      "INC": 21,
+      "TDP": 15,
+      "BJP": 5,
+      "AIMIM": 7,
+      "CPI": 1,
+      "IND": 1,
+      "YSRCP": 3,
+      "CPM": 1
+    },
+    "party_wins": {
+      "BSP": 2,
+      "TRS": 63,
+      "INC": 21,
+      "TDP": 15,
+      "BJP": 5,
+      "AIMIM": 7,
+      "CPI": 1,
+      "IND": 1,
+      "YSRCP": 3,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Chhattisgarh",
+    "stateSlug": "chhattisgarh",
+    "year": 2013,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "BJP": 49,
+      "INC": 39,
+      "BSP": 1,
+      "IND": 1
+    },
+    "party_wins": {
+      "BJP": 49,
+      "INC": 39,
+      "BSP": 1,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Delhi",
+    "stateSlug": "delhi",
+    "year": 2013,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 70,
+    "total_seats": 70,
+    "partyWins": {
+      "BJP": 31,
+      "AAAP": 28,
+      "INC": 8,
+      "IND": 1,
+      "JD(U)": 1,
+      "SAD": 1
+    },
+    "party_wins": {
+      "BJP": 31,
+      "AAAP": 28,
+      "INC": 8,
+      "IND": 1,
+      "JD(U)": 1,
+      "SAD": 1
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 2013,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 224,
+    "total_seats": 224,
+    "partyWins": {
+      "BJP": 40,
+      "INC": 122,
+      "BSRCP": 4,
+      "IND": 9,
+      "KJP": 6,
+      "JD(S)": 40,
+      "KMP": 1,
+      "SP": 1,
+      "SKP": 1
+    },
+    "party_wins": {
+      "BJP": 40,
+      "INC": 122,
+      "BSRCP": 4,
+      "IND": 9,
+      "KJP": 6,
+      "JD(S)": 40,
+      "KMP": 1,
+      "SP": 1,
+      "SKP": 1
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 2013,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 230,
+    "total_seats": 230,
+    "partyWins": {
+      "BJP": 165,
+      "INC": 58,
+      "BSP": 4,
+      "IND": 3
+    },
+    "party_wins": {
+      "BJP": 165,
+      "INC": 58,
+      "BSP": 4,
+      "IND": 3
+    }
+  },
+  {
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "year": 2013,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 29,
+      "IND": 13,
+      "NESDP": 1,
+      "UDP": 8,
+      "NCP": 2,
+      "HSPDP": 4,
+      "NPP": 2,
+      "GNC": 1
+    },
+    "party_wins": {
+      "INC": 29,
+      "IND": 13,
+      "NESDP": 1,
+      "UDP": 8,
+      "NCP": 2,
+      "HSPDP": 4,
+      "NPP": 2,
+      "GNC": 1
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 2013,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "INC": 34,
+      "MPC": 1,
+      "MNF": 5
+    },
+    "party_wins": {
+      "INC": 34,
+      "MPC": 1,
+      "MNF": 5
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 2013,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "NPF": 38,
+      "INC": 8,
+      "IND": 8,
+      "NCP": 4,
+      "BJP": 1,
+      "JD(U)": 1
+    },
+    "party_wins": {
+      "NPF": 38,
+      "INC": 8,
+      "IND": 8,
+      "NCP": 4,
+      "BJP": 1,
+      "JD(U)": 1
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 2013,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 200,
+    "total_seats": 200,
+    "partyWins": {
+      "BJP": 163,
+      "NUZP": 2,
+      "INC": 21,
+      "IND": 7,
+      "BSP": 3,
+      "NPEP": 4
+    },
+    "party_wins": {
+      "BJP": 163,
+      "NUZP": 2,
+      "INC": 21,
+      "IND": 7,
+      "BSP": 3,
+      "NPEP": 4
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 2013,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "CPM": 49,
+      "INC": 10,
+      "CPI": 1
+    },
+    "party_wins": {
+      "CPM": 49,
+      "INC": 10,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Goa",
+    "stateSlug": "goa",
+    "year": 2012,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "BJP": 21,
+      "IND": 5,
+      "INC": 9,
+      "MAG": 3,
+      "GVP": 2
+    },
+    "party_wins": {
+      "BJP": 21,
+      "IND": 5,
+      "INC": 9,
+      "MAG": 3,
+      "GVP": 2
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 2012,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 182,
+    "total_seats": 182,
+    "partyWins": {
+      "INC": 61,
+      "BJP": 115,
+      "NCP": 2,
+      "GPP": 2,
+      "IND": 1,
+      "JD(U)": 1
+    },
+    "party_wins": {
+      "INC": 61,
+      "BJP": 115,
+      "NCP": 2,
+      "GPP": 2,
+      "IND": 1,
+      "JD(U)": 1
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 2012,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 68,
+    "total_seats": 68,
+    "partyWins": {
+      "BJP": 26,
+      "INC": 36,
+      "IND": 5,
+      "HLP": 1
+    },
+    "party_wins": {
+      "BJP": 26,
+      "INC": 36,
+      "IND": 5,
+      "HLP": 1
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 2012,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 42,
+      "AITC": 7,
+      "MSCP": 5,
+      "NCP": 1,
+      "LJP": 1,
+      "NPF": 4
+    },
+    "party_wins": {
+      "INC": 42,
+      "AITC": 7,
+      "MSCP": 5,
+      "NCP": 1,
+      "LJP": 1,
+      "NPF": 4
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 2012,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 117,
+    "total_seats": 117,
+    "partyWins": {
+      "BJP": 12,
+      "SAD": 56,
+      "INC": 46,
+      "IND": 3
+    },
+    "party_wins": {
+      "BJP": 12,
+      "SAD": 56,
+      "INC": 46,
+      "IND": 3
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 2012,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 403,
+    "total_seats": 403,
+    "partyWins": {
+      "BSP": 80,
+      "BJP": 47,
+      "SP": 224,
+      "INC": 28,
+      "RLD": 9,
+      "PECP": 4,
+      "IEMC": 1,
+      "IND": 6,
+      "NCP": 1,
+      "QED": 2,
+      "AD": 1
+    },
+    "party_wins": {
+      "BSP": 80,
+      "BJP": 47,
+      "SP": 224,
+      "INC": 28,
+      "RLD": 9,
+      "PECP": 4,
+      "IEMC": 1,
+      "IND": 6,
+      "NCP": 1,
+      "QED": 2,
+      "AD": 1
+    }
+  },
+  {
+    "state": "Uttarakhand",
+    "stateSlug": "uttarakhand",
+    "year": 2012,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 70,
+    "total_seats": 70,
+    "partyWins": {
+      "BJP": 31,
+      "UKDP": 1,
+      "INC": 32,
+      "IND": 3,
+      "BSP": 3
+    },
+    "party_wins": {
+      "BJP": 31,
+      "UKDP": 1,
+      "INC": 32,
+      "IND": 3,
+      "BSP": 3
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 2011,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 126,
+    "total_seats": 126,
+    "partyWins": {
+      "INC": 78,
+      "AGP": 10,
+      "AIUDF": 18,
+      "IND": 2,
+      "BOPF": 12,
+      "BJP": 5,
+      "AITC": 1
+    },
+    "party_wins": {
+      "INC": 78,
+      "AGP": 10,
+      "AIUDF": 18,
+      "IND": 2,
+      "BOPF": 12,
+      "BJP": 5,
+      "AITC": 1
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 2011,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "MUL": 20,
+      "CPM": 45,
+      "CPI": 13,
+      "INC": 38,
+      "SJD": 2,
+      "JD(S)": 4,
+      "NCP": 2,
+      "IND": 2,
+      "KEC(M)": 9,
+      "KEC(J)": 1,
+      "KRSP": 1,
+      "RSP": 2,
+      "KEC(B)": 1
+    },
+    "party_wins": {
+      "MUL": 20,
+      "CPM": 45,
+      "CPI": 13,
+      "INC": 38,
+      "SJD": 2,
+      "JD(S)": 4,
+      "NCP": 2,
+      "IND": 2,
+      "KEC(M)": 9,
+      "KEC(J)": 1,
+      "KRSP": 1,
+      "RSP": 2,
+      "KEC(B)": 1
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 2011,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "AINRC": 15,
+      "INC": 7,
+      "DMK": 2,
+      "ADMK": 5,
+      "IND": 1
+    },
+    "party_wins": {
+      "AINRC": 15,
+      "INC": 7,
+      "DMK": 2,
+      "ADMK": 5,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 2011,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "DMDK": 29,
+      "ADMK": 150,
+      "CPM": 10,
+      "DMK": 23,
+      "PMK": 3,
+      "CPI": 9,
+      "MAMAK": 2,
+      "INC": 5,
+      "PT": 2,
+      "AIFB": 1
+    },
+    "party_wins": {
+      "DMDK": 29,
+      "ADMK": 150,
+      "CPM": 10,
+      "DMK": 23,
+      "PMK": 3,
+      "CPI": 9,
+      "MAMAK": 2,
+      "INC": 5,
+      "PT": 2,
+      "AIFB": 1
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 2011,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "AIFB": 11,
+      "AITC": 184,
+      "INC": 42,
+      "RSP": 7,
+      "IND": 2,
+      "CPM": 40,
+      "GOJAM": 3,
+      "SP": 1,
+      "CPI": 2,
+      "SUCI": 1,
+      "DSP(P)": 1
+    },
+    "party_wins": {
+      "AIFB": 11,
+      "AITC": 184,
+      "INC": 42,
+      "RSP": 7,
+      "IND": 2,
+      "CPM": 40,
+      "GOJAM": 3,
+      "SP": 1,
+      "CPI": 2,
+      "SUCI": 1,
+      "DSP(P)": 1
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 2010,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 243,
+    "total_seats": 243,
+    "partyWins": {
+      "JD(U)": 115,
+      "BJP": 91,
+      "IND": 6,
+      "RJD": 22,
+      "LJP": 3,
+      "INC": 4,
+      "CPI": 1,
+      "JMM": 1
+    },
+    "party_wins": {
+      "JD(U)": 115,
+      "BJP": 91,
+      "IND": 6,
+      "RJD": 22,
+      "LJP": 3,
+      "INC": 4,
+      "CPI": 1,
+      "JMM": 1
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 2009,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "TRS": 10,
+      "CPI": 4,
+      "INC": 156,
+      "TDP": 92,
+      "PRAP": 18,
+      "BJP": 2,
+      "IND": 3,
+      "LSP": 1,
+      "AIMIM": 7,
+      "CPM": 1
+    },
+    "party_wins": {
+      "TRS": 10,
+      "CPI": 4,
+      "INC": 156,
+      "TDP": 92,
+      "PRAP": 18,
+      "BJP": 2,
+      "IND": 3,
+      "LSP": 1,
+      "AIMIM": 7,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "year": 2009,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 42,
+      "PPA": 4,
+      "AITC": 5,
+      "NCP": 5,
+      "BJP": 3,
+      "IND": 1
+    },
+    "party_wins": {
+      "INC": 42,
+      "PPA": 4,
+      "AITC": 5,
+      "NCP": 5,
+      "BJP": 3,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 2009,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "INLD": 31,
+      "INC": 40,
+      "BJP": 4,
+      "BSP": 1,
+      "IND": 7,
+      "HJCBL": 6,
+      "SAD": 1
+    },
+    "party_wins": {
+      "INLD": 31,
+      "INC": 40,
+      "BJP": 4,
+      "BSP": 1,
+      "IND": 7,
+      "HJCBL": 6,
+      "SAD": 1
+    }
+  },
+  {
+    "state": "Jharkhand",
+    "stateSlug": "jharkhand",
+    "year": 2009,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 81,
+    "total_seats": 81,
+    "partyWins": {
+      "BJP": 18,
+      "JMM": 18,
+      "JVM": 11,
+      "IND": 2,
+      "RJD": 5,
+      "INC": 14,
+      "AJSUP": 5,
+      "CPI(ML)(L)": 1,
+      "MCO": 1,
+      "JBSP": 1,
+      "JD(U)": 2,
+      "JHJAM": 1,
+      "RAKAP": 1,
+      "JKP": 1
+    },
+    "party_wins": {
+      "BJP": 18,
+      "JMM": 18,
+      "JVM": 11,
+      "IND": 2,
+      "RJD": 5,
+      "INC": 14,
+      "AJSUP": 5,
+      "CPI(ML)(L)": 1,
+      "MCO": 1,
+      "JBSP": 1,
+      "JD(U)": 2,
+      "JHJAM": 1,
+      "RAKAP": 1,
+      "JKP": 1
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 2009,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "INC": 82,
+      "NCP": 62,
+      "SP": 4,
+      "SHS": 44,
+      "LKSGM": 1,
+      "BJP": 46,
+      "IND": 24,
+      "BBM": 1,
+      "MNS": 13,
+      "JSS": 2,
+      "CPM": 1,
+      "BVA": 2,
+      "PWPI": 4,
+      "RSPS": 1,
+      "SWP": 1
+    },
+    "party_wins": {
+      "INC": 82,
+      "NCP": 62,
+      "SP": 4,
+      "SHS": 44,
+      "LKSGM": 1,
+      "BJP": 46,
+      "IND": 24,
+      "BBM": 1,
+      "MNS": 13,
+      "JSS": 2,
+      "CPM": 1,
+      "BVA": 2,
+      "PWPI": 4,
+      "RSPS": 1,
+      "SWP": 1
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 2009,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 147,
+    "total_seats": 147,
+    "partyWins": {
+      "BJD": 103,
+      "INC": 27,
+      "IND": 6,
+      "BJP": 6,
+      "NCP": 4,
+      "CPI": 1
+    },
+    "party_wins": {
+      "BJD": 103,
+      "INC": 27,
+      "IND": 6,
+      "BJP": 6,
+      "NCP": 4,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Sikkim",
+    "stateSlug": "sikkim",
+    "year": 2009,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 32,
+    "total_seats": 32,
+    "partyWins": {
+      "SDF": 32
+    },
+    "party_wins": {
+      "SDF": 32
+    }
+  },
+  {
+    "state": "Chhattisgarh",
+    "stateSlug": "chhattisgarh",
+    "year": 2008,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "BJP": 50,
+      "INC": 38,
+      "BSP": 2
+    },
+    "party_wins": {
+      "BJP": 50,
+      "INC": 38,
+      "BSP": 2
+    }
+  },
+  {
+    "state": "Delhi",
+    "stateSlug": "delhi",
+    "year": 2008,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 70,
+    "total_seats": 70,
+    "partyWins": {
+      "INC": 43,
+      "BJP": 23,
+      "LJP": 1,
+      "IND": 1,
+      "BSP": 2
+    },
+    "party_wins": {
+      "INC": 43,
+      "BJP": 23,
+      "LJP": 1,
+      "IND": 1,
+      "BSP": 2
+    }
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "stateSlug": "jammu---kashmir",
+    "year": 2008,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 87,
+    "total_seats": 87,
+    "partyWins": {
+      "JKN": 28,
+      "JKPDP": 21,
+      "IND": 4,
+      "INC": 17,
+      "JKDPN": 1,
+      "PDF": 1,
+      "CPM": 1,
+      "BJP": 11,
+      "JKNPP": 3
+    },
+    "party_wins": {
+      "JKN": 28,
+      "JKPDP": 21,
+      "IND": 4,
+      "INC": 17,
+      "JKDPN": 1,
+      "PDF": 1,
+      "CPM": 1,
+      "BJP": 11,
+      "JKNPP": 3
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 2008,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 224,
+    "total_seats": 224,
+    "partyWins": {
+      "INC": 80,
+      "BJP": 110,
+      "JD(S)": 28,
+      "IND": 6
+    },
+    "party_wins": {
+      "INC": 80,
+      "BJP": 110,
+      "JD(S)": 28,
+      "IND": 6
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 2008,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 230,
+    "total_seats": 230,
+    "partyWins": {
+      "INC": 71,
+      "BSP": 7,
+      "BJP": 143,
+      "BJSH": 5,
+      "SP": 1,
+      "IND": 3
+    },
+    "party_wins": {
+      "INC": 71,
+      "BSP": 7,
+      "BJP": 143,
+      "BJSH": 5,
+      "SP": 1,
+      "IND": 3
+    }
+  },
+  {
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "year": 2008,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 25,
+      "NCP": 15,
+      "UDP": 11,
+      "BJP": 1,
+      "KHNAM": 1,
+      "IND": 5,
+      "HSPDP": 2
+    },
+    "party_wins": {
+      "INC": 25,
+      "NCP": 15,
+      "UDP": 11,
+      "BJP": 1,
+      "KHNAM": 1,
+      "IND": 5,
+      "HSPDP": 2
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 2008,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "INC": 32,
+      "ZNP": 2,
+      "MPC": 2,
+      "MNF": 3,
+      "MDF": 1
+    },
+    "party_wins": {
+      "INC": 32,
+      "ZNP": 2,
+      "MPC": 2,
+      "MNF": 3,
+      "MDF": 1
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 2008,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 23,
+      "IND": 7,
+      "NPF": 26,
+      "BJP": 2,
+      "NCP": 2
+    },
+    "party_wins": {
+      "INC": 23,
+      "IND": 7,
+      "NPF": 26,
+      "BJP": 2,
+      "NCP": 2
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 2008,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 200,
+    "total_seats": 200,
+    "partyWins": {
+      "INC": 96,
+      "BJP": 78,
+      "IND": 14,
+      "CPM": 3,
+      "BSP": 6,
+      "LSWP": 1,
+      "SP": 1,
+      "JD(U)": 1
+    },
+    "party_wins": {
+      "INC": 96,
+      "BJP": 78,
+      "IND": 14,
+      "CPM": 3,
+      "BSP": 6,
+      "LSWP": 1,
+      "SP": 1,
+      "JD(U)": 1
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 2008,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "CPM": 46,
+      "INC": 10,
+      "RSP": 2,
+      "CPI": 1,
+      "INPT": 1
+    },
+    "party_wins": {
+      "CPM": 46,
+      "INC": 10,
+      "RSP": 2,
+      "CPI": 1,
+      "INPT": 1
+    }
+  },
+  {
+    "state": "Goa",
+    "stateSlug": "goa",
+    "year": 2007,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "BJP": 14,
+      "INC": 16,
+      "NCP": 3,
+      "UGDP": 1,
+      "IND": 2,
+      "MAG": 2,
+      "SGF": 2
+    },
+    "party_wins": {
+      "BJP": 14,
+      "INC": 16,
+      "NCP": 3,
+      "UGDP": 1,
+      "IND": 2,
+      "MAG": 2,
+      "SGF": 2
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 2007,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 182,
+    "total_seats": 182,
+    "partyWins": {
+      "BJP": 116,
+      "INC": 59,
+      "NCP": 3,
+      "BJNKP": 1,
+      "IND": 2,
+      "JD(U)": 1
+    },
+    "party_wins": {
+      "BJP": 116,
+      "INC": 59,
+      "NCP": 3,
+      "BJNKP": 1,
+      "IND": 2,
+      "JD(U)": 1
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 2007,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 68,
+    "total_seats": 68,
+    "partyWins": {
+      "BJP": 41,
+      "INC": 23,
+      "IND": 3,
+      "BSP": 1
+    },
+    "party_wins": {
+      "BJP": 41,
+      "INC": 23,
+      "IND": 3,
+      "BSP": 1
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 2007,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "NCP": 5,
+      "INC": 30,
+      "MPP": 5,
+      "CPI": 4,
+      "IND": 10,
+      "RJD": 3,
+      "NPP": 3
+    },
+    "party_wins": {
+      "NCP": 5,
+      "INC": 30,
+      "MPP": 5,
+      "CPI": 4,
+      "IND": 10,
+      "RJD": 3,
+      "NPP": 3
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 2007,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 116,
+    "total_seats": 116,
+    "partyWins": {
+      "SAD": 48,
+      "BJP": 19,
+      "INC": 44,
+      "IND": 5
+    },
+    "party_wins": {
+      "SAD": 48,
+      "BJP": 19,
+      "INC": 44,
+      "IND": 5
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 2007,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 403,
+    "total_seats": 403,
+    "partyWins": {
+      "BSP": 206,
+      "SP": 97,
+      "BJP": 51,
+      "INC": 22,
+      "RPD": 2,
+      "BJSH": 1,
+      "RSBP": 1,
+      "IND": 9,
+      "JD(U)": 1,
+      "JM": 1,
+      "RLD": 10,
+      "ABLTC": 1,
+      "UPUDF": 1
+    },
+    "party_wins": {
+      "BSP": 206,
+      "SP": 97,
+      "BJP": 51,
+      "INC": 22,
+      "RPD": 2,
+      "BJSH": 1,
+      "RSBP": 1,
+      "IND": 9,
+      "JD(U)": 1,
+      "JM": 1,
+      "RLD": 10,
+      "ABLTC": 1,
+      "UPUDF": 1
+    }
+  },
+  {
+    "state": "Uttarakhand",
+    "stateSlug": "uttarakhand",
+    "year": 2007,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 69,
+    "total_seats": 69,
+    "partyWins": {
+      "INC": 21,
+      "BJP": 34,
+      "UKKD": 3,
+      "BSP": 8,
+      "IND": 3
+    },
+    "party_wins": {
+      "INC": 21,
+      "BJP": 34,
+      "UKKD": 3,
+      "BSP": 8,
+      "IND": 3
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 2006,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 126,
+    "total_seats": 126,
+    "partyWins": {
+      "BJP": 12,
+      "IND": 18,
+      "AUDF": 10,
+      "INC": 56,
+      "ASDC": 1,
+      "AGP": 23,
+      "NCP": 1,
+      "LKS": 1,
+      "CPM": 2,
+      "AGP(P)": 1,
+      "CPI": 1
+    },
+    "party_wins": {
+      "BJP": 12,
+      "IND": 18,
+      "AUDF": 10,
+      "INC": 56,
+      "ASDC": 1,
+      "AGP": 23,
+      "NCP": 1,
+      "LKS": 1,
+      "CPM": 2,
+      "AGP(P)": 1,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 2006,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "CPM": 61,
+      "MUL": 7,
+      "CPI": 17,
+      "INC": 24,
+      "C(S)": 1,
+      "JD(S)": 5,
+      "NCP": 1,
+      "IND": 5,
+      "INL": 1,
+      "KEC(M)": 7,
+      "KEC": 4,
+      "KCS": 1,
+      "DIC": 1,
+      "JPSS": 1,
+      "KEC(B)": 1,
+      "RSP": 3
+    },
+    "party_wins": {
+      "CPM": 61,
+      "MUL": 7,
+      "CPI": 17,
+      "INC": 24,
+      "C(S)": 1,
+      "JD(S)": 5,
+      "NCP": 1,
+      "IND": 5,
+      "INL": 1,
+      "KEC(M)": 7,
+      "KEC": 4,
+      "KCS": 1,
+      "DIC": 1,
+      "JPSS": 1,
+      "KEC(B)": 1,
+      "RSP": 3
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 2006,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "DMK": 7,
+      "PMC": 3,
+      "ADMK": 3,
+      "PMK": 2,
+      "INC": 10,
+      "IND": 3,
+      "CPI": 1,
+      "MDMK": 1
+    },
+    "party_wins": {
+      "DMK": 7,
+      "PMC": 3,
+      "ADMK": 3,
+      "PMK": 2,
+      "INC": 10,
+      "IND": 3,
+      "CPI": 1,
+      "MDMK": 1
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 2006,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "ADMK": 61,
+      "DMK": 96,
+      "CPM": 9,
+      "PMK": 18,
+      "INC": 34,
+      "VCK": 2,
+      "DMDK": 1,
+      "IND": 1,
+      "MDMK": 6,
+      "CPI": 6
+    },
+    "party_wins": {
+      "ADMK": 61,
+      "DMK": 96,
+      "CPM": 9,
+      "PMK": 18,
+      "INC": 34,
+      "VCK": 2,
+      "DMDK": 1,
+      "IND": 1,
+      "MDMK": 6,
+      "CPI": 6
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 2006,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "AIFB": 23,
+      "CPM": 176,
+      "INC": 21,
+      "AITC": 30,
+      "RSP": 20,
+      "GNLF": 3,
+      "CPI": 8,
+      "WBSP": 4,
+      "IND": 6,
+      "RJD": 1,
+      "DSP(P)": 1,
+      "JKP(N)": 1
+    },
+    "party_wins": {
+      "AIFB": 23,
+      "CPM": 176,
+      "INC": 21,
+      "AITC": 30,
+      "RSP": 20,
+      "GNLF": 3,
+      "CPI": 8,
+      "WBSP": 4,
+      "IND": 6,
+      "RJD": 1,
+      "DSP(P)": 1,
+      "JKP(N)": 1
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 2005,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 486,
+    "total_seats": 486,
+    "partyWins": {
+      "RJD": 129,
+      "JD(U)": 143,
+      "BJP": 92,
+      "INC": 19,
+      "LJP": 39,
+      "BSP": 6,
+      "CPI(ML)(L)": 12,
+      "IND": 27,
+      "CPI": 6,
+      "SP": 6,
+      "CPM": 2,
+      "NCP": 4,
+      "AJVD": 1
+    },
+    "party_wins": {
+      "RJD": 129,
+      "JD(U)": 143,
+      "BJP": 92,
+      "INC": 19,
+      "LJP": 39,
+      "BSP": 6,
+      "CPI(ML)(L)": 12,
+      "IND": 27,
+      "CPI": 6,
+      "SP": 6,
+      "CPM": 2,
+      "NCP": 4,
+      "AJVD": 1
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 2005,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "INC": 67,
+      "INLD": 9,
+      "BSP": 1,
+      "IND": 10,
+      "BJP": 2,
+      "NCP": 1
+    },
+    "party_wins": {
+      "INC": 67,
+      "INLD": 9,
+      "BSP": 1,
+      "IND": 10,
+      "BJP": 2,
+      "NCP": 1
+    }
+  },
+  {
+    "state": "Jharkhand",
+    "stateSlug": "jharkhand",
+    "year": 2005,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 81,
+    "total_seats": 81,
+    "partyWins": {
+      "INC": 9,
+      "BJP": 30,
+      "JMM": 17,
+      "IND": 3,
+      "RJD": 7,
+      "JD(U)": 6,
+      "AJSU": 2,
+      "CPI(ML)(L)": 1,
+      "AIFB": 2,
+      "UGDP": 2,
+      "JKP": 1,
+      "NCP": 1
+    },
+    "party_wins": {
+      "INC": 9,
+      "BJP": 30,
+      "JMM": 17,
+      "IND": 3,
+      "RJD": 7,
+      "JD(U)": 6,
+      "AJSU": 2,
+      "CPI(ML)(L)": 1,
+      "AIFB": 2,
+      "UGDP": 2,
+      "JKP": 1,
+      "NCP": 1
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 2004,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "INC": 185,
+      "TDP": 47,
+      "CPM": 9,
+      "IND": 11,
+      "BSP": 1,
+      "CPI": 6,
+      "BJP": 2,
+      "TRS": 26,
+      "SP": 1,
+      "AIMIM": 4,
+      "JP": 2
+    },
+    "party_wins": {
+      "INC": 185,
+      "TDP": 47,
+      "CPM": 9,
+      "IND": 11,
+      "BSP": 1,
+      "CPI": 6,
+      "BJP": 2,
+      "TRS": 26,
+      "SP": 1,
+      "AIMIM": 4,
+      "JP": 2
+    }
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "year": 2004,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 57,
+    "total_seats": 57,
+    "partyWins": {
+      "INC": 31,
+      "IND": 13,
+      "BJP": 9,
+      "NCP": 2,
+      "AC": 2
+    },
+    "party_wins": {
+      "INC": 31,
+      "IND": 13,
+      "BJP": 9,
+      "NCP": 2,
+      "AC": 2
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 2004,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 224,
+    "total_seats": 224,
+    "partyWins": {
+      "INC": 65,
+      "BJP": 79,
+      "IND": 13,
+      "JD(S)": 58,
+      "KNDP": 1,
+      "JD(U)": 5,
+      "CPM": 1,
+      "RPI": 1,
+      "KCVP": 1
+    },
+    "party_wins": {
+      "INC": 65,
+      "BJP": 79,
+      "IND": 13,
+      "JD(S)": 58,
+      "KNDP": 1,
+      "JD(U)": 5,
+      "CPM": 1,
+      "RPI": 1,
+      "KCVP": 1
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 2004,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "SHS": 62,
+      "BJP": 54,
+      "NCP": 71,
+      "INC": 69,
+      "PWPI": 2,
+      "ABHS": 1,
+      "RPI(A)": 1,
+      "IND": 19,
+      "CPM": 3,
+      "BBM": 1,
+      "JSS": 4,
+      "STBP": 1
+    },
+    "party_wins": {
+      "SHS": 62,
+      "BJP": 54,
+      "NCP": 71,
+      "INC": 69,
+      "PWPI": 2,
+      "ABHS": 1,
+      "RPI(A)": 1,
+      "IND": 19,
+      "CPM": 3,
+      "BBM": 1,
+      "JSS": 4,
+      "STBP": 1
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 2004,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 147,
+    "total_seats": 147,
+    "partyWins": {
+      "BJD": 61,
+      "IND": 8,
+      "JMM": 4,
+      "BJP": 32,
+      "OGP": 2,
+      "INC": 38,
+      "CPI": 1,
+      "CPM": 1
+    },
+    "party_wins": {
+      "BJD": 61,
+      "IND": 8,
+      "JMM": 4,
+      "BJP": 32,
+      "OGP": 2,
+      "INC": 38,
+      "CPI": 1,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Sikkim",
+    "stateSlug": "sikkim",
+    "year": 2004,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 28,
+    "total_seats": 28,
+    "partyWins": {
+      "SDF": 27,
+      "INC": 1
+    },
+    "party_wins": {
+      "SDF": 27,
+      "INC": 1
+    }
+  },
+  {
+    "state": "Chhattisgarh",
+    "stateSlug": "chhattisgarh",
+    "year": 2003,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "INC": 37,
+      "BJP": 50,
+      "BSP": 2,
+      "NCP": 1
+    },
+    "party_wins": {
+      "INC": 37,
+      "BJP": 50,
+      "BSP": 2,
+      "NCP": 1
+    }
+  },
+  {
+    "state": "Delhi",
+    "stateSlug": "delhi",
+    "year": 2003,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 70,
+    "total_seats": 70,
+    "partyWins": {
+      "INC": 47,
+      "BJP": 20,
+      "IND": 1,
+      "NCP": 1,
+      "JD(S)": 1
+    },
+    "party_wins": {
+      "INC": 47,
+      "BJP": 20,
+      "IND": 1,
+      "NCP": 1,
+      "JD(S)": 1
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 2003,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 68,
+    "total_seats": 68,
+    "partyWins": {
+      "INC": 43,
+      "IND": 6,
+      "BJP": 16,
+      "LJNSP": 1,
+      "LMHP": 1,
+      "HVC": 1
+    },
+    "party_wins": {
+      "INC": 43,
+      "IND": 6,
+      "BJP": 16,
+      "LJNSP": 1,
+      "LMHP": 1,
+      "HVC": 1
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 2003,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 230,
+    "total_seats": 230,
+    "partyWins": {
+      "BJP": 173,
+      "INC": 38,
+      "IND": 2,
+      "BSP": 2,
+      "RSMD": 2,
+      "SP": 7,
+      "CPM": 1,
+      "GGP": 3,
+      "JD(U)": 1,
+      "NCP": 1
+    },
+    "party_wins": {
+      "BJP": 173,
+      "INC": 38,
+      "IND": 2,
+      "BSP": 2,
+      "RSMD": 2,
+      "SP": 7,
+      "CPM": 1,
+      "GGP": 3,
+      "JD(U)": 1,
+      "NCP": 1
+    }
+  },
+  {
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "year": 2003,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "UDP": 9,
+      "INC": 22,
+      "MDP": 4,
+      "IND": 5,
+      "BJP": 2,
+      "KHNAM": 2,
+      "NCP": 14,
+      "HPDP": 2
+    },
+    "party_wins": {
+      "UDP": 9,
+      "INC": 22,
+      "MDP": 4,
+      "IND": 5,
+      "BJP": 2,
+      "KHNAM": 2,
+      "NCP": 14,
+      "HPDP": 2
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 2003,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "MDF": 1,
+      "INC": 12,
+      "MNF": 21,
+      "MZPC": 3,
+      "ZNP": 2,
+      "HPC": 1
+    },
+    "party_wins": {
+      "MDF": 1,
+      "INC": 12,
+      "MNF": 21,
+      "MZPC": 3,
+      "ZNP": 2,
+      "HPC": 1
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 2003,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "BJP": 7,
+      "NPF": 19,
+      "NDM": 5,
+      "INC": 21,
+      "JD(U)": 3,
+      "SAP": 1,
+      "IND": 4
+    },
+    "party_wins": {
+      "BJP": 7,
+      "NPF": 19,
+      "NDM": 5,
+      "INC": 21,
+      "JD(U)": 3,
+      "SAP": 1,
+      "IND": 4
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 2003,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 200,
+    "total_seats": 200,
+    "partyWins": {
+      "IND": 13,
+      "INLD": 4,
+      "BJP": 120,
+      "INC": 56,
+      "RSNM": 1,
+      "LJNSP": 1,
+      "CPM": 1,
+      "BSP": 2,
+      "JD(U)": 2
+    },
+    "party_wins": {
+      "IND": 13,
+      "INLD": 4,
+      "BJP": 120,
+      "INC": 56,
+      "RSNM": 1,
+      "LJNSP": 1,
+      "CPM": 1,
+      "BSP": 2,
+      "JD(U)": 2
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 2003,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "CPM": 38,
+      "INC": 13,
+      "INPT": 6,
+      "RSP": 2,
+      "CPI": 1
+    },
+    "party_wins": {
+      "CPM": 38,
+      "INC": 13,
+      "INPT": 6,
+      "RSP": 2,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Goa",
+    "stateSlug": "goa",
+    "year": 2002,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "BJP": 17,
+      "INC": 16,
+      "NCP": 1,
+      "UGDP": 3,
+      "MAG": 2,
+      "IND": 1
+    },
+    "party_wins": {
+      "BJP": 17,
+      "INC": 16,
+      "NCP": 1,
+      "UGDP": 3,
+      "MAG": 2,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 2002,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 182,
+    "total_seats": 182,
+    "partyWins": {
+      "BJP": 127,
+      "INC": 51,
+      "IND": 2,
+      "JD(U)": 2
+    },
+    "party_wins": {
+      "BJP": 127,
+      "INC": 51,
+      "IND": 2,
+      "JD(U)": 2
+    }
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "stateSlug": "jammu---kashmir",
+    "year": 2002,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 87,
+    "total_seats": 87,
+    "partyWins": {
+      "JKN": 28,
+      "IND": 13,
+      "INC": 20,
+      "JKAL": 1,
+      "PDP": 16,
+      "CPM": 2,
+      "JKNPP": 4,
+      "DM": 1,
+      "BSP": 1,
+      "BJP": 1
+    },
+    "party_wins": {
+      "JKN": 28,
+      "IND": 13,
+      "INC": 20,
+      "JKAL": 1,
+      "PDP": 16,
+      "CPM": 2,
+      "JKNPP": 4,
+      "DM": 1,
+      "BSP": 1,
+      "BJP": 1
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 2002,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "SAP": 3,
+      "DRPP": 2,
+      "FPM": 13,
+      "MSCP": 7,
+      "INC": 20,
+      "CPI": 5,
+      "BJP": 4,
+      "MNC": 1,
+      "MPP": 2,
+      "NCP": 3
+    },
+    "party_wins": {
+      "SAP": 3,
+      "DRPP": 2,
+      "FPM": 13,
+      "MSCP": 7,
+      "INC": 20,
+      "CPI": 5,
+      "BJP": 4,
+      "MNC": 1,
+      "MPP": 2,
+      "NCP": 3
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 2002,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 117,
+    "total_seats": 117,
+    "partyWins": {
+      "INC": 62,
+      "SAD": 41,
+      "IND": 9,
+      "BJP": 3,
+      "CPI": 2
+    },
+    "party_wins": {
+      "INC": 62,
+      "SAD": 41,
+      "IND": 9,
+      "BJP": 3,
+      "CPI": 2
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 2002,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 403,
+    "total_seats": 403,
+    "partyWins": {
+      "BSP": 98,
+      "SP": 143,
+      "BJP": 88,
+      "CPM": 2,
+      "RLD": 14,
+      "RPD": 1,
+      "IND": 16,
+      "INC": 25,
+      "JD(U)": 2,
+      "LJNSP": 1,
+      "ABLTC": 2,
+      "ABHM": 1,
+      "NLP": 1,
+      "SJP(R)": 1,
+      "AD": 3,
+      "RTKP": 4,
+      "JP": 1
+    },
+    "party_wins": {
+      "BSP": 98,
+      "SP": 143,
+      "BJP": 88,
+      "CPM": 2,
+      "RLD": 14,
+      "RPD": 1,
+      "IND": 16,
+      "INC": 25,
+      "JD(U)": 2,
+      "LJNSP": 1,
+      "ABLTC": 2,
+      "ABHM": 1,
+      "NLP": 1,
+      "SJP(R)": 1,
+      "AD": 3,
+      "RTKP": 4,
+      "JP": 1
+    }
+  },
+  {
+    "state": "Uttarakhand",
+    "stateSlug": "uttarakhand",
+    "year": 2002,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 70,
+    "total_seats": 70,
+    "partyWins": {
+      "BJP": 19,
+      "INC": 36,
+      "UKKD": 4,
+      "NCP": 1,
+      "BSP": 7,
+      "IND": 3
+    },
+    "party_wins": {
+      "BJP": 19,
+      "INC": 36,
+      "UKKD": 4,
+      "NCP": 1,
+      "BSP": 7,
+      "IND": 3
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 2001,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 126,
+    "total_seats": 126,
+    "partyWins": {
+      "IND": 19,
+      "INC": 71,
+      "BJP": 8,
+      "SAP": 1,
+      "AITC": 1,
+      "AGP": 20,
+      "SP": 1,
+      "ASDC(U)": 2,
+      "NCP": 3
+    },
+    "party_wins": {
+      "IND": 19,
+      "INC": 71,
+      "BJP": 8,
+      "SAP": 1,
+      "AITC": 1,
+      "AGP": 20,
+      "SP": 1,
+      "ASDC(U)": 2,
+      "NCP": 3
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 2001,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "MUL": 16,
+      "CPM": 23,
+      "CPI": 7,
+      "INC": 62,
+      "JD(S)": 3,
+      "NCP": 2,
+      "IND": 3,
+      "KEC(M)": 9,
+      "JPSS": 4,
+      "KEC(J)": 2,
+      "KEC": 2,
+      "KEC(B)": 2,
+      "RSP": 2,
+      "RSPK(B)": 2,
+      "CMPKSC": 1
+    },
+    "party_wins": {
+      "MUL": 16,
+      "CPM": 23,
+      "CPI": 7,
+      "INC": 62,
+      "JD(S)": 3,
+      "NCP": 2,
+      "IND": 3,
+      "KEC(M)": 9,
+      "JPSS": 4,
+      "KEC(J)": 2,
+      "KEC": 2,
+      "KEC(B)": 2,
+      "RSP": 2,
+      "RSPK(B)": 2,
+      "CMPKSC": 1
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 2001,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "ADMK": 3,
+      "PMC": 4,
+      "DMK": 7,
+      "IND": 2,
+      "INC": 11,
+      "TMC(M)": 2,
+      "BJP": 1
+    },
+    "party_wins": {
+      "ADMK": 3,
+      "PMC": 4,
+      "DMK": 7,
+      "IND": 2,
+      "INC": 11,
+      "TMC(M)": 2,
+      "BJP": 1
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 2001,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "ADMK": 132,
+      "DMK": 31,
+      "TMC(M)": 23,
+      "CPM": 6,
+      "BJP": 4,
+      "CPI": 5,
+      "PMK": 20,
+      "INC": 7,
+      "IND": 3,
+      "FBL": 1,
+      "MADMK": 2
+    },
+    "party_wins": {
+      "ADMK": 132,
+      "DMK": 31,
+      "TMC(M)": 23,
+      "CPM": 6,
+      "BJP": 4,
+      "CPI": 5,
+      "PMK": 20,
+      "INC": 7,
+      "IND": 3,
+      "FBL": 1,
+      "MADMK": 2
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 2001,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "FBL": 25,
+      "CPM": 143,
+      "RSP": 17,
+      "INC": 26,
+      "GNLF": 3,
+      "IND": 9,
+      "AITC": 60,
+      "CPI": 7,
+      "WBSP": 4
+    },
+    "party_wins": {
+      "FBL": 25,
+      "CPM": 143,
+      "RSP": 17,
+      "INC": 26,
+      "GNLF": 3,
+      "IND": 9,
+      "AITC": 60,
+      "CPI": 7,
+      "WBSP": 4
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 2000,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 324,
+    "total_seats": 324,
+    "partyWins": {
+      "BSP": 5,
+      "RJD": 124,
+      "BJP": 67,
+      "INC": 23,
+      "SAP": 34,
+      "KSP": 2,
+      "IND": 20,
+      "JD(U)": 21,
+      "CPI(ML)(L)": 6,
+      "CPM": 2,
+      "CPI": 5,
+      "JMM": 12,
+      "MCO": 1,
+      "UGDP": 2
+    },
+    "party_wins": {
+      "BSP": 5,
+      "RJD": 124,
+      "BJP": 67,
+      "INC": 23,
+      "SAP": 34,
+      "KSP": 2,
+      "IND": 20,
+      "JD(U)": 21,
+      "CPI(ML)(L)": 6,
+      "CPM": 2,
+      "CPI": 5,
+      "JMM": 12,
+      "MCO": 1,
+      "UGDP": 2
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 2000,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "INC": 21,
+      "INLD": 47,
+      "BJP": 6,
+      "BSP": 1,
+      "IND": 11,
+      "RPI": 1,
+      "NCP": 1,
+      "HVP": 2
+    },
+    "party_wins": {
+      "INC": 21,
+      "INLD": 47,
+      "BJP": 6,
+      "BSP": 1,
+      "IND": 11,
+      "RPI": 1,
+      "NCP": 1,
+      "HVP": 2
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 2000,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "MPP": 4,
+      "FPM": 6,
+      "MSCP": 23,
+      "SAP": 1,
+      "INC": 11,
+      "JD(S)": 1,
+      "BJP": 6,
+      "IND": 1,
+      "NCP": 5,
+      "RJD": 1,
+      "JD(U)": 1
+    },
+    "party_wins": {
+      "MPP": 4,
+      "FPM": 6,
+      "MSCP": 23,
+      "SAP": 1,
+      "INC": 11,
+      "JD(S)": 1,
+      "BJP": 6,
+      "IND": 1,
+      "NCP": 5,
+      "RJD": 1,
+      "JD(U)": 1
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 2000,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 147,
+    "total_seats": 147,
+    "partyWins": {
+      "IND": 8,
+      "BJP": 38,
+      "JMM": 3,
+      "BJD": 68,
+      "INC": 26,
+      "CPM": 1,
+      "JD(S)": 1,
+      "AITC": 1,
+      "CPI": 1
+    },
+    "party_wins": {
+      "IND": 8,
+      "BJP": 38,
+      "JMM": 3,
+      "BJD": 68,
+      "INC": 26,
+      "CPM": 1,
+      "JD(S)": 1,
+      "AITC": 1,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 1999,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "TDP": 180,
+      "INC": 91,
+      "IND": 5,
+      "BJP": 12,
+      "AIMIM": 4,
+      "CPM": 2
+    },
+    "party_wins": {
+      "TDP": 180,
+      "INC": 91,
+      "IND": 5,
+      "BJP": 12,
+      "AIMIM": 4,
+      "CPM": 2
+    }
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "year": 1999,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 59,
+    "total_seats": 59,
+    "partyWins": {
+      "INC": 52,
+      "IND": 2,
+      "NCP": 4,
+      "AC": 1
+    },
+    "party_wins": {
+      "INC": 52,
+      "IND": 2,
+      "NCP": 4,
+      "AC": 1
+    }
+  },
+  {
+    "state": "Goa",
+    "stateSlug": "goa",
+    "year": 1999,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "MAG": 4,
+      "INC": 21,
+      "GRCP": 2,
+      "BJP": 10,
+      "UGDP": 2,
+      "IND": 1
+    },
+    "party_wins": {
+      "MAG": 4,
+      "INC": 21,
+      "GRCP": 2,
+      "BJP": 10,
+      "UGDP": 2,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 1999,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 224,
+    "total_seats": 224,
+    "partyWins": {
+      "BJP": 44,
+      "JD(S)": 10,
+      "INC": 132,
+      "JD(U)": 18,
+      "IND": 19,
+      "ADMK": 1
+    },
+    "party_wins": {
+      "BJP": 44,
+      "JD(S)": 10,
+      "INC": 132,
+      "JD(U)": 18,
+      "IND": 19,
+      "ADMK": 1
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 1999,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "SHS": 69,
+      "BJP": 56,
+      "NCP": 58,
+      "PWPI": 5,
+      "INC": 75,
+      "SP": 2,
+      "NVPP": 1,
+      "IND": 12,
+      "CPM": 2,
+      "BBM": 3,
+      "SJP(M)": 1,
+      "RPI": 1,
+      "GGP": 1,
+      "JD(S)": 2
+    },
+    "party_wins": {
+      "SHS": 69,
+      "BJP": 56,
+      "NCP": 58,
+      "PWPI": 5,
+      "INC": 75,
+      "SP": 2,
+      "NVPP": 1,
+      "IND": 12,
+      "CPM": 2,
+      "BBM": 3,
+      "SJP(M)": 1,
+      "RPI": 1,
+      "GGP": 1,
+      "JD(S)": 2
+    }
+  },
+  {
+    "state": "Sikkim",
+    "stateSlug": "sikkim",
+    "year": 1999,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 32,
+    "total_seats": 32,
+    "partyWins": {
+      "SDF": 24,
+      "SSP": 7,
+      "IND": 1
+    },
+    "party_wins": {
+      "SDF": 24,
+      "SSP": 7,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Delhi",
+    "stateSlug": "delhi",
+    "year": 1998,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 70,
+    "total_seats": 70,
+    "partyWins": {
+      "BJP": 15,
+      "INC": 52,
+      "IND": 2,
+      "JD": 1
+    },
+    "party_wins": {
+      "BJP": 15,
+      "INC": 52,
+      "IND": 2,
+      "JD": 1
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 1998,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 182,
+    "total_seats": 182,
+    "partyWins": {
+      "INC": 53,
+      "BJP": 117,
+      "AIRJP": 4,
+      "IND": 3,
+      "JD": 4,
+      "SP": 1
+    },
+    "party_wins": {
+      "INC": 53,
+      "BJP": 117,
+      "AIRJP": 4,
+      "IND": 3,
+      "JD": 4,
+      "SP": 1
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 1998,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 68,
+    "total_seats": 68,
+    "partyWins": {
+      "BJP": 31,
+      "INC": 31,
+      "IND": 1,
+      "HVC": 5
+    },
+    "party_wins": {
+      "BJP": 31,
+      "INC": 31,
+      "IND": 1,
+      "HVC": 5
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 1998,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 320,
+    "total_seats": 320,
+    "partyWins": {
+      "IND": 9,
+      "BJP": 119,
+      "BSP": 11,
+      "INC": 172,
+      "SP": 4,
+      "GGP": 1,
+      "RPI": 1,
+      "JP": 1,
+      "JD": 1,
+      "AJBP": 1
+    },
+    "party_wins": {
+      "IND": 9,
+      "BJP": 119,
+      "BSP": 11,
+      "INC": 172,
+      "SP": 4,
+      "GGP": 1,
+      "RPI": 1,
+      "JP": 1,
+      "JD": 1,
+      "AJBP": 1
+    }
+  },
+  {
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "year": 1998,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "UDP": 20,
+      "INC": 25,
+      "IND": 5,
+      "BJP": 3,
+      "PDM": 3,
+      "HPDP": 3,
+      "GNC": 1
+    },
+    "party_wins": {
+      "UDP": 20,
+      "INC": 25,
+      "IND": 5,
+      "BJP": 3,
+      "PDM": 3,
+      "HPDP": 3,
+      "GNC": 1
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 1998,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "INC": 6,
+      "IND": 1,
+      "MZPC": 12,
+      "MNF": 21
+    },
+    "party_wins": {
+      "INC": 6,
+      "IND": 1,
+      "MZPC": 12,
+      "MNF": 21
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 1998,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 53,
+      "IND": 7
+    },
+    "party_wins": {
+      "INC": 53,
+      "IND": 7
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 1998,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 200,
+    "total_seats": 200,
+    "partyWins": {
+      "INC": 153,
+      "BJP": 33,
+      "IND": 7,
+      "CPM": 1,
+      "BSP": 2,
+      "RJD": 1,
+      "JD": 3
+    },
+    "party_wins": {
+      "INC": 153,
+      "BJP": 33,
+      "IND": 7,
+      "CPM": 1,
+      "BSP": 2,
+      "RJD": 1,
+      "JD": 3
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 1998,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "CPM": 38,
+      "INC": 13,
+      "IND": 2,
+      "TUJS": 4,
+      "RSP": 2,
+      "CPI": 1
+    },
+    "party_wins": {
+      "CPM": 38,
+      "INC": 13,
+      "IND": 2,
+      "TUJS": 4,
+      "RSP": 2,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 1997,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 117,
+    "total_seats": 117,
+    "partyWins": {
+      "IND": 6,
+      "BJP": 18,
+      "SAD": 75,
+      "INC": 14,
+      "BSP": 1,
+      "CPI": 2,
+      "SAD(M)": 1
+    },
+    "party_wins": {
+      "IND": 6,
+      "BJP": 18,
+      "SAD": 75,
+      "INC": 14,
+      "BSP": 1,
+      "CPI": 2,
+      "SAD(M)": 1
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 1996,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 122,
+    "total_seats": 122,
+    "partyWins": {
+      "BJP": 4,
+      "AGP": 59,
+      "INC": 34,
+      "IND": 11,
+      "ASDC": 5,
+      "CPI": 3,
+      "AIIC(T)": 2,
+      "CPM": 2,
+      "UMFA": 2
+    },
+    "party_wins": {
+      "BJP": 4,
+      "AGP": 59,
+      "INC": 34,
+      "IND": 11,
+      "ASDC": 5,
+      "CPI": 3,
+      "AIIC(T)": 2,
+      "CPM": 2,
+      "UMFA": 2
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 1996,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "INC": 9,
+      "HVP": 33,
+      "SAP": 24,
+      "IND": 10,
+      "BJP": 11,
+      "AIIC(T)": 3
+    },
+    "party_wins": {
+      "INC": 9,
+      "HVP": 33,
+      "SAP": 24,
+      "IND": 10,
+      "BJP": 11,
+      "AIIC(T)": 3
+    }
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "stateSlug": "jammu---kashmir",
+    "year": 1996,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 87,
+    "total_seats": 87,
+    "partyWins": {
+      "JKN": 57,
+      "JD": 5,
+      "IND": 2,
+      "JKAL": 1,
+      "INC": 7,
+      "CPM": 1,
+      "BSP": 4,
+      "BJP": 8,
+      "JPP": 1,
+      "AIIC(T)": 1
+    },
+    "party_wins": {
+      "JKN": 57,
+      "JD": 5,
+      "IND": 2,
+      "JKAL": 1,
+      "INC": 7,
+      "CPM": 1,
+      "BSP": 4,
+      "BJP": 8,
+      "JPP": 1,
+      "AIIC(T)": 1
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 1996,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "MUL": 13,
+      "CPM": 40,
+      "CPI": 18,
+      "INC": 37,
+      "JD": 4,
+      "ICS": 3,
+      "IND": 5,
+      "KEC(J)": 2,
+      "KEC": 6,
+      "KEC(M)": 5,
+      "JPSS": 1,
+      "RSP": 5,
+      "KEC(B)": 1
+    },
+    "party_wins": {
+      "MUL": 13,
+      "CPM": 40,
+      "CPI": 18,
+      "INC": 37,
+      "JD": 4,
+      "ICS": 3,
+      "IND": 5,
+      "KEC(J)": 2,
+      "KEC": 6,
+      "KEC(M)": 5,
+      "JPSS": 1,
+      "RSP": 5,
+      "KEC(B)": 1
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 1996,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "ADMK": 3,
+      "IND": 2,
+      "DMK": 7,
+      "INC": 9,
+      "TMC(M)": 5,
+      "CPI": 2,
+      "PMK": 1,
+      "JD": 1
+    },
+    "party_wins": {
+      "ADMK": 3,
+      "IND": 2,
+      "DMK": 7,
+      "INC": 9,
+      "TMC(M)": 5,
+      "CPI": 2,
+      "PMK": 1,
+      "JD": 1
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 1996,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "DMK": 173,
+      "TMC(M)": 39,
+      "JD": 1,
+      "CPI": 8,
+      "PMK": 4,
+      "ADMK": 4,
+      "FBL": 1,
+      "IND": 1,
+      "JP": 1,
+      "BJP": 1,
+      "CPM": 1
+    },
+    "party_wins": {
+      "DMK": 173,
+      "TMC(M)": 39,
+      "JD": 1,
+      "CPI": 8,
+      "PMK": 4,
+      "ADMK": 4,
+      "FBL": 1,
+      "IND": 1,
+      "JP": 1,
+      "BJP": 1,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1996,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 424,
+    "total_seats": 424,
+    "partyWins": {
+      "BJP": 174,
+      "AIIC(T)": 4,
+      "SP": 110,
+      "CPM": 4,
+      "BSP": 67,
+      "IND": 13,
+      "INC": 33,
+      "JD": 7,
+      "SJP(R)": 1,
+      "SAP": 2,
+      "CPI": 1,
+      "BKKGP": 8
+    },
+    "party_wins": {
+      "BJP": 174,
+      "AIIC(T)": 4,
+      "SP": 110,
+      "CPM": 4,
+      "BSP": 67,
+      "IND": 13,
+      "INC": 33,
+      "JD": 7,
+      "SJP(R)": 1,
+      "SAP": 2,
+      "CPI": 1,
+      "BKKGP": 8
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1996,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "FBL": 21,
+      "CPM": 157,
+      "INC": 82,
+      "IND": 5,
+      "FB(S)": 1,
+      "RSP": 18,
+      "GNLF": 3,
+      "CPI": 6,
+      "JKP(N)": 1
+    },
+    "party_wins": {
+      "FBL": 21,
+      "CPM": 157,
+      "INC": 82,
+      "IND": 5,
+      "FB(S)": 1,
+      "RSP": 18,
+      "GNLF": 3,
+      "CPI": 6,
+      "JKP(N)": 1
+    }
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "year": 1995,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "IND": 12,
+      "INC": 43,
+      "JP": 2,
+      "JD": 3
+    },
+    "party_wins": {
+      "IND": 12,
+      "INC": 43,
+      "JP": 2,
+      "JD": 3
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 1995,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 324,
+    "total_seats": 324,
+    "partyWins": {
+      "SAP": 7,
+      "JD": 167,
+      "CVP": 1,
+      "CPI": 26,
+      "IND": 12,
+      "BJP": 41,
+      "CPM": 6,
+      "CPI(ML)(L)": 6,
+      "INC": 29,
+      "BPP": 1,
+      "SP": 2,
+      "JMM": 10,
+      "JMM(S)": 6,
+      "BSP": 2,
+      "JMM(M)": 3,
+      "MCOR": 2,
+      "JPP": 2,
+      "JKP": 1
+    },
+    "party_wins": {
+      "SAP": 7,
+      "JD": 167,
+      "CVP": 1,
+      "CPI": 26,
+      "IND": 12,
+      "BJP": 41,
+      "CPM": 6,
+      "CPI(ML)(L)": 6,
+      "INC": 29,
+      "BPP": 1,
+      "SP": 2,
+      "JMM": 10,
+      "JMM(S)": 6,
+      "BSP": 2,
+      "JMM(M)": 3,
+      "MCOR": 2,
+      "JPP": 2,
+      "JKP": 1
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 1995,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 182,
+    "total_seats": 182,
+    "partyWins": {
+      "INC": 45,
+      "BJP": 121,
+      "IND": 16
+    },
+    "party_wins": {
+      "INC": 45,
+      "BJP": 121,
+      "IND": 16
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 1995,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "INC": 80,
+      "SHS": 73,
+      "BJP": 65,
+      "PWP": 6,
+      "SP": 3,
+      "JD": 11,
+      "IND": 45,
+      "CPM": 3,
+      "MVC": 1,
+      "NVAS": 1
+    },
+    "party_wins": {
+      "INC": 80,
+      "SHS": 73,
+      "BJP": 65,
+      "PWP": 6,
+      "SP": 3,
+      "JD": 11,
+      "IND": 45,
+      "CPM": 3,
+      "MVC": 1,
+      "NVAS": 1
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 1995,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "MPP": 18,
+      "FPM": 2,
+      "IND": 3,
+      "JD": 7,
+      "INC": 22,
+      "BJP": 1,
+      "CPI": 2,
+      "SAP": 2,
+      "ICS": 1,
+      "NPP": 2
+    },
+    "party_wins": {
+      "MPP": 18,
+      "FPM": 2,
+      "IND": 3,
+      "JD": 7,
+      "INC": 22,
+      "BJP": 1,
+      "CPI": 2,
+      "SAP": 2,
+      "ICS": 1,
+      "NPP": 2
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 1995,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 147,
+    "total_seats": 147,
+    "partyWins": {
+      "JD": 46,
+      "IND": 6,
+      "JPP": 1,
+      "INC": 80,
+      "JMM": 4,
+      "BJP": 9,
+      "CPI": 1
+    },
+    "party_wins": {
+      "JD": 46,
+      "IND": 6,
+      "JPP": 1,
+      "INC": 80,
+      "JMM": 4,
+      "BJP": 9,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 1994,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "TDP": 216,
+      "INC": 26,
+      "CPI": 19,
+      "IND": 12,
+      "CPM": 15,
+      "BJP": 3,
+      "MBT": 2,
+      "MIM": 1
+    },
+    "party_wins": {
+      "TDP": 216,
+      "INC": 26,
+      "CPI": 19,
+      "IND": 12,
+      "CPM": 15,
+      "BJP": 3,
+      "MBT": 2,
+      "MIM": 1
+    }
+  },
+  {
+    "state": "Goa",
+    "stateSlug": "goa",
+    "year": 1994,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "INC": 18,
+      "MAG": 12,
+      "BJP": 4,
+      "IND": 3,
+      "UGDP": 3
+    },
+    "party_wins": {
+      "INC": 18,
+      "MAG": 12,
+      "BJP": 4,
+      "IND": 3,
+      "UGDP": 3
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 1994,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 224,
+    "total_seats": 224,
+    "partyWins": {
+      "JD": 115,
+      "INC": 34,
+      "BJP": 40,
+      "BSP": 1,
+      "KCP": 10,
+      "INL": 1,
+      "IND": 18,
+      "CPM": 1,
+      "BRP": 1,
+      "ADMK": 1,
+      "KRRS": 1,
+      "KCVP": 1
+    },
+    "party_wins": {
+      "JD": 115,
+      "INC": 34,
+      "BJP": 40,
+      "BSP": 1,
+      "KCP": 10,
+      "INL": 1,
+      "IND": 18,
+      "CPM": 1,
+      "BRP": 1,
+      "ADMK": 1,
+      "KRRS": 1,
+      "KCVP": 1
+    }
+  },
+  {
+    "state": "Sikkim",
+    "stateSlug": "sikkim",
+    "year": 1994,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 32,
+    "total_seats": 32,
+    "partyWins": {
+      "IND": 1,
+      "SSP": 10,
+      "SDF": 19,
+      "INC": 2
+    },
+    "party_wins": {
+      "IND": 1,
+      "SSP": 10,
+      "SDF": 19,
+      "INC": 2
+    }
+  },
+  {
+    "state": "Delhi",
+    "stateSlug": "delhi",
+    "year": 1993,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 70,
+    "total_seats": 70,
+    "partyWins": {
+      "BJP": 49,
+      "INC": 14,
+      "JD": 4,
+      "IND": 3
+    },
+    "party_wins": {
+      "BJP": 49,
+      "INC": 14,
+      "JD": 4,
+      "IND": 3
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 1993,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 68,
+    "total_seats": 68,
+    "partyWins": {
+      "INC": 52,
+      "IND": 7,
+      "BJP": 8,
+      "CPM": 1
+    },
+    "party_wins": {
+      "INC": 52,
+      "IND": 7,
+      "BJP": 8,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 1993,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 320,
+    "total_seats": 320,
+    "partyWins": {
+      "BJP": 117,
+      "INC": 174,
+      "BSP": 11,
+      "IND": 8,
+      "CPM": 1,
+      "JD": 4,
+      "CPI": 2,
+      "CMM": 1,
+      "RPI(K)": 1,
+      "KSM": 1
+    },
+    "party_wins": {
+      "BJP": 117,
+      "INC": 174,
+      "BSP": 11,
+      "IND": 8,
+      "CPM": 1,
+      "JD": 4,
+      "CPI": 2,
+      "CMM": 1,
+      "RPI(K)": 1,
+      "KSM": 1
+    }
+  },
+  {
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "year": 1993,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 24,
+      "HPU": 11,
+      "AHLC(AM)": 3,
+      "HPSD": 8,
+      "PDI": 2,
+      "IND": 10,
+      "MPP": 2
+    },
+    "party_wins": {
+      "INC": 24,
+      "HPU": 11,
+      "AHLC(AM)": 3,
+      "HPSD": 8,
+      "PDI": 2,
+      "IND": 10,
+      "MPP": 2
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 1993,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "IND": 10,
+      "MNF": 14,
+      "INC": 16
+    },
+    "party_wins": {
+      "IND": 10,
+      "MNF": 14,
+      "INC": 16
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 1993,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "IND": 7,
+      "INC": 35,
+      "NPC": 17,
+      "DLP": 1
+    },
+    "party_wins": {
+      "IND": 7,
+      "INC": 35,
+      "NPC": 17,
+      "DLP": 1
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 1993,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 199,
+    "total_seats": 199,
+    "partyWins": {
+      "IND": 21,
+      "JD": 6,
+      "BJP": 95,
+      "INC": 76,
+      "CPM": 1
+    },
+    "party_wins": {
+      "IND": 21,
+      "JD": 6,
+      "BJP": 95,
+      "INC": 76,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 1993,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "CPM": 44,
+      "INC": 10,
+      "JD(B)": 1,
+      "FBL": 1,
+      "TJS": 1,
+      "RSP": 2,
+      "IND": 1
+    },
+    "party_wins": {
+      "CPM": 44,
+      "INC": 10,
+      "JD(B)": 1,
+      "FBL": 1,
+      "TJS": 1,
+      "RSP": 2,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1993,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 423,
+    "total_seats": 423,
+    "partyWins": {
+      "SP": 109,
+      "INC": 28,
+      "BJP": 177,
+      "IND": 8,
+      "UKD": 1,
+      "JD": 27,
+      "CPM": 1,
+      "JP": 1,
+      "BSP": 68,
+      "CPI": 3
+    },
+    "party_wins": {
+      "SP": 109,
+      "INC": 28,
+      "BJP": 177,
+      "IND": 8,
+      "UKD": 1,
+      "JD": 27,
+      "CPM": 1,
+      "JP": 1,
+      "BSP": 68,
+      "CPI": 3
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 1992,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 117,
+    "total_seats": 117,
+    "partyWins": {
+      "INC": 87,
+      "BJP": 6,
+      "CPI": 4,
+      "IND": 4,
+      "SAD": 3,
+      "BSP": 9,
+      "CPM": 1,
+      "JD": 1,
+      "UCPI": 1,
+      "IPF": 1
+    },
+    "party_wins": {
+      "INC": 87,
+      "BJP": 6,
+      "CPI": 4,
+      "IND": 4,
+      "SAD": 3,
+      "BSP": 9,
+      "CPM": 1,
+      "JD": 1,
+      "UCPI": 1,
+      "IPF": 1
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 1991,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 126,
+    "total_seats": 126,
+    "partyWins": {
+      "BJP": 10,
+      "INC": 66,
+      "AGP": 19,
+      "JD": 1,
+      "ADC": 4,
+      "IND": 15,
+      "CPI": 4,
+      "CPM": 2,
+      "NAGP": 5
+    },
+    "party_wins": {
+      "BJP": 10,
+      "INC": 66,
+      "AGP": 19,
+      "JD": 1,
+      "ADC": 4,
+      "IND": 15,
+      "CPI": 4,
+      "CPM": 2,
+      "NAGP": 5
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 1991,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "INC": 51,
+      "BSP": 1,
+      "IND": 5,
+      "HVP": 12,
+      "JP": 16,
+      "JD": 3,
+      "BJP": 2
+    },
+    "party_wins": {
+      "INC": 51,
+      "BSP": 1,
+      "IND": 5,
+      "HVP": 12,
+      "JP": 16,
+      "JD": 3,
+      "BJP": 2
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 1991,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "MUL": 19,
+      "CPM": 29,
+      "CPI": 12,
+      "INC": 55,
+      "JD": 3,
+      "ICS(SCS)": 2,
+      "IND": 4,
+      "KEC(M)": 10,
+      "NDP": 2,
+      "KEC": 1,
+      "RSP": 2,
+      "CPM(K)": 1
+    },
+    "party_wins": {
+      "MUL": 19,
+      "CPM": 29,
+      "CPI": 12,
+      "INC": 55,
+      "JD": 3,
+      "ICS(SCS)": 2,
+      "IND": 4,
+      "KEC(M)": 10,
+      "NDP": 2,
+      "KEC": 1,
+      "RSP": 2,
+      "CPM(K)": 1
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 1991,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "ADK": 6,
+      "JD": 1,
+      "INC": 15,
+      "DMK": 4,
+      "IND": 3,
+      "CPI": 1
+    },
+    "party_wins": {
+      "ADK": 6,
+      "JD": 1,
+      "INC": 15,
+      "DMK": 4,
+      "IND": 3,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 1991,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "ADK": 164,
+      "DMK": 2,
+      "INC": 60,
+      "PMK": 1,
+      "CPM": 1,
+      "CPI": 1,
+      "TMK": 2,
+      "ICS(SCS)": 1,
+      "IND": 1,
+      "JD": 1
+    },
+    "party_wins": {
+      "ADK": 164,
+      "DMK": 2,
+      "INC": 60,
+      "PMK": 1,
+      "CPM": 1,
+      "CPI": 1,
+      "TMK": 2,
+      "ICS(SCS)": 1,
+      "IND": 1,
+      "JD": 1
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1991,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 419,
+    "total_seats": 419,
+    "partyWins": {
+      "BJP": 221,
+      "INC": 46,
+      "JD": 92,
+      "JP": 34,
+      "IND": 7,
+      "SHS": 1,
+      "BSP": 12,
+      "CPI": 4,
+      "CPM": 1,
+      "SSD": 1
+    },
+    "party_wins": {
+      "BJP": 221,
+      "INC": 46,
+      "JD": 92,
+      "JP": 34,
+      "IND": 7,
+      "SHS": 1,
+      "BSP": 12,
+      "CPI": 4,
+      "CPM": 1,
+      "SSD": 1
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1991,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "FBL": 29,
+      "CPM": 189,
+      "RSP": 18,
+      "INC": 43,
+      "IND": 6,
+      "CPI": 5,
+      "DSP(PC)": 1,
+      "JKP": 1,
+      "JD": 1,
+      "RCPI(RB)": 1
+    },
+    "party_wins": {
+      "FBL": 29,
+      "CPM": 189,
+      "RSP": 18,
+      "INC": 43,
+      "IND": 6,
+      "CPI": 5,
+      "DSP(PC)": 1,
+      "JKP": 1,
+      "JD": 1,
+      "RCPI(RB)": 1
+    }
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "year": 1990,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 37,
+      "IND": 11,
+      "JD": 11,
+      "JNP(JP)": 1
+    },
+    "party_wins": {
+      "INC": 37,
+      "IND": 11,
+      "JD": 11,
+      "JNP(JP)": 1
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 1990,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 324,
+    "total_seats": 324,
+    "partyWins": {
+      "INC": 71,
+      "JD": 122,
+      "BJP": 39,
+      "IND": 30,
+      "CPI": 23,
+      "CPM": 6,
+      "JNP(JP)": 3,
+      "SOP(L)": 1,
+      "JMM": 19,
+      "IPF": 7,
+      "MCOR": 2,
+      "JKD": 1
+    },
+    "party_wins": {
+      "INC": 71,
+      "JD": 122,
+      "BJP": 39,
+      "IND": 30,
+      "CPI": 23,
+      "CPM": 6,
+      "JNP(JP)": 3,
+      "SOP(L)": 1,
+      "JMM": 19,
+      "IPF": 7,
+      "MCOR": 2,
+      "JKD": 1
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 1990,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 182,
+    "total_seats": 182,
+    "partyWins": {
+      "BJP": 67,
+      "INC": 33,
+      "JD": 70,
+      "IND": 11,
+      "YVP": 1
+    },
+    "party_wins": {
+      "BJP": 67,
+      "INC": 33,
+      "JD": 70,
+      "IND": 11,
+      "YVP": 1
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 1990,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 67,
+    "total_seats": 67,
+    "partyWins": {
+      "BJP": 45,
+      "INC": 9,
+      "JD": 11,
+      "CPI": 1,
+      "IND": 1
+    },
+    "party_wins": {
+      "BJP": 45,
+      "INC": 9,
+      "JD": 11,
+      "CPI": 1,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 1990,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 320,
+    "total_seats": 320,
+    "partyWins": {
+      "BJP": 220,
+      "INC": 56,
+      "JD": 28,
+      "IND": 10,
+      "CPI": 3,
+      "BSP": 2,
+      "KSM": 1
+    },
+    "party_wins": {
+      "BJP": 220,
+      "INC": 56,
+      "JD": 28,
+      "IND": 10,
+      "CPI": 3,
+      "BSP": 2,
+      "KSM": 1
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 1990,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "INC": 141,
+      "JD": 24,
+      "SHS": 52,
+      "BJP": 42,
+      "PWP": 8,
+      "MUL": 1,
+      "CPM": 3,
+      "ICS(SCS)": 1,
+      "IND": 13,
+      "CPI": 2,
+      "RPK": 1
+    },
+    "party_wins": {
+      "INC": 141,
+      "JD": 24,
+      "SHS": 52,
+      "BJP": 42,
+      "PWP": 8,
+      "MUL": 1,
+      "CPM": 3,
+      "ICS(SCS)": 1,
+      "IND": 13,
+      "CPI": 2,
+      "RPK": 1
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 1990,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 54,
+    "total_seats": 54,
+    "partyWins": {
+      "MPP": 9,
+      "JD": 11,
+      "INC": 24,
+      "CPI": 3,
+      "ICS(SCS)": 4,
+      "NPP": 1,
+      "KNA": 2
+    },
+    "party_wins": {
+      "MPP": 9,
+      "JD": 11,
+      "INC": 24,
+      "CPI": 3,
+      "ICS(SCS)": 4,
+      "NPP": 1,
+      "KNA": 2
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 1990,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 147,
+    "total_seats": 147,
+    "partyWins": {
+      "JD": 123,
+      "IND": 6,
+      "CPI": 5,
+      "INC": 10,
+      "CPM": 1,
+      "BJP": 2
+    },
+    "party_wins": {
+      "JD": 123,
+      "IND": 6,
+      "CPI": 5,
+      "INC": 10,
+      "CPM": 1,
+      "BJP": 2
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 1990,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "DMK": 9,
+      "INC": 11,
+      "CPI": 2,
+      "JD": 4,
+      "ADK": 3,
+      "IND": 1
+    },
+    "party_wins": {
+      "DMK": 9,
+      "INC": 11,
+      "CPI": 2,
+      "JD": 4,
+      "ADK": 3,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 1990,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 200,
+    "total_seats": 200,
+    "partyWins": {
+      "JD": 55,
+      "INC": 50,
+      "CPM": 1,
+      "BJP": 85,
+      "IND": 9
+    },
+    "party_wins": {
+      "JD": 55,
+      "INC": 50,
+      "CPM": 1,
+      "BJP": 85,
+      "IND": 9
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 1989,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "TDP": 74,
+      "IND": 15,
+      "INC": 181,
+      "CPM": 6,
+      "BJP": 5,
+      "JD": 1,
+      "MIM": 4,
+      "CPI": 8
+    },
+    "party_wins": {
+      "TDP": 74,
+      "IND": 15,
+      "INC": 181,
+      "CPM": 6,
+      "BJP": 5,
+      "JD": 1,
+      "MIM": 4,
+      "CPI": 8
+    }
+  },
+  {
+    "state": "Goa",
+    "stateSlug": "goa",
+    "year": 1989,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "MAG": 18,
+      "INC": 20,
+      "IND": 2
+    },
+    "party_wins": {
+      "MAG": 18,
+      "INC": 20,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 1989,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 224,
+    "total_seats": 224,
+    "partyWins": {
+      "JD": 24,
+      "IND": 12,
+      "INC": 178,
+      "BJP": 4,
+      "MUL": 1,
+      "ADK": 1,
+      "JNP(JP)": 2,
+      "KRS": 2
+    },
+    "party_wins": {
+      "JD": 24,
+      "IND": 12,
+      "INC": 178,
+      "BJP": 4,
+      "MUL": 1,
+      "ADK": 1,
+      "JNP(JP)": 2,
+      "KRS": 2
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 1989,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "INC": 23,
+      "MNF": 14,
+      "IND": 2,
+      "PPC": 1
+    },
+    "party_wins": {
+      "INC": 23,
+      "MNF": 14,
+      "IND": 2,
+      "PPC": 1
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 1989,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 36,
+      "NPC": 24
+    },
+    "party_wins": {
+      "INC": 36,
+      "NPC": 24
+    }
+  },
+  {
+    "state": "Sikkim",
+    "stateSlug": "sikkim",
+    "year": 1989,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 32,
+    "total_seats": 32,
+    "partyWins": {
+      "SSP": 32
+    },
+    "party_wins": {
+      "SSP": 32
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 1989,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "DMK": 150,
+      "CPM": 15,
+      "ADK(JL)": 27,
+      "INC": 26,
+      "IND": 5,
+      "JNP": 4,
+      "ADK": 2,
+      "ADK(JR)": 2,
+      "CPI": 3
+    },
+    "party_wins": {
+      "DMK": 150,
+      "CPM": 15,
+      "ADK(JL)": 27,
+      "INC": 26,
+      "IND": 5,
+      "JNP": 4,
+      "ADK": 2,
+      "ADK(JR)": 2,
+      "CPI": 3
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1989,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 425,
+    "total_seats": 425,
+    "partyWins": {
+      "JD": 208,
+      "INC": 94,
+      "IND": 40,
+      "BJP": 57,
+      "BSP": 13,
+      "CPM": 2,
+      "CPI": 6,
+      "LKD(B)": 2,
+      "HMS": 1,
+      "JNP(JP)": 1,
+      "SSD": 1
+    },
+    "party_wins": {
+      "JD": 208,
+      "INC": 94,
+      "IND": 40,
+      "BJP": 57,
+      "BSP": 13,
+      "CPM": 2,
+      "CPI": 6,
+      "LKD(B)": 2,
+      "HMS": 1,
+      "JNP(JP)": 1,
+      "SSD": 1
+    }
+  },
+  {
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "year": 1988,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 22,
+      "IND": 9,
+      "HPU": 19,
+      "HPD": 6,
+      "PDC": 2,
+      "AHL(A)": 2
+    },
+    "party_wins": {
+      "INC": 22,
+      "IND": 9,
+      "HPU": 19,
+      "HPD": 6,
+      "PDC": 2,
+      "AHL(A)": 2
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 1988,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "CPM": 26,
+      "INC": 25,
+      "TUS": 7,
+      "RSP": 2
+    },
+    "party_wins": {
+      "CPM": 26,
+      "INC": 25,
+      "TUS": 7,
+      "RSP": 2
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 1987,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "LKD": 60,
+      "IND": 7,
+      "INC": 5,
+      "BJP": 16,
+      "CPI": 1,
+      "CPM": 1
+    },
+    "party_wins": {
+      "LKD": 60,
+      "IND": 7,
+      "INC": 5,
+      "BJP": 16,
+      "CPI": 1,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "stateSlug": "jammu---kashmir",
+    "year": 1987,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 76,
+    "total_seats": 76,
+    "partyWins": {
+      "JKN": 40,
+      "IND": 8,
+      "INC": 26,
+      "BJP": 2
+    },
+    "party_wins": {
+      "JKN": 40,
+      "IND": 8,
+      "INC": 26,
+      "BJP": 2
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 1987,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "MUL": 15,
+      "INC": 33,
+      "CPM": 38,
+      "IND": 14,
+      "JNP": 7,
+      "CPI": 16,
+      "ICS(SCS)": 6,
+      "KEC": 5,
+      "RSP": 5,
+      "LKD": 1
+    },
+    "party_wins": {
+      "MUL": 15,
+      "INC": 33,
+      "CPM": 38,
+      "IND": 14,
+      "JNP": 7,
+      "CPI": 16,
+      "ICS(SCS)": 6,
+      "KEC": 5,
+      "RSP": 5,
+      "LKD": 1
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 1987,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "INC": 13,
+      "PPC": 3,
+      "IND": 24
+    },
+    "party_wins": {
+      "INC": 13,
+      "PPC": 3,
+      "IND": 24
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 1987,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 34,
+      "IND": 7,
+      "NND": 18,
+      "NPP": 1
+    },
+    "party_wins": {
+      "INC": 34,
+      "IND": 7,
+      "NND": 18,
+      "NPP": 1
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1987,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "FBL": 26,
+      "CPM": 187,
+      "RSP": 18,
+      "INC": 40,
+      "CPI": 11,
+      "IND": 9,
+      "MUL": 1,
+      "SUC": 2
+    },
+    "party_wins": {
+      "FBL": 26,
+      "CPM": 187,
+      "RSP": 18,
+      "INC": 40,
+      "CPI": 11,
+      "IND": 9,
+      "MUL": 1,
+      "SUC": 2
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "TDP": 202,
+      "INC": 50,
+      "CPM": 11,
+      "CPI": 11,
+      "IND": 9,
+      "BJP": 8,
+      "JNP": 3
+    },
+    "party_wins": {
+      "TDP": 202,
+      "INC": 50,
+      "CPM": 11,
+      "CPI": 11,
+      "IND": 9,
+      "BJP": 8,
+      "JNP": 3
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 126,
+    "total_seats": 126,
+    "partyWins": {
+      "INC": 25,
+      "IND": 92,
+      "CPM": 2,
+      "ICS": 4,
+      "PTC": 3
+    },
+    "party_wins": {
+      "INC": 25,
+      "IND": 92,
+      "CPM": 2,
+      "ICS": 4,
+      "PTC": 3
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 324,
+    "total_seats": 324,
+    "partyWins": {
+      "LKD": 46,
+      "INC": 196,
+      "JNP": 13,
+      "CPI": 12,
+      "IND": 29,
+      "BJP": 16,
+      "SUC": 1,
+      "CPM": 1,
+      "JMM": 9,
+      "ICS": 1
+    },
+    "party_wins": {
+      "LKD": 46,
+      "INC": 196,
+      "JNP": 13,
+      "CPI": 12,
+      "IND": 29,
+      "BJP": 16,
+      "SUC": 1,
+      "CPM": 1,
+      "JMM": 9,
+      "ICS": 1
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 182,
+    "total_seats": 182,
+    "partyWins": {
+      "INC": 149,
+      "BJP": 11,
+      "IND": 8,
+      "JNP": 14
+    },
+    "party_wins": {
+      "INC": 149,
+      "BJP": 11,
+      "IND": 8,
+      "JNP": 14
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 68,
+    "total_seats": 68,
+    "partyWins": {
+      "INC": 58,
+      "BJP": 7,
+      "IND": 2,
+      "LKD": 1
+    },
+    "party_wins": {
+      "INC": 58,
+      "BJP": 7,
+      "IND": 2,
+      "LKD": 1
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 224,
+    "total_seats": 224,
+    "partyWins": {
+      "JNP": 139,
+      "INC": 65,
+      "CPI": 3,
+      "IND": 13,
+      "CPM": 2,
+      "BJP": 2
+    },
+    "party_wins": {
+      "JNP": 139,
+      "INC": 65,
+      "CPI": 3,
+      "IND": 13,
+      "CPM": 2,
+      "BJP": 2
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 320,
+    "total_seats": 320,
+    "partyWins": {
+      "ICS": 1,
+      "BJP": 58,
+      "INC": 250,
+      "JNP": 5,
+      "IND": 6
+    },
+    "party_wins": {
+      "ICS": 1,
+      "BJP": 58,
+      "INC": 250,
+      "JNP": 5,
+      "IND": 6
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "INC": 161,
+      "JNP": 20,
+      "BJP": 16,
+      "IND": 20,
+      "PWP": 13,
+      "CPM": 2,
+      "ICS": 54,
+      "CPI": 2
+    },
+    "party_wins": {
+      "INC": 161,
+      "JNP": 20,
+      "BJP": 16,
+      "IND": 20,
+      "PWP": 13,
+      "CPM": 2,
+      "ICS": 54,
+      "CPI": 2
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 147,
+    "total_seats": 147,
+    "partyWins": {
+      "INC": 117,
+      "IND": 7,
+      "JNP": 21,
+      "BJP": 1,
+      "CPI": 1
+    },
+    "party_wins": {
+      "INC": 117,
+      "IND": 7,
+      "JNP": 21,
+      "BJP": 1,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "DMK": 5,
+      "INC": 15,
+      "ADK": 6,
+      "JNP": 2,
+      "IND": 2
+    },
+    "party_wins": {
+      "DMK": 5,
+      "INC": 15,
+      "ADK": 6,
+      "JNP": 2,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 117,
+    "total_seats": 117,
+    "partyWins": {
+      "SAD": 73,
+      "INC": 32,
+      "BJP": 6,
+      "JNP": 1,
+      "IND": 4,
+      "CPI": 1
+    },
+    "party_wins": {
+      "SAD": 73,
+      "INC": 32,
+      "BJP": 6,
+      "JNP": 1,
+      "IND": 4,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 200,
+    "total_seats": 200,
+    "partyWins": {
+      "LKD": 27,
+      "INC": 113,
+      "CPI": 1,
+      "JNP": 10,
+      "IND": 10,
+      "BJP": 39
+    },
+    "party_wins": {
+      "LKD": 27,
+      "INC": 113,
+      "CPI": 1,
+      "JNP": 10,
+      "IND": 10,
+      "BJP": 39
+    }
+  },
+  {
+    "state": "Sikkim",
+    "stateSlug": "sikkim",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 32,
+    "total_seats": 32,
+    "partyWins": {
+      "SSP": 30,
+      "INC": 1,
+      "IND": 1
+    },
+    "party_wins": {
+      "SSP": 30,
+      "INC": 1,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1985,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 425,
+    "total_seats": 425,
+    "partyWins": {
+      "INC": 269,
+      "LKD": 84,
+      "IND": 23,
+      "JNP": 20,
+      "ICJ": 5,
+      "BJP": 16,
+      "CPM": 2,
+      "CPI": 6
+    },
+    "party_wins": {
+      "INC": 269,
+      "LKD": 84,
+      "IND": 23,
+      "JNP": 20,
+      "ICJ": 5,
+      "BJP": 16,
+      "CPM": 2,
+      "CPI": 6
+    }
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "year": 1984,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "INC": 21,
+      "IND": 4,
+      "PPA": 4,
+      "BJP": 1
+    },
+    "party_wins": {
+      "INC": 21,
+      "IND": 4,
+      "PPA": 4,
+      "BJP": 1
+    }
+  },
+  {
+    "state": "Goa Daman & Diu",
+    "stateSlug": "goa-daman---diu",
+    "year": 1984,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "INC": 18,
+      "MAG": 8,
+      "IND": 4
+    },
+    "party_wins": {
+      "INC": 18,
+      "MAG": 8,
+      "IND": 4
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 1984,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "IND": 21,
+      "INC": 30,
+      "MRP": 3,
+      "JNP": 4,
+      "CPI": 1,
+      "KNA": 1
+    },
+    "party_wins": {
+      "IND": 21,
+      "INC": 30,
+      "MRP": 3,
+      "JNP": 4,
+      "CPI": 1,
+      "KNA": 1
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 1984,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "INC": 20,
+      "PC": 8,
+      "IND": 2
+    },
+    "party_wins": {
+      "INC": 20,
+      "PC": 8,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 1984,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "DMK": 24,
+      "INC": 61,
+      "ADK": 132,
+      "CPM": 5,
+      "IND": 4,
+      "AKD": 1,
+      "JNP": 3,
+      "CPI": 2,
+      "GKC": 2
+    },
+    "party_wins": {
+      "DMK": 24,
+      "INC": 61,
+      "ADK": 132,
+      "CPM": 5,
+      "IND": 4,
+      "AKD": 1,
+      "JNP": 3,
+      "CPI": 2,
+      "GKC": 2
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 1983,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "IND": 219,
+      "INC": 60,
+      "TDP": 1,
+      "BJP": 3,
+      "ICJ": 1,
+      "JNP": 1,
+      "CPI": 4,
+      "CPM": 5
+    },
+    "party_wins": {
+      "IND": 219,
+      "INC": 60,
+      "TDP": 1,
+      "BJP": 3,
+      "ICJ": 1,
+      "JNP": 1,
+      "CPI": 4,
+      "CPM": 5
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 1983,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 109,
+    "total_seats": 109,
+    "partyWins": {
+      "INC": 91,
+      "IND": 10,
+      "ICS": 2,
+      "CPM": 2,
+      "CPI": 1,
+      "PTC": 3
+    },
+    "party_wins": {
+      "INC": 91,
+      "IND": 10,
+      "ICS": 2,
+      "CPM": 2,
+      "CPI": 1,
+      "PTC": 3
+    }
+  },
+  {
+    "state": "Delhi",
+    "stateSlug": "delhi",
+    "year": 1983,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 55,
+    "total_seats": 55,
+    "partyWins": {
+      "BJP": 19,
+      "INC": 33,
+      "LKD": 2,
+      "JNP": 1
+    },
+    "party_wins": {
+      "BJP": 19,
+      "INC": 33,
+      "LKD": 2,
+      "JNP": 1
+    }
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "stateSlug": "jammu---kashmir",
+    "year": 1983,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 76,
+    "total_seats": 76,
+    "partyWins": {
+      "JKP": 1,
+      "JKN": 46,
+      "INC": 25,
+      "IND": 4
+    },
+    "party_wins": {
+      "JKP": 1,
+      "JKN": 46,
+      "INC": 25,
+      "IND": 4
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 1983,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 224,
+    "total_seats": 224,
+    "partyWins": {
+      "INC": 82,
+      "BJP": 18,
+      "JNP": 95,
+      "CPI": 3,
+      "IND": 22,
+      "CPM": 3,
+      "ADMK": 1
+    },
+    "party_wins": {
+      "INC": 82,
+      "BJP": 18,
+      "JNP": 95,
+      "CPI": 3,
+      "IND": 22,
+      "CPM": 3,
+      "ADMK": 1
+    }
+  },
+  {
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "year": 1983,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "IND": 3,
+      "AHL": 15,
+      "HPD": 15,
+      "INC": 25,
+      "PDC": 2
+    },
+    "party_wins": {
+      "IND": 3,
+      "AHL": 15,
+      "HPD": 15,
+      "INC": 25,
+      "PDC": 2
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 1983,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "CPM": 37,
+      "INC": 12,
+      "TUS": 6,
+      "RSP": 2,
+      "IND": 3
+    },
+    "party_wins": {
+      "CPM": 37,
+      "INC": 12,
+      "TUS": 6,
+      "RSP": 2,
+      "IND": 3
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 1982,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "IND": 16,
+      "BJP": 6,
+      "LKD": 31,
+      "INC": 36,
+      "JNP": 1
+    },
+    "party_wins": {
+      "IND": 16,
+      "BJP": 6,
+      "LKD": 31,
+      "INC": 36,
+      "JNP": 1
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 1982,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 68,
+    "total_seats": 68,
+    "partyWins": {
+      "IND": 6,
+      "INC": 31,
+      "BJP": 29,
+      "JNP": 2
+    },
+    "party_wins": {
+      "IND": 6,
+      "INC": 31,
+      "BJP": 29,
+      "JNP": 2
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 1982,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "CPI": 13,
+      "MUL": 14,
+      "IND": 33,
+      "CPM": 26,
+      "ICS": 5,
+      "IML": 4,
+      "INC": 20,
+      "JNP": 4,
+      "NDP": 2,
+      "KEC": 6,
+      "IC(S)": 1,
+      "KEC(J)": 8,
+      "RSP": 4
+    },
+    "party_wins": {
+      "CPI": 13,
+      "MUL": 14,
+      "IND": 33,
+      "CPM": 26,
+      "ICS": 5,
+      "IML": 4,
+      "INC": 20,
+      "JNP": 4,
+      "NDP": 2,
+      "KEC": 6,
+      "IC(S)": 1,
+      "KEC(J)": 8,
+      "RSP": 4
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 1982,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 24,
+      "NND": 24,
+      "IND": 12
+    },
+    "party_wins": {
+      "INC": 24,
+      "NND": 24,
+      "IND": 12
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1982,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "FBL": 28,
+      "CPM": 174,
+      "RSP": 19,
+      "IND": 11,
+      "INC": 49,
+      "ICS": 4,
+      "SUC": 2,
+      "CPI": 7
+    },
+    "party_wins": {
+      "FBL": 28,
+      "CPM": 174,
+      "RSP": 19,
+      "IND": 11,
+      "INC": 49,
+      "ICS": 4,
+      "SUC": 2,
+      "CPI": 7
+    }
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "PPA": 13,
+      "INC(I)": 13,
+      "IND": 4
+    },
+    "party_wins": {
+      "PPA": 13,
+      "INC(I)": 13,
+      "IND": 4
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 324,
+    "total_seats": 324,
+    "partyWins": {
+      "INC(I)": 169,
+      "JNP(JP)": 13,
+      "CPI": 23,
+      "CPM": 6,
+      "JNP(SC)": 42,
+      "IND": 23,
+      "INC(U)": 14,
+      "BJP": 21,
+      "JNP(SR)": 1,
+      "SUC": 1,
+      "JMM": 11
+    },
+    "party_wins": {
+      "INC(I)": 169,
+      "JNP(JP)": 13,
+      "CPI": 23,
+      "CPM": 6,
+      "JNP(SC)": 42,
+      "IND": 23,
+      "INC(U)": 14,
+      "BJP": 21,
+      "JNP(SR)": 1,
+      "SUC": 1,
+      "JMM": 11
+    }
+  },
+  {
+    "state": "Goa Daman & Diu",
+    "stateSlug": "goa-daman---diu",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "MAG": 7,
+      "IND": 3,
+      "INC(U)": 20
+    },
+    "party_wins": {
+      "MAG": 7,
+      "IND": 3,
+      "INC(U)": 20
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 182,
+    "total_seats": 182,
+    "partyWins": {
+      "INC(I)": 141,
+      "BJP": 9,
+      "JNP(JP)": 21,
+      "IND": 10,
+      "JNP(SC)": 1
+    },
+    "party_wins": {
+      "INC(I)": 141,
+      "BJP": 9,
+      "JNP(JP)": 21,
+      "IND": 10,
+      "JNP(SC)": 1
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "CPI": 17,
+      "MUL": 14,
+      "CPM": 35,
+      "INC(U)": 21,
+      "JNP": 5,
+      "IML": 5,
+      "INC(I)": 17,
+      "IND": 5,
+      "KEC": 8,
+      "KEC(J)": 6,
+      "RSP": 6,
+      "KCP": 1
+    },
+    "party_wins": {
+      "CPI": 17,
+      "MUL": 14,
+      "CPM": 35,
+      "INC(U)": 21,
+      "JNP": 5,
+      "IML": 5,
+      "INC(I)": 17,
+      "IND": 5,
+      "KEC": 8,
+      "KEC(J)": 6,
+      "RSP": 6,
+      "KCP": 1
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 320,
+    "total_seats": 320,
+    "partyWins": {
+      "INC(I)": 246,
+      "BJP": 60,
+      "IND": 8,
+      "JNP(SC)": 1,
+      "CPI": 2,
+      "JNP(JP)": 2,
+      "RPK": 1
+    },
+    "party_wins": {
+      "INC(I)": 246,
+      "BJP": 60,
+      "IND": 8,
+      "JNP(SC)": 1,
+      "CPI": 2,
+      "JNP(JP)": 2,
+      "RPK": 1
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "INC(I)": 186,
+      "JNP(JP)": 17,
+      "BJP": 14,
+      "PWP": 9,
+      "IND": 10,
+      "CPM": 2,
+      "INC(U)": 47,
+      "CPI": 2,
+      "RPK": 1
+    },
+    "party_wins": {
+      "INC(I)": 186,
+      "JNP(JP)": 17,
+      "BJP": 14,
+      "PWP": 9,
+      "IND": 10,
+      "CPM": 2,
+      "INC(U)": 47,
+      "CPI": 2,
+      "RPK": 1
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "CPM": 1,
+      "IND": 19,
+      "MPP": 4,
+      "INC(U)": 6,
+      "CPI": 5,
+      "INC(I)": 13,
+      "JNP": 10,
+      "KNA": 2
+    },
+    "party_wins": {
+      "CPM": 1,
+      "IND": 19,
+      "MPP": 4,
+      "INC(U)": 6,
+      "CPI": 5,
+      "INC(I)": 13,
+      "JNP": 10,
+      "KNA": 2
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 147,
+    "total_seats": 147,
+    "partyWins": {
+      "JNP(SC)": 13,
+      "INC(I)": 118,
+      "JNP(JP)": 3,
+      "CPI": 4,
+      "IND": 7,
+      "INC(U)": 2
+    },
+    "party_wins": {
+      "JNP(SC)": 13,
+      "INC(I)": 118,
+      "JNP(JP)": 3,
+      "CPI": 4,
+      "IND": 7,
+      "INC(U)": 2
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "DMK": 14,
+      "INC(I)": 10,
+      "JNP": 3,
+      "IND": 2,
+      "CPM": 1
+    },
+    "party_wins": {
+      "DMK": 14,
+      "INC(I)": 10,
+      "JNP": 3,
+      "IND": 2,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 117,
+    "total_seats": 117,
+    "partyWins": {
+      "INC(I)": 63,
+      "SAD": 37,
+      "CPI": 9,
+      "CPM": 5,
+      "IND": 2,
+      "BJP": 1
+    },
+    "party_wins": {
+      "INC(I)": 63,
+      "SAD": 37,
+      "CPI": 9,
+      "CPM": 5,
+      "IND": 2,
+      "BJP": 1
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 200,
+    "total_seats": 200,
+    "partyWins": {
+      "INC(I)": 133,
+      "JNP(JP)": 8,
+      "IND": 12,
+      "BJP": 32,
+      "JNP(SC)": 7,
+      "CPM": 1,
+      "INC(U)": 6,
+      "CPI": 1
+    },
+    "party_wins": {
+      "INC(I)": 133,
+      "JNP(JP)": 8,
+      "IND": 12,
+      "BJP": 32,
+      "JNP(SC)": 7,
+      "CPM": 1,
+      "INC(U)": 6,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "DMK": 37,
+      "INC(I)": 31,
+      "GKC": 6,
+      "ADK": 129,
+      "CPI": 9,
+      "CPM": 11,
+      "IND": 8,
+      "FBL": 1,
+      "JNP(JP)": 2
+    },
+    "party_wins": {
+      "DMK": 37,
+      "INC(I)": 31,
+      "GKC": 6,
+      "ADK": 129,
+      "CPI": 9,
+      "CPM": 11,
+      "IND": 8,
+      "FBL": 1,
+      "JNP(JP)": 2
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1980,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 425,
+    "total_seats": 425,
+    "partyWins": {
+      "IND": 17,
+      "INC(I)": 309,
+      "CPI": 7,
+      "JNP(SC)": 59,
+      "BJP": 11,
+      "INC(U)": 13,
+      "JNP(SR)": 4,
+      "JNP(JP)": 4,
+      "SSD": 1
+    },
+    "party_wins": {
+      "IND": 17,
+      "INC(I)": 309,
+      "CPI": 7,
+      "JNP(SC)": 59,
+      "BJP": 11,
+      "INC(U)": 13,
+      "JNP(SR)": 4,
+      "JNP(JP)": 4,
+      "SSD": 1
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 1979,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "JNP": 2,
+      "PPC": 18,
+      "IND": 5,
+      "INC(I)": 5
+    },
+    "party_wins": {
+      "JNP": 2,
+      "PPC": 18,
+      "IND": 5,
+      "INC(I)": 5
+    }
+  },
+  {
+    "state": "Sikkim",
+    "stateSlug": "sikkim",
+    "year": 1979,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 32,
+    "total_seats": 32,
+    "partyWins": {
+      "SJP": 16,
+      "SCR": 11,
+      "SPC": 4,
+      "IND": 1
+    },
+    "party_wins": {
+      "SJP": 16,
+      "SCR": 11,
+      "SPC": 4,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 1978,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "JNP": 60,
+      "INC": 30,
+      "INC(I)": 175,
+      "IND": 15,
+      "CPI": 6,
+      "CPM": 8
+    },
+    "party_wins": {
+      "JNP": 60,
+      "INC": 30,
+      "INC(I)": 175,
+      "IND": 15,
+      "CPI": 6,
+      "CPM": 8
+    }
+  },
+  {
+    "state": "Arunachal Pradesh",
+    "stateSlug": "arunachal-pradesh",
+    "year": 1978,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "IND": 5,
+      "JNP": 17,
+      "PPA": 8
+    },
+    "party_wins": {
+      "IND": 5,
+      "JNP": 17,
+      "PPA": 8
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 1978,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 126,
+    "total_seats": 126,
+    "partyWins": {
+      "JNP": 53,
+      "IND": 15,
+      "CPM": 11,
+      "INC": 26,
+      "INC(I)": 8,
+      "CPI": 5,
+      "PTC": 4,
+      "RCI": 4
+    },
+    "party_wins": {
+      "JNP": 53,
+      "IND": 15,
+      "CPM": 11,
+      "INC": 26,
+      "INC(I)": 8,
+      "CPI": 5,
+      "PTC": 4,
+      "RCI": 4
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 1978,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 224,
+    "total_seats": 224,
+    "partyWins": {
+      "INC(I)": 149,
+      "INC": 2,
+      "JNP": 59,
+      "IND": 10,
+      "CPI": 3,
+      "RPI": 1
+    },
+    "party_wins": {
+      "INC(I)": 149,
+      "INC": 2,
+      "JNP": 59,
+      "IND": 10,
+      "CPI": 3,
+      "RPI": 1
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 1978,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "JNP": 99,
+      "INC": 69,
+      "PWP": 13,
+      "IND": 28,
+      "CPM": 9,
+      "RPK": 2,
+      "INC(I)": 62,
+      "FBL": 3,
+      "RPI": 2,
+      "CPI": 1
+    },
+    "party_wins": {
+      "JNP": 99,
+      "INC": 69,
+      "PWP": 13,
+      "IND": 28,
+      "CPM": 9,
+      "RPK": 2,
+      "INC(I)": 62,
+      "FBL": 3,
+      "RPI": 2,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "year": 1978,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "AHL": 16,
+      "HPD": 14,
+      "IND": 10,
+      "INC": 20
+    },
+    "party_wins": {
+      "AHL": 16,
+      "HPD": 14,
+      "IND": 10,
+      "INC": 20
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 1978,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "IND": 8,
+      "PPC": 22
+    },
+    "party_wins": {
+      "IND": 8,
+      "PPC": 22
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 324,
+    "total_seats": 324,
+    "partyWins": {
+      "INC": 57,
+      "JNP": 214,
+      "CPM": 4,
+      "CPI": 21,
+      "IND": 24,
+      "SSD": 1,
+      "JKP": 1,
+      "JKD": 2
+    },
+    "party_wins": {
+      "INC": 57,
+      "JNP": 214,
+      "CPM": 4,
+      "CPI": 21,
+      "IND": 24,
+      "SSD": 1,
+      "JKP": 1,
+      "JKD": 2
+    }
+  },
+  {
+    "state": "Delhi",
+    "stateSlug": "delhi",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 56,
+    "total_seats": 56,
+    "partyWins": {
+      "JNP": 46,
+      "INC": 10
+    },
+    "party_wins": {
+      "JNP": 46,
+      "INC": 10
+    }
+  },
+  {
+    "state": "Goa Daman & Diu",
+    "stateSlug": "goa-daman---diu",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "MAG": 15,
+      "INC": 10,
+      "JNP": 3,
+      "IND": 2
+    },
+    "party_wins": {
+      "MAG": 15,
+      "INC": 10,
+      "JNP": 3,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 90,
+    "total_seats": 90,
+    "partyWins": {
+      "JNP": 75,
+      "INC": 3,
+      "VHP": 5,
+      "IND": 7
+    },
+    "party_wins": {
+      "JNP": 75,
+      "INC": 3,
+      "VHP": 5,
+      "IND": 7
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 68,
+    "total_seats": 68,
+    "partyWins": {
+      "IND": 6,
+      "JNP": 53,
+      "INC": 9
+    },
+    "party_wins": {
+      "IND": 6,
+      "JNP": 53,
+      "INC": 9
+    }
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "stateSlug": "jammu---kashmir",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 76,
+    "total_seats": 76,
+    "partyWins": {
+      "JKN": 47,
+      "JNP": 13,
+      "JMI": 1,
+      "INC": 11,
+      "IND": 4
+    },
+    "party_wins": {
+      "JKN": 47,
+      "JNP": 13,
+      "JMI": 1,
+      "INC": 11,
+      "IND": 4
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "CPI": 23,
+      "MUL": 13,
+      "IND": 9,
+      "CPM": 17,
+      "INC": 38,
+      "BLD": 6,
+      "MLO": 3,
+      "KEC": 20,
+      "KCP": 2,
+      "RSP": 9
+    },
+    "party_wins": {
+      "CPI": 23,
+      "MUL": 13,
+      "IND": 9,
+      "CPM": 17,
+      "INC": 38,
+      "BLD": 6,
+      "MLO": 3,
+      "KEC": 20,
+      "KCP": 2,
+      "RSP": 9
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 320,
+    "total_seats": 320,
+    "partyWins": {
+      "JNP": 230,
+      "INC": 84,
+      "IND": 5,
+      "RRP": 1
+    },
+    "party_wins": {
+      "JNP": 230,
+      "INC": 84,
+      "IND": 5,
+      "RRP": 1
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 15,
+      "IND": 9,
+      "UDF": 35,
+      "NCN": 1
+    },
+    "party_wins": {
+      "INC": 15,
+      "IND": 9,
+      "UDF": 35,
+      "NCN": 1
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 147,
+    "total_seats": 147,
+    "partyWins": {
+      "JNP": 110,
+      "INC": 26,
+      "IND": 9,
+      "CPM": 1,
+      "CPI": 1
+    },
+    "party_wins": {
+      "JNP": 110,
+      "INC": 26,
+      "IND": 9,
+      "CPM": 1,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "ADK": 14,
+      "JNP": 7,
+      "INC": 2,
+      "DMK": 3,
+      "CPI": 1,
+      "IND": 3
+    },
+    "party_wins": {
+      "ADK": 14,
+      "JNP": 7,
+      "INC": 2,
+      "DMK": 3,
+      "CPI": 1,
+      "IND": 3
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 117,
+    "total_seats": 117,
+    "partyWins": {
+      "SAD": 58,
+      "JNP": 25,
+      "INC": 17,
+      "CPI": 7,
+      "CPM": 8,
+      "IND": 2
+    },
+    "party_wins": {
+      "SAD": 58,
+      "JNP": 25,
+      "INC": 17,
+      "CPI": 7,
+      "CPM": 8,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 200,
+    "total_seats": 200,
+    "partyWins": {
+      "JNP": 152,
+      "CPM": 1,
+      "INC": 41,
+      "IND": 5,
+      "CPI": 1
+    },
+    "party_wins": {
+      "JNP": 152,
+      "CPM": 1,
+      "INC": 41,
+      "IND": 5,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "DMK": 48,
+      "ADK": 130,
+      "INC": 27,
+      "CPM": 12,
+      "IND": 1,
+      "JNP": 10,
+      "FBL": 1,
+      "CPI": 5
+    },
+    "party_wins": {
+      "DMK": 48,
+      "ADK": 130,
+      "INC": 27,
+      "CPM": 12,
+      "IND": 1,
+      "JNP": 10,
+      "FBL": 1,
+      "CPI": 5
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "CPM": 51,
+      "IND": 2,
+      "FBL": 1,
+      "TUS": 4,
+      "RSP": 2
+    },
+    "party_wins": {
+      "CPM": 51,
+      "IND": 2,
+      "FBL": 1,
+      "TUS": 4,
+      "RSP": 2
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 425,
+    "total_seats": 425,
+    "partyWins": {
+      "JNP": 352,
+      "CPI": 9,
+      "IND": 16,
+      "INC": 47,
+      "CPM": 1
+    },
+    "party_wins": {
+      "JNP": 352,
+      "CPI": 9,
+      "IND": 16,
+      "INC": 47,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1977,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 294,
+    "total_seats": 294,
+    "partyWins": {
+      "FBL": 25,
+      "CPM": 178,
+      "RSP": 20,
+      "IND": 10,
+      "INC": 20,
+      "JNP": 29,
+      "RCI": 2,
+      "MUL": 1,
+      "SUC": 4,
+      "CPI": 2,
+      "BBC": 1,
+      "MFB": 2
+    },
+    "party_wins": {
+      "FBL": 25,
+      "CPM": 178,
+      "RSP": 20,
+      "IND": 10,
+      "INC": 20,
+      "JNP": 29,
+      "RCI": 2,
+      "MUL": 1,
+      "SUC": 4,
+      "CPI": 2,
+      "BBC": 1,
+      "MFB": 2
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 1975,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 181,
+    "total_seats": 181,
+    "partyWins": {
+      "INC": 75,
+      "BJS": 18,
+      "NCO": 56,
+      "IND": 15,
+      "KLP": 12,
+      "BLD": 2,
+      "SP": 2,
+      "RMP": 1
+    },
+    "party_wins": {
+      "INC": 75,
+      "BJS": 18,
+      "NCO": 56,
+      "IND": 15,
+      "KLP": 12,
+      "BLD": 2,
+      "SP": 2,
+      "RMP": 1
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 1974,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "CPI": 6,
+      "IND": 5,
+      "SOP": 2,
+      "MRP": 20,
+      "INC": 13,
+      "MHU": 12,
+      "KNA": 2
+    },
+    "party_wins": {
+      "CPI": 6,
+      "IND": 5,
+      "SOP": 2,
+      "MRP": 20,
+      "INC": 13,
+      "MHU": 12,
+      "KNA": 2
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 1974,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "NNO": 23,
+      "IND": 12,
+      "UDF": 25
+    },
+    "party_wins": {
+      "NNO": 23,
+      "IND": 12,
+      "UDF": 25
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 1974,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 146,
+    "total_seats": 146,
+    "partyWins": {
+      "INC": 69,
+      "IND": 7,
+      "UTC": 35,
+      "CPI": 7,
+      "SOP": 2,
+      "CPM": 3,
+      "SWA": 21,
+      "JAC": 1,
+      "JKD": 1
+    },
+    "party_wins": {
+      "INC": 69,
+      "IND": 7,
+      "UTC": 35,
+      "CPI": 7,
+      "SOP": 2,
+      "CPM": 3,
+      "SWA": 21,
+      "JAC": 1,
+      "JKD": 1
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 1974,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "ADK": 12,
+      "NCO": 5,
+      "INC": 7,
+      "CPI": 2,
+      "DMK": 2,
+      "CPM": 1,
+      "IND": 1
+    },
+    "party_wins": {
+      "ADK": 12,
+      "NCO": 5,
+      "INC": 7,
+      "CPI": 2,
+      "DMK": 2,
+      "CPM": 1,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1974,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 424,
+    "total_seats": 424,
+    "partyWins": {
+      "INC": 215,
+      "CPI": 16,
+      "NCO": 10,
+      "BKD": 106,
+      "BJS": 61,
+      "IND": 5,
+      "CPM": 2,
+      "HMS": 1,
+      "SOP": 5,
+      "SSD": 1,
+      "MUL": 1,
+      "SWA": 1
+    },
+    "party_wins": {
+      "INC": 215,
+      "CPI": 16,
+      "NCO": 10,
+      "BKD": 106,
+      "BJS": 61,
+      "IND": 5,
+      "CPM": 2,
+      "HMS": 1,
+      "SOP": 5,
+      "SSD": 1,
+      "MUL": 1,
+      "SWA": 1
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 287,
+    "total_seats": 287,
+    "partyWins": {
+      "INC": 219,
+      "IND": 57,
+      "CPI": 7,
+      "SWA": 2,
+      "STS": 1,
+      "CPM": 1
+    },
+    "party_wins": {
+      "INC": 219,
+      "IND": 57,
+      "CPI": 7,
+      "SWA": 2,
+      "STS": 1,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 114,
+    "total_seats": 114,
+    "partyWins": {
+      "INC": 95,
+      "IND": 10,
+      "PTC": 1,
+      "SOP": 4,
+      "CPI": 3,
+      "SWA": 1
+    },
+    "party_wins": {
+      "INC": 95,
+      "IND": 10,
+      "PTC": 1,
+      "SOP": 4,
+      "CPI": 3,
+      "SWA": 1
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 318,
+    "total_seats": 318,
+    "partyWins": {
+      "INC": 167,
+      "NCO": 30,
+      "SOP": 33,
+      "CPI": 35,
+      "BJS": 25,
+      "IND": 17,
+      "HSD": 3,
+      "SWA": 1,
+      "PHJ": 2,
+      "HJS": 1,
+      "JKP": 3,
+      "JKD": 1
+    },
+    "party_wins": {
+      "INC": 167,
+      "NCO": 30,
+      "SOP": 33,
+      "CPI": 35,
+      "BJS": 25,
+      "IND": 17,
+      "HSD": 3,
+      "SWA": 1,
+      "PHJ": 2,
+      "HJS": 1,
+      "JKP": 3,
+      "JKD": 1
+    }
+  },
+  {
+    "state": "Delhi",
+    "stateSlug": "delhi",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 56,
+    "total_seats": 56,
+    "partyWins": {
+      "INC": 44,
+      "CPI": 3,
+      "IND": 2,
+      "BJS": 5,
+      "NCO": 2
+    },
+    "party_wins": {
+      "INC": 44,
+      "CPI": 3,
+      "IND": 2,
+      "BJS": 5,
+      "NCO": 2
+    }
+  },
+  {
+    "state": "Goa Daman & Diu",
+    "stateSlug": "goa-daman---diu",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "MAG": 18,
+      "UGS": 10,
+      "INC": 1,
+      "IND": 1
+    },
+    "party_wins": {
+      "MAG": 18,
+      "UGS": 10,
+      "INC": 1,
+      "IND": 1
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 168,
+    "total_seats": 168,
+    "partyWins": {
+      "INC": 140,
+      "IND": 8,
+      "NCO": 16,
+      "CPI": 1,
+      "BJS": 3
+    },
+    "party_wins": {
+      "INC": 140,
+      "IND": 8,
+      "NCO": 16,
+      "CPI": 1,
+      "BJS": 3
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 81,
+    "total_seats": 81,
+    "partyWins": {
+      "INC": 52,
+      "IND": 11,
+      "BJS": 2,
+      "NCO": 12,
+      "BAS": 1,
+      "VHP": 3
+    },
+    "party_wins": {
+      "INC": 52,
+      "IND": 11,
+      "BJS": 2,
+      "NCO": 12,
+      "BAS": 1,
+      "VHP": 3
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 68,
+    "total_seats": 68,
+    "partyWins": {
+      "LRP": 2,
+      "INC": 53,
+      "IND": 7,
+      "BJS": 5,
+      "CPM": 1
+    },
+    "party_wins": {
+      "LRP": 2,
+      "INC": 53,
+      "IND": 7,
+      "BJS": 5,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "stateSlug": "jammu---kashmir",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 75,
+    "total_seats": 75,
+    "partyWins": {
+      "IND": 9,
+      "INC": 58,
+      "JMI": 5,
+      "BJS": 3
+    },
+    "party_wins": {
+      "IND": 9,
+      "INC": 58,
+      "JMI": 5,
+      "BJS": 3
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 216,
+    "total_seats": 216,
+    "partyWins": {
+      "IND": 20,
+      "INC": 165,
+      "CPI": 3,
+      "NCO": 24,
+      "JPP": 1,
+      "SOP": 3
+    },
+    "party_wins": {
+      "IND": 20,
+      "INC": 165,
+      "CPI": 3,
+      "NCO": 24,
+      "JPP": 1,
+      "SOP": 3
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 296,
+    "total_seats": 296,
+    "partyWins": {
+      "BJS": 48,
+      "INC": 220,
+      "SOP": 7,
+      "CPI": 3,
+      "IND": 18
+    },
+    "party_wins": {
+      "BJS": 48,
+      "INC": 220,
+      "SOP": 7,
+      "CPI": 3,
+      "IND": 18
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 270,
+    "total_seats": 270,
+    "partyWins": {
+      "INC": 222,
+      "BJS": 5,
+      "SOP": 3,
+      "IND": 23,
+      "PWP": 7,
+      "SHS": 1,
+      "MUL": 1,
+      "BKD": 1,
+      "FBL": 2,
+      "CPM": 1,
+      "RPI": 2,
+      "CPI": 2
+    },
+    "party_wins": {
+      "INC": 222,
+      "BJS": 5,
+      "SOP": 3,
+      "IND": 23,
+      "PWP": 7,
+      "SHS": 1,
+      "MUL": 1,
+      "BKD": 1,
+      "FBL": 2,
+      "CPM": 1,
+      "RPI": 2,
+      "CPI": 2
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "INC": 17,
+      "NCO": 1,
+      "MRP": 15,
+      "CPI": 5,
+      "IND": 19,
+      "SOP": 3
+    },
+    "party_wins": {
+      "INC": 17,
+      "NCO": 1,
+      "MRP": 15,
+      "CPI": 5,
+      "IND": 19,
+      "SOP": 3
+    }
+  },
+  {
+    "state": "Meghalaya",
+    "stateSlug": "meghalaya",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "AHL": 32,
+      "IND": 19,
+      "INC": 9
+    },
+    "party_wins": {
+      "AHL": 32,
+      "IND": 19,
+      "INC": 9
+    }
+  },
+  {
+    "state": "Mizoram",
+    "stateSlug": "mizoram",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "IND": 24,
+      "INC": 6
+    },
+    "party_wins": {
+      "IND": 24,
+      "INC": 6
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 104,
+    "total_seats": 104,
+    "partyWins": {
+      "INC": 66,
+      "SAD": 24,
+      "CPI": 10,
+      "IND": 3,
+      "CPM": 1
+    },
+    "party_wins": {
+      "INC": 66,
+      "SAD": 24,
+      "CPI": 10,
+      "IND": 3,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 184,
+    "total_seats": 184,
+    "partyWins": {
+      "INC": 145,
+      "SOP": 4,
+      "SWA": 11,
+      "CPI": 4,
+      "IND": 11,
+      "NCO": 1,
+      "BJS": 8
+    },
+    "party_wins": {
+      "INC": 145,
+      "SOP": 4,
+      "SWA": 11,
+      "CPI": 4,
+      "IND": 11,
+      "NCO": 1,
+      "BJS": 8
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "CPM": 16,
+      "INC": 41,
+      "IND": 2,
+      "CPI": 1
+    },
+    "party_wins": {
+      "CPM": 16,
+      "INC": 41,
+      "IND": 2,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1972,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 280,
+    "total_seats": 280,
+    "partyWins": {
+      "INC": 216,
+      "RSP": 3,
+      "CPI": 35,
+      "IGL": 2,
+      "CPM": 14,
+      "MUL": 1,
+      "SUC": 1,
+      "IND": 5,
+      "WPI": 1,
+      "NCO": 2
+    },
+    "party_wins": {
+      "INC": 216,
+      "RSP": 3,
+      "CPI": 35,
+      "IGL": 2,
+      "CPM": 14,
+      "MUL": 1,
+      "SUC": 1,
+      "IND": 5,
+      "WPI": 1,
+      "NCO": 2
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 1971,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "SWA": 36,
+      "INC": 51,
+      "JKP": 4,
+      "IND": 4,
+      "PSP": 4,
+      "UTC": 33,
+      "CPM": 2,
+      "CPI": 4,
+      "NCO": 1,
+      "JAC": 1
+    },
+    "party_wins": {
+      "SWA": 36,
+      "INC": 51,
+      "JKP": 4,
+      "IND": 4,
+      "PSP": 4,
+      "UTC": 33,
+      "CPM": 2,
+      "CPI": 4,
+      "NCO": 1,
+      "JAC": 1
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 1971,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "DMK": 184,
+      "IND": 8,
+      "SWA": 6,
+      "NCO": 15,
+      "PSP": 4,
+      "CPI": 8,
+      "FBL": 7,
+      "MUL": 2
+    },
+    "party_wins": {
+      "DMK": 184,
+      "IND": 8,
+      "SWA": 6,
+      "NCO": 15,
+      "PSP": 4,
+      "CPI": 8,
+      "FBL": 7,
+      "MUL": 2
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1971,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 279,
+    "total_seats": 279,
+    "partyWins": {
+      "FBL": 3,
+      "INC": 105,
+      "RSP": 3,
+      "CPM": 113,
+      "IGL": 2,
+      "IND": 12,
+      "WPI": 2,
+      "CPI": 13,
+      "BJS": 1,
+      "RCI": 3,
+      "SUC": 7,
+      "BAC": 5,
+      "MFB": 2,
+      "NCO": 2,
+      "PSP": 3,
+      "JKP": 2,
+      "BBC": 1
+    },
+    "party_wins": {
+      "FBL": 3,
+      "INC": 105,
+      "RSP": 3,
+      "CPM": 113,
+      "IGL": 2,
+      "IND": 12,
+      "WPI": 2,
+      "CPI": 13,
+      "BJS": 1,
+      "RCI": 3,
+      "SUC": 7,
+      "BAC": 5,
+      "MFB": 2,
+      "NCO": 2,
+      "PSP": 3,
+      "JKP": 2,
+      "BBC": 1
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 1970,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 133,
+    "total_seats": 133,
+    "partyWins": {
+      "CPI": 16,
+      "IND": 16,
+      "PSP": 3,
+      "CPM": 29,
+      "INC": 30,
+      "ISP": 3,
+      "MUL": 11,
+      "SOP": 6,
+      "KSP": 1,
+      "RSP": 6,
+      "KEC": 12
+    },
+    "party_wins": {
+      "CPI": 16,
+      "IND": 16,
+      "PSP": 3,
+      "CPM": 29,
+      "INC": 30,
+      "ISP": 3,
+      "MUL": 11,
+      "SOP": 6,
+      "KSP": 1,
+      "RSP": 6,
+      "KEC": 12
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 1969,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 318,
+    "total_seats": 318,
+    "partyWins": {
+      "PSP": 18,
+      "INC": 118,
+      "BJS": 34,
+      "SWA": 3,
+      "SSP": 52,
+      "CPI": 25,
+      "JAP": 14,
+      "BKD": 6,
+      "LTC": 9,
+      "SHD": 6,
+      "IND": 24,
+      "CPM": 3,
+      "PHJ": 5,
+      "FBL": 1
+    },
+    "party_wins": {
+      "PSP": 18,
+      "INC": 118,
+      "BJS": 34,
+      "SWA": 3,
+      "SSP": 52,
+      "CPI": 25,
+      "JAP": 14,
+      "BKD": 6,
+      "LTC": 9,
+      "SHD": 6,
+      "IND": 24,
+      "CPM": 3,
+      "PHJ": 5,
+      "FBL": 1
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 1969,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "NNO": 22,
+      "IND": 8,
+      "UFN": 10
+    },
+    "party_wins": {
+      "NNO": 22,
+      "IND": 8,
+      "UFN": 10
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 1969,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "DMK": 15,
+      "INC": 10,
+      "CPI": 3,
+      "IND": 2
+    },
+    "party_wins": {
+      "DMK": 15,
+      "INC": 10,
+      "CPI": 3,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 1969,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 104,
+    "total_seats": 104,
+    "partyWins": {
+      "SAD": 43,
+      "CPI": 4,
+      "BJS": 8,
+      "INC": 38,
+      "PJP": 1,
+      "SSP": 2,
+      "CPM": 2,
+      "PSP": 1,
+      "IND": 4,
+      "SWA": 1
+    },
+    "party_wins": {
+      "SAD": 43,
+      "CPI": 4,
+      "BJS": 8,
+      "INC": 38,
+      "PJP": 1,
+      "SSP": 2,
+      "CPM": 2,
+      "PSP": 1,
+      "IND": 4,
+      "SWA": 1
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1969,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 425,
+    "total_seats": 425,
+    "partyWins": {
+      "INC": 211,
+      "CPI": 4,
+      "IND": 18,
+      "BJS": 49,
+      "BKD": 98,
+      "PSP": 3,
+      "SWA": 5,
+      "SSP": 33,
+      "HMS": 1,
+      "CPM": 1,
+      "RPI": 1,
+      "KMP": 1
+    },
+    "party_wins": {
+      "INC": 211,
+      "CPI": 4,
+      "IND": 18,
+      "BJS": 49,
+      "BKD": 98,
+      "PSP": 3,
+      "SWA": 5,
+      "SSP": 33,
+      "HMS": 1,
+      "CPM": 1,
+      "RPI": 1,
+      "KMP": 1
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1969,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 280,
+    "total_seats": 280,
+    "partyWins": {
+      "FBL": 21,
+      "INC": 55,
+      "RSP": 12,
+      "SSP": 9,
+      "CPI": 30,
+      "IGL": 4,
+      "NDF": 1,
+      "PSP": 5,
+      "CPM": 80,
+      "BAC": 33,
+      "IND": 11,
+      "WPI": 2,
+      "PML": 3,
+      "RCI": 2,
+      "SUC": 7,
+      "MFB": 1,
+      "LSS": 4
+    },
+    "party_wins": {
+      "FBL": 21,
+      "INC": 55,
+      "RSP": 12,
+      "SSP": 9,
+      "CPI": 30,
+      "IGL": 4,
+      "NDF": 1,
+      "PSP": 5,
+      "CPM": 80,
+      "BAC": 33,
+      "IND": 11,
+      "WPI": 2,
+      "PML": 3,
+      "RCI": 2,
+      "SUC": 7,
+      "MFB": 1,
+      "LSS": 4
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 1968,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 81,
+    "total_seats": 81,
+    "partyWins": {
+      "INC": 48,
+      "BJS": 7,
+      "IND": 6,
+      "RPI": 1,
+      "SWA": 2,
+      "VHP": 16,
+      "BKD": 1
+    },
+    "party_wins": {
+      "INC": 48,
+      "BJS": 7,
+      "IND": 6,
+      "RPI": 1,
+      "SWA": 2,
+      "VHP": 16,
+      "BKD": 1
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 287,
+    "total_seats": 287,
+    "partyWins": {
+      "SWA": 29,
+      "INC": 165,
+      "IND": 68,
+      "BJS": 3,
+      "CPM": 9,
+      "CPI": 11,
+      "SSP": 1,
+      "RPI": 1
+    },
+    "party_wins": {
+      "SWA": 29,
+      "INC": 165,
+      "IND": 68,
+      "BJS": 3,
+      "CPM": 9,
+      "CPI": 11,
+      "SSP": 1,
+      "RPI": 1
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 125,
+    "total_seats": 125,
+    "partyWins": {
+      "INC": 73,
+      "IND": 25,
+      "AHL": 9,
+      "PSP": 5,
+      "CPI": 7,
+      "SSP": 4,
+      "SWA": 2
+    },
+    "party_wins": {
+      "INC": 73,
+      "IND": 25,
+      "AHL": 9,
+      "PSP": 5,
+      "CPI": 7,
+      "SSP": 4,
+      "SWA": 2
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 318,
+    "total_seats": 318,
+    "partyWins": {
+      "PSP": 18,
+      "INC": 128,
+      "CPM": 4,
+      "IND": 33,
+      "SSP": 68,
+      "BJS": 26,
+      "CPI": 24,
+      "SWA": 3,
+      "RPI": 1,
+      "JKD": 13
+    },
+    "party_wins": {
+      "PSP": 18,
+      "INC": 128,
+      "CPM": 4,
+      "IND": 33,
+      "SSP": 68,
+      "BJS": 26,
+      "CPI": 24,
+      "SWA": 3,
+      "RPI": 1,
+      "JKD": 13
+    }
+  },
+  {
+    "state": "Goa Daman & Diu",
+    "stateSlug": "goa-daman---diu",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "MAG": 16,
+      "UGS": 12,
+      "IND": 2
+    },
+    "party_wins": {
+      "MAG": 16,
+      "UGS": 12,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 168,
+    "total_seats": 168,
+    "partyWins": {
+      "INC": 93,
+      "SWA": 66,
+      "BJS": 1,
+      "IND": 5,
+      "PSP": 3
+    },
+    "party_wins": {
+      "INC": 93,
+      "SWA": 66,
+      "BJS": 1,
+      "IND": 5,
+      "PSP": 3
+    }
+  },
+  {
+    "state": "Haryana",
+    "stateSlug": "haryana",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 81,
+    "total_seats": 81,
+    "partyWins": {
+      "IND": 16,
+      "INC": 48,
+      "BJS": 12,
+      "RPI": 2,
+      "SWA": 3
+    },
+    "party_wins": {
+      "IND": 16,
+      "INC": 48,
+      "BJS": 12,
+      "RPI": 2,
+      "SWA": 3
+    }
+  },
+  {
+    "state": "Himachal Pradesh",
+    "stateSlug": "himachal-pradesh",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 60,
+    "total_seats": 60,
+    "partyWins": {
+      "IND": 16,
+      "INC": 34,
+      "BJS": 7,
+      "CPI": 2,
+      "SWA": 1
+    },
+    "party_wins": {
+      "IND": 16,
+      "INC": 34,
+      "BJS": 7,
+      "CPI": 2,
+      "SWA": 1
+    }
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "stateSlug": "jammu---kashmir",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 75,
+    "total_seats": 75,
+    "partyWins": {
+      "INC": 61,
+      "JKN": 8,
+      "IND": 3,
+      "BJS": 3
+    },
+    "party_wins": {
+      "INC": 61,
+      "JKN": 8,
+      "IND": 3,
+      "BJS": 3
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 216,
+    "total_seats": 216,
+    "partyWins": {
+      "INC": 126,
+      "BJS": 4,
+      "CPI": 1,
+      "IND": 41,
+      "PSP": 20,
+      "SWA": 16,
+      "SSP": 6,
+      "CPM": 1,
+      "RPI": 1
+    },
+    "party_wins": {
+      "INC": 126,
+      "BJS": 4,
+      "CPI": 1,
+      "IND": 41,
+      "PSP": 20,
+      "SWA": 16,
+      "SSP": 6,
+      "CPM": 1,
+      "RPI": 1
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 133,
+    "total_seats": 133,
+    "partyWins": {
+      "IND": 15,
+      "SSP": 19,
+      "CPM": 52,
+      "MUL": 14,
+      "INC": 9,
+      "CPI": 19,
+      "KEC": 5
+    },
+    "party_wins": {
+      "IND": 15,
+      "SSP": 19,
+      "CPM": 52,
+      "MUL": 14,
+      "INC": 9,
+      "CPI": 19,
+      "KEC": 5
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 296,
+    "total_seats": 296,
+    "partyWins": {
+      "BJS": 78,
+      "IND": 22,
+      "PSP": 9,
+      "SSP": 10,
+      "JAC": 2,
+      "SWA": 7,
+      "INC": 167,
+      "CPI": 1
+    },
+    "party_wins": {
+      "BJS": 78,
+      "IND": 22,
+      "PSP": 9,
+      "SSP": 10,
+      "JAC": 2,
+      "SWA": 7,
+      "INC": 167,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 270,
+    "total_seats": 270,
+    "partyWins": {
+      "INC": 203,
+      "PSP": 8,
+      "PWP": 19,
+      "IND": 16,
+      "CPI": 10,
+      "BJS": 4,
+      "RPI": 5,
+      "SSP": 4,
+      "CPM": 1
+    },
+    "party_wins": {
+      "INC": 203,
+      "PSP": 8,
+      "PWP": 19,
+      "IND": 16,
+      "CPI": 10,
+      "BJS": 4,
+      "RPI": 5,
+      "SSP": 4,
+      "CPM": 1
+    }
+  },
+  {
+    "state": "Manipur",
+    "stateSlug": "manipur",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "CPI": 1,
+      "SSP": 4,
+      "INC": 16,
+      "IND": 9
+    },
+    "party_wins": {
+      "CPI": 1,
+      "SSP": 4,
+      "INC": 16,
+      "IND": 9
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "SWA": 49,
+      "JAC": 26,
+      "INC": 31,
+      "PSP": 21,
+      "CPM": 1,
+      "IND": 3,
+      "CPI": 7,
+      "SSP": 2
+    },
+    "party_wins": {
+      "SWA": 49,
+      "JAC": 26,
+      "INC": 31,
+      "PSP": 21,
+      "CPM": 1,
+      "IND": 3,
+      "CPI": 7,
+      "SSP": 2
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 104,
+    "total_seats": 104,
+    "partyWins": {
+      "ADS": 24,
+      "INC": 48,
+      "BJS": 9,
+      "CPI": 5,
+      "IND": 9,
+      "CPM": 3,
+      "SSP": 1,
+      "RPI": 3,
+      "ADM": 2
+    },
+    "party_wins": {
+      "ADS": 24,
+      "INC": 48,
+      "BJS": 9,
+      "CPI": 5,
+      "IND": 9,
+      "CPM": 3,
+      "SSP": 1,
+      "RPI": 3,
+      "ADM": 2
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 184,
+    "total_seats": 184,
+    "partyWins": {
+      "INC": 89,
+      "SWA": 48,
+      "SSP": 8,
+      "IND": 16,
+      "BJS": 22,
+      "CPI": 1
+    },
+    "party_wins": {
+      "INC": 89,
+      "SWA": 48,
+      "SSP": 8,
+      "IND": 16,
+      "BJS": 22,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 234,
+    "total_seats": 234,
+    "partyWins": {
+      "DMK": 137,
+      "IND": 6,
+      "SWA": 20,
+      "INC": 51,
+      "CPM": 11,
+      "PSP": 4,
+      "SSP": 2,
+      "FBL": 1,
+      "CPI": 2
+    },
+    "party_wins": {
+      "DMK": 137,
+      "IND": 6,
+      "SWA": 20,
+      "INC": 51,
+      "CPM": 11,
+      "PSP": 4,
+      "SSP": 2,
+      "FBL": 1,
+      "CPI": 2
+    }
+  },
+  {
+    "state": "Tripura",
+    "stateSlug": "tripura",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "INC": 27,
+      "CPM": 2,
+      "CPI": 1
+    },
+    "party_wins": {
+      "INC": 27,
+      "CPM": 2,
+      "CPI": 1
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 425,
+    "total_seats": 425,
+    "partyWins": {
+      "INC": 199,
+      "IND": 37,
+      "SWA": 12,
+      "BJS": 98,
+      "PSP": 11,
+      "CPM": 1,
+      "RPI": 10,
+      "SSP": 44,
+      "CPI": 13
+    },
+    "party_wins": {
+      "INC": 199,
+      "IND": 37,
+      "SWA": 12,
+      "BJS": 98,
+      "PSP": 11,
+      "CPM": 1,
+      "RPI": 10,
+      "SSP": 44,
+      "CPI": 13
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1967,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 280,
+    "total_seats": 280,
+    "partyWins": {
+      "FBL": 13,
+      "CPM": 43,
+      "INC": 127,
+      "IND": 31,
+      "PSP": 7,
+      "SSP": 7,
+      "BAC": 34,
+      "SWA": 1,
+      "CPI": 16,
+      "BJS": 1
+    },
+    "party_wins": {
+      "FBL": 13,
+      "CPM": 43,
+      "INC": 127,
+      "IND": 31,
+      "PSP": 7,
+      "SSP": 7,
+      "BAC": 34,
+      "SWA": 1,
+      "CPI": 16,
+      "BJS": 1
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 1965,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 133,
+    "total_seats": 133,
+    "partyWins": {
+      "CON": 36,
+      "IND": 12,
+      "SSP": 13,
+      "CPM": 40,
+      "ML": 6,
+      "CPI": 3,
+      "KC": 23
+    },
+    "party_wins": {
+      "CON": 36,
+      "IND": 12,
+      "SSP": 13,
+      "CPM": 40,
+      "ML": 6,
+      "CPI": 3,
+      "KC": 23
+    }
+  },
+  {
+    "state": "Nagaland",
+    "stateSlug": "nagaland",
+    "year": 1964,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 40,
+    "total_seats": 40,
+    "partyWins": {
+      "IND": 40
+    },
+    "party_wins": {
+      "IND": 40
+    }
+  },
+  {
+    "state": "Puducherry",
+    "stateSlug": "puducherry",
+    "year": 1964,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 30,
+    "total_seats": 30,
+    "partyWins": {
+      "CONG": 20,
+      "IND": 5,
+      "PF": 4,
+      "INC": 1
+    },
+    "party_wins": {
+      "CONG": 20,
+      "IND": 5,
+      "PF": 4,
+      "INC": 1
+    }
+  },
+  {
+    "state": "Andhra Pradesh",
+    "stateSlug": "andhra-pradesh",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 300,
+    "total_seats": 300,
+    "partyWins": {
+      "INC": 177,
+      "SWA": 19,
+      "IND": 51,
+      "CPI": 51,
+      "SOC": 2
+    },
+    "party_wins": {
+      "INC": 177,
+      "SWA": 19,
+      "IND": 51,
+      "CPI": 51,
+      "SOC": 2
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 105,
+    "total_seats": 105,
+    "partyWins": {
+      "HLC": 11,
+      "INC": 79,
+      "IND": 8,
+      "PSP": 6,
+      "RCP": 1
+    },
+    "party_wins": {
+      "HLC": 11,
+      "INC": 79,
+      "IND": 8,
+      "PSP": 6,
+      "RCP": 1
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 318,
+    "total_seats": 318,
+    "partyWins": {
+      "INC": 185,
+      "SWA": 50,
+      "PSP": 29,
+      "CPI": 12,
+      "JS": 3,
+      "SOC": 7,
+      "IND": 12,
+      "JP": 20
+    },
+    "party_wins": {
+      "INC": 185,
+      "SWA": 50,
+      "PSP": 29,
+      "CPI": 12,
+      "JS": 3,
+      "SOC": 7,
+      "IND": 12,
+      "JP": 20
+    }
+  },
+  {
+    "state": "Gujarat",
+    "stateSlug": "gujarat",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 154,
+    "total_seats": 154,
+    "partyWins": {
+      "SWA": 26,
+      "INC": 113,
+      "IND": 7,
+      "PSP": 7,
+      "NJP": 1
+    },
+    "party_wins": {
+      "SWA": 26,
+      "INC": 113,
+      "IND": 7,
+      "PSP": 7,
+      "NJP": 1
+    }
+  },
+  {
+    "state": "Jammu & Kashmir",
+    "stateSlug": "jammu---kashmir",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 75,
+    "total_seats": 75,
+    "partyWins": {
+      "NC": 70,
+      "PP": 3,
+      "IND": 2
+    },
+    "party_wins": {
+      "NC": 70,
+      "PP": 3,
+      "IND": 2
+    }
+  },
+  {
+    "state": "Karnataka",
+    "stateSlug": "karnataka",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 208,
+    "total_seats": 208,
+    "partyWins": {
+      "INC": 138,
+      "PSP": 20,
+      "IND": 27,
+      "CPI": 3,
+      "SWA": 9,
+      "LSS": 4,
+      "MES": 6,
+      "SOC": 1
+    },
+    "party_wins": {
+      "INC": 138,
+      "PSP": 20,
+      "IND": 27,
+      "CPI": 3,
+      "SWA": 9,
+      "LSS": 4,
+      "MES": 6,
+      "SOC": 1
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 288,
+    "total_seats": 288,
+    "partyWins": {
+      "HMS": 6,
+      "IND": 39,
+      "PSP": 33,
+      "INC": 142,
+      "JS": 41,
+      "SOC": 14,
+      "RRP": 10,
+      "CPI": 1,
+      "SWA": 2
+    },
+    "party_wins": {
+      "HMS": 6,
+      "IND": 39,
+      "PSP": 33,
+      "INC": 142,
+      "JS": 41,
+      "SOC": 14,
+      "RRP": 10,
+      "CPI": 1,
+      "SWA": 2
+    }
+  },
+  {
+    "state": "Maharashtra",
+    "stateSlug": "maharashtra",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 264,
+    "total_seats": 264,
+    "partyWins": {
+      "INC": 214,
+      "CPI": 6,
+      "IND": 15,
+      "PSP": 10,
+      "PWP": 15,
+      "SOC": 1,
+      "REP": 3
+    },
+    "party_wins": {
+      "INC": 214,
+      "CPI": 6,
+      "IND": 15,
+      "PSP": 10,
+      "PWP": 15,
+      "SOC": 1,
+      "REP": 3
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 154,
+    "total_seats": 154,
+    "partyWins": {
+      "IND": 18,
+      "INC": 90,
+      "CPI": 9,
+      "AD": 19,
+      "SWA": 3,
+      "JS": 8,
+      "HLS": 3,
+      "SOC": 4
+    },
+    "party_wins": {
+      "IND": 18,
+      "INC": 90,
+      "CPI": 9,
+      "AD": 19,
+      "SWA": 3,
+      "JS": 8,
+      "HLS": 3,
+      "SOC": 4
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 176,
+    "total_seats": 176,
+    "partyWins": {
+      "IND": 22,
+      "SWA": 36,
+      "INC": 88,
+      "JS": 15,
+      "CPI": 5,
+      "SOC": 5,
+      "RRP": 3,
+      "PSP": 2
+    },
+    "party_wins": {
+      "IND": 22,
+      "SWA": 36,
+      "INC": 88,
+      "JS": 15,
+      "CPI": 5,
+      "SOC": 5,
+      "RRP": 3,
+      "PSP": 2
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 206,
+    "total_seats": 206,
+    "partyWins": {
+      "INC": 139,
+      "DMK": 50,
+      "SWA": 6,
+      "IND": 5,
+      "SOC": 1,
+      "FB": 3,
+      "CPI": 2
+    },
+    "party_wins": {
+      "INC": 139,
+      "DMK": 50,
+      "SWA": 6,
+      "IND": 5,
+      "SOC": 1,
+      "FB": 3,
+      "CPI": 2
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 430,
+    "total_seats": 430,
+    "partyWins": {
+      "INC": 249,
+      "IND": 31,
+      "PSP": 38,
+      "JS": 49,
+      "CPI": 14,
+      "REP": 8,
+      "SOC": 24,
+      "SWA": 15,
+      "HMS": 2
+    },
+    "party_wins": {
+      "INC": 249,
+      "IND": 31,
+      "PSP": 38,
+      "JS": 49,
+      "CPI": 14,
+      "REP": 8,
+      "SOC": 24,
+      "SWA": 15,
+      "HMS": 2
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1962,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 252,
+    "total_seats": 252,
+    "partyWins": {
+      "FB": 13,
+      "INC": 157,
+      "CPI": 50,
+      "RSP": 9,
+      "GL": 2,
+      "PSP": 5,
+      "IND": 11,
+      "SBP": 1,
+      "LSS": 4
+    },
+    "party_wins": {
+      "FB": 13,
+      "INC": 157,
+      "CPI": 50,
+      "RSP": 9,
+      "GL": 2,
+      "PSP": 5,
+      "IND": 11,
+      "SBP": 1,
+      "LSS": 4
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 1961,
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "INC": 82,
+      "GP": 37,
+      "IND": 7,
+      "CPI": 4,
+      "PSP": 10
+    },
+    "party_wins": {
+      "INC": 82,
+      "GP": 37,
+      "IND": 7,
+      "CPI": 4,
+      "PSP": 10
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 1957,
+    "totalSeats": 108,
+    "total_seats": 108,
+    "partyWins": {
+      "INC": 71,
+      "PSP": 8,
+      "CPI": 4,
+      "IND": 25
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 71,
+      "PSP": 8,
+      "CPI": 4,
+      "IND": 25
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 1957,
+    "totalSeats": 318,
+    "total_seats": 318,
+    "partyWins": {
+      "INC": 210,
+      "JKD": 40,
+      "PSP": 31,
+      "CNPSPJP": 17,
+      "IND": 15
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 210,
+      "JKD": 40,
+      "PSP": 31,
+      "CNPSPJP": 17,
+      "IND": 15
+    }
+  },
+  {
+    "state": "Kerala",
+    "stateSlug": "kerala",
+    "year": 1957,
+    "totalSeats": 126,
+    "total_seats": 126,
+    "partyWins": {
+      "CPI": 60,
+      "INC": 43,
+      "PSP": 9,
+      "IND": 14
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "CPI": 60,
+      "INC": 43,
+      "PSP": 9,
+      "IND": 14
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 1957,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "INC": 56,
+      "AIGP": 51,
+      "PSP": 11,
+      "CPI": 9,
+      "IND": 13
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 56,
+      "AIGP": 51,
+      "PSP": 11,
+      "CPI": 9,
+      "IND": 13
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 1957,
+    "totalSeats": 154,
+    "total_seats": 154,
+    "partyWins": {
+      "INC": 120,
+      "CPI": 6,
+      "BJS": 9,
+      "IND": 13
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 120,
+      "CPI": 6,
+      "BJS": 9,
+      "IND": 13
+    }
+  },
+  {
+    "state": "Rajasthan",
+    "stateSlug": "rajasthan",
+    "year": 1957,
+    "totalSeats": 176,
+    "total_seats": 176,
+    "partyWins": {
+      "INC": 119,
+      "RRP": 17,
+      "BJS": 6,
+      "IND": 32
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 119,
+      "RRP": 17,
+      "BJS": 6,
+      "IND": 32
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 1957,
+    "totalSeats": 205,
+    "total_seats": 205,
+    "partyWins": {
+      "INC": 151,
+      "IND": 48,
+      "CPI": 4,
+      "PSP": 2
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 151,
+      "IND": 48,
+      "CPI": 4,
+      "PSP": 2
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1957,
+    "totalSeats": 430,
+    "total_seats": 430,
+    "partyWins": {
+      "INC": 286,
+      "PSP": 44,
+      "BJS": 17,
+      "CPI": 9,
+      "IND": 74
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 286,
+      "PSP": 44,
+      "BJS": 17,
+      "CPI": 9,
+      "IND": 74
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1957,
+    "totalSeats": 252,
+    "total_seats": 252,
+    "partyWins": {
+      "INC": 152,
+      "CPI": 46,
+      "PSP": 21,
+      "IND": 20
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 152,
+      "CPI": 46,
+      "PSP": 21,
+      "IND": 20
+    }
+  },
+  {
+    "state": "Assam",
+    "stateSlug": "assam",
+    "year": 1952,
+    "totalSeats": 108,
+    "total_seats": 108,
+    "partyWins": {
+      "INC": 76,
+      "SP": 4,
+      "IND": 14
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 76,
+      "SP": 4,
+      "IND": 14
+    }
+  },
+  {
+    "state": "Bihar",
+    "stateSlug": "bihar",
+    "year": 1952,
+    "totalSeats": 330,
+    "total_seats": 330,
+    "partyWins": {
+      "INC": 239,
+      "SP": 23,
+      "CNPSPJP": 11,
+      "IND": 33
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 239,
+      "SP": 23,
+      "CNPSPJP": 11,
+      "IND": 33
+    }
+  },
+  {
+    "state": "Madhya Pradesh",
+    "stateSlug": "madhya-pradesh",
+    "year": 1952,
+    "totalSeats": 232,
+    "total_seats": 232,
+    "partyWins": {
+      "INC": 194,
+      "IND": 23
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 194,
+      "IND": 23
+    }
+  },
+  {
+    "state": "Odisha",
+    "stateSlug": "odisha",
+    "year": 1952,
+    "totalSeats": 140,
+    "total_seats": 140,
+    "partyWins": {
+      "INC": 67,
+      "AIGP": 31,
+      "SP": 10,
+      "CPI": 7,
+      "IND": 24
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 67,
+      "AIGP": 31,
+      "SP": 10,
+      "CPI": 7,
+      "IND": 24
+    }
+  },
+  {
+    "state": "Punjab",
+    "stateSlug": "punjab",
+    "year": 1952,
+    "totalSeats": 126,
+    "total_seats": 126,
+    "partyWins": {
+      "INC": 96,
+      "SAD": 13,
+      "IND": 9
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 96,
+      "SAD": 13,
+      "IND": 9
+    }
+  },
+  {
+    "state": "Tamil Nadu",
+    "stateSlug": "tamil-nadu",
+    "year": 1952,
+    "totalSeats": 375,
+    "total_seats": 375,
+    "partyWins": {
+      "INC": 152,
+      "CPI": 62,
+      "KMPP": 35,
+      "IND": 62
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 152,
+      "CPI": 62,
+      "KMPP": 35,
+      "IND": 62
+    }
+  },
+  {
+    "state": "Uttar Pradesh",
+    "stateSlug": "uttar-pradesh",
+    "year": 1952,
+    "totalSeats": 430,
+    "total_seats": 430,
+    "partyWins": {
+      "INC": 388,
+      "SP": 20,
+      "BJS": 2,
+      "IND": 15
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 388,
+      "SP": 20,
+      "BJS": 2,
+      "IND": 15
+    }
+  },
+  {
+    "state": "West Bengal",
+    "stateSlug": "west-bengal",
+    "year": 1952,
+    "totalSeats": 238,
+    "total_seats": 238,
+    "partyWins": {
+      "INC": 150,
+      "CPI": 28,
+      "KMPP": 15,
+      "IND": 19
+    },
+    "electionType": "ASSEMBLY",
+    "isGeneralElection": true,
+    "party_wins": {
+      "INC": 150,
+      "CPI": 28,
+      "KMPP": 15,
+      "IND": 19
+    }
+  }
+]

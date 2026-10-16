@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
@@ -9,11 +10,19 @@ export default function ConstituencyResult({ year, stateSlug, constituencySlug, 
   useEffect(() => {
     async function fetchResult() {
       try {
-        const docId = `LS_${year}_${stateSlug}_${constituencySlug}`;
-        const ref = doc(db, 'elections_constituencies', docId);
-        const snapshot = await getDoc(ref);
-        if (snapshot.exists()) {
-          setData(snapshot.data());
+        // Try LS ID, then state archive ID, then ASSEMBLY ID
+        const possibleIds = [
+          `LS_${year}_${stateSlug}_${constituencySlug}`,
+          `${stateSlug}_${year}_${constituencySlug}`,
+          `ASSEMBLY_${stateSlug}_${year}_${constituencySlug}`
+        ];
+        for (const id of possibleIds) {
+          const ref = doc(db, 'elections_constituencies', id);
+          const snapshot = await getDoc(ref);
+          if (snapshot.exists()) {
+            setData(snapshot.data());
+            break;
+          }
         }
       } catch (error) {
         console.error("Error fetching constituency:", error);
@@ -34,6 +43,13 @@ export default function ConstituencyResult({ year, stateSlug, constituencySlug, 
 
   return (
     <div className="container" style={{ padding: '40px 0' }}>
+
+      <Helmet>
+        <title>{`${data?.constituency || "Constituency"} Election Results | Opinar`}</title>
+        <meta name="description" content="View historical election results and runner-ups for this constituency." />
+        <link rel="canonical" href="{`https://www.opinar.in/elections/state/${stateSlug}/${year}/${constituency}`}" />
+      </Helmet>
+
       <button 
         onClick={onBack}
         style={{ background: 'transparent', border: 'none', color: 'var(--accent-primary)', cursor: 'pointer', marginBottom: '24px', fontSize: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}

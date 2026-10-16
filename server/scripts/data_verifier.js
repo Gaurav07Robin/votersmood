@@ -16,9 +16,12 @@ async function runVerifier() {
   let totalErrors = 0;
   let totalVerified = 0;
 
-  for (const metaDoc of metadataSnap.docs) {
+  // Audit a sample of 5 state elections per run to stay well within Firebase Spark read limits
+  const sampleDocs = metadataSnap.docs.sort(() => 0.5 - Math.random()).slice(0, 5);
+  console.log(`Auditing a sample of ${sampleDocs.length} election cycles...`);
+  for (const metaDoc of sampleDocs) {
     const meta = metaDoc.data();
-    const expectedSeats = meta.totalSeats;
+    const expectedSeats = meta.totalSeats || meta.total_seats || 0;
     const state = meta.state;
     const year = meta.year;
 

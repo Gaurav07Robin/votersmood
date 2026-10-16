@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import React, { useState, useEffect } from 'react';
 import { api } from '../api/client';
 import PostComposer from '../components/PostComposer';
@@ -93,6 +94,13 @@ export default function Home({ openRegisterModal }) {
 
   return (
     <div className="container page-main-container" style={{ padding: '32px 24px' }}>
+
+      <Helmet>
+        <title>Opinar | Public Voice Platform</title>
+        <meta name="description" content="Discover real-time political intelligence and civic discussions." />
+        <link rel="canonical" href="https://www.opinar.in/" />
+      </Helmet>
+
       
       {/* Title Header Card */}
       <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-main)', borderRadius: 'var(--radius-card)', padding: '24px', marginBottom: '28px', boxShadow: 'var(--shadow-card)' }}>
