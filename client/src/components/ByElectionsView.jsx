@@ -1,381 +1,19 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { api } from '../api/client';
 import { db } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { getPartyColor, getPartySymbol } from '../utils/party_utils';
+import { BY_ELECTIONS_DATA } from '../data/by_elections_data';
 import Search from 'lucide-react/dist/esm/icons/search';
 import Trophy from 'lucide-react/dist/esm/icons/trophy';
 import Calendar from 'lucide-react/dist/esm/icons/calendar';
 import CheckCircle2 from 'lucide-react/dist/esm/icons/check-circle-2';
 import Clock from 'lucide-react/dist/esm/icons/clock';
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
 
-// Authentic By-Elections with real results or upcoming schedule
-const AUTHENTIC_BY_ELECTIONS = [
-  {
-    id: 'bypoll-kl-wayanad',
-    constituency: 'Wayanad',
-    state: 'Kerala',
-    type: 'LOK_SABHA',
-    level: 'Lok Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Priyanka Gandhi Vadra',
-      party: 'INC',
-      margin: '4,10,931 votes',
-      runnerUp: 'Sathyan Mokeri',
-      runnerUpParty: 'CPI'
-    }
-  },
-  {
-    id: 'bypoll-mh-nanded',
-    constituency: 'Nanded',
-    state: 'Maharashtra',
-    type: 'LOK_SABHA',
-    level: 'Lok Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Ravindra Vasantrao Chavan',
-      party: 'INC',
-      margin: '1,457 votes',
-      runnerUp: 'Santukrao Hambarde',
-      runnerUpParty: 'BJP'
-    }
-  },
-  {
-    id: 'bypoll-uk-kedarnath',
-    constituency: 'Kedarnath',
-    state: 'Uttarakhand',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Asha Nautiyal',
-      party: 'BJP',
-      margin: '5,622 votes',
-      runnerUp: 'Manoj Rawat',
-      runnerUpParty: 'INC'
-    }
-  },
-  {
-    id: 'bypoll-gj-vav',
-    constituency: 'Vav',
-    state: 'Gujarat',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Gulabsinh Rajput',
-      party: 'INC',
-      margin: '2,484 votes',
-      runnerUp: 'Swaroopji Thakor',
-      runnerUpParty: 'BJP'
-    }
-  },
-  {
-    id: 'bypoll-up-karhal',
-    constituency: 'Karhal',
-    state: 'Uttar Pradesh',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Tej Pratap Yadav',
-      party: 'SP',
-      margin: '14,302 votes',
-      runnerUp: 'Anujesh Pratap Singh',
-      runnerUpParty: 'BJP'
-    }
-  },
-  {
-    id: 'bypoll-up-kundarki',
-    constituency: 'Kundarki',
-    state: 'Uttar Pradesh',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Ramveer Singh',
-      party: 'BJP',
-      margin: '1,44,791 votes',
-      runnerUp: 'Mohd Rizwan',
-      runnerUpParty: 'SP'
-    }
-  },
-  {
-    id: 'bypoll-up-ghaziabad',
-    constituency: 'Ghaziabad',
-    state: 'Uttar Pradesh',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Sanjeev Sharma',
-      party: 'BJP',
-      margin: '69,551 votes',
-      runnerUp: 'Singh Raj Jatav',
-      runnerUpParty: 'SP'
-    }
-  },
-  {
-    id: 'bypoll-up-meerapur',
-    constituency: 'Meerapur',
-    state: 'Uttar Pradesh',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Mithlesh Pal',
-      party: 'RLD',
-      margin: '29,796 votes',
-      runnerUp: 'Sumbul Rana',
-      runnerUpParty: 'SP'
-    }
-  },
-  {
-    id: 'bypoll-up-sisamau',
-    constituency: 'Sisamau',
-    state: 'Uttar Pradesh',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Naseem Solanki',
-      party: 'SP',
-      margin: '8,533 votes',
-      runnerUp: 'Suresh Awasthi',
-      runnerUpParty: 'BJP'
-    }
-  },
-  {
-    id: 'bypoll-up-phulpur',
-    constituency: 'Phulpur',
-    state: 'Uttar Pradesh',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Deepak Patel',
-      party: 'BJP',
-      margin: '11,305 votes',
-      runnerUp: 'Mujtaba Siddiqui',
-      runnerUpParty: 'SP'
-    }
-  },
-  {
-    id: 'bypoll-up-katehari',
-    constituency: 'Katehari',
-    state: 'Uttar Pradesh',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Dharmraj Nishad',
-      party: 'BJP',
-      margin: '12,852 votes',
-      runnerUp: 'Shobhavati Verma',
-      runnerUpParty: 'SP'
-    }
-  },
-  {
-    id: 'bypoll-up-khair',
-    constituency: 'Khair (SC)',
-    state: 'Uttar Pradesh',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Surendra Diler',
-      party: 'BJP',
-      margin: '36,734 votes',
-      runnerUp: 'Charu Kain',
-      runnerUpParty: 'SP'
-    }
-  },
-  {
-    id: 'bypoll-pb-gidderbaha',
-    constituency: 'Gidderbaha',
-    state: 'Punjab',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Hardeep Singh Dimpy Dhillon',
-      party: 'AAP',
-      margin: '21,969 votes',
-      runnerUp: 'Amrinder Singh Raja Warring',
-      runnerUpParty: 'INC'
-    }
-  },
-  {
-    id: 'bypoll-pb-barnala',
-    constituency: 'Barnala',
-    state: 'Punjab',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Harinder Singh Dhaliwal',
-      party: 'AAP',
-      margin: '2,157 votes',
-      runnerUp: 'Kuldeep Singh Dhillon',
-      runnerUpParty: 'INC'
-    }
-  },
-  {
-    id: 'bypoll-pb-derababanak',
-    constituency: 'Dera Baba Nanak',
-    state: 'Punjab',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Gurdeep Singh Randhawa',
-      party: 'AAP',
-      margin: '5,699 votes',
-      runnerUp: 'Jatinder Kaur Randhawa',
-      runnerUpParty: 'INC'
-    }
-  },
-  {
-    id: 'bypoll-pb-chabbewal',
-    constituency: 'Chabbewal (SC)',
-    state: 'Punjab',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Ishan Kumar',
-      party: 'AAP',
-      margin: '28,690 votes',
-      runnerUp: 'Ranjit Kumar',
-      runnerUpParty: 'INC'
-    }
-  },
-  {
-    id: 'bypoll-kl-palakkad',
-    constituency: 'Palakkad',
-    state: 'Kerala',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Rahul Mamkootathil',
-      party: 'INC',
-      margin: '18,840 votes',
-      runnerUp: 'C. Krishnakumar',
-      runnerUpParty: 'BJP'
-    }
-  },
-  {
-    id: 'bypoll-kl-chelakkara',
-    constituency: 'Chelakkara (SC)',
-    state: 'Kerala',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'U. R. Pradeep',
-      party: 'CPM',
-      margin: '12,201 votes',
-      runnerUp: 'Ramya Haridas',
-      runnerUpParty: 'INC'
-    }
-  },
-  {
-    id: 'bypoll-mp-budhni',
-    constituency: 'Budhni',
-    state: 'Madhya Pradesh',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Ramakant Bhargava',
-      party: 'BJP',
-      margin: '13,090 votes',
-      runnerUp: 'Rajkumar Patel',
-      runnerUpParty: 'INC'
-    }
-  },
-  {
-    id: 'bypoll-mp-vijaypur',
-    constituency: 'Vijaypur',
-    state: 'Madhya Pradesh',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'November 2024',
-    status: 'RESULT',
-    result: {
-      winner: 'Mukesh Malhotra',
-      party: 'INC',
-      margin: '7,364 votes',
-      runnerUp: 'Ramniwas Rawat',
-      runnerUpParty: 'BJP'
-    }
-  },
-  // Upcoming / Live tracked by-elections
-  {
-    id: 'bypoll-as-nagaon',
-    constituency: 'Nagaon',
-    state: 'Assam',
-    type: 'LOK_SABHA',
-    level: 'Lok Sabha',
-    date: 'Upcoming 2026',
-    status: 'UPCOMING',
-    result: null
-  },
-  {
-    id: 'bypoll-py-thattanchavady',
-    constituency: 'Thattanchavady',
-    state: 'Puducherry',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'Upcoming 2026',
-    status: 'UPCOMING',
-    result: null
-  },
-  {
-    id: 'bypoll-as-dhing',
-    constituency: 'Dhing',
-    state: 'Assam',
-    type: 'ASSEMBLY',
-    level: 'Vidhan Sabha',
-    date: 'Upcoming 2026',
-    status: 'UPCOMING',
-    result: null
-  },
-  {
-    id: 'bypoll-up-bithoor',
-    constituency: 'Bithoor',
-    state: 'Uttar Pradesh',
-    type: 'MUNICIPAL',
-    level: 'Municipal / Local Body',
-    date: 'Upcoming 2026',
-    status: 'UPCOMING',
-    result: null
-  }
-];
-
-export default function ByElectionsView({ defaultLevel = 'ALL' }) {
-  const [bypolls, setBypolls] = useState(AUTHENTIC_BY_ELECTIONS);
+export default function ByElectionsView({ defaultLevel = 'ALL', onSelectByElection }) {
+  const [bypolls, setBypolls] = useState(BY_ELECTIONS_DATA);
   const [selectedLevel, setSelectedLevel] = useState(defaultLevel);
   const [selectedStatus, setSelectedStatus] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
@@ -429,10 +67,16 @@ export default function ByElectionsView({ defaultLevel = 'ALL' }) {
             const docStatus = item.status === 'RESULT' || item.winner ? 'RESULT' :
                               item.status === 'COUNTING' || item.liveCount ? 'COUNTING' : 'UPCOMING';
 
+            const st = item.state || 'India';
+            const stateSlug = st.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            const constituencySlug = constName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+
             mapped.push({
               id: item.id || `live-${constName}`,
               constituency: constName,
-              state: item.state || 'India',
+              constituencySlug,
+              state: st,
+              stateSlug,
               type,
               level,
               date: item.date || '2026',
@@ -453,7 +97,7 @@ export default function ByElectionsView({ defaultLevel = 'ALL' }) {
           });
 
           if (mapped.length > 0) {
-            const combined = [...AUTHENTIC_BY_ELECTIONS];
+            const combined = [...BY_ELECTIONS_DATA];
             mapped.forEach(m => {
               if (!combined.some(c => c.constituency.toLowerCase() === m.constituency.toLowerCase())) {
                 combined.unshift(m);
@@ -467,6 +111,17 @@ export default function ByElectionsView({ defaultLevel = 'ALL' }) {
     fetchDynamic();
     return () => { isMounted = false; };
   }, []);
+
+  const handleCardClick = (bp) => {
+    const sSlug = bp.stateSlug || bp.state.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    const cSlug = bp.constituencySlug || bp.constituency.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    if (onSelectByElection) {
+      onSelectByElection(sSlug, cSlug);
+    } else {
+      window.history.pushState({}, '', `/by-elections/${sSlug}/${cSlug}`);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  };
 
   // Filtered dataset
   const filteredList = useMemo(() => {
@@ -496,6 +151,19 @@ export default function ByElectionsView({ defaultLevel = 'ALL' }) {
   return (
     <div style={{ marginTop: '8px', color: '#E4E4E7' }}>
       
+      {/* HIGH-RANKING SHORT-TAIL & LONG-TAIL SEO METATAGS */}
+      <Helmet>
+        <title>By-Election Results India 2024-2026: Lok Sabha & Vidhan Sabha Bypoll Winners, Live Count | Opinar</title>
+        <meta name="description" content="Track official Indian by-election results and live count for Lok Sabha, Vidhan Sabha and Municipal seats. Verified winners, margins and party breakdown for Wayanad, Karhal, Kedarnath, Vav, Kundarki and upcoming bypolls." />
+        <meta name="keywords" content="by election results 2024, bypoll results live, lok sabha by election, vidhan sabha by election, who won by election, election commission bypoll results, wayanad by election, karhal bypoll results, kedarnath by election, kundarki by election, vav by election result, by election live count" />
+        <link rel="canonical" href="https://www.opinar.in/by-elections" />
+
+        <meta property="og:title" content="By-Election Results India 2024-2026: Live Bypoll Count & Winners | Opinar" />
+        <meta property="og:description" content="Explore live counting, winners, margins, and election commission verified returns across Indian by-elections." />
+        <meta property="og:url" content="https://www.opinar.in/by-elections" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       {/* MINIMAL FILTER BAR */}
       <div style={{ 
         display: 'flex', 
@@ -603,6 +271,7 @@ export default function ByElectionsView({ defaultLevel = 'ALL' }) {
             return (
               <div
                 key={bp.id}
+                onClick={() => handleCardClick(bp)}
                 style={{
                   backgroundColor: '#27272A',
                   borderRadius: '12px',
@@ -611,8 +280,17 @@ export default function ByElectionsView({ defaultLevel = 'ALL' }) {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '12px',
-                  transition: 'border-color 0.15s',
-                  position: 'relative'
+                  transition: 'border-color 0.15s, transform 0.15s',
+                  position: 'relative',
+                  cursor: 'pointer'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#3B82F6';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '#3F3F46';
+                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
                 {/* Header: Level & Status */}
@@ -768,6 +446,12 @@ export default function ByElectionsView({ defaultLevel = 'ALL' }) {
                     Polling scheduled. Results will be updated immediately upon counting.
                   </div>
                 )}
+
+                {/* CARD FOOTER: LINK TO DEDICATED SEO PAGE */}
+                <div style={{ marginTop: 'auto', paddingTop: '8px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', color: '#3B82F6', fontSize: '12px', fontWeight: 600, gap: '4px' }}>
+                  <span>View Full Details & Breakdown</span>
+                  <ArrowRight size={13} />
+                </div>
 
               </div>
             );

@@ -61,7 +61,8 @@ export default function ElectionsHub({
   onTypeChange,
   onStateChange,
   onYearChange,
-  onSelectConstituency
+  onSelectConstituency,
+  onSelectByElection
 }) {
   useEffect(() => {
     let isMounted = true;
@@ -454,6 +455,7 @@ export default function ElectionsHub({
           defaultLevel={electionType === 'MUNICIPAL' ? 'MUNICIPAL' : 'ALL'}
           onSelectConstituency={onSelectConstituency}
           onSelectYear={onSelectYear}
+          onSelectByElection={onSelectByElection}
         />
       )}
 
