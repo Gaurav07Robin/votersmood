@@ -408,9 +408,11 @@ export default function ElectionsHub({
              electionType === 'ASSEMBLY' ? 'State Assembly Elections' :
              electionType === 'MUNICIPAL' ? 'Municipal Elections' : 'By-Elections'}
           </h1>
-          <p style={{ color: '#A1A1AA', fontSize: '16px', margin: '8px 0 0 0' }}>
+          <p style={{ color: '#A1A1AA', fontSize: '15px', margin: '8px 0 0 0' }}>
             {electionType === 'LOK_SABHA' ? "A 75-year timeline of India's parliamentary elections" :
-             "State and local election historical data mapping"}
+             electionType === 'ASSEMBLY' ? "State assembly election historical data" :
+             electionType === 'MUNICIPAL' ? "Municipal and urban local body election mapping" :
+             "Recent and scheduled by-elections across parliamentary and assembly seats"}
           </p>
         </div>
 
