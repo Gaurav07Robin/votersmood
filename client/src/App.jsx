@@ -72,9 +72,11 @@ function AppContent() {
               setActiveTab('elections');
           }
         }
-      } else if (path === 'elections' || path === 'elections/lok-sabha' || path === 'elections/state') {
+      } else if (path === 'elections' || path === 'elections/lok-sabha' || path === 'elections/state' || path === 'elections/by-elections' || path === 'elections/municipal') {
         if (path === 'elections/state') setElectionCategory('ASSEMBLY');
-        if (path === 'elections/lok-sabha') setElectionCategory('LOK_SABHA');
+        else if (path === 'elections/lok-sabha') setElectionCategory('LOK_SABHA');
+        else if (path === 'elections/by-elections') setElectionCategory('BY_ELECTION');
+        else if (path === 'elections/municipal') setElectionCategory('MUNICIPAL');
         setActiveTab('elections');
         setSelectedElection(null);
       } else if (path.startsWith('insights/')) {
@@ -185,6 +187,7 @@ function AppContent() {
             onTypeChange={setElectionCategory}
             onStateChange={setLastSelectedState}
             onYearChange={setLastSelectedYear}
+            onSelectConstituency={handleSelectConstituency}
           />
         )}
         

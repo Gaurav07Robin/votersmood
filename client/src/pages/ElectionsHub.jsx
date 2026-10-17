@@ -9,6 +9,7 @@ import ChevronDown from 'lucide-react/dist/esm/icons/chevron-down';
 import { getPartyColor, getPartySymbol, getPartyFlag } from '../utils/party_utils';
 import localStateMetadata from '../data/state_elections_metadata.json';
 import localLokSabhaMetadata from '../data/lok_sabha_metadata.json';
+import ByElectionsView from '../components/ByElectionsView';
 
 const CustomXAxisTick = ({ x, y, payload }) => {
   const symbol = getPartySymbol(payload.value);
@@ -59,7 +60,8 @@ export default function ElectionsHub({
   initialSelectedYear = 2024,
   onTypeChange,
   onStateChange,
-  onYearChange
+  onYearChange,
+  onSelectConstituency
 }) {
   useEffect(() => {
     let isMounted = true;
@@ -72,6 +74,12 @@ export default function ElectionsHub({
   const [loading, setLoading] = useState(false);
   const [liveElections, setLiveElections] = useState([]);
   const [electionType, setElectionType] = useState(initialType || 'LOK_SABHA');
+
+  useEffect(() => {
+    if (initialType && initialType !== electionType) {
+      setElectionType(initialType);
+    }
+  }, [initialType]);
   
   // Lok Sabha State (Initialized with 18 historical general elections)
   const [activeYearLS, setActiveYearLS] = useState(2024);
@@ -278,6 +286,15 @@ export default function ElectionsHub({
   const handleTypeSwitch = (typeId) => {
     setElectionType(typeId);
     onTypeChange?.(typeId);
+    if (typeId === 'LOK_SABHA') {
+      window.history.pushState({}, '', '/elections/lok-sabha');
+    } else if (typeId === 'ASSEMBLY') {
+      window.history.pushState({}, '', '/elections/state');
+    } else if (typeId === 'BY_ELECTION') {
+      window.history.pushState({}, '', '/elections/by-elections');
+    } else if (typeId === 'MUNICIPAL') {
+      window.history.pushState({}, '', '/elections/municipal');
+    }
   };
 
   // State docs for the entire historical timeline of the selected state
@@ -431,10 +448,11 @@ export default function ElectionsHub({
       </div>
 
       {!isLS && !isAS && (
-        <div style={{ textAlign: 'center', padding: '40px', backgroundColor: '#27272A', borderRadius: '12px', color: '#A1A1AA', marginBottom: '24px' }}>
-          <h3 style={{ color: '#FFFFFF', fontSize: '20px', marginBottom: '8px' }}>Module Active</h3>
-          <p>This section is currently being mapped with historical data.</p>
-        </div>
+        <ByElectionsView 
+          defaultLevel={electionType === 'MUNICIPAL' ? 'MUNICIPAL' : 'ALL'}
+          onSelectConstituency={onSelectConstituency}
+          onSelectYear={onSelectYear}
+        />
       )}
 
       {(isLS || isAS) && (<>
