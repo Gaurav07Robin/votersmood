@@ -420,7 +420,7 @@ export default function ElectionsHub({
             { id: 'LOK_SABHA', label: 'Lok Sabha', icon: '🏛️' },
             { id: 'ASSEMBLY', label: 'State Assembly', icon: '🗺️' },
             { id: 'MUNICIPAL', label: 'Municipal', icon: '🏙️' },
-            { id: 'BY_ELECTION', label: 'By-Election', icon: '🔄', badge: 'LIVE' }
+            { id: 'BY_ELECTION', label: 'By-Election', icon: '🔄' }
           ].map(type => (
             <button
               key={type.id}
@@ -428,7 +428,7 @@ export default function ElectionsHub({
               style={{
                 backgroundColor: electionType === type.id ? '#3F3F46' : 'transparent',
                 color: electionType === type.id ? '#FFFFFF' : '#A1A1AA',
-                border: type.id === 'BY_ELECTION' && electionType !== 'BY_ELECTION' ? '1px dashed #EF4444' : 'none',
+                border: 'none',
                 borderRadius: '8px',
                 padding: '8px 14px',
                 fontSize: '13px',
@@ -441,21 +441,7 @@ export default function ElectionsHub({
                 boxShadow: electionType === type.id ? '0 2px 4px rgba(0,0,0,0.2)' : 'none'
               }}
             >
-              <span style={{ fontSize: '14px' }}>{type.icon}</span> 
-              <span>{type.label}</span>
-              {type.badge && (
-                <span style={{
-                  backgroundColor: '#EF4444',
-                  color: '#FFFFFF',
-                  fontSize: '9px',
-                  fontWeight: 800,
-                  padding: '1px 5px',
-                  borderRadius: '4px',
-                  letterSpacing: '0.5px'
-                }}>
-                  {type.badge}
-                </span>
-              )}
+              <span style={{ fontSize: '14px' }}>{type.icon}</span> {type.label}
             </button>
           ))}
         </div>

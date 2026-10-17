@@ -41,12 +41,7 @@ const SignalPulse = ({ size = 18 }) => (
   </svg>
 );
 
-export default function Navbar({ 
-  activeTab = 'discussions', 
-  electionCategory = 'LOK_SABHA',
-  setActiveTab, 
-  openRegisterModal: propOpenRegisterModal 
-}) {
+export default function Navbar({ activeTab = 'discussions', setActiveTab, openRegisterModal: propOpenRegisterModal }) {
   const { user, userProfile, logout, isAdmin, openRegisterModal: contextOpenRegisterModal } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
@@ -80,25 +75,6 @@ export default function Navbar({
     setMobileMenuOpen(false);
   };
 
-  const isTabActive = (tabId) => {
-    if (tabId === 'by-elections') {
-      return activeTab === 'elections' && electionCategory === 'BY_ELECTION';
-    }
-    if (tabId === 'elections') {
-      return activeTab === 'elections' && electionCategory !== 'BY_ELECTION';
-    }
-    return activeTab === tabId;
-  };
-
-  const navTabs = [
-    { id: 'discussions', label: 'Discussions', icon: EditorialFeed },
-    { id: 'polls', label: 'Election Polls', icon: BallotBox },
-    { id: 'insights', label: 'Insights', icon: EditorialFeed },
-    { id: 'directory', label: 'Directory', icon: AssemblyPillar },
-    { id: 'elections', label: 'Elections', icon: AssemblyPillar },
-    { id: 'by-elections', label: 'By-Elections', icon: BallotBox, isLive: true },
-  ];
-
   return (
     <>
       <header style={{ width: '100%', position: 'sticky', top: 0, zIndex: 100, backgroundColor: '#FFFFFF', borderBottom: '1px solid var(--border-subtle)' }}>
@@ -124,10 +100,16 @@ export default function Navbar({
             </div>
 
             {/* Desktop Center Links */}
-            <div className="desktop-nav" style={{ display: 'flex', gap: '20px', height: '100%', alignItems: 'center' }}>
-              {navTabs.map((tab) => {
+            <div className="desktop-nav" style={{ display: 'flex', gap: '28px', height: '100%', alignItems: 'center' }}>
+              {[
+                { id: 'discussions', label: 'Discussions', icon: EditorialFeed },
+                { id: 'polls', label: 'Election Polls', icon: BallotBox },
+                { id: 'insights', label: 'Insights', icon: EditorialFeed },
+                { id: 'directory', label: 'Directory', icon: AssemblyPillar },
+                { id: 'elections', label: 'Elections', icon: AssemblyPillar },
+              ].map((tab) => {
                 const IconComp = tab.icon;
-                const isActive = isTabActive(tab.id);
+                const isActive = activeTab === tab.id;
                 return (
                   <button
                     key={tab.id}
@@ -150,23 +132,7 @@ export default function Navbar({
                     }}
                   >
                     <IconComp size={16} />
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                      <span>{tab.label}</span>
-                      {tab.isLive && (
-                        <span style={{
-                          backgroundColor: '#EF4444',
-                          color: '#FFFFFF',
-                          fontSize: '9px',
-                          fontWeight: 800,
-                          padding: '1px 5px',
-                          borderRadius: '4px',
-                          letterSpacing: '0.5px',
-                          lineHeight: 1.2
-                        }}>
-                          LIVE
-                        </span>
-                      )}
-                    </span>
+                    <span>{tab.label}</span>
                   </button>
                 );
               })}
@@ -319,9 +285,15 @@ export default function Navbar({
                 </div>
               )}
 
-              {navTabs.map((tab) => {
+              {[
+                { id: 'discussions', label: 'Discussions', icon: EditorialFeed },
+                { id: 'polls', label: 'Election Polls', icon: BallotBox },
+                { id: 'insights', label: 'Insights', icon: EditorialFeed },
+                { id: 'directory', label: 'Directory', icon: AssemblyPillar },
+                { id: 'elections', label: 'Elections', icon: AssemblyPillar },
+              ].map((tab) => {
                 const IconComp = tab.icon;
-                const isActive = isTabActive(tab.id);
+                const isActive = activeTab === tab.id;
                 return (
                   <button
                     key={tab.id}
@@ -341,22 +313,7 @@ export default function Navbar({
                     }}
                   >
                     <IconComp size={16} />
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                      <span>{tab.label}</span>
-                      {tab.isLive && (
-                        <span style={{
-                          backgroundColor: '#EF4444',
-                          color: '#FFFFFF',
-                          fontSize: '9px',
-                          fontWeight: 800,
-                          padding: '1px 5px',
-                          borderRadius: '4px',
-                          letterSpacing: '0.5px'
-                        }}>
-                          LIVE
-                        </span>
-                      )}
-                    </span>
+                    <span>{tab.label}</span>
                   </button>
                 );
               })}

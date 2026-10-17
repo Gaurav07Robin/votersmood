@@ -72,23 +72,11 @@ function AppContent() {
               setActiveTab('elections');
           }
         }
-      } else if (
-        path === 'elections' || 
-        path === 'elections/lok-sabha' || 
-        path === 'elections/state' || 
-        path === 'elections/by-elections' || 
-        path === 'elections/municipal' ||
-        path === 'by-elections' ||
-        path === 'by-election' ||
-        path === 'byelections' ||
-        path === 'byelection' ||
-        path === 'bypolls' ||
-        path === 'bypoll'
-      ) {
+      } else if (path === 'elections' || path === 'elections/lok-sabha' || path === 'elections/state' || path === 'elections/by-elections' || path === 'elections/municipal') {
         if (path === 'elections/state') setElectionCategory('ASSEMBLY');
         else if (path === 'elections/lok-sabha') setElectionCategory('LOK_SABHA');
+        else if (path === 'elections/by-elections') setElectionCategory('BY_ELECTION');
         else if (path === 'elections/municipal') setElectionCategory('MUNICIPAL');
-        else setElectionCategory('BY_ELECTION');
         setActiveTab('elections');
         setSelectedElection(null);
       } else if (path.startsWith('insights/')) {
@@ -129,20 +117,6 @@ function AppContent() {
     setSelectedLeaderSlug(null);
     setSelectedElection(null);
     setSelectedInsightSlug(null);
-    if (tab === 'by-elections') {
-      setElectionCategory('BY_ELECTION');
-      setActiveTab('elections');
-      window.history.pushState({}, '', '/elections/by-elections');
-      return;
-    }
-    if (tab === 'elections') {
-      if (electionCategory === 'BY_ELECTION') {
-        setElectionCategory('LOK_SABHA');
-      }
-      setActiveTab('elections');
-      window.history.pushState({}, '', '/elections/lok-sabha');
-      return;
-    }
     setActiveTab(tab);
     const newPath = tab === 'discussions' ? '/' : `/${tab}`;
     window.history.pushState({}, '', newPath);
@@ -182,7 +156,6 @@ function AppContent() {
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--bg-primary)' }}>
       <Navbar 
         activeTab={activeTab} 
-        electionCategory={electionCategory}
         setActiveTab={handleTabChange} 
         openRegisterModal={openRegisterModal}
       />
