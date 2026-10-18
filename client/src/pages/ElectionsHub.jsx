@@ -9,6 +9,7 @@ import ChevronDown from 'lucide-react/dist/esm/icons/chevron-down';
 import { getPartyColor, getPartySymbol, getPartyFlag } from '../utils/party_utils';
 import localStateMetadata from '../data/state_elections_metadata.json';
 import localLokSabhaMetadata from '../data/lok_sabha_metadata.json';
+import ByElectionsView from '../components/ByElectionsView';
 
 const CustomXAxisTick = ({ x, y, payload }) => {
   const symbol = getPartySymbol(payload.value);
@@ -37,14 +38,15 @@ const normalizeStateName = (name) => {
 };
 
 const formattedLocalLS = (localLokSabhaMetadata || []).map(d => {
-  const incSeats = d.party_wins?.['INC'] || d.partyWins?.['INC'] || 0;
-  const bjpSeats = (d.party_wins?.['BJP'] || d.partyWins?.['BJP'] || 0) + (d.party_wins?.['BJS'] || d.partyWins?.['BJS'] || 0);
+  const pw = d.party_wins || d.partyWins || {};
+  const incSeats = (pw['INC'] || 0) + (pw['INC(I)'] || 0) + (pw['INC(R)'] || 0);
+  const bjpSeats = (pw['BJP'] || 0) + (pw['BJS'] || 0);
   const total = d.total_seats || d.totalSeats || 543;
   const othersSeats = total - incSeats - bjpSeats;
   return {
     ...d,
     total_seats: total,
-    party_wins: d.party_wins || d.partyWins || {},
+    party_wins: pw,
     INC: incSeats,
     BJP: bjpSeats,
     Others: othersSeats > 0 ? othersSeats : 0
@@ -58,7 +60,9 @@ export default function ElectionsHub({
   initialSelectedYear = 2024,
   onTypeChange,
   onStateChange,
-  onYearChange
+  onYearChange,
+  onSelectConstituency,
+  onSelectByElection
 }) {
   useEffect(() => {
     let isMounted = true;
@@ -71,6 +75,12 @@ export default function ElectionsHub({
   const [loading, setLoading] = useState(false);
   const [liveElections, setLiveElections] = useState([]);
   const [electionType, setElectionType] = useState(initialType || 'LOK_SABHA');
+
+  useEffect(() => {
+    if (initialType && initialType !== electionType) {
+      setElectionType(initialType);
+    }
+  }, [initialType]);
   
   // Lok Sabha State (Initialized with 18 historical general elections)
   const [activeYearLS, setActiveYearLS] = useState(2024);
@@ -125,16 +135,32 @@ export default function ElectionsHub({
         });
         
         const LOK_SABHA_YEARS = [1952, 1957, 1962, 1967, 1971, 1977, 1980, 1984, 1989, 1991, 1996, 1998, 1999, 2004, 2009, 2014, 2019, 2024];
-        const majorElections = data.filter(d => LOK_SABHA_YEARS.includes(d.year) || d.total_seats > 400);
-        majorElections.sort((a, b) => a.year - b.year);
+        
+        // CRITICAL: Filter for authentic General Elections (total seats >= 400) and deduplicate by year (taking max seats)
+        const mapByYear = {};
+        data.forEach(d => {
+          const total = d.total_seats || d.totalSeats || 0;
+          if (total >= 400 && LOK_SABHA_YEARS.includes(d.year)) {
+            const existingTotal = mapByYear[d.year] ? (mapByYear[d.year].total_seats || mapByYear[d.year].totalSeats || 0) : 0;
+            if (!mapByYear[d.year] || existingTotal < total) {
+              mapByYear[d.year] = d;
+            }
+          }
+        });
+
+        const majorElections = Object.values(mapByYear).sort((a, b) => a.year - b.year);
         
         if (majorElections.length > 0) {
           const chartData = majorElections.map(d => {
-            const incSeats = d.party_wins?.['INC'] || 0;
-            const bjpSeats = (d.party_wins?.['BJP'] || 0) + (d.party_wins?.['BJS'] || 0);
-            const othersSeats = d.total_seats - incSeats - bjpSeats;
+            const pw = d.party_wins || d.partyWins || {};
+            const incSeats = (pw['INC'] || 0) + (pw['INC(I)'] || 0) + (pw['INC(R)'] || 0);
+            const bjpSeats = (pw['BJP'] || 0) + (pw['BJS'] || 0);
+            const total = d.total_seats || d.totalSeats || 543;
+            const othersSeats = total - incSeats - bjpSeats;
             return {
               ...d,
+              total_seats: total,
+              party_wins: pw,
               INC: incSeats,
               BJP: bjpSeats,
               Others: othersSeats > 0 ? othersSeats : 0
@@ -261,6 +287,15 @@ export default function ElectionsHub({
   const handleTypeSwitch = (typeId) => {
     setElectionType(typeId);
     onTypeChange?.(typeId);
+    if (typeId === 'LOK_SABHA') {
+      window.history.pushState({}, '', '/elections/lok-sabha');
+    } else if (typeId === 'ASSEMBLY') {
+      window.history.pushState({}, '', '/elections/state');
+    } else if (typeId === 'BY_ELECTION') {
+      window.history.pushState({}, '', '/elections/by-elections');
+    } else if (typeId === 'MUNICIPAL') {
+      window.history.pushState({}, '', '/elections/municipal');
+    }
   };
 
   // State docs for the entire historical timeline of the selected state
@@ -272,17 +307,29 @@ export default function ElectionsHub({
   const maxStateSeats = stateDocs.reduce((max, d) => Math.max(max, d.totalSeats || d.total_seats || 0), 0);
 
   const filteredStateData = useMemo(() => {
-    return stateDocs
-      .filter(d => (d.totalSeats || d.total_seats || 0) >= Math.max(15, maxStateSeats * 0.4))
-      .sort((a, b) => a.year - b.year)
+    // Map to ensure each year only has 1 general election entry (taking the one with max seats)
+    const map = {};
+    stateDocs.forEach(d => {
+      const y = d.year || d.Year;
+      const total = d.totalSeats || d.total_seats || 0;
+      if (y && total >= Math.max(15, maxStateSeats * 0.4)) {
+        if (!map[y] || (map[y].totalSeats || map[y].total_seats || 0) < total) {
+          map[y] = d;
+        }
+      }
+    });
+
+    return Object.values(map)
+      .sort((a, b) => (a.year || a.Year) - (b.year || b.Year))
       .map(d => {
           const total = d.totalSeats || d.total_seats || 0;
           const pw = d.partyWins || d.party_wins || {};
-          const inc = pw['INC'] || 0;
+          const inc = (pw['INC'] || 0) + (pw['INC(I)'] || 0) + (pw['INC(R)'] || 0);
           const bjp = (pw['BJP'] || 0) + (pw['BJS'] || 0);
           const rest = total - inc - bjp;
           return {
               ...d,
+              year: d.year || d.Year,
               total_seats: total,
               party_wins: pw,
               INC: inc,
@@ -362,9 +409,11 @@ export default function ElectionsHub({
              electionType === 'ASSEMBLY' ? 'State Assembly Elections' :
              electionType === 'MUNICIPAL' ? 'Municipal Elections' : 'By-Elections'}
           </h1>
-          <p style={{ color: '#A1A1AA', fontSize: '16px', margin: '8px 0 0 0' }}>
+          <p style={{ color: '#A1A1AA', fontSize: '15px', margin: '8px 0 0 0' }}>
             {electionType === 'LOK_SABHA' ? "A 75-year timeline of India's parliamentary elections" :
-             "State and local election historical data mapping"}
+             electionType === 'ASSEMBLY' ? "State assembly election historical data" :
+             electionType === 'MUNICIPAL' ? "Municipal and urban local body election mapping" :
+             "Recent and scheduled by-elections across parliamentary and assembly seats"}
           </p>
         </div>
 
@@ -402,10 +451,12 @@ export default function ElectionsHub({
       </div>
 
       {!isLS && !isAS && (
-        <div style={{ textAlign: 'center', padding: '40px', backgroundColor: '#27272A', borderRadius: '12px', color: '#A1A1AA', marginBottom: '24px' }}>
-          <h3 style={{ color: '#FFFFFF', fontSize: '20px', marginBottom: '8px' }}>Module Active</h3>
-          <p>This section is currently being mapped with historical data.</p>
-        </div>
+        <ByElectionsView 
+          defaultLevel={electionType === 'MUNICIPAL' ? 'MUNICIPAL' : 'ALL'}
+          onSelectConstituency={onSelectConstituency}
+          onSelectYear={onSelectYear}
+          onSelectByElection={onSelectByElection}
+        />
       )}
 
       {(isLS || isAS) && (<>

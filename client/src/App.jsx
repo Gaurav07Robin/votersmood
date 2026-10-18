@@ -12,9 +12,10 @@ const Admin = React.lazy(() => import('./pages/Admin'));
 const ElectionsHub = React.lazy(() => import('./pages/ElectionsHub'));
 const ElectionYearDetail = React.lazy(() => import('./pages/ElectionYearDetail'));
 const ConstituencyResult = React.lazy(() => import('./pages/ConstituencyResult'));
+const ByElectionDetail = React.lazy(() => import('./pages/ByElectionDetail'));
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 
-const KNOWN_TABS = ['discussions', 'polls', 'insights', 'directory', 'trending', 'admin', 'elections'];
+const KNOWN_TABS = ['discussions', 'polls', 'insights', 'directory', 'trending', 'admin', 'elections', 'by-elections'];
 
 function AppContent() {
   const { isRegisterOpen, openRegisterModal, closeRegisterModal } = useAuth();
@@ -22,6 +23,7 @@ function AppContent() {
   const [selectedLeaderSlug, setSelectedLeaderSlug] = useState(null);
   const [selectedInsightSlug, setSelectedInsightSlug] = useState(null);
   const [selectedElection, setSelectedElection] = useState(null); // { year, stateSlug, constituencySlug }
+  const [selectedByElection, setSelectedByElection] = useState(null); // { stateSlug, constituencySlug }
   const [electionCategory, setElectionCategory] = useState('LOK_SABHA');
   const [lastSelectedState, setLastSelectedState] = useState('Maharashtra');
   const [lastSelectedYear, setLastSelectedYear] = useState(2024);
@@ -72,11 +74,39 @@ function AppContent() {
               setActiveTab('elections');
           }
         }
-      } else if (path === 'elections' || path === 'elections/lok-sabha' || path === 'elections/state') {
+      } else if (path.startsWith('by-elections/') || path.startsWith('elections/by-elections/')) {
+        const clean = path.replace(/^elections\//, '');
+        const parts = clean.split('/');
+        const stateSlug = parts[1];
+        const constituencySlug = parts[2];
+        if (stateSlug && constituencySlug) {
+          setSelectedByElection({ stateSlug, constituencySlug });
+          setActiveTab('by-election-detail');
+        } else {
+          setElectionCategory('BY_ELECTION');
+          setActiveTab('elections');
+          setSelectedElection(null);
+          setSelectedByElection(null);
+        }
+      } else if (
+        path === 'elections' || 
+        path === 'elections/lok-sabha' || 
+        path === 'elections/state' || 
+        path === 'elections/by-elections' || 
+        path === 'elections/municipal' ||
+        path === 'by-elections' ||
+        path === 'by-election' ||
+        path === 'byelections' ||
+        path === 'byelection' ||
+        path === 'bypolls'
+      ) {
         if (path === 'elections/state') setElectionCategory('ASSEMBLY');
-        if (path === 'elections/lok-sabha') setElectionCategory('LOK_SABHA');
+        else if (path === 'elections/lok-sabha') setElectionCategory('LOK_SABHA');
+        else if (path === 'elections/municipal') setElectionCategory('MUNICIPAL');
+        else setElectionCategory('BY_ELECTION');
         setActiveTab('elections');
         setSelectedElection(null);
+        setSelectedByElection(null);
       } else if (path.startsWith('insights/')) {
         const slug = path.split('insights/')[1];
         setSelectedInsightSlug(slug);
@@ -111,10 +141,24 @@ function AppContent() {
     window.history.pushState({}, '', `/directory/${cleanSlug}`);
   };
 
+  const handleSelectByElection = (stateSlug, constituencySlug) => {
+    setSelectedByElection({ stateSlug, constituencySlug });
+    setActiveTab('by-election-detail');
+    window.history.pushState({}, '', `/by-elections/${stateSlug}/${constituencySlug}`);
+  };
+
+  const handleBackToByElections = () => {
+    setSelectedByElection(null);
+    setElectionCategory('BY_ELECTION');
+    setActiveTab('elections');
+    window.history.pushState({}, '', '/elections/by-elections');
+  };
+
   const handleTabChange = (tab) => {
     setSelectedLeaderSlug(null);
     setSelectedElection(null);
     setSelectedInsightSlug(null);
+    setSelectedByElection(null);
     setActiveTab(tab);
     const newPath = tab === 'discussions' ? '/' : `/${tab}`;
     window.history.pushState({}, '', newPath);
@@ -185,9 +229,19 @@ function AppContent() {
             onTypeChange={setElectionCategory}
             onStateChange={setLastSelectedState}
             onYearChange={setLastSelectedYear}
+            onSelectConstituency={handleSelectConstituency}
+            onSelectByElection={handleSelectByElection}
           />
         )}
         
+        {activeTab === 'by-election-detail' && selectedByElection && (
+          <ByElectionDetail 
+            stateSlug={selectedByElection.stateSlug} 
+            constituencySlug={selectedByElection.constituencySlug}
+            onBack={handleBackToByElections}
+          />
+        )}
+
         {activeTab === 'election-year-detail' && selectedElection?.year && (
           <ElectionYearDetail 
             year={selectedElection.year} 

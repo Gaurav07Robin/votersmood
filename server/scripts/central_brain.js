@@ -1,6 +1,7 @@
 import { getDb } from '../config/firebase-admin.js';
 import { runAutonomousTracker } from './autonomous_tracker.js';
 import { runJournalistAgent } from './journalist_agent.js';
+import { runLiveElectionTracker } from './live_election_tracker.js';
 import { PLATFORM_VISION } from '../config/vision.js';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
@@ -29,7 +30,7 @@ Here is the current state of our database:
 Analyze the database state and the current political climate. 
 CRITICAL RULE: Your absolute #1 priority is always to capture CURRENT LIVE ELECTIONS and BREAKING NEWS to maximize SEO value. 
 If it is a heavy news day or election season, you MUST prioritize SCRAPE_LIVE or WRITE_INSIGHTS to generate high-SEO blog posts. 
-Historical scraping (Phase 1) is your background task�only do it when the news cycle is quiet.
+Historical scraping (Phase 1) is your background task�only do it when the news cycle is quiet.
 
 Choose EXACTLY ONE task to execute today to optimize our API usage and progress the roadmap:
 1. "SCRAPE_LIVE": Scrape the current year (${new Date().getFullYear()}) for any breaking news.
@@ -90,6 +91,14 @@ async function startCentralBrain() {
   const decision = await getBrainDecision(stats);
   console.log(`\n🧠 Deep Thought: "${decision.thought}"`);
   console.log(`🎯 Chosen Task: ${decision.task}\n`);
+
+  // Daily check & sync: Live by-elections and declared results
+  try {
+    console.log('📡 Running Daily By-Election & Live Results Radar...');
+    await runLiveElectionTracker();
+  } catch (e) {
+    console.log('⚠️ By-election radar warning:', e.message);
+  }
 
   if (decision.task === 'SCRAPE_LIVE') {
     await runAutonomousTracker(new Date().getFullYear(), 'LIVE');
