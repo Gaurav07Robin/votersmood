@@ -1,5 +1,13 @@
 {
   "lastIndex": 2,
   "crawledBodies": {},
-  "lastRun": "2026-10-19T04:07:33.905Z"
+  "lastRun": "2026-10-19T04:25:32.516Z",
+  "currentPhase": "MAHANAGAR_PALIKA",
+  "phaseIndex": 3,
+  "phaseStats": {
+    "MAHANAGAR_PALIKA": {
+      "total": 25,
+      "scraped": 3
+    }
+  }
 }

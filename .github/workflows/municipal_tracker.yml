@@ -2,9 +2,25 @@ name: Municipal Election Crawler
 
 on:
   schedule:
-    # Runs daily at 04:00 UTC
-    - cron: '0 4 * * *'
-  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+    # Runs every 2 hours at minute 15 (Never collides with Journalist at :00 or By-Election Radar at :30)
+    - cron: '15 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: 'Choose Phase to Scrape (or AUTO to continue state pipeline)'
+        required: true
+        default: 'AUTO'
+        type: choice
+        options:
+          - AUTO
+          - MAHANAGAR_PALIKA
+          - NAGAR_PALIKA
+          - NAGAR_PARISHAD
+          - NAGAR_PANCHAYAT
+      batch_size:
+        description: 'Number of bodies to crawl in this run'
+        required: false
+        default: '5'
 
 jobs:
   track-municipal-elections:
@@ -30,4 +46,9 @@ jobs:
           FIREBASE_PRIVATE_KEY: ${{ secrets.FIREBASE_PRIVATE_KEY }}
           FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID || 'votersmood78' }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: node scripts/municipal_agent.js
+        run: |
+          if [ "${{ inputs.phase }}" = "AUTO" ] || [ -z "${{ inputs.phase }}" ]; then
+            node scripts/municipal_agent.js --batch=${{ inputs.batch_size || 5 }}
+          else
+            node scripts/municipal_agent.js --phase=${{ inputs.phase }} --batch=${{ inputs.batch_size || 5 }}
+          fi

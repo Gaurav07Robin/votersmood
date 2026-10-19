@@ -14,9 +14,14 @@ dotenv.config({ path: path.join(__dirname, '../.env') });
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const STATE_FILE = path.join(__dirname, 'municipal_crawler_state.json');
 
-// Registry of Urban Local Bodies (Excluding Gram Panchayats as requested)
+// Helper to delay between API calls (Rate limit pacer)
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+// Registry of Urban Local Bodies Structured by 4 Tiers (Gram Panchayats strictly excluded)
 export const URBAN_LOCAL_BODIES_TARGETS = [
-  // 1. MAHANAGAR PALIKAS (Mega Behemoths)
+  // ==========================================
+  // PHASE 1: MAHANAGAR PALIKAS (Mega Behemoths)
+  // ==========================================
   { name: 'Municipal Corporation of Delhi', state: 'Delhi', district: 'All Districts (Metro-wide)', type: 'MAHANAGAR_PALIKA', isBehemoth: true, year: 2022 },
   { name: 'Brihanmumbai Municipal Corporation', state: 'Maharashtra', district: 'Mumbai & Mumbai Suburban', type: 'MAHANAGAR_PALIKA', isBehemoth: true, year: 2017 },
   { name: 'Kolkata Municipal Corporation', state: 'West Bengal', district: 'Kolkata & South 24 Parganas', type: 'MAHANAGAR_PALIKA', isBehemoth: true, year: 2021 },
@@ -43,7 +48,9 @@ export const URBAN_LOCAL_BODIES_TARGETS = [
   { name: 'Shimla Municipal Corporation', state: 'Himachal Pradesh', district: 'Shimla', type: 'MAHANAGAR_PALIKA', isBehemoth: true, year: 2023 },
   { name: 'Greater Visakhapatnam Municipal Corporation', state: 'Andhra Pradesh', district: 'Visakhapatnam', type: 'MAHANAGAR_PALIKA', isBehemoth: true, year: 2021 },
 
-  // 2. NAGAR PALIKAS (Municipal Councils)
+  // ==========================================
+  // PHASE 2: NAGAR PALIKAS (Municipal Councils)
+  // ==========================================
   { name: 'Baramati Nagar Palika', state: 'Maharashtra', district: 'Pune', type: 'NAGAR_PALIKA', isBehemoth: false, year: 2021 },
   { name: 'Satara Nagar Palika', state: 'Maharashtra', district: 'Satara', type: 'NAGAR_PALIKA', isBehemoth: false, year: 2021 },
   { name: 'Alibaug Nagar Palika', state: 'Maharashtra', district: 'Raigad', type: 'NAGAR_PALIKA', isBehemoth: false, year: 2021 },
@@ -59,13 +66,17 @@ export const URBAN_LOCAL_BODIES_TARGETS = [
   { name: 'Udupi City Municipal Council', state: 'Karnataka', district: 'Udupi', type: 'NAGAR_PALIKA', isBehemoth: false, year: 2018 },
   { name: 'Darjeeling Municipality', state: 'West Bengal', district: 'Darjeeling', type: 'NAGAR_PALIKA', isBehemoth: false, year: 2022 },
 
-  // 3. NAGAR PARISHADS (Town Municipal Councils)
+  // ==========================================
+  // PHASE 3: NAGAR PARISHADS (Town Municipal Councils)
+  // ==========================================
   { name: 'Shirdi Nagar Parishad', state: 'Maharashtra', district: 'Ahmednagar', type: 'NAGAR_PARISHAD', isBehemoth: false, year: 2021 },
   { name: 'Lonavala Nagar Parishad', state: 'Maharashtra', district: 'Pune', type: 'NAGAR_PARISHAD', isBehemoth: false, year: 2021 },
   { name: 'Mount Abu Nagar Parishad', state: 'Rajasthan', district: 'Sirohi', type: 'NAGAR_PARISHAD', isBehemoth: false, year: 2021 },
   { name: 'Bodh Gaya Nagar Parishad', state: 'Bihar', district: 'Gaya', type: 'NAGAR_PARISHAD', isBehemoth: false, year: 2022 },
 
-  // 4. NAGAR PANCHAYATS (Transitional Town Councils)
+  // ==========================================
+  // PHASE 4: NAGAR PANCHAYATS (Transitional Councils)
+  // ==========================================
   { name: 'Kedarnath Nagar Panchayat', state: 'Uttarakhand', district: 'Rudraprayag', type: 'NAGAR_PANCHAYAT', isBehemoth: false, year: 2023 },
   { name: 'Badrinath Nagar Panchayat', state: 'Uttarakhand', district: 'Chamoli', type: 'NAGAR_PANCHAYAT', isBehemoth: false, year: 2023 },
   { name: 'Goshainganj Nagar Panchayat', state: 'Uttar Pradesh', district: 'Ayodhya', type: 'NAGAR_PANCHAYAT', isBehemoth: false, year: 2023 },
@@ -73,13 +84,33 @@ export const URBAN_LOCAL_BODIES_TARGETS = [
   { name: 'Kalka Nagar Panchayat', state: 'Haryana', district: 'Panchkula', type: 'NAGAR_PANCHAYAT', isBehemoth: false, year: 2022 }
 ];
 
+export const PHASES = ['MAHANAGAR_PALIKA', 'NAGAR_PALIKA', 'NAGAR_PARISHAD', 'NAGAR_PANCHAYAT'];
+
+export const TARGETS_BY_PHASE = {
+  MAHANAGAR_PALIKA: URBAN_LOCAL_BODIES_TARGETS.filter(t => t.type === 'MAHANAGAR_PALIKA'),
+  NAGAR_PALIKA: URBAN_LOCAL_BODIES_TARGETS.filter(t => t.type === 'NAGAR_PALIKA'),
+  NAGAR_PARISHAD: URBAN_LOCAL_BODIES_TARGETS.filter(t => t.type === 'NAGAR_PARISHAD'),
+  NAGAR_PANCHAYAT: URBAN_LOCAL_BODIES_TARGETS.filter(t => t.type === 'NAGAR_PANCHAYAT')
+};
+
 function loadCrawlerState() {
   try {
     if (fs.existsSync(STATE_FILE)) {
       return JSON.parse(fs.readFileSync(STATE_FILE, 'utf-8'));
     }
   } catch (e) {}
-  return { lastIndex: 0, crawledBodies: {} };
+  return {
+    currentPhase: 'MAHANAGAR_PALIKA',
+    phaseIndex: 0,
+    cycleCount: 0,
+    lastRun: null,
+    phaseStats: {
+      MAHANAGAR_PALIKA: { total: TARGETS_BY_PHASE.MAHANAGAR_PALIKA.length, scraped: 0 },
+      NAGAR_PALIKA: { total: TARGETS_BY_PHASE.NAGAR_PALIKA.length, scraped: 0 },
+      NAGAR_PARISHAD: { total: TARGETS_BY_PHASE.NAGAR_PARISHAD.length, scraped: 0 },
+      NAGAR_PANCHAYAT: { total: TARGETS_BY_PHASE.NAGAR_PANCHAYAT.length, scraped: 0 }
+    }
+  };
 }
 
 function saveCrawlerState(state) {
@@ -105,7 +136,7 @@ async function getTopUrls(query) {
     if (!data.query || !data.query.search || data.query.search.length === 0) return [];
     
     let links = [];
-    for(let i = 0; i < Math.min(2, data.query.search.length); i++) {
+    for (let i = 0; i < Math.min(2, data.query.search.length); i++) {
       links.push(`https://en.wikipedia.org/wiki/?curid=${data.query.search[i].pageid}`);
     }
     return links;
@@ -127,7 +158,7 @@ async function scrapeArticle(url) {
   }
 }
 
-// 3. AI Data Structuring using Gemini
+// 3. AI Data Structuring using Gemini (with exponential backoff on 429)
 async function extractMunicipalData(rawText, target) {
   const systemPrompt = `
 You are a political data engineer. You are given raw text about the municipal election results for "${target.name}" in ${target.state} (Year: ${target.year}).
@@ -157,29 +188,43 @@ Rules:
 3. Return ONLY pure valid JSON, no markdown formatting.
 `;
 
-  try {
-    const safeText = rawText.substring(0, 30000);
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
-    
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: systemPrompt + "\n\nRaw Text:\n" + safeText }] }],
-        generationConfig: { response_mime_type: "application/json" }
-      })
-    });
-    
-    const data = await res.json();
-    if (data.error) throw new Error(data.error.message);
-    
-    let text = data.candidates[0].content.parts[0].text;
-    text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-    return JSON.parse(text);
-  } catch (error) {
-    console.error(`   ❌ AI Error for ${target.name}:`, error.message);
-    return null;
+  let attempts = 0;
+  while (attempts < 2) {
+    attempts++;
+    try {
+      const safeText = rawText.substring(0, 30000);
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${GEMINI_API_KEY}`;
+      
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: systemPrompt + "\n\nRaw Text:\n" + safeText }] }],
+          generationConfig: { response_mime_type: "application/json" }
+        })
+      });
+
+      if (res.status === 429) {
+        console.warn(`   ⚠️ Gemini Rate Limited (429). Pausing for 10s backoff...`);
+        await sleep(10000);
+        continue;
+      }
+      
+      const data = await res.json();
+      if (data.error) throw new Error(data.error.message);
+      
+      let text = data.candidates[0].content.parts[0].text;
+      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+      return JSON.parse(text);
+    } catch (error) {
+      if (attempts >= 2) {
+        console.error(`   ❌ AI Error for ${target.name}:`, error.message);
+        return null;
+      }
+      await sleep(4000);
+    }
   }
+  return null;
 }
 
 // 4. Scrape Single Municipal Target
@@ -222,40 +267,90 @@ export async function scrapeSingleMunicipal(target) {
   }
 }
 
-// 5. Main Batch Runner
-export async function runMunicipalTracker(batchSize = 3) {
-  console.log(`\n========================================`);
-  console.log(`🚀 RUNNING MUNICIPAL ELECTION CRAWLER (Batch: ${batchSize})`);
-  console.log(`========================================`);
-
+// 5. Phased Batch Runner (Guarantees Phase 1 Behemoths -> Phase 2 Nagar Palika -> Phase 3 Nagar Parishad -> Phase 4 Nagar Panchayat)
+export async function runMunicipalTracker(batchSize = 5, forcedPhase = null) {
   const state = loadCrawlerState();
-  let currentIndex = state.lastIndex || 0;
-  let processed = 0;
+  let currentPhase = forcedPhase || state.currentPhase || 'MAHANAGAR_PALIKA';
+  let phaseList = TARGETS_BY_PHASE[currentPhase] || TARGETS_BY_PHASE.MAHANAGAR_PALIKA;
+  let phaseIndex = forcedPhase ? 0 : (state.phaseIndex || 0);
+
+  console.log(`\n======================================================`);
+  console.log(`🚀 MUNICIPAL CRAWLER: PHASE [${currentPhase}]`);
+  console.log(`🎯 Targets in Phase: ${phaseList.length} | Current Pointer: ${phaseIndex}/${phaseList.length}`);
+  console.log(`⚙️ Batch Size: ${batchSize} | Rate-limit pacer: 4000ms`);
+  console.log(`======================================================`);
+
+  let processedInBatch = 0;
 
   for (let i = 0; i < batchSize; i++) {
-    const target = URBAN_LOCAL_BODIES_TARGETS[currentIndex % URBAN_LOCAL_BODIES_TARGETS.length];
-    currentIndex++;
+    if (phaseIndex >= phaseList.length) {
+      // Advance to next Phase!
+      const currentPhaseIdx = PHASES.indexOf(currentPhase);
+      const nextPhaseIdx = (currentPhaseIdx + 1) % PHASES.length;
+      const nextPhase = PHASES[nextPhaseIdx];
+
+      console.log(`\n🎉 PHASE COMPLETE: [${currentPhase}] has finished all ${phaseList.length} targets!`);
+      console.log(`➡️ ADVANCING TO NEXT PHASE: [${nextPhase}]`);
+
+      currentPhase = nextPhase;
+      phaseList = TARGETS_BY_PHASE[currentPhase];
+      phaseIndex = 0;
+
+      if (nextPhaseIdx === 0) {
+        state.cycleCount = (state.cycleCount || 0) + 1;
+        console.log(`🌟 FULL NATIONWIDE CYCLE COMPLETED! (Total Cycles: ${state.cycleCount})`);
+      }
+    }
+
+    const target = phaseList[phaseIndex];
+    phaseIndex++;
 
     try {
       await scrapeSingleMunicipal(target);
-      processed++;
+      processedInBatch++;
     } catch (e) {
       console.error(`   ❌ Failed on target ${target.name}:`, e.message);
     }
+
+    // Rate-limiting safety pacer between calls: 4 seconds
+    if (i < batchSize - 1) {
+      console.log(`   ⏳ Pacing 4s to maintain free-tier RPM safety...`);
+      await sleep(4000);
+    }
   }
 
-  state.lastIndex = currentIndex;
+  // Update persistent state
+  state.currentPhase = currentPhase;
+  state.phaseIndex = phaseIndex;
   state.lastRun = new Date().toISOString();
+  if (!state.phaseStats) state.phaseStats = {};
+  state.phaseStats[currentPhase] = {
+    total: phaseList.length,
+    scraped: phaseIndex
+  };
   saveCrawlerState(state);
 
-  console.log(`\n✅ Municipal Crawler batch complete. Processed: ${processed}/${batchSize}. Next index: ${currentIndex}\n`);
+  console.log(`\n✅ Batch Complete: ${processedInBatch} targets processed.`);
+  console.log(`📊 State: Active Phase = ${currentPhase} | Next Index = ${phaseIndex}/${phaseList.length}\n`);
 }
 
-// Direct execution CLI check
+// CLI Execution Router
 if (process.argv[1] && process.argv[1].endsWith('municipal_agent.js')) {
-  runMunicipalTracker(3)
+  // Parse command line arguments: e.g. --phase=MAHANAGAR_PALIKA --batch=8
+  let forcedPhase = null;
+  let batch = 5;
+
+  process.argv.slice(2).forEach(arg => {
+    if (arg.startsWith('--phase=')) {
+      forcedPhase = arg.split('=')[1].toUpperCase();
+    } else if (arg.startsWith('--batch=')) {
+      batch = parseInt(arg.split('=')[1], 10) || 5;
+    }
+  });
+
+  runMunicipalTracker(batch, forcedPhase)
     .then(() => {
-      console.log("🏁 Done. Exiting.");
+      console.log("🏁 Municipal Agent execution completed cleanly.");
       process.exit(0);
     })
     .catch((err) => {
