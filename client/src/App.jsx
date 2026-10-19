@@ -37,7 +37,7 @@ function AppContent() {
         setActiveTab('discussions');
         setSelectedLeaderSlug(null);
         setSelectedElection(null);
-        document.title = "JanMat | Political Intelligence & Verified Constituency Portal";
+        document.title = "Opinar | Political Intelligence & Verified Constituency Portal";
       } else if (path.startsWith('directory/')) {
         const slug = path.split('directory/')[1];
         setSelectedLeaderSlug(slug);
@@ -94,6 +94,8 @@ function AppContent() {
         path === 'elections/state' || 
         path === 'elections/by-elections' || 
         path === 'elections/municipal' ||
+        path === 'municipal' ||
+        path === 'municipal-elections' ||
         path === 'by-elections' ||
         path === 'by-election' ||
         path === 'byelections' ||
@@ -102,7 +104,7 @@ function AppContent() {
       ) {
         if (path === 'elections/state') setElectionCategory('ASSEMBLY');
         else if (path === 'elections/lok-sabha') setElectionCategory('LOK_SABHA');
-        else if (path === 'elections/municipal') setElectionCategory('MUNICIPAL');
+        else if (path === 'elections/municipal' || path === 'municipal' || path === 'municipal-elections') setElectionCategory('MUNICIPAL');
         else setElectionCategory('BY_ELECTION');
         setActiveTab('elections');
         setSelectedElection(null);
@@ -119,7 +121,7 @@ function AppContent() {
         setSelectedLeaderSlug(null);
         setSelectedElection(null);
         setSelectedInsightSlug(null);
-        document.title = `JanMat Gazette • ${path.toUpperCase()}`;
+        document.title = `Opinar Gazette • ${path.toUpperCase()}`;
       } else {
         // Fallback for old URLs
         setSelectedLeaderSlug(path);

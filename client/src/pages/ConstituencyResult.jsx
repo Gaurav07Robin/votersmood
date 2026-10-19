@@ -41,13 +41,60 @@ export default function ConstituencyResult({ year, stateSlug, constituencySlug, 
     return <div className="container" style={{ padding: '40px 0', color: 'var(--text-muted)' }}>Result not found.</div>;
   }
 
+  const winner = data.candidates?.[0];
+  const runnerUp = data.candidates?.[1];
+  const canonicalUrl = `https://www.opinar.in/elections/state/${stateSlug}/${year}/${constituencySlug}`;
+  const seoTitle = `${data.constituency} Election Result ${year} (${data.state}): ${winner ? winner.name + ' (' + winner.party + ')' : 'Winner'}, Margin & Vote Share | Opinar`;
+  const seoDescription = `${winner ? winner.name + ' (' + winner.party + ')' : 'Candidate'} won the ${data.constituency} (${data.state}) election in ${year} by ${data.margin ? data.margin.toLocaleString() : 'declared'} votes against ${runnerUp ? runnerUp.name + ' (' + runnerUp.party + ')' : 'runner-up'}. Complete candidate returns and vote breakdown on Opinar.`;
+
+  const constituencyFaqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": `Who won the ${data.constituency} election in ${year}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `${winner ? winner.name : 'The winning candidate'} representing ${winner ? winner.party : 'their party'} won ${data.constituency} in the ${year} election with ${winner?.votes?.toLocaleString() || 0} votes (${winner?.percentage || 0}% vote share).`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `What was the victory margin in ${data.constituency} in ${year}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `The victory margin in ${data.constituency} was ${data.margin ? data.margin.toLocaleString() + ' votes' : 'declared by the returning officer'} against runner-up ${runnerUp ? runnerUp.name + ' (' + runnerUp.party + ')' : 'opponent'}.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `How many total votes were polled in ${data.constituency} in ${year}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `A total of ${data.total_votes ? data.total_votes.toLocaleString() : 'thousands of'} votes were cast across all contesting candidates in ${data.constituency}.`
+        }
+      }
+    ]
+  };
+
   return (
     <div className="container" style={{ padding: '40px 0' }}>
 
       <Helmet>
-        <title>{`${data?.constituency || "Constituency"} Election Results | Opinar`}</title>
-        <meta name="description" content="View historical election results and runner-ups for this constituency." />
-        <link rel="canonical" href="{`https://www.opinar.in/elections/state/${stateSlug}/${year}/${constituency}`}" />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content={`${data.constituency} election result ${year}, who won ${data.constituency}, ${winner?.name || ''} margin, ${data.constituency} mla election, ${data.state} election results, ${winner?.party || ''} vs ${runnerUp?.party || ''}`} />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="article" />
+
+        <script type="application/ld+json">
+          {JSON.stringify(constituencyFaqSchema)}
+        </script>
       </Helmet>
 
       <button 
