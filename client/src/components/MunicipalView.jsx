@@ -18,8 +18,14 @@ export default function MunicipalView() {
   const [selectedTier, setSelectedTier] = useState('ALL');
   const [selectedState, setSelectedState] = useState('ALL');
   const [selectedDistrict, setSelectedDistrict] = useState('ALL');
+  const [selectedYear, setSelectedYear] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
   const [onlyBehemoths, setOnlyBehemoths] = useState(false);
+
+  // Dynamic Years from dataset (from 2026 back to 1952)
+  const yearsList = useMemo(() => {
+    return Array.from(new Set(data.map(d => d.year).filter(Boolean))).sort((a, b) => b - a);
+  }, [data]);
 
   // Dynamic States from library + dataset
   const statesList = useMemo(() => {
@@ -111,6 +117,9 @@ export default function MunicipalView() {
         if (!itemDist.includes(selDist) && !selDist.includes(itemDist)) return false;
       }
 
+      // Year filter (Supports filtering by historical election years back to 1952)
+      if (selectedYear !== 'ALL' && String(item.year) !== String(selectedYear)) return false;
+
       // Search filter
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase().trim();
@@ -126,7 +135,7 @@ export default function MunicipalView() {
 
       return true;
     });
-  }, [data, selectedTier, selectedState, selectedDistrict, searchQuery, onlyBehemoths]);
+  }, [data, selectedTier, selectedState, selectedDistrict, selectedYear, searchQuery, onlyBehemoths]);
 
   return (
     <div style={{ marginTop: '8px', color: '#E4E4E7' }}>
@@ -293,13 +302,42 @@ export default function MunicipalView() {
             <ChevronDown size={14} color="#A1A1AA" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
           </div>
 
+          {/* Year Dropdown */}
+          <div style={{ position: 'relative', minWidth: '140px' }}>
+            <select
+              value={selectedYear}
+              onChange={(e) => setSelectedYear(e.target.value)}
+              style={{
+                width: '100%',
+                backgroundColor: '#18181B',
+                color: '#FFFFFF',
+                border: '1px solid #3F3F46',
+                borderRadius: '8px',
+                padding: '8px 30px 8px 12px',
+                fontSize: '13px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                outline: 'none',
+                appearance: 'none',
+                boxSizing: 'border-box'
+              }}
+            >
+              <option value="ALL">All Years ({yearsList.length})</option>
+              {yearsList.map(yr => (
+                <option key={yr} value={yr}>{yr}</option>
+              ))}
+            </select>
+            <ChevronDown size={14} color="#A1A1AA" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+          </div>
+
           {/* Reset Filters */}
-          {(selectedState !== 'ALL' || selectedDistrict !== 'ALL' || selectedTier !== 'ALL' || searchQuery || onlyBehemoths) && (
+          {(selectedState !== 'ALL' || selectedDistrict !== 'ALL' || selectedYear !== 'ALL' || selectedTier !== 'ALL' || searchQuery || onlyBehemoths) && (
             <button
               onClick={() => {
                 setSelectedTier('ALL');
                 setSelectedState('ALL');
                 setSelectedDistrict('ALL');
+                setSelectedYear('ALL');
                 setSearchQuery('');
                 setOnlyBehemoths(false);
               }}
@@ -448,7 +486,7 @@ export default function MunicipalView() {
                     <span>•</span>
                     <span style={{ color: '#93C5FD' }}>{mb.state}</span>
                     <span>•</span>
-                    <span style={{ color: '#71717A' }}>{mb.year}</span>
+                    <span style={{ color: '#FBBF24', fontWeight: 700, backgroundColor: '#FBBF2415', padding: '1px 6px', borderRadius: '4px' }}>{mb.year}</span>
                   </div>
                 </div>
 
