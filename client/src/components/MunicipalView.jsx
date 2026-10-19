@@ -137,15 +137,66 @@ export default function MunicipalView() {
     });
   }, [data, selectedTier, selectedState, selectedDistrict, selectedYear, searchQuery, onlyBehemoths]);
 
+  // Dynamic SEO Title & Description
+  const seoTitle = selectedDistrict !== 'ALL'
+    ? `${selectedDistrict} (${selectedState}) Municipal Election Results: Wards, Seats & Mayor | Opinar`
+    : selectedState !== 'ALL'
+    ? `${selectedState} Municipal Corporation & Local Body Election Results: Party Standings | Opinar`
+    : selectedTier === 'MAHANAGAR_PALIKA'
+    ? `Mahanagar Palika Election Results India: BMC, MCD, KMC, GHMC Ward Breakdowns | Opinar`
+    : `Municipal Election Results India (1952–2026): Ward Standings, Majorities & Mayors | Opinar`;
+
+  const seoDescription = `Explore official ward results, party seat majorities, and mayors across ${filteredList.length} Indian urban local bodies${selectedState !== 'ALL' ? ' in ' + selectedState : ''}. Includes historical BMC Mumbai, Delhi MCD, KMC Kolkata, and district Nagar Palikas.`;
+
+  const municipalFaqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which party holds the majority in Delhi MCD?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In the 2022 Delhi Municipal Corporation election, Aam Aadmi Party (AAP) crossed the majority mark winning 134 out of 250 wards, ending the BJP's 15-year control."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which party won the most seats in Mumbai BMC civic elections?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In the Brihanmumbai Municipal Corporation (BMC) election, Shiv Sena emerged as the largest single party winning 84 seats, closely trailed by the BJP with 82 seats out of 227 total wards."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How are urban local bodies classified in India?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Under the 74th Constitutional Amendment Act, Indian urban local governance is structured into four tiers: Mahanagar Palika (Municipal Corporations for mega cities), Nagar Palika (Municipal Councils for medium cities), Nagar Parishad (City Councils), and Nagar Panchayat (Transitional urban centers)."
+        }
+      }
+    ]
+  };
+
   return (
     <div style={{ marginTop: '8px', color: '#E4E4E7' }}>
       
-      {/* SEO METATAGS */}
+      {/* 3-TIER SEO METATAGS & GOOGLE RICH SNIPPET SCHEMA */}
       <Helmet>
-        <title>Municipal Corporation & Urban Local Body Election Results India | Opinar</title>
-        <meta name="description" content="Explore verified ward-wise results, party standings, and mayors for Indian municipal corporations, Mahanagar Palikas, Nagar Palikas, and Nagar Panchayats across states and districts." />
-        <meta name="keywords" content="municipal election results, mahanagar palika results, mcd delhi results, bmc mumbai election, kmc kolkata results, ghmc hyderabad, nagar palika results, nagar parishad, ward results india" />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content="municipal election results, mahanagar palika results, mcd delhi results 2022, bmc mumbai election 2017, kmc kolkata results, ghmc hyderabad, nagar palika results, nagar parishad, nagar panchayat, who won municipal corporation election, ward results india" />
         <link rel="canonical" href="https://www.opinar.in/elections/municipal" />
+
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:url" content="https://www.opinar.in/elections/municipal" />
+        <meta property="og:type" content="website" />
+
+        <script type="application/ld+json">
+          {JSON.stringify(municipalFaqSchema)}
+        </script>
       </Helmet>
 
       {/* FILTER CONTROLS BAR */}

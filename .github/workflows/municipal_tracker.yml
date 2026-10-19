@@ -20,7 +20,7 @@ on:
       batch_size:
         description: 'Number of bodies to crawl in this run'
         required: false
-        default: '5'
+        default: '20'
 
 jobs:
   track-municipal-elections:
@@ -48,7 +48,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           if [ "${{ inputs.phase }}" = "AUTO" ] || [ -z "${{ inputs.phase }}" ]; then
-            node scripts/municipal_agent.js --batch=${{ inputs.batch_size || 5 }}
+            node scripts/municipal_agent.js --batch=${{ inputs.batch_size || 20 }}
           else
-            node scripts/municipal_agent.js --phase=${{ inputs.phase }} --batch=${{ inputs.batch_size || 5 }}
+            node scripts/municipal_agent.js --phase=${{ inputs.phase }} --batch=${{ inputs.batch_size || 20 }}
           fi

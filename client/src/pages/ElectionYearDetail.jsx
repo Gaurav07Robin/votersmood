@@ -213,13 +213,27 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
   }, [districtScopedConstituencies, selectedParty, searchQuery]);
 
   const activeTitle = isLS ? `Lok Sabha ${year}` : `${state || selectedState} Assembly ${year}`;
+  const seoTitle = isLS 
+    ? `Lok Sabha Election Results ${year}: Full Constituency Winners, Party Tally & Margins | Opinar`
+    : `${state || selectedState} Assembly Election Results ${year}: Constituency Winners, Margins & Party Breakdown | Opinar`;
+  const seoDescription = `Explore official ${year} ${isLS ? 'Lok Sabha parliamentary general election' : (state || selectedState) + ' Vidhan Sabha assembly election'} results across ${scopedConstituencies.length} constituencies. Complete winning candidates, vote shares, runner-ups, and party tallies on Opinar.`;
+  const canonicalUrl = isLS
+    ? `https://www.opinar.in/elections/lok-sabha/${year}`
+    : `https://www.opinar.in/elections/state/${slugify(state || selectedState)}/${year}`;
 
   return (
     <div style={{ backgroundColor: t.bg, minHeight: '100vh', color: t.text, padding: '24px', fontFamily: 'Inter, sans-serif', transition: 'background-color 0.2s ease, color 0.2s ease' }}>
 
       <Helmet>
-        <title>{`${activeTitle} | Opinar`}</title>
-        <meta name="description" content="View full assembly election results, party vote shares, and winning MLAs." />
+        <title>{seoTitle}</title>
+        <meta name="description" content={seoDescription} />
+        <meta name="keywords" content={`${activeTitle}, ${year} election results, ${isLS ? 'lok sabha' : (state || selectedState) + ' assembly'}, who won ${year} election, election commission results ${year}`} />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:title" content={seoTitle} />
+        <meta property="og:description" content={seoDescription} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content="website" />
       </Helmet>
 
       {/* HEADER WITH CONTROLS */}
