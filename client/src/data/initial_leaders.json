@@ -1,0 +1,785 @@
+[
+  {
+    "id": "narendra-modi",
+    "openQuestionsCount": 0,
+    "repType": "MP_LS",
+    "portfolio": "Prime Minister of India",
+    "termStart": "2014-05-26",
+    "totalReactionsCount": 0,
+    "constituency": "Varanasi",
+    "portfolios": [
+      "Prime Minister of India",
+      "Member of Parliament"
+    ],
+    "type": "MP_LS",
+    "verificationStatus": "Verified",
+    "electionYear": "2024",
+    "chamber": "Lok Sabha",
+    "education": "Post Graduate",
+    "district": "Varanasi",
+    "party": "BJP",
+    "funnyCount": 0,
+    "gender": "Male",
+    "status": "Active",
+    "displayName": "Narendra Modi",
+    "careerTimeline": [
+      {
+        "year": "2014 - Present",
+        "title": "Prime Minister of India",
+        "description": "Serving as the Prime Minister of India.",
+        "place": "New Delhi"
+      },
+      {
+        "place": "Rajkot, Gujarat",
+        "year": "2002 - 2002",
+        "title": "Member of Gujarat Legislative Assembly",
+        "description": "He contested his first election in a by-election from the Rajkot II constituency."
+      },
+      {
+        "year": "2002 - 2014",
+        "description": "He won the seat in the 2002 elections and was subsequently re-elected in 2007 and 2012, representing the constituency until 2014.",
+        "title": "Member of Gujarat Legislative Assembly",
+        "place": "Maninagar, Gujarat"
+      },
+      {
+        "description": "He served as the Chief Minister of Gujarat before transitioning to national politics.",
+        "year": "2001 - 2014",
+        "title": "Chief Minister of Gujarat",
+        "place": "Gujarat"
+      },
+      {
+        "title": "Member of Parliament, Lok Sabha",
+        "description": "He won the Lok Sabha election from Vadodara, defeating Madhusudan Mistry, but later vacated the seat.",
+        "year": "2014 - 2014",
+        "place": "Vadodara, Gujarat"
+      },
+      {
+        "description": "He won the Varanasi seat in 2014 by defeating Arvind Kejriwal and assumed office as the Prime Minister of India.",
+        "year": "2014 - Present",
+        "place": "Varanasi, Uttar Pradesh",
+        "title": "Prime Minister of India and Member of Parliament"
+      },
+      {
+        "place": "Varanasi, Uttar Pradesh",
+        "title": "Member of Parliament, Lok Sabha",
+        "year": "2019 - 2024",
+        "description": "He was re-elected from Varanasi for a second consecutive term in the general elections."
+      },
+      {
+        "year": "2024 - Present",
+        "place": "Varanasi, Uttar Pradesh",
+        "description": "He was re-elected from Varanasi for a third consecutive term.",
+        "title": "Member of Parliament, Lok Sabha"
+      }
+    ],
+    "name": "Narendra Modi",
+    "createdAt": 1789035006238,
+    "seatType": "General",
+    "answeredCount": 0,
+    "agreeCount": 0,
+    "totalCommentsCount": 0,
+    "state": "Uttar Pradesh",
+    "age": 73,
+    "website": "https://www.narendramodi.in/",
+    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=narendra-modi",
+    "pendingCount": 0,
+    "currentDesignation": "Prime Minister"
+  },
+  {
+    "id": "rahul-gandhi",
+    "pendingCount": 29,
+    "profilePhoto": "https://pbs.twimg.com/profile_images/2048691685794930688/AEEaltaE_400x400.jpg",
+    "openQuestionsCount": 39,
+    "status": "Active",
+    "name": "Rahul Gandhi",
+    "type": "MP_LS",
+    "seatType": "General",
+    "totalReactionsCount": 6210,
+    "answeredCount": 10,
+    "funnyCount": 1420,
+    "agreeCount": 18900,
+    "portfolio": "Leader of Opposition, Lok Sabha",
+    "district": "",
+    "state": "Uttar Pradesh",
+    "chamber": "Lok Sabha",
+    "portfolios": [
+      "External Affairs",
+      "Defense"
+    ],
+    "totalCommentsCount": 1890,
+    "constituency": "Rae Bareli",
+    "governmentPositions": [
+      "Leader of Opposition"
+    ],
+    "party": "INC",
+    "website": "https://rahulgandhi.in",
+    "gender": "Male",
+    "careerTimeline": [
+      {
+        "place": "Amethi, UP",
+        "description": "Contested and won the 14th general elections from Amethi.",
+        "year": "2004 - 2009",
+        "title": "Member of Parliament (Lok Sabha)"
+      },
+      {
+        "title": "Standing Committee on Home Affairs",
+        "description": "Served as a member of the parliamentary Standing Committee on Home Affairs.",
+        "place": "New Delhi",
+        "year": "2004 - 2006"
+      },
+      {
+        "title": "Standing Committee on HRD",
+        "description": "Served as a member of the Standing Committee on Human Resource Development.",
+        "place": "New Delhi",
+        "year": "2006 - 2009"
+      },
+      {
+        "year": "2007 - 2013",
+        "place": "New Delhi",
+        "description": "Appointed general secretary of the All India Congress Committee. Also given charge of the Indian Youth Congress and NSUI.",
+        "title": "General Secretary (AICC)"
+      },
+      {
+        "place": "Amethi, UP",
+        "year": "2009 - 2014",
+        "description": "Retained the Amethi seat in the 15th general elections.",
+        "title": "Member of Parliament (Lok Sabha)"
+      },
+      {
+        "year": "2014 - 2019",
+        "description": "Retained the Amethi Lok Sabha seat by defeating Smriti Irani. Also named Vice-President of the INC.",
+        "place": "Amethi, UP",
+        "title": "Member of Parliament (Lok Sabha)"
+      },
+      {
+        "description": "Won the Wayanad Lok Sabha seat in Kerala. He lost his existing seat in Amethi to Smriti Irani.",
+        "title": "Member of Parliament (Lok Sabha)",
+        "year": "2019 - 2024",
+        "place": "Wayanad, KL"
+      },
+      {
+        "description": "Won the Rae Bareli constituency. Assumed the constitutional role of Leader of the Official Opposition in the Lok Sabha.",
+        "year": "2024 - Present",
+        "place": "Rae Bareli, UP",
+        "title": "Leader of Opposition & MP"
+      }
+    ]
+  },
+  {
+    "id": "amit-shah",
+    "website": "",
+    "careerTimeline": [
+      {
+        "year": "2024 - Present",
+        "title": "Minister of Home Affairs; Minister of Cooperation",
+        "description": "Serving in the Union Council of Ministers.",
+        "place": "New Delhi"
+      },
+      {
+        "place": "Sarkhej, Gujarat",
+        "description": "He served as an MLA representing the Sarkhej constituency after winning a by-election in 1997 and retained his seat in subsequent elections.",
+        "year": "1997 - 2012",
+        "title": "Member of the Gujarat Legislative Assembly"
+      },
+      {
+        "year": "2002 - 2012",
+        "place": "Gandhinagar, Gujarat",
+        "description": "He held multiple portfolios in the Modi ministry in Gujarat as the youngest minister in the government. He managed various departments including home, law and justice, prison, and border security.",
+        "title": "Minister of State for Home, Law and Justice, Gujarat"
+      },
+      {
+        "year": "2012 - 2017",
+        "place": "Naranpura, Gujarat",
+        "description": "He served as a member of the Gujarat Legislative Assembly representing the Naranpura Assembly constituency.",
+        "title": "Member of the Gujarat Legislative Assembly"
+      },
+      {
+        "year": "2014 - 2020",
+        "title": "National President of the Bharatiya Janata Party",
+        "place": "New Delhi",
+        "description": "He served as the 10th president of the BJP, leading the party to significant electoral victories across multiple states and a major majority in the 2019 general election."
+      },
+      {
+        "title": "Chairman of the National Democratic Alliance",
+        "description": "He has served as the chairman of the NDA, coordinating the political activities of the ruling coalition.",
+        "place": "New Delhi",
+        "year": "2014 - Present"
+      },
+      {
+        "description": "He served as a member of the upper house of parliament representing the state of Gujarat.",
+        "title": "Member of Parliament, Rajya Sabha",
+        "place": "New Delhi",
+        "year": "2017 - 2019"
+      },
+      {
+        "description": "He has been serving as the Minister of Home Affairs, becoming the longest-serving holder of the office in Indian history.",
+        "year": "2019 - Present",
+        "place": "New Delhi",
+        "title": "Minister of Home Affairs"
+      },
+      {
+        "year": "2021 - Present",
+        "place": "New Delhi",
+        "description": "He assumed office as the inaugural Minister of Co-operation in the central government.",
+        "title": "Minister of Co-operation"
+      }
+    ],
+    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=amit-shah",
+    "pendingCount": 0,
+    "createdAt": 1786726336055,
+    "state": "Gujarat",
+    "seatType": "General",
+    "status": "Active",
+    "answeredCount": 0,
+    "agreeCount": 0,
+    "totalCommentsCount": 0,
+    "type": "MLA",
+    "termStart": "2022-12-08",
+    "electionYear": "2022",
+    "district": "Ahmedabad",
+    "portfolio": "Minister of Home Affairs; Minister of Cooperation",
+    "portfolios": [
+      "Member of Legislative Assembly"
+    ],
+    "age": 66,
+    "totalReactionsCount": 0,
+    "gender": "Male",
+    "openQuestionsCount": 0,
+    "displayName": "Amit Shah",
+    "chamber": "Vidhan Sabha",
+    "party": "BJP",
+    "funnyCount": 0,
+    "repType": "MLA",
+    "verificationStatus": "Verified",
+    "name": "Amit Shah",
+    "constituency": "Ellisbridge",
+    "education": "Professional Graduate",
+    "currentDesignation": "Minister of Home Affairs"
+  },
+  {
+    "id": "yogi-adityanath",
+    "name": "Yogi Adityanath",
+    "termStart": "2022-03-10",
+    "portfolio": "Chief Minister of Uttar Pradesh",
+    "repType": "MLA",
+    "funnyCount": 0,
+    "totalCommentsCount": 0,
+    "constituency": "Gorakhpur Urban",
+    "chamber": "Vidhan Sabha",
+    "careerTimeline": [
+      {
+        "place": "Gorakhpur, UP",
+        "description": "Served for five consecutive terms in India's lower house of parliament representing the Gorakhpur constituency. He became one of the youngest parliamentarians when first elected in 1998 at the age of 26.",
+        "title": "Member of Parliament, Lok Sabha",
+        "year": "1998 - 2017"
+      },
+      {
+        "year": "2014 - Present",
+        "description": "Became the head priest of the prominent Hindu monastery following the death of his spiritual guru, Mahant Avaidyanath.",
+        "title": "Mahant of Gorakhnath Math",
+        "place": "Gorakhpur, UP"
+      },
+      {
+        "year": "2017 - Present",
+        "place": "Lucknow, UP",
+        "title": "Chief Minister of Uttar Pradesh",
+        "description": "Transitioned to state politics and assumed office as the chief minister, later becoming the state's longest-serving chief minister and the first to hold the office for two consecutive terms."
+      }
+    ],
+    "party": "BJP",
+    "seatType": "General",
+    "displayName": "Yogi Adityanath",
+    "age": 53,
+    "electionYear": "2022",
+    "portfolios": [
+      "Member of Legislative Assembly"
+    ],
+    "education": "Graduate",
+    "status": "Active",
+    "type": "MLA",
+    "gender": "Male",
+    "district": "Gorakhpur",
+    "agreeCount": 0,
+    "createdAt": 1786728751401,
+    "totalReactionsCount": 0,
+    "verificationStatus": "Verified",
+    "answeredCount": 0,
+    "state": "Uttar Pradesh",
+    "pendingCount": 0,
+    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=yogi-adityanath",
+    "openQuestionsCount": 0,
+    "website": "",
+    "currentDesignation": "Chief Minister"
+  },
+  {
+    "id": "mamata-banerjee",
+    "party": "TMC",
+    "state": "West Bengal",
+    "governmentPositions": [
+      "Chief Minister"
+    ],
+    "openQuestionsCount": 30,
+    "seatType": "General",
+    "answeredCount": 7,
+    "portfolio": "West Bengal",
+    "constituency": "BHABANIPUR",
+    "portfolios": [
+      "Home Affairs",
+      "Health",
+      "Land & Land Reforms"
+    ],
+    "status": "Active",
+    "careerTimeline": [
+      {
+        "place": "West Bengal",
+        "description": "Mamata Banerjee served as the Chief Minister of West Bengal, leading the All India Trinamool Congress government after defeating the Left Front and subsequently winning multiple elections until the 2026 defeat.",
+        "title": "Chief Minister",
+        "year": "2011 - 2026"
+      }
+    ],
+    "totalCommentsCount": 1150,
+    "gender": "Female",
+    "agreeCount": 15400,
+    "website": "https://aitcofficial.org",
+    "totalReactionsCount": 4890,
+    "name": "Mamata Banerjee",
+    "chamber": "Vidhan Sabha",
+    "type": "MLA",
+    "profilePhoto": "https://www.facebook.com/MamataBanerjeeOfficial/photos/",
+    "pendingCount": 23,
+    "funnyCount": 1120,
+    "district": "Kolkata"
+  },
+  {
+    "id": "akhilesh-yadav",
+    "funnyCount": 910,
+    "district": "",
+    "gender": "Male",
+    "totalReactionsCount": 3890,
+    "careerTimeline": [
+      {
+        "year": "2024 - Present",
+        "title": "Minister of Environment, Forest and Climate Change",
+        "description": "Serving in the Union Council of Ministers.",
+        "place": "New Delhi"
+      },
+      {
+        "year": "2000 - 2004",
+        "place": "Kannauj, UP",
+        "description": "He was elected to the 13th Lok Sabha from Kannauj in a by-election. During this term, he also served on various parliamentary committees.",
+        "title": "Member of Parliament, 13th Lok Sabha"
+      },
+      {
+        "place": "Kannauj, UP",
+        "description": "He was elected for a second term to the 14th Lok Sabha. He actively participated in multiple parliamentary committees related to urban development, science, and environment.",
+        "year": "2004 - 2009",
+        "title": "Member of Parliament, 14th Lok Sabha"
+      },
+      {
+        "title": "Member of Parliament, 15th Lok Sabha",
+        "description": "He served as a member of the 15th Lok Sabha for a second term. During this period, he was a member of the JPC on the 2G spectrum case.",
+        "place": "Kannauj, UP",
+        "year": "2009 - 2012"
+      },
+      {
+        "title": "Chief Minister of Uttar Pradesh",
+        "description": "He assumed office at the age of 38, becoming the youngest Chief Minister of the state. His tenure saw the launch of major infrastructure projects like the Agra-Lucknow Expressway and the Lucknow Metro.",
+        "year": "2012 - 2017",
+        "place": "Lucknow, UP"
+      },
+      {
+        "title": "Leader of Opposition",
+        "place": "Karhal, UP",
+        "description": "He served as the Leader of Opposition in the Uttar Pradesh Legislative Assembly after being elected as an MLA for Karhal.",
+        "year": "2022 - 2024"
+      },
+      {
+        "place": "Kannauj, UP",
+        "description": "He was elected to the 18th Lok Sabha from Kannauj and serves as the parliamentary party leader of the Samajwadi Party.",
+        "title": "Member of Parliament, 18th Lok Sabha",
+        "year": "2024 - Present"
+      }
+    ],
+    "answeredCount": 4,
+    "constituency": "Kannauj",
+    "party": "SP",
+    "state": "Uttar Pradesh",
+    "agreeCount": 11200,
+    "openQuestionsCount": 21,
+    "name": "Akhilesh Yadav",
+    "chamber": "Lok Sabha",
+    "portfolios": [
+      "Rural Development",
+      "Agriculture"
+    ],
+    "type": "MP_LS",
+    "seatType": "General",
+    "governmentPositions": [
+      "Party President"
+    ],
+    "status": "Active",
+    "totalCommentsCount": 810,
+    "portfolio": "Minister of Environment, Forest and Climate Change",
+    "profilePhoto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX7t7JnI58o-LjNWeSFxqGm6Wlsw-ArVZcFsU71huR-BLcgIBKNr4a5x0&s=10",
+    "pendingCount": 17,
+    "website": "https://samajwadiparty.in",
+    "currentDesignation": "Minister of Environment, Forest and Climate Change"
+  },
+  {
+    "id": "nitin-gadkari",
+    "totalCommentsCount": 980,
+    "gender": "Male",
+    "constituency": "Nagpur",
+    "portfolios": [
+      "Road Transport",
+      "Highways",
+      "MSME"
+    ],
+    "portfolio": "Minister of Road Transport and Highways",
+    "careerTimeline": [
+      {
+        "year": "2024 - Present",
+        "title": "Minister of Road Transport and Highways",
+        "description": "Serving in the Union Council of Ministers.",
+        "place": "New Delhi"
+      },
+      {
+        "title": "Member of Legislative Council, Maharashtra State",
+        "description": "Elected to the Maharashtra Legislative Council from the Nagpur graduates constituency.",
+        "place": "Nagpur, Maharashtra",
+        "year": "1989 - 1990"
+      },
+      {
+        "place": "Maharashtra",
+        "title": "Minister, Public Works Department, Maharashtra",
+        "description": "Oversaw the fast‑tracking of the Mumbai‑Pune Expressway and construction of 55 flyovers in Mumbai.",
+        "year": "1995 - 1999"
+      },
+      {
+        "title": "Member of Legislative Council, Maharashtra State",
+        "description": "Re‑elected in 1996 and again unopposed in 2002, representing the Nagpur region.",
+        "place": "Nagpur, Maharashtra",
+        "year": "1996 - 2002"
+      },
+      {
+        "place": "New Delhi",
+        "description": "Led the BJP from December 2009, resigning in January 2013.",
+        "title": "National President, Bharatiya Janata Party",
+        "year": "2009 - 2013"
+      },
+      {
+        "year": "2014 - Present",
+        "place": "Nagpur, Maharashtra",
+        "description": "Won the 2014 Lok Sabha election defeating Vilas Muttemwar and retained the seat in 2019 against Nana Patole.",
+        "title": "Member of Parliament, Lok Sabha (Nagpur)"
+      },
+      {
+        "year": "2014 - Present",
+        "title": "Minister of Road Transport & Highways",
+        "description": "Serving since May 2014, the longest‑serving minister in this portfolio, driving major highway expansion.",
+        "place": "New Delhi"
+      },
+      {
+        "year": "2014 - 2019",
+        "place": "New Delhi",
+        "description": "Handled the Shipping portfolio from 2014 until it was reassigned in May 2019.",
+        "title": "Minister of Shipping"
+      },
+      {
+        "year": "2014 - 2019",
+        "place": "New Delhi",
+        "description": "Managed water resources and river development ministries until the 2019 cabinet reshuffle.",
+        "title": "Minister of Water Resources, River Development and Ganga Rejuvenation"
+      },
+      {
+        "place": "New Delhi",
+        "description": "Took over the MSME portfolio on 31 May 2019 in the second Modi ministry.",
+        "title": "Minister of Micro, Small & Medium Enterprises",
+        "year": "2019 - Present"
+      }
+    ],
+    "governmentPositions": [
+      "Cabinet Minister"
+    ],
+    "seatType": "General",
+    "openQuestionsCount": 19,
+    "party": "BJP",
+    "state": "Maharashtra",
+    "answeredCount": 8,
+    "chamber": "Lok Sabha",
+    "agreeCount": 24100,
+    "status": "Active",
+    "district": "",
+    "funnyCount": 320,
+    "website": "https://nitingadkari.org.in",
+    "name": "Nitin Gadkari",
+    "type": "MP_LS",
+    "profilePhoto": "https://etedge-insights.com/featured-insights/bombay-high-court-permits-nitin-gadkari-to-pursue-deepfake-suit-against-meta-google-and-x/",
+    "pendingCount": 11,
+    "totalReactionsCount": 5120,
+    "currentDesignation": "Minister of Road Transport and Highways"
+  },
+  {
+    "id": "ashok-gehlot",
+    "portfolios": [
+      "Member of Legislative Assembly"
+    ],
+    "name": "Ashok Gehlot",
+    "createdAt": 1786728120200,
+    "website": "",
+    "gender": "Male",
+    "verificationStatus": "Verified",
+    "seatType": "General",
+    "funnyCount": 0,
+    "age": 74,
+    "displayName": "Ashok Gehlot",
+    "pendingCount": 0,
+    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=ashok-gehlot",
+    "state": "Rajasthan",
+    "answeredCount": 0,
+    "openQuestionsCount": 0,
+    "type": "MLA",
+    "constituency": "Sardarpura",
+    "chamber": "Vidhan Sabha",
+    "portfolio": "Member of Legislative Assembly (MLA) - Sardarpura",
+    "totalCommentsCount": 0,
+    "termStart": "2023-12-03",
+    "education": "Post Graduate",
+    "careerTimeline": [
+      {
+        "place": "Jodhpur, Rajasthan",
+        "description": "He served as a Member of Parliament representing Jodhpur during this period, though he lost his seat in 1989.",
+        "title": "Member of Parliament, Lok Sabha",
+        "year": "1980 - 1989"
+      },
+      {
+        "place": "New Delhi",
+        "title": "Union Minister",
+        "description": "He held various ministerial positions including Deputy Minister for Sports, and Minister of State for Tourism and Civil Aviation.",
+        "year": "1984 - 1984"
+      },
+      {
+        "title": "Member of Parliament, Lok Sabha",
+        "year": "1991 - 1998",
+        "description": "He returned to Parliament as a Member of Lok Sabha from Jodhpur and also served as Union Minister of State for Textile.",
+        "place": "Jodhpur, Rajasthan"
+      },
+      {
+        "year": "1998 - 2003",
+        "place": "Rajasthan",
+        "description": "He led the Congress party to a landslide victory and served his first term as Chief Minister of Rajasthan.",
+        "title": "Chief Minister of Rajasthan"
+      },
+      {
+        "place": "Sardarpura, Rajasthan",
+        "title": "Member of Legislative Assembly",
+        "description": "He has continuously represented the Sardarpura constituency as a Member of the Legislative Assembly of Rajasthan.",
+        "year": "1998 - Present"
+      },
+      {
+        "title": "Chief Minister of Rajasthan",
+        "year": "2008 - 2013",
+        "description": "He was appointed Chief Minister for the second time to prevent political instability after the party fell short of a majority.",
+        "place": "Rajasthan"
+      },
+      {
+        "year": "2018 - 2019",
+        "title": "AICC General Secretary",
+        "description": "He served as the national General Secretary of the Congress Party, in-charge of organizations and training.",
+        "place": "New Delhi"
+      },
+      {
+        "year": "2018 - 2023",
+        "title": "Chief Minister of Rajasthan",
+        "description": "He assumed office as Chief Minister of Rajasthan for the third time following the party's victory in the assembly elections.",
+        "place": "Rajasthan"
+      }
+    ],
+    "totalReactionsCount": 0,
+    "repType": "MLA",
+    "party": "INC",
+    "status": "Active",
+    "district": "Jodhpur",
+    "electionYear": "2023",
+    "agreeCount": 0
+  },
+  {
+    "id": "devendra-fadnavis",
+    "portfolios": [
+      "Home Affairs",
+      "Energy",
+      "Housing"
+    ],
+    "gender": "Male",
+    "totalReactionsCount": 4382,
+    "party": "BJP",
+    "state": "Maharashtra",
+    "pendingCount": 19,
+    "profilePhoto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTinziJL1le123L3ducVPgmaYgjFHwwStm1QcpwbxsLk3ZbJRDi_gKZEO0VwjMCU8K7kdVGRS0yK6_3GZKWW1-spQVzUJO0S_ayYayt1U&s=10",
+    "openQuestionsCount": 25,
+    "seatType": "General",
+    "governmentPositions": [
+      "Deputy Chief Minister"
+    ],
+    "chamber": "Vidhan Sabha",
+    "answeredCount": 6,
+    "constituency": "Nagpur South West",
+    "funnyCount": 840,
+    "totalCommentsCount": 1245,
+    "portfolio": "Deputy Home & Energy Affairs",
+    "name": "Devendra Fadnavis",
+    "district": "Nagpur",
+    "type": "MLA",
+    "website": "https://devendrafadnavis.in",
+    "agreeCount": 12400,
+    "careerTimeline": [
+      {
+        "place": "Nagpur, Maharashtra",
+        "title": "Municipal Councillor",
+        "description": "He began his electoral political career by representing the Ram Nagar Ward in the Nagpur Municipal Corporation.",
+        "year": "1992 - 1997"
+      },
+      {
+        "description": "He became the youngest mayor of Nagpur and the second-youngest in the history of India. During his tenure, he doubled the property tax to raise funds for the municipal corporation.",
+        "year": "1997 - 1999",
+        "place": "Nagpur, Maharashtra",
+        "title": "Mayor of Nagpur"
+      },
+      {
+        "place": "Nagpur, Maharashtra",
+        "title": "Member of Legislative Assembly",
+        "year": "1999 - 2009",
+        "description": "He served as an MLA representing the Nagpur West constituency in the Maharashtra Legislative Assembly."
+      },
+      {
+        "year": "2009 - Present",
+        "description": "He has represented the newly created Nagpur South West constituency in the Maharashtra Legislative Assembly.",
+        "place": "Nagpur, Maharashtra",
+        "title": "Member of Legislative Assembly"
+      },
+      {
+        "place": "Maharashtra",
+        "title": "BJP State President",
+        "year": "2013 - 2015",
+        "description": "He served as the President of the Maharashtra state unit of the Bharatiya Janata Party, utilizing the position to campaign against the state government."
+      },
+      {
+        "description": "He served his first full five-year term as Chief Minister, overseeing major infrastructure projects like the Mumbai-Nagpur Expressway and metro expansions.",
+        "title": "Chief Minister of Maharashtra",
+        "year": "2014 - 2019",
+        "place": "Mumbai, Maharashtra"
+      },
+      {
+        "year": "2019 - 2019",
+        "title": "Chief Minister of Maharashtra",
+        "description": "He held a brief second term as Chief Minister for five days during the 2019 political crisis before resigning.",
+        "place": "Mumbai, Maharashtra"
+      },
+      {
+        "description": "He served as the Leader of the Opposition in the Maharashtra Legislative Assembly.",
+        "year": "2019 - 2022",
+        "place": "Mumbai, Maharashtra",
+        "title": "Leader of the Opposition"
+      },
+      {
+        "title": "Deputy Chief Minister of Maharashtra",
+        "year": "2022 - 2024",
+        "description": "He served as the Deputy Chief Minister in the Eknath Shinde government alongside Ajit Pawar.",
+        "place": "Mumbai, Maharashtra"
+      },
+      {
+        "title": "Member of Legislative Assembly of Maharashtra",
+        "description": "He is currently serving his third term as the Member of Legislative Assembly of Maharashtra.",
+        "place": "Mumbai, Maharashtra",
+        "year": "2024 - Present"
+      }
+    ],
+    "status": "Active"
+  },
+  {
+    "id": "eknath-sambhaji-shinde",
+    "portfolios": [
+      "Member of Legislative Assembly"
+    ],
+    "name": "Eknath Sambhaji Shinde",
+    "createdAt": 1786727407254,
+    "website": "",
+    "gender": "Male",
+    "verificationStatus": "Verified",
+    "seatType": "General",
+    "funnyCount": 0,
+    "age": null,
+    "displayName": "Eknath Sambhaji Shinde",
+    "pendingCount": 0,
+    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=eknath-sambhaji-shinde",
+    "state": "Maharashtra",
+    "answeredCount": 0,
+    "openQuestionsCount": 0,
+    "type": "MLA",
+    "constituency": "Kopri-Pachpakhadi",
+    "chamber": "Vidhan Sabha",
+    "portfolio": "Chief Minister of Maharashtra",
+    "totalCommentsCount": 0,
+    "termStart": "2024-11-23",
+    "education": "Graduate",
+    "totalReactionsCount": 0,
+    "repType": "MLA",
+    "party": "SHS",
+    "status": "Active",
+    "district": "Thane",
+    "electionYear": "2024",
+    "agreeCount": 0,
+    "currentDesignation": "Chief Minister",
+    "careerTimeline": [
+      {
+        "year": "2026 - Present",
+        "title": "Chief Minister of Maharashtra",
+        "description": "Serving as the Chief Minister of Maharashtra.",
+        "place": "Maharashtra"
+      }
+    ]
+  },
+  {
+    "id": "udhayanidhi-stalin",
+    "chamber": "Vidhan Sabha",
+    "party": "DMK",
+    "education": "Graduate",
+    "pendingCount": 0,
+    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=udhayanidhi-stalin",
+    "displayName": "Udhayanidhi Stalin",
+    "status": "Active",
+    "type": "MLA",
+    "district": "Chennai",
+    "repType": "MLA",
+    "totalCommentsCount": 0,
+    "termStart": "2026-05-04",
+    "portfolio": "Deputy Chief Minister; Youth Welfare & Sports Development, Planning",
+    "agreeCount": 0,
+    "state": "Tamil Nadu",
+    "portfolios": [
+      "Member of Legislative Assembly"
+    ],
+    "answeredCount": 0,
+    "seatType": "General",
+    "electionYear": "2026",
+    "website": "",
+    "openQuestionsCount": 0,
+    "name": "Udhayanidhi Stalin",
+    "funnyCount": 0,
+    "createdAt": 1786728306063,
+    "gender": "Male",
+    "constituency": "Chepauk-Thiruvalliken",
+    "age": 48,
+    "totalReactionsCount": 0,
+    "verificationStatus": "Verified",
+    "currentDesignation": "Deputy Chief Minister",
+    "careerTimeline": [
+      {
+        "year": "Present",
+        "title": "Deputy Chief Minister; Youth Welfare & Sports Development, Planning",
+        "description": "Serving in the state cabinet.",
+        "place": "Tamil Nadu"
+      }
+    ]
+  }
+]

@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /api/
 
-Sitemap: https://opinar.in/sitemap.xml
+Sitemap: https://www.opinar.in/sitemap.xml

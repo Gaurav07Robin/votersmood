@@ -4,9 +4,10 @@ import { STATES, PARTIES, LEADER_TYPES } from '../../../server/data/states';
 import LeaderCard from '../components/LeaderCard';
 import { LeaderSkeleton } from '../components/Skeleton';
 import EmptyState from '../components/EmptyState';
+import initialLeaders from '../data/initial_leaders.json';
 
 export default function Leaders({ onSelectLeader }) {
-  const [leaders, setLeaders] = useState([]);
+  const [leaders, setLeaders] = useState(initialLeaders || []);
   const [searchInput, setSearchInput] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [stateFilter, setStateFilter] = useState('');
@@ -16,9 +17,9 @@ export default function Leaders({ onSelectLeader }) {
   // Pagination & Scroll State
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [totalCount, setTotalCount] = useState(0);
+  const [totalCount, setTotalCount] = useState(initialLeaders?.length || 11);
 
   const observerTarget = useRef(null);
 
@@ -32,16 +33,17 @@ export default function Leaders({ onSelectLeader }) {
 
   // 2. Fetch Initial Page or Reset Filters
   const fetchLeaders = useCallback(async (pageNum, isReset = false) => {
-    if (pageNum === 1) {
+    const hasFilter = Boolean(debouncedSearch || stateFilter || partyFilter || typeFilter);
+    if (pageNum === 1 && hasFilter) {
       setLoading(true);
-    } else {
+    } else if (pageNum > 1) {
       setLoadingMore(true);
     }
 
     try {
       const data = await api.getLeaders({
         page: pageNum,
-        limit: 6,
+        limit: 12,
         search: debouncedSearch,
         state: stateFilter,
         party: partyFilter,
@@ -53,13 +55,15 @@ export default function Leaders({ onSelectLeader }) {
       const count = data.total !== undefined ? data.total : newLeaders.length;
 
       if (isReset || pageNum === 1) {
-        setLeaders(newLeaders);
+        if (newLeaders.length > 0 || hasFilter) {
+          setLeaders(newLeaders);
+        }
       } else {
         setLeaders(prev => [...prev, ...newLeaders]);
       }
 
       setHasMore(moreAvailable);
-      setTotalCount(count);
+      if (count > 0) setTotalCount(count);
     } catch (err) {
       console.warn('Error fetching leaders:', err);
     } finally {
@@ -153,7 +157,7 @@ export default function Leaders({ onSelectLeader }) {
       </div>
 
       {/* Leader Directory Grid */}
-      {loading ? (
+      {loading && leaders.length === 0 ? (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '20px' }}>
           <LeaderSkeleton />
           <LeaderSkeleton />

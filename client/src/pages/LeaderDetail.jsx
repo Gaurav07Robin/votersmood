@@ -109,8 +109,8 @@ export default function LeaderDetail({ leaderId, onBack }) {
 
       <Helmet>
         <title>{leader?.name ? `${leader.name} | ${leader.portfolio || 'Politician'} - Opinar` : 'Leader Profile | Opinar'}</title>
-        <meta name="description" content="{leader?.name ? `Ask ${leader.name} a question, track their performance, and participate in civic discussions on Opinar.` : 'Track leader performance on Opinar.'}" />
-        <link rel="canonical" href="{`https://www.opinar.in/leaders/${leader?.id || ''}`}" />
+        <meta name="description" content={leader?.name ? `Ask ${leader.name} a question, track their performance, and participate in civic discussions on Opinar.` : 'Track leader performance on Opinar.'} />
+        <link rel="canonical" href={`https://www.opinar.in/directory/${leader?.id || leaderId || ''}`} />
       </Helmet>
 
       

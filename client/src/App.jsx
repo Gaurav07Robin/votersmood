@@ -33,6 +33,16 @@ function AppContent() {
     const parseUrlRoute = () => {
       const path = window.location.pathname.replace(/^\/+/, '').trim();
       
+      // Keep canonical URL synchronized with the active route for SEO
+      const canonicalHref = path ? `https://www.opinar.in/${path}` : 'https://www.opinar.in/';
+      let canonicalLink = document.querySelector('link[rel="canonical"]');
+      if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.setAttribute('rel', 'canonical');
+        document.head.appendChild(canonicalLink);
+      }
+      canonicalLink.setAttribute('href', canonicalHref);
+
       if (!path || path === 'discussions') {
         setActiveTab('discussions');
         setSelectedLeaderSlug(null);
