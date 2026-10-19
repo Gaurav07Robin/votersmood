@@ -37,7 +37,7 @@ function AppContent() {
         setActiveTab('discussions');
         setSelectedLeaderSlug(null);
         setSelectedElection(null);
-        document.title = "JanMat | Political Intelligence & Verified Constituency Portal";
+        document.title = "Opinar | Political Intelligence & Verified Constituency Portal";
       } else if (path.startsWith('directory/')) {
         const slug = path.split('directory/')[1];
         setSelectedLeaderSlug(slug);
@@ -121,7 +121,7 @@ function AppContent() {
         setSelectedLeaderSlug(null);
         setSelectedElection(null);
         setSelectedInsightSlug(null);
-        document.title = `JanMat Gazette • ${path.toUpperCase()}`;
+        document.title = `Opinar Gazette • ${path.toUpperCase()}`;
       } else {
         // Fallback for old URLs
         setSelectedLeaderSlug(path);

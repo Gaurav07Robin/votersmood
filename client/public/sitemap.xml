@@ -11,6 +11,36 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://opinar.in/elections</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://opinar.in/elections/lok-sabha</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://opinar.in/elections/state</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://opinar.in/elections/by-elections</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://opinar.in/elections/municipal</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://opinar.in/insights</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://opinar.in/directory/a-anbalagan</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -11532,6 +11562,11 @@
   </url>
   <url>
     <loc>https://opinar.in/directory/narendra-mehta</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://opinar.in/directory/narendra-modi</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

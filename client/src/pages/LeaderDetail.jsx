@@ -42,7 +42,7 @@ export default function LeaderDetail({ leaderId, onBack }) {
           setLeader(leaderData);
           if (leaderData?.name) {
             // 1. Generate SEO-optimized text
-            const pageTitle = `${leaderData.name} - Political Profile & Career History | VotersMood`;
+            const pageTitle = `${leaderData.name} - Political Profile & Career History | Opinar`;
             const pageDesc = `View the complete political career, election timeline, and ask open questions to ${leaderData.name}, ${leaderData.party} leader from ${leaderData.constituency}, ${leaderData.state}.`;
             
             // 2. Update Document Title

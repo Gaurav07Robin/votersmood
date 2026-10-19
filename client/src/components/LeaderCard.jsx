@@ -18,6 +18,7 @@ export default function LeaderCard({ leader, rank, onSelect, openRegisterModal }
   const [isHighlighted, setIsHighlighted] = useState(false);
 
   const cardRef = useRef(null);
+  const cleanSlug = (leader?.id || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-');
 
   useEffect(() => {
     setAgreeCount(leader.agreeCount || 0);
@@ -230,29 +231,38 @@ export default function LeaderCard({ leader, rank, onSelect, openRegisterModal }
             </div>
           </div>
 
-          {/* Leader Profile Photo & Title Row */}
+          {/* Leader Profile Photo & Title Row (Crawlable <a> tag for Googlebot SEO) */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '4px' }}>
-            {photoUrl ? (
-              <img 
-                src={photoUrl} 
-                alt={leader.name} 
-                style={{ width: '42px', height: '42px', borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--border-subtle)', flexShrink: 0, backgroundColor: '#F8FAFC' }} 
-              />
-            ) : (
-              <div style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--bg-navbar)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 700, flexShrink: 0 }}>
-                {leader.name?.charAt(0)}
-              </div>
-            )}
+            <a
+              href={`/directory/${cleanSlug}`}
+              onClick={(e) => {
+                e.preventDefault();
+                if (onSelect) onSelect(leader.id);
+              }}
+              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px', flex: 1, color: 'inherit' }}
+            >
+              {photoUrl ? (
+                <img 
+                  src={photoUrl} 
+                  alt={leader.name} 
+                  style={{ width: '42px', height: '42px', borderRadius: '50%', objectFit: 'cover', border: '1px solid var(--border-subtle)', flexShrink: 0, backgroundColor: '#F8FAFC' }} 
+                />
+              ) : (
+                <div style={{ width: '42px', height: '42px', borderRadius: '50%', backgroundColor: 'var(--bg-navbar)', color: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-serif)', fontSize: '18px', fontWeight: 700, flexShrink: 0 }}>
+                  {leader.name?.charAt(0)}
+                </div>
+              )}
 
-            <div>
-              <h3 style={{ fontFamily: 'var(--font-card-title)', fontSize: '19px', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
-                {leader.name}
-              </h3>
+              <div>
+                <h3 style={{ fontFamily: 'var(--font-card-title)', fontSize: '19px', fontWeight: 700, color: 'var(--text-primary)', margin: 0 }}>
+                  {leader.name}
+                </h3>
 
-              <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11.5px', color: 'var(--text-secondary)' }}>
-                📍 {leader.constituency}, {leader.state}
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11.5px', color: 'var(--text-secondary)' }}>
+                  📍 {leader.constituency}, {leader.state}
+                </div>
               </div>
-            </div>
+            </a>
           </div>
 
           {leader.portfolio && (
