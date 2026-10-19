@@ -94,6 +94,8 @@ function AppContent() {
         path === 'elections/state' || 
         path === 'elections/by-elections' || 
         path === 'elections/municipal' ||
+        path === 'municipal' ||
+        path === 'municipal-elections' ||
         path === 'by-elections' ||
         path === 'by-election' ||
         path === 'byelections' ||
@@ -102,7 +104,7 @@ function AppContent() {
       ) {
         if (path === 'elections/state') setElectionCategory('ASSEMBLY');
         else if (path === 'elections/lok-sabha') setElectionCategory('LOK_SABHA');
-        else if (path === 'elections/municipal') setElectionCategory('MUNICIPAL');
+        else if (path === 'elections/municipal' || path === 'municipal' || path === 'municipal-elections') setElectionCategory('MUNICIPAL');
         else setElectionCategory('BY_ELECTION');
         setActiveTab('elections');
         setSelectedElection(null);

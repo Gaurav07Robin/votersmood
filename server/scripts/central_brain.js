@@ -2,6 +2,7 @@ import { getDb } from '../config/firebase-admin.js';
 import { runAutonomousTracker } from './autonomous_tracker.js';
 import { runJournalistAgent } from './journalist_agent.js';
 import { runLiveElectionTracker } from './live_election_tracker.js';
+import { runMunicipalTracker } from './municipal_agent.js';
 import { PLATFORM_VISION } from '../config/vision.js';
 import fetch from 'node-fetch';
 import dotenv from 'dotenv';
@@ -114,7 +115,8 @@ async function startCentralBrain() {
     }
   }
   else if (decision.task === 'SCRAPE_HISTORICAL_LOCAL') {
-    console.log(`🚀 PHASE 2: Dispatching Municipal Tracker (Script under construction)`);
+    console.log(`🚀 PHASE 2: Dispatching Municipal Tracker...`);
+    await runMunicipalTracker(3);
   }
   else if (decision.task === 'EXTRACT_ECI_PDF') {
     console.log(`🚀 PHASE 3: Dispatching ECI PDF Parser for Demographic Data (Script under construction)`);

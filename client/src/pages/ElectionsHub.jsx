@@ -10,6 +10,7 @@ import { getPartyColor, getPartySymbol, getPartyFlag } from '../utils/party_util
 import localStateMetadata from '../data/state_elections_metadata.json';
 import localLokSabhaMetadata from '../data/lok_sabha_metadata.json';
 import ByElectionsView from '../components/ByElectionsView';
+import MunicipalView from '../components/MunicipalView';
 
 const CustomXAxisTick = ({ x, y, payload }) => {
   const symbol = getPartySymbol(payload.value);
@@ -450,9 +451,13 @@ export default function ElectionsHub({
         </div>
       </div>
 
-      {!isLS && !isAS && (
+      {electionType === 'MUNICIPAL' && (
+        <MunicipalView />
+      )}
+
+      {electionType === 'BY_ELECTION' && (
         <ByElectionsView 
-          defaultLevel={electionType === 'MUNICIPAL' ? 'MUNICIPAL' : 'ALL'}
+          defaultLevel="ALL"
           onSelectConstituency={onSelectConstituency}
           onSelectYear={onSelectYear}
           onSelectByElection={onSelectByElection}
