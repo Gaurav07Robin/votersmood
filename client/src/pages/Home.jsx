@@ -96,9 +96,40 @@ export default function Home({ openRegisterModal }) {
     <div className="container page-main-container" style={{ padding: '32px 24px' }}>
 
       <Helmet>
-        <title>Opinar | Public Voice Platform</title>
-        <meta name="description" content="Discover real-time political intelligence and civic discussions." />
+        <title>Opinar | Verified Citizen Discussions & Political Intelligence Platform</title>
+        <meta name="description" content="Join India's public voice platform. Ask verified open questions to elected MPs and MLAs, debate civic issues, track elections, and view live voter sentiment." />
+        <meta name="keywords" content="Opinar, Indian politics, Lok Sabha elections, civic intelligence, public voice, live political discussions India, ask questions to politicians, Indian election tracker 2024 2026, constituency debates, how to ask questions to elected MP and MLA in India, real time political opinions and civic sentiment analysis, track election results across Indian states" />
         <link rel="canonical" href="https://www.opinar.in/" />
+
+        <meta property="og:title" content="Opinar | Verified Citizen Discussions & Political Intelligence Platform" />
+        <meta property="og:description" content="Ask verified open questions to elected MPs and MLAs, debate civic issues, and track election results across Indian states." />
+        <meta property="og:url" content="https://www.opinar.in/" />
+        <meta property="og:type" content="website" />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "WebSite",
+                "name": "Opinar",
+                "url": "https://www.opinar.in/",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://www.opinar.in/directory?search={search_term_string}",
+                  "query-input": "required name=search_term_string"
+                }
+              },
+              {
+                "@type": "Organization",
+                "name": "Opinar",
+                "url": "https://www.opinar.in/",
+                "logo": "https://www.opinar.in/vite.svg",
+                "sameAs": []
+              }
+            ]
+          })}
+        </script>
       </Helmet>
 
       

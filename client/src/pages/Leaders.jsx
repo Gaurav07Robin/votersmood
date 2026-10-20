@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { api } from '../api/client';
 import { STATES, PARTIES, LEADER_TYPES } from '../../../server/data/states';
 import LeaderCard from '../components/LeaderCard';
@@ -102,6 +103,42 @@ export default function Leaders({ onSelectLeader }) {
 
   return (
     <div className="container" style={{ padding: '32px 24px' }}>
+      <Helmet>
+        <title>Elected Representatives Directory: MPs, MLAs & Local Leaders | Opinar</title>
+        <meta name="description" content="Search and ask open questions to 4,100+ verified Indian Members of Parliament (MPs) and Legislative Assembly (MLAs). Track performance, constituency issues, and election track records." />
+        <meta name="keywords" content="politician directory, Indian MPs, Indian MLAs, elected representatives, search MP by constituency, contact MLA online, ask politicians open questions, India leader tracker, how to ask questions to elected representative in India, verified constituency performance of MPs and MLAs, track Indian politicians performance and attendance" />
+        <link rel="canonical" href="https://www.opinar.in/directory" />
+
+        <meta property="og:title" content="Elected Representatives Directory: MPs, MLAs & Local Leaders | Opinar" />
+        <meta property="og:description" content="Search and ask open questions to 4,100+ verified Indian Members of Parliament (MPs) and Legislative Assembly (MLAs)." />
+        <meta property="og:url" content="https://www.opinar.in/directory" />
+        <meta property="og:type" content="website" />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How can I ask a question to my MP or MLA on Opinar?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Navigate to the Elected Representatives Directory on Opinar, search for your leader by name or constituency, open their verified profile, and submit your public open question."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How many Indian politicians are tracked on Opinar?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Opinar indexes over 4,100 elected representatives across Lok Sabha, Rajya Sabha, Vidhan Sabha (State Assemblies), and Municipal Councils across India."
+                }
+              }
+            ]
+          })}
+        </script>
+      </Helmet>
       
       {/* Header Banner */}
       <div style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-main)', borderRadius: 'var(--radius-card)', padding: '24px', marginBottom: '28px' }}>

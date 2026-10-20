@@ -227,7 +227,32 @@ export default function ElectionYearDetail({ year, isLS = true, state = null, on
       <Helmet>
         <title>{seoTitle}</title>
         <meta name="description" content={seoDescription} />
-        <meta name="keywords" content={`${activeTitle}, ${year} election results, ${isLS ? 'lok sabha' : (state || selectedState) + ' assembly'}, who won ${year} election, election commission results ${year}`} />
+        <meta name="keywords" content={`${year} election results, ${isLS ? 'Lok Sabha election' : (state || selectedState) + ' Vidhan Sabha'}, Indian elections, ${activeTitle} constituency winners, ${year} party tally, ${isLS ? 'Lok Sabha seats' : (state || selectedState) + ' assembly seats'}, who won ${year} election, complete list of winning candidates ${activeTitle}, election commission results ${year} vote margin, party seat share and vote breakdown ${activeTitle}`} />
+        
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": `How many constituencies were contested in ${activeTitle}?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": `A total of ${scopedConstituencies.length} constituencies were contested in the ${activeTitle} election.`
+                }
+              },
+              {
+                "@type": "Question",
+                "name": `Where can I view official candidate margins for ${activeTitle}?`,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": `Complete constituency-level vote counts, margins, runner-ups, and party tallies for ${activeTitle} are indexed on Opinar.`
+                }
+              }
+            ]
+          })}
+        </script>
         <link rel="canonical" href={canonicalUrl} />
 
         <meta property="og:title" content={seoTitle} />

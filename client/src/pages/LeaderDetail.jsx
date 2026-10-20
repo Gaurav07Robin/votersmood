@@ -109,8 +109,59 @@ export default function LeaderDetail({ leaderId, onBack }) {
 
       <Helmet>
         <title>{leader?.name ? `${leader.name} | ${leader.portfolio || 'Politician'} - Opinar` : 'Leader Profile | Opinar'}</title>
-        <meta name="description" content={leader?.name ? `Ask ${leader.name} a question, track their performance, and participate in civic discussions on Opinar.` : 'Track leader performance on Opinar.'} />
+        <meta name="description" content={leader?.name ? `View ${leader.name}'s political track record, election history from ${leader.constituency || 'constituency'}, ${leader.state || 'India'}, and ask verified public questions on Opinar.` : 'Track leader performance on Opinar.'} />
+        <meta name="keywords" content={`${leader?.name || 'Indian politician'}, ${leader?.party || ''}, ${leader?.state || ''} politics, ${leader?.name || ''} ${leader?.constituency || ''}, ${leader?.name || ''} political career, ask question to ${leader?.name || ''}, how to contact ${leader?.name || ''} ${leader?.constituency || ''} representative, ${leader?.name || ''} election history and portfolio, public questions to ${leader?.name || ''} on Opinar`} />
         <link rel="canonical" href={`https://www.opinar.in/directory/${leader?.id || leaderId || ''}`} />
+
+        <meta property="og:title" content={`${leader?.name || 'Politician'} Profile & Career | Opinar`} />
+        <meta property="og:description" content={`View ${leader?.name || 'leader'}'s political career, election timeline, and ask open questions on Opinar.`} />
+        <meta property="og:url" content={`https://www.opinar.in/directory/${leader?.id || leaderId || ''}`} />
+        <meta property="og:type" content="profile" />
+
+        {leader?.name && (
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Person",
+                  "name": leader.name,
+                  "jobTitle": leader.portfolio || (leader.type === 'MP_LS' ? 'Member of Parliament (Lok Sabha)' : 'Member of Legislative Assembly'),
+                  "affiliation": {
+                    "@type": "Organization",
+                    "name": leader.party
+                  },
+                  "address": {
+                    "@type": "PostalAddress",
+                    "addressRegion": leader.state,
+                    "addressCountry": "IN"
+                  }
+                },
+                {
+                  "@type": "FAQPage",
+                  "mainEntity": [
+                    {
+                      "@type": "Question",
+                      "name": `Which constituency does ${leader.name} represent?`,
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": `${leader.name} represents ${leader.constituency || 'their constituency'} in ${leader.state} as a member of ${leader.party}.`
+                      }
+                    },
+                    {
+                      "@type": "Question",
+                      "name": `How can I ask an open question to ${leader.name}?`,
+                      "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": `You can post a verified citizen open question to ${leader.name} directly on their Opinar profile page.`
+                      }
+                    }
+                  ]
+                }
+              ]
+            })}
+          </script>
+        )}
       </Helmet>
 
       

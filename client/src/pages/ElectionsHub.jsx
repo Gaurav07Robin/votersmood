@@ -390,9 +390,50 @@ export default function ElectionsHub({
     <div style={{ backgroundColor: '#18181B', minHeight: '100vh', color: '#E4E4E7', padding: '24px', overflowX: 'hidden', fontFamily: 'Inter, sans-serif' }}>
 
       <Helmet>
-        <title>Elections Hub | Opinar</title>
-        <meta name="description" content="Explore historical and live election results across India." />
-        <link rel="canonical" href="https://www.opinar.in/elections" />
+        <title>
+          {activeType === 'LOK_SABHA' 
+            ? 'Lok Sabha Election Results (1952–2024): General Elections Timeline & Party Tally | Opinar'
+            : activeType === 'ASSEMBLY'
+            ? `${selectedState} Assembly Election Results (1952–2026): Vidhan Sabha Seat Breakdowns | Opinar`
+            : activeType === 'BY_ELECTION'
+            ? 'Live By-Election Radar India (2024–2026): Assembly & Lok Sabha Bypolls | Opinar'
+            : 'Municipal Election Results India (1952–2026): Mahanagar Palika, Wards & Mayors | Opinar'}
+        </title>
+        <meta 
+          name="description" 
+          content={activeType === 'LOK_SABHA'
+            ? 'Explore official Lok Sabha parliamentary election results across 543 constituencies from 1952 to 2024. View party vote shares, majorities, and historical winning trends on Opinar.'
+            : activeType === 'ASSEMBLY'
+            ? `Historical and live Vidhan Sabha assembly election results in ${selectedState} across all constituencies since 1952. Party seat shares, vote margins, and government formations.`
+            : activeType === 'BY_ELECTION'
+            ? 'Live tracking of Indian by-elections, candidate nominations, voter turnouts, and margins across Wayanad, Karhal, Dausa, and key parliamentary and assembly seats.'
+            : 'Explore municipal corporation and local body elections across Mumbai BMC, Delhi MCD, Kolkata KMC, and urban councils. Party majorities and ward standings.'}
+        />
+        <meta 
+          name="keywords" 
+          content={activeType === 'LOK_SABHA'
+            ? 'Lok Sabha election results, Indian general elections 1952 to 2024, Lok Sabha party tally, parliamentary election winners, who won Lok Sabha majority, general election seat share India, complete list of Lok Sabha election results year wise, national election commission data India'
+            : activeType === 'ASSEMBLY'
+            ? `${selectedState} assembly election results, Vidhan Sabha election, state elections India, ${selectedState} party seats tally, state election winners, historical state assembly election results since 1952, who formed government in ${selectedState}, state assembly election seat breakdown`
+            : activeType === 'BY_ELECTION'
+            ? 'by election results, bypoll results 2024, by elections India, assembly and parliamentary by-elections, live by-election tracker, upcoming bypoll candidates, who won Wayanad by election, state by election results live updates, why was by election held'
+            : 'municipal election results, mahanagar palika results, mcd delhi results 2022, bmc mumbai election 2017, kmc kolkata results, ghmc hyderabad, nagar palika results, nagar parishad, nagar panchayat, who won municipal corporation election, ward results india'}
+        />
+        <link 
+          rel="canonical" 
+          href={activeType === 'LOK_SABHA' 
+            ? 'https://www.opinar.in/elections/lok-sabha'
+            : activeType === 'ASSEMBLY'
+            ? `https://www.opinar.in/elections/state/${selectedState.toLowerCase().replace(/\s+/g, '-')}`
+            : activeType === 'BY_ELECTION'
+            ? 'https://www.opinar.in/elections/by-elections'
+            : 'https://www.opinar.in/elections/municipal'} 
+        />
+
+        <meta property="og:title" content="Elections Hub | Opinar" />
+        <meta property="og:description" content="Explore historical and live election results across India." />
+        <meta property="og:url" content="https://www.opinar.in/elections" />
+        <meta property="og:type" content="website" />
       </Helmet>
 
       

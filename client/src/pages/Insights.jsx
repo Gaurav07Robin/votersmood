@@ -265,9 +265,15 @@ export default function Insights({ initialSlug, onSelectSlug }) {
   return (
     <div style={{ backgroundColor: '#F8F9FA', minHeight: '100vh', padding: '16px 16px 80px 16px', fontFamily: 'Inter, -apple-system, sans-serif' }}>
       <Helmet>
-        <title>Political Insights & Ground Reports | Opinar</title>
-        <meta name="description" content="Verified investigative reports, breaking campaign rallies, judicial observations, and state election progression." />
+        <title>Political Insights, Video Reels & Ground Journalism | Opinar</title>
+        <meta name="description" content="Verified investigative reports, breaking campaign rallies, judicial observations, and state election progressions across India on Opinar." />
+        <meta name="keywords" content="political insights, Indian politics reels, election news, ground reports India, campaign rally coverage India, verified political intelligence, state election insights, political video reels, unbiased Indian political news analysis, real time election campaign updates, verified journalist field reports India" />
         <link rel="canonical" href="https://www.opinar.in/insights" />
+
+        <meta property="og:title" content="Political Insights, Video Reels & Ground Journalism | Opinar" />
+        <meta property="og:description" content="Verified investigative reports, breaking campaign rallies, and election progressions." />
+        <meta property="og:url" content="https://www.opinar.in/insights" />
+        <meta property="og:type" content="website" />
       </Helmet>
 
       {/* TOP SECTION: HORIZONTAL SWIPEABLE REELS CAROUSEL */}
