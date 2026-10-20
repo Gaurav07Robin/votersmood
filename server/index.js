@@ -14,6 +14,7 @@ import leadersRouter from './routes/leaders.js';
 import topicsRouter from './routes/topics.js';
 import adminRouter from './routes/admin.js';
 import insightsRouter from './routes/insights.js';
+import electionsRouter from './routes/elections.js';
 
 dotenv.config();
 
@@ -49,6 +50,8 @@ app.use('/api/leaders', leadersRouter);
 app.use('/api/topics', topicsRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/insights', insightsRouter);
+app.use('/api/elections', electionsRouter);
+app.use('/api/election', electionsRouter);
 
 // Global Error Handler
 app.use((err, req, res, next) => {

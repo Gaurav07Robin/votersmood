@@ -15,7 +15,7 @@ const ConstituencyResult = React.lazy(() => import('./pages/ConstituencyResult')
 const ByElectionDetail = React.lazy(() => import('./pages/ByElectionDetail'));
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 
-const KNOWN_TABS = ['discussions', 'polls', 'insights', 'directory', 'trending', 'admin', 'elections', 'by-elections'];
+const KNOWN_TABS = ['discussions', 'polls', 'insights', 'directory', 'trending', 'admin', 'elections', 'election', 'by-elections'];
 
 function AppContent() {
   const { isRegisterOpen, openRegisterModal, closeRegisterModal } = useAuth();
@@ -52,7 +52,7 @@ function AppContent() {
         const slug = path.split('directory/')[1];
         setSelectedLeaderSlug(slug);
         setActiveTab('leader-detail');
-      } else if (path.startsWith('elections/lok-sabha/') || path.startsWith('elections/state/')) {
+      } else if (path.startsWith('elections/lok-sabha/') || path.startsWith('election/lok-sabha/') || path.startsWith('elections/state/') || path.startsWith('election/state/')) {
         const parts = path.split('/');
         if (parts[1] === 'lok-sabha') {
           setElectionCategory('LOK_SABHA');
@@ -99,7 +99,12 @@ function AppContent() {
           setSelectedByElection(null);
         }
       } else if (
-        path === 'elections' || 
+        path === 'elections' ||
+        path === 'election' ||
+        path === 'election/lok-sabha' ||
+        path === 'election/state' ||
+        path === 'election/by-elections' ||
+        path === 'election/municipal' || 
         path === 'elections/lok-sabha' || 
         path === 'elections/state' || 
         path === 'elections/by-elections' || 
