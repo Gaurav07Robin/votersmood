@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './components/Toast';
 import Navbar from './components/Navbar';
 import RegisterModal from './components/RegisterModal';
+import ErrorBoundary from './components/ErrorBoundary';
 import Home from './pages/Home';
 const Polls = React.lazy(() => import('./pages/Polls'));
 const Insights = React.lazy(() => import('./pages/Insights'));
@@ -117,10 +118,10 @@ function AppContent() {
         path === 'byelection' ||
         path === 'bypolls'
       ) {
-        if (path === 'elections/state') setElectionCategory('ASSEMBLY');
-        else if (path === 'elections/lok-sabha') setElectionCategory('LOK_SABHA');
-        else if (path === 'elections/municipal' || path === 'municipal' || path === 'municipal-elections') setElectionCategory('MUNICIPAL');
-        else setElectionCategory('BY_ELECTION');
+        if (path.includes('state')) setElectionCategory('ASSEMBLY');
+        else if (path.includes('municipal')) setElectionCategory('MUNICIPAL');
+        else if (path.includes('by-election') || path.includes('byelection') || path.includes('bypoll')) setElectionCategory('BY_ELECTION');
+        else setElectionCategory('LOK_SABHA');
         setActiveTab('elections');
         setSelectedElection(null);
         setSelectedByElection(null);

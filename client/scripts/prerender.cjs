@@ -176,11 +176,19 @@ const coreRoutes = [
   }
 ];
 
-// Write core routes
-for (const route of coreRoutes) {
+// Write core routes and aliases
+const electionAliases = coreRoutes
+  .filter(r => r.path.startsWith('elections'))
+  .map(r => ({
+    ...r,
+    path: r.path.replace(/^elections/, 'election')
+  }));
+
+const allCoreRoutes = [...coreRoutes, ...electionAliases];
+for (const route of allCoreRoutes) {
   writeRoute(route.path, route);
 }
-console.log(`✅ Pre-rendered ${coreRoutes.length} core platform hubs.`);
+console.log(`✅ Pre-rendered ${allCoreRoutes.length} core platform hubs (including /election aliases).`);
 
 // ========================================================
 // 2. POLITICIAN PROFILES (4,110 REPRESENTATIVES)
