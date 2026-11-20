@@ -1,5 +1,40 @@
 [
   {
+    "id": "priyanka-gandhi-vadra",
+    "name": "Priyanka Gandhi Vadra",
+    "displayName": "Priyanka Gandhi Vadra",
+    "party": "INC",
+    "state": "Kerala",
+    "constituency": "Wayanad",
+    "district": "Wayanad",
+    "repType": "MP",
+    "type": "MP_LS",
+    "chamber": "Lok Sabha",
+    "status": "Active",
+    "portfolio": "Member of Parliament (Lok Sabha) - Wayanad",
+    "portfolios": [
+      "Member of Parliament (Lok Sabha)"
+    ],
+    "electionYear": "2024",
+    "termStart": "2024-11-23",
+    "verificationStatus": "Verified",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Priyanka_Gandhi_Vadra_2024.jpg/500px-Priyanka_Gandhi_Vadra_2024.jpg",
+    "careerTimeline": [
+      {
+        "year": "2024 - Present",
+        "title": "Member of Parliament (Lok Sabha) - Wayanad",
+        "place": "Wayanad, Kerala",
+        "description": "Elected to the 18th Lok Sabha in the November 2024 parliamentary by-election with 6,22,338 votes, securing a historic victory margin of 4,10,931 votes."
+      },
+      {
+        "year": "2019 - Present",
+        "title": "General Secretary, Indian National Congress",
+        "place": "New Delhi",
+        "description": "Appointed All India Congress Committee (AICC) General Secretary in charge of key political campaigns."
+      }
+    ]
+  },
+  {
     "id": "a-anbalagan",
     "repType": "MLA",
     "portfolios": [
@@ -6289,13 +6324,16 @@
     "governmentPositions": [
       "Party President"
     ],
-    "status": "Active",
+    "status": "Active (MP)",
     "totalCommentsCount": 810,
-    "portfolio": "Minister of Environment, Forest and Climate Change",
-    "profilePhoto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQX7t7JnI58o-LjNWeSFxqGm6Wlsw-ArVZcFsU71huR-BLcgIBKNr4a5x0&s=10",
+    "portfolio": "Member of Parliament (Lok Sabha) - Kannauj",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Akhilesh_Yadav_in_2022.jpg/500px-Akhilesh_Yadav_in_2022.jpg",
     "pendingCount": 17,
     "website": "https://samajwadiparty.in",
-    "currentDesignation": "Minister of Environment, Forest and Climate Change"
+    "currentDesignation": "Minister of Environment, Forest and Climate Change",
+    "statusNote": "Vacated Karhal Assembly seat in June 2024 following election as MP for Kannauj in the 18th Lok Sabha.",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Akhilesh_Yadav_in_2022.jpg/500px-Akhilesh_Yadav_in_2022.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Akhilesh_Yadav_in_2022.jpg/500px-Akhilesh_Yadav_in_2022.jpg"
   },
   {
     "id": "akhruzzaman",
@@ -9267,7 +9305,7 @@
         "title": "Minister of Co-operation"
       }
     ],
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=amit-shah",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Shri_Amit_Shah_in_Raigad.jpg/500px-Shri_Amit_Shah_in_Raigad.jpg",
     "pendingCount": 0,
     "createdAt": 1786726336055,
     "state": "Gujarat",
@@ -9297,7 +9335,9 @@
     "name": "Amit Shah",
     "constituency": "Ellisbridge",
     "education": "Professional Graduate",
-    "currentDesignation": "Minister of Home Affairs"
+    "currentDesignation": "Minister of Home Affairs",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Shri_Amit_Shah_in_Raigad.jpg/500px-Shri_Amit_Shah_in_Raigad.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Shri_Amit_Shah_in_Raigad.jpg/500px-Shri_Amit_Shah_in_Raigad.jpg"
   },
   {
     "id": "amit-singh-chauhan",
@@ -10197,7 +10237,7 @@
     "repType": "MLA",
     "constituency": "Salumber(ST)",
     "agreeCount": 0,
-    "status": "Active",
+    "status": "Deceased",
     "district": "Udaipur",
     "careerTimeline": [
       {
@@ -10215,7 +10255,9 @@
     "totalReactionsCount": 0,
     "party": "BJP",
     "electionYear": "2023",
-    "age": 65
+    "age": 65,
+    "statusNote": "Passed away on August 7, 2024 while serving as MLA for Salumber.",
+    "termEnd": "2024-08-07"
   },
   {
     "id": "amritpal-singh-sukhanand",
@@ -13978,7 +14020,7 @@
   },
   {
     "id": "anoop-singh-urf-anoop-pradhan-valmeeki",
-    "portfolio": "Member of Legislative Assembly (MLA) - Khair",
+    "portfolio": "Member of Parliament (Lok Sabha) - Hathras",
     "age": 44,
     "chamber": "Vidhan Sabha",
     "funnyCount": 0,
@@ -14005,10 +14047,11 @@
     "name": "Anoop Singh Urf Anoop Pradhan Valmeeki",
     "verificationStatus": "Verified",
     "party": "BJP",
-    "status": "Active",
+    "status": "Elevated to Lok Sabha",
     "answeredCount": 0,
     "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=anoop-singh-urf-anoop-pradhan-valmeeki",
-    "pendingCount": 0
+    "pendingCount": 0,
+    "statusNote": "Vacated Khair Assembly seat in June 2024 following election as MP for Hathras."
   },
   {
     "id": "anshuman-singh-bhati",
@@ -14236,7 +14279,7 @@
     "name": "Anumula Revanth Reddy",
     "displayName": "Anumula Revanth Reddy",
     "pendingCount": 0,
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=anumula-revanth-reddy",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/A._Revanth_Reddy_2023.jpg/500px-A._Revanth_Reddy_2023.jpg",
     "repType": "MLA",
     "seatType": "General",
     "portfolio": "Chief Minister of Andhra Pradesh",
@@ -14297,7 +14340,9 @@
     "totalReactionsCount": 0,
     "funnyCount": 0,
     "party": "INC",
-    "currentDesignation": "Chief Minister"
+    "currentDesignation": "Chief Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/A._Revanth_Reddy_2023.jpg/500px-A._Revanth_Reddy_2023.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/A._Revanth_Reddy_2023.jpg/500px-A._Revanth_Reddy_2023.jpg"
   },
   {
     "id": "anup-kumar-saha",
@@ -17377,7 +17422,7 @@
     "type": "MLA",
     "agreeCount": 0,
     "constituency": "Gola Gokrannath",
-    "status": "Active",
+    "status": "Deceased",
     "district": "Agra",
     "repType": "MLA",
     "state": "Uttar Pradesh",
@@ -17397,7 +17442,9 @@
     "totalCommentsCount": 0,
     "answeredCount": 0,
     "party": "BJP",
-    "funnyCount": 0
+    "funnyCount": 0,
+    "statusNote": "Passed away in September 2022 while serving as MLA for Gola Gokrannath.",
+    "termEnd": "2022-09-06"
   },
   {
     "id": "arvind-kumar-sharma",
@@ -17463,7 +17510,7 @@
     "chamber": "Vidhan Sabha",
     "age": 42,
     "party": "BJP",
-    "status": "Active",
+    "status": "Deceased",
     "verificationStatus": "Verified",
     "name": "Arvind Kumar Singh",
     "createdAt": 1786728751403,
@@ -17493,7 +17540,9 @@
     "state": "Uttar Pradesh",
     "totalCommentsCount": 0,
     "website": "",
-    "answeredCount": 0
+    "answeredCount": 0,
+    "statusNote": "Passed away on January 5, 2024 while serving as MLA for Dadraul.",
+    "termEnd": "2024-01-05"
   },
   {
     "id": "arvind-mohapatra",
@@ -21371,10 +21420,12 @@
     "party": "AAP",
     "totalCommentsCount": 0,
     "seatType": "General",
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=atishi",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Atishi_Marlena_in_2023.jpg/500px-Atishi_Marlena_in_2023.jpg",
     "pendingCount": 0,
     "createdAt": 1786726173633,
-    "website": ""
+    "website": "",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Atishi_Marlena_in_2023.jpg/500px-Atishi_Marlena_in_2023.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Atishi_Marlena_in_2023.jpg/500px-Atishi_Marlena_in_2023.jpg"
   },
   {
     "id": "atram-dharamraobaba-bhagwantrao",
@@ -22144,7 +22195,7 @@
     "id": "awadhesh-prasad",
     "verificationStatus": "Verified",
     "age": 80,
-    "status": "Active",
+    "status": "Elevated to Lok Sabha",
     "constituency": "Milkipur (SC)",
     "repType": "MLA",
     "agreeCount": 0,
@@ -22234,7 +22285,8 @@
     "party": "SP",
     "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=awadhesh-prasad",
     "pendingCount": 0,
-    "portfolio": "Member of Legislative Assembly (MLA) - Milkipur"
+    "portfolio": "Member of Parliament (Lok Sabha) - Faizabad",
+    "statusNote": "Vacated Milkipur Assembly seat in June 2024 following election as MP for Faizabad (Ayodhya) in the 18th Lok Sabha."
   },
   {
     "id": "awadhesh-singh",
@@ -28625,7 +28677,7 @@
     "funnyCount": 0,
     "status": "Active",
     "pendingCount": 0,
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=bhagwant-mann",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bhagwant_Mann_2022.jpg/500px-Bhagwant_Mann_2022.jpg",
     "name": "Bhagwant Mann",
     "careerTimeline": [
       {
@@ -28659,7 +28711,9 @@
         "description": "He assumed office as the 17th Chief Minister of Punjab after leading his party to a major victory in the assembly elections. He also represents the Dhuri Assembly constituency."
       }
     ],
-    "currentDesignation": "Chief Minister"
+    "currentDesignation": "Chief Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bhagwant_Mann_2022.jpg/500px-Bhagwant_Mann_2022.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bhagwant_Mann_2022.jpg/500px-Bhagwant_Mann_2022.jpg"
   },
   {
     "id": "bhai-birendra",
@@ -28825,7 +28879,7 @@
     "answeredCount": 0,
     "name": "Bhajan Lal Sharma",
     "pendingCount": 0,
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=bhajan-lal-sharma",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Bhajan_Lal_Sharma_2023.jpg/500px-Bhajan_Lal_Sharma_2023.jpg",
     "funnyCount": 0,
     "repType": "MLA",
     "state": "Rajasthan",
@@ -28852,7 +28906,9 @@
     ],
     "status": "Active",
     "termStart": "2023-12-03",
-    "currentDesignation": "Chief Minister"
+    "currentDesignation": "Chief Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Bhajan_Lal_Sharma_2023.jpg/500px-Bhajan_Lal_Sharma_2023.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Bhajan_Lal_Sharma_2023.jpg/500px-Bhajan_Lal_Sharma_2023.jpg"
   },
   {
     "id": "bhanuben-manoharbhai-babariya",
@@ -34671,9 +34727,9 @@
     ],
     "totalReactionsCount": 0,
     "state": "Rajasthan",
-    "status": "Active",
+    "status": "Elevated to Lok Sabha",
     "type": "MLA",
-    "portfolio": "Member of Legislative Assembly (MLA) - Jhunjhunu",
+    "portfolio": "Member of Parliament (Lok Sabha) - Jhunjhunu",
     "termStart": "2023-12-03",
     "district": "Jhunjhunu",
     "electionYear": "2023",
@@ -34694,7 +34750,8 @@
     "createdAt": 1786728120200,
     "party": "INC",
     "age": 72,
-    "repType": "MLA"
+    "repType": "MLA",
+    "statusNote": "Vacated Jhunjhunu Assembly seat in June 2024 following election as MP for Jhunjhunu."
   },
   {
     "id": "brijesh",
@@ -37548,18 +37605,19 @@
     "displayName": "Chandan Chauhan",
     "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=chandan-chauhan",
     "pendingCount": 0,
-    "portfolio": "Member of Legislative Assembly (MLA) - Meerapur",
+    "portfolio": "Member of Parliament (Lok Sabha) - Bijnor",
     "website": "",
     "termStart": "2022-03-10",
     "verificationStatus": "Verified",
     "education": "Graduate",
-    "status": "Active",
+    "status": "Elevated to Lok Sabha",
     "type": "MLA",
     "age": 37,
     "agreeCount": 0,
     "party": "RLD",
     "openQuestionsCount": 0,
-    "seatType": "General"
+    "seatType": "General",
+    "statusNote": "Vacated Meerapur Assembly seat in June 2024 following election as MP for Bijnor."
   },
   {
     "id": "chandan-kumar-choudhary",
@@ -38374,7 +38432,7 @@
     "party": "TDP",
     "funnyCount": 0,
     "portfolio": "Member of Legislative Assembly (MLA) - Kuppam",
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=chandrababu-naidu-nara",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/N._Chandrababu_Naidu_in_2024.jpg/500px-N._Chandrababu_Naidu_in_2024.jpg",
     "pendingCount": 0,
     "careerTimeline": [
       {
@@ -38413,7 +38471,9 @@
     "displayName": "Chandrababu Naidu Nara",
     "repType": "MLA",
     "totalReactionsCount": 0,
-    "type": "MLA"
+    "type": "MLA",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/N._Chandrababu_Naidu_in_2024.jpg/500px-N._Chandrababu_Naidu_in_2024.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/N._Chandrababu_Naidu_in_2024.jpg/500px-N._Chandrababu_Naidu_in_2024.jpg"
   },
   {
     "id": "chandrabhan-singh-chouhan",
@@ -45128,7 +45188,7 @@
     "party": "BJP",
     "state": "Maharashtra",
     "pendingCount": 19,
-    "profilePhoto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTinziJL1le123L3ducVPgmaYgjFHwwStm1QcpwbxsLk3ZbJRDi_gKZEO0VwjMCU8K7kdVGRS0yK6_3GZKWW1-spQVzUJO0S_ayYayt1U&s=10",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Devendra_Fadnavis_2022.jpg/500px-Devendra_Fadnavis_2022.jpg",
     "openQuestionsCount": 25,
     "seatType": "General",
     "governmentPositions": [
@@ -45207,7 +45267,9 @@
         "year": "2024 - Present"
       }
     ],
-    "status": "Active"
+    "status": "Active",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Devendra_Fadnavis_2022.jpg/500px-Devendra_Fadnavis_2022.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Devendra_Fadnavis_2022.jpg/500px-Devendra_Fadnavis_2022.jpg"
   },
   {
     "id": "devendra-gangadhar-fadnavis",
@@ -51912,7 +51974,7 @@
     "age": null,
     "displayName": "Eknath Sambhaji Shinde",
     "pendingCount": 0,
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=eknath-sambhaji-shinde",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Eknath_Shinde_2022.jpg/500px-Eknath_Shinde_2022.jpg",
     "state": "Maharashtra",
     "answeredCount": 0,
     "openQuestionsCount": 0,
@@ -51938,7 +52000,9 @@
         "description": "Serving as the Chief Minister of Maharashtra.",
         "place": "Maharashtra"
       }
-    ]
+    ],
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Eknath_Shinde_2022.jpg/500px-Eknath_Shinde_2022.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Eknath_Shinde_2022.jpg/500px-Eknath_Shinde_2022.jpg"
   },
   {
     "id": "elango-r",
@@ -56546,7 +56610,7 @@
     "id": "geniben-nagaji-thakor",
     "displayName": "Geniben Nagaji Thakor",
     "verificationStatus": "Verified",
-    "portfolio": "Member of Legislative Assembly (MLA) - Vav",
+    "portfolio": "Member of Parliament (Lok Sabha) - Banaskantha",
     "state": "Gujarat",
     "district": "Banaskantha",
     "termStart": "2022-12-08",
@@ -56554,7 +56618,7 @@
     "agreeCount": 0,
     "openQuestionsCount": 0,
     "type": "MLA",
-    "status": "Active",
+    "status": "Elevated to Lok Sabha",
     "website": "",
     "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=geniben-nagaji-thakor",
     "pendingCount": 0,
@@ -56600,7 +56664,8 @@
       }
     ],
     "answeredCount": 0,
-    "seatType": "General"
+    "seatType": "General",
+    "statusNote": "Vacated Vav Assembly seat in June 2024 following election as MP for Banaskantha."
   },
   {
     "id": "ghanshyam",
@@ -62929,7 +62994,7 @@
   },
   {
     "id": "harish-chandra-meena",
-    "status": "Active",
+    "status": "Elevated to Lok Sabha",
     "displayName": "Harish Chandra Meena",
     "verificationStatus": "Verified",
     "totalReactionsCount": 0,
@@ -62981,11 +63046,12 @@
       }
     ],
     "state": "Rajasthan",
-    "portfolio": "Member of Legislative Assembly (MLA) - Deoli-Uniara",
+    "portfolio": "Member of Parliament (Lok Sabha) - Tonk-Sawai Madhopur",
     "gender": "Male",
     "termStart": "2023-12-03",
     "constituency": "Deoli-Uniara",
-    "chamber": "Vidhan Sabha"
+    "chamber": "Vidhan Sabha",
+    "statusNote": "Vacated Deoli-Uniara Assembly seat in June 2024 following election as MP for Tonk-Sawai Madhopur."
   },
   {
     "id": "harish-chaudhary",
@@ -64738,7 +64804,7 @@
     "state": "Jharkhand",
     "district": "Godda",
     "totalReactionsCount": 0,
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=hemant-soren",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Hemant_Soren_2020.jpg/500px-Hemant_Soren_2020.jpg",
     "pendingCount": 0,
     "seatType": "General",
     "status": "Active",
@@ -64753,7 +64819,9 @@
     ],
     "party": "JMM",
     "repType": "MLA",
-    "currentDesignation": "Chief Minister"
+    "currentDesignation": "Chief Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Hemant_Soren_2020.jpg/500px-Hemant_Soren_2020.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Hemant_Soren_2020.jpg/500px-Hemant_Soren_2020.jpg"
   },
   {
     "id": "hemant-vijay-khandelwal",
@@ -65206,7 +65274,7 @@
     ],
     "displayName": "Himanta Biswa Sarma",
     "gender": "Male",
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=himanta-biswa-sarma",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Himanta_Biswa_Sarma_2021.jpg/500px-Himanta_Biswa_Sarma_2021.jpg",
     "pendingCount": 0,
     "website": "",
     "totalReactionsCount": 0,
@@ -65216,7 +65284,9 @@
     "type": "MLA",
     "answeredCount": 0,
     "termStart": "2026-05-10",
-    "currentDesignation": "Chief Minister"
+    "currentDesignation": "Chief Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Himanta_Biswa_Sarma_2021.jpg/500px-Himanta_Biswa_Sarma_2021.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Himanta_Biswa_Sarma_2021.jpg/500px-Himanta_Biswa_Sarma_2021.jpg"
   },
   {
     "id": "hirabhai-odhavjibhai-solanki",
@@ -68910,7 +68980,7 @@
     "verificationStatus": "Verified",
     "gender": "Male",
     "education": "Graduate",
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=jai-ram-thakur",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Jai_Ram_Thakur_2018.jpg/500px-Jai_Ram_Thakur_2018.jpg",
     "pendingCount": 0,
     "funnyCount": 0,
     "openQuestionsCount": 0,
@@ -68943,7 +69013,9 @@
     "answeredCount": 0,
     "electionYear": "2022",
     "displayName": "Jai Ram Thakur",
-    "currentDesignation": "Minister of State in Agriculture and Farmers Welfare"
+    "currentDesignation": "Minister of State in Agriculture and Farmers Welfare",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Jai_Ram_Thakur_2018.jpg/500px-Jai_Ram_Thakur_2018.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Jai_Ram_Thakur_2018.jpg/500px-Jai_Ram_Thakur_2018.jpg"
   },
   {
     "id": "jaikishan-sahu",
@@ -91869,10 +91941,10 @@
     "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=lalji-verma",
     "answeredCount": 0,
     "type": "MLA",
-    "status": "Active",
+    "status": "Elevated to Lok Sabha",
     "district": "Ambedkar Nagar",
     "totalCommentsCount": 0,
-    "portfolio": "Member of Legislative Assembly (MLA) - Katehari",
+    "portfolio": "Member of Parliament (Lok Sabha) - Ambedkar Nagar",
     "displayName": "Lalji Verma",
     "constituency": "Katehari",
     "gender": "Male",
@@ -91886,7 +91958,8 @@
     "verificationStatus": "Verified",
     "electionYear": "2022",
     "website": "",
-    "totalReactionsCount": 0
+    "totalReactionsCount": 0,
+    "statusNote": "Vacated Katehari Assembly seat in June 2024 following election as MP for Ambedkar Nagar."
   },
   {
     "id": "laljit-singh-bhullar",
@@ -99051,10 +99124,12 @@
     "name": "Mamata Banerjee",
     "chamber": "Vidhan Sabha",
     "type": "MLA",
-    "profilePhoto": "https://www.facebook.com/MamataBanerjeeOfficial/photos/",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Mamata_Banerjee_2022.jpg/500px-Mamata_Banerjee_2022.jpg",
     "pendingCount": 23,
     "funnyCount": 1120,
-    "district": "Kolkata"
+    "district": "Kolkata",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Mamata_Banerjee_2022.jpg/500px-Mamata_Banerjee_2022.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Mamata_Banerjee_2022.jpg/500px-Mamata_Banerjee_2022.jpg"
   },
   {
     "id": "mamidi-govinda-rao",
@@ -106908,7 +106983,7 @@
     "verificationStatus": "Verified",
     "party": "BJP",
     "agreeCount": 0,
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=mohan-charan-majhi",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Mohan_Charan_Majhi_2024.jpg/500px-Mohan_Charan_Majhi_2024.jpg",
     "pendingCount": 0,
     "portfolio": "Chief Minister of Odisha",
     "district": "Kendujhar",
@@ -106919,7 +106994,9 @@
     "totalReactionsCount": 0,
     "education": "Graduate",
     "repType": "MLA",
-    "currentDesignation": "Chief Minister"
+    "currentDesignation": "Chief Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Mohan_Charan_Majhi_2024.jpg/500px-Mohan_Charan_Majhi_2024.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Mohan_Charan_Majhi_2024.jpg/500px-Mohan_Charan_Majhi_2024.jpg"
   },
   {
     "id": "mohan-gopalrao-mate",
@@ -107362,8 +107439,10 @@
     "answeredCount": 0,
     "status": "Active",
     "pendingCount": 0,
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=mohan-yadav",
-    "currentDesignation": "Chief Minister"
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Mohan_Yadav_2023.jpg/500px-Mohan_Yadav_2023.jpg",
+    "currentDesignation": "Chief Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Mohan_Yadav_2023.jpg/500px-Mohan_Yadav_2023.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Mohan_Yadav_2023.jpg/500px-Mohan_Yadav_2023.jpg"
   },
   {
     "id": "mohanbhai-dhanjibhai-dhodiya",
@@ -109805,7 +109884,7 @@
       }
     ],
     "openQuestionsCount": 0,
-    "portfolio": "Member of Legislative Assembly (MLA) - Dausa",
+    "portfolio": "Member of Parliament (Lok Sabha) - Dausa",
     "electionYear": "2023",
     "termStart": "2023-12-03",
     "gender": "Male",
@@ -109827,14 +109906,15 @@
     "portfolios": [
       "Member of Legislative Assembly"
     ],
-    "status": "Active",
+    "status": "Elevated to Lok Sabha",
     "totalCommentsCount": 0,
     "displayName": "Murari Lal Meena",
     "age": 65,
     "seatType": "General",
     "party": "INC",
     "totalReactionsCount": 0,
-    "chamber": "Vidhan Sabha"
+    "chamber": "Vidhan Sabha",
+    "statusNote": "Vacated Dausa Assembly seat in June 2024 following election as MP for Dausa."
   },
   {
     "id": "murari-mohan-jha",
@@ -113802,9 +113882,11 @@
     "state": "Uttar Pradesh",
     "age": 73,
     "website": "https://www.narendramodi.in/",
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=narendra-modi",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/5/5f/The_official_portrait_of_Shri_Narendra_Modi%2C_the_Prime_Minister_of_the_Republic_of_India.jpg",
     "pendingCount": 0,
-    "currentDesignation": "Prime Minister"
+    "currentDesignation": "Prime Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/5/5f/The_official_portrait_of_Shri_Narendra_Modi%2C_the_Prime_Minister_of_the_Republic_of_India.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/5/5f/The_official_portrait_of_Shri_Narendra_Modi%2C_the_Prime_Minister_of_the_Republic_of_India.jpg"
   },
   {
     "id": "narendra-narayan-yadav",
@@ -118179,10 +118261,12 @@
     "website": "https://nitingadkari.org.in",
     "name": "Nitin Gadkari",
     "type": "MP_LS",
-    "profilePhoto": "https://etedge-insights.com/featured-insights/bombay-high-court-permits-nitin-gadkari-to-pursue-deepfake-suit-against-meta-google-and-x/",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Nitin_Gadkari_cabinet_minister.jpg/500px-Nitin_Gadkari_cabinet_minister.jpg",
     "pendingCount": 11,
     "totalReactionsCount": 5120,
-    "currentDesignation": "Minister of Road Transport and Highways"
+    "currentDesignation": "Minister of Road Transport and Highways",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Nitin_Gadkari_cabinet_minister.jpg/500px-Nitin_Gadkari_cabinet_minister.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Nitin_Gadkari_cabinet_minister.jpg/500px-Nitin_Gadkari_cabinet_minister.jpg"
   },
   {
     "id": "nitin-kashinath-raut",
@@ -127120,10 +127204,12 @@
     "answeredCount": 0,
     "openQuestionsCount": 0,
     "district": "Kannur",
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=pinarayi-vijayan",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pinarayi_Vijayan_2019.jpg/500px-Pinarayi_Vijayan_2019.jpg",
     "pendingCount": 0,
     "createdAt": 1786726825027,
-    "name": "Pinarayi Vijayan"
+    "name": "Pinarayi Vijayan",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pinarayi_Vijayan_2019.jpg/500px-Pinarayi_Vijayan_2019.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Pinarayi_Vijayan_2019.jpg/500px-Pinarayi_Vijayan_2019.jpg"
   },
   {
     "id": "pinki-singh",
@@ -132268,9 +132354,10 @@
     "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=praveen-patel",
     "agreeCount": 0,
     "seatType": "General",
-    "status": "Active",
-    "portfolio": "Member of Legislative Assembly (MLA) - Phulpur",
-    "totalCommentsCount": 0
+    "status": "Elevated to Lok Sabha",
+    "portfolio": "Member of Parliament (Lok Sabha) - Phulpur",
+    "totalCommentsCount": 0,
+    "statusNote": "Vacated Phulpur Assembly seat in June 2024 following election as MP for Phulpur."
   },
   {
     "id": "praveen-t-t",
@@ -134627,7 +134714,7 @@
     "chamber": "Vidhan Sabha",
     "displayName": "Pushkar Singh Dhami",
     "pendingCount": 0,
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=pushkar-singh-dhami",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Pushkar_Singh_Dhami_2022.jpg/500px-Pushkar_Singh_Dhami_2022.jpg",
     "type": "MLA",
     "careerTimeline": [
       {
@@ -134671,7 +134758,9 @@
     "totalCommentsCount": 0,
     "party": "BJP",
     "portfolio": "Chief Minister of Uttarakhand",
-    "currentDesignation": "Chief Minister"
+    "currentDesignation": "Chief Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Pushkar_Singh_Dhami_2022.jpg/500px-Pushkar_Singh_Dhami_2022.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Pushkar_Singh_Dhami_2022.jpg/500px-Pushkar_Singh_Dhami_2022.jpg"
   },
   {
     "id": "pushpendra-singh",
@@ -136748,7 +136837,7 @@
   {
     "id": "rahul-gandhi",
     "pendingCount": 29,
-    "profilePhoto": "https://pbs.twimg.com/profile_images/2048691685794930688/AEEaltaE_400x400.jpg",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Rahul_Gandhi_2023.jpg/500px-Rahul_Gandhi_2023.jpg",
     "openQuestionsCount": 39,
     "status": "Active",
     "name": "Rahul Gandhi",
@@ -136823,7 +136912,9 @@
         "place": "Rae Bareli, UP",
         "title": "Leader of Opposition & MP"
       }
-    ]
+    ],
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Rahul_Gandhi_2023.jpg/500px-Rahul_Gandhi_2023.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Rahul_Gandhi_2023.jpg/500px-Rahul_Gandhi_2023.jpg"
   },
   {
     "id": "rahul-kumar",
@@ -141381,7 +141472,7 @@
     "constituency": "Chorasi (ST)",
     "state": "Rajasthan",
     "totalReactionsCount": 0,
-    "portfolio": "Member of Legislative Assembly (MLA) - Chorasi",
+    "portfolio": "Member of Parliament (Lok Sabha) - Banswara",
     "verificationStatus": "Verified",
     "repType": "MLA",
     "portfolios": [
@@ -141425,8 +141516,9 @@
     "website": "",
     "type": "MLA",
     "age": 33,
-    "status": "Active",
-    "displayName": "Rajkumar Roat"
+    "status": "Elevated to Lok Sabha",
+    "displayName": "Rajkumar Roat",
+    "statusNote": "Vacated Chorasi Assembly seat in June 2024 following election as MP for Banswara."
   },
   {
     "id": "rajkumar-sahyogi",
@@ -162663,7 +162755,7 @@
     "openQuestionsCount": 0,
     "displayName": "Sarwat Kareem Ansari",
     "district": "Satara",
-    "status": "Active",
+    "status": "Deceased",
     "state": "Maharashtra",
     "type": "MLA",
     "repType": "MLA",
@@ -162688,7 +162780,9 @@
     "party": "BSP",
     "termStart": "2022-03-10",
     "age": 69,
-    "seatType": "General"
+    "seatType": "General",
+    "statusNote": "Passed away on October 30, 2023 while serving as MLA for Manglaur.",
+    "termEnd": "2023-10-30"
   },
   {
     "id": "saryu-roy",
@@ -165090,14 +165184,16 @@
     "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=shaila-rani-rawat",
     "type": "MLA",
     "website": "",
-    "status": "Active",
+    "status": "Deceased",
     "totalCommentsCount": 0,
     "state": "Uttarakhand",
     "district": "Rudraprayag",
     "agreeCount": 0,
     "answeredCount": 0,
     "portfolio": "Member of Legislative Assembly (MLA) - Kedarnath",
-    "termStart": "2022-03-10"
+    "termStart": "2022-03-10",
+    "statusNote": "Passed away on July 9, 2024 while serving as MLA for Kedarnath.",
+    "termEnd": "2024-07-09"
   },
   {
     "id": "shailendra-beldale",
@@ -167106,7 +167202,7 @@
     "id": "shashi-tharoor",
     "funnyCount": 450,
     "pendingCount": 10,
-    "profilePhoto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVAHaD79Wig0aXqJqXqMpbySA_x5fy54Q22832DU7-_iNH6ciIwxfUYZkArE3CwKwk4SYVunvH8e8C4L3AkhZ13d3cYBJ-CtVWRQKbmw&s=10",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Dr._Shashi_Tharoor_in_2022.jpg/500px-Dr._Shashi_Tharoor_in_2022.jpg",
     "portfolio": "Chairman, Parliamentary Standing Committee",
     "governmentPositions": [
       "Committee Chairman"
@@ -167131,7 +167227,9 @@
     "name": "Shashi Tharoor",
     "type": "MP_LS",
     "constituency": "Thiruvananthapuram",
-    "chamber": "Lok Sabha"
+    "chamber": "Lok Sabha",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Dr._Shashi_Tharoor_in_2022.jpg/500px-Dr._Shashi_Tharoor_in_2022.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Dr._Shashi_Tharoor_in_2022.jpg/500px-Dr._Shashi_Tharoor_in_2022.jpg"
   },
   {
     "id": "shatrughan-gautam",
@@ -169595,7 +169693,7 @@
     "portfolios": [
       "Member of Legislative Assembly"
     ],
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=siddaramaiah",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Siddaramaiah_2023.jpg/500px-Siddaramaiah_2023.jpg",
     "pendingCount": 0,
     "district": "Bagalkot",
     "careerTimeline": [
@@ -169688,7 +169786,9 @@
     "website": "",
     "answeredCount": 0,
     "totalCommentsCount": 0,
-    "currentDesignation": "Chief Minister"
+    "currentDesignation": "Chief Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Siddaramaiah_2023.jpg/500px-Siddaramaiah_2023.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Siddaramaiah_2023.jpg/500px-Siddaramaiah_2023.jpg"
   },
   {
     "id": "siddharth-anil-shirole",
@@ -174658,14 +174758,16 @@
     "chamber": "Vidhan Sabha",
     "createdAt": 1786726488694,
     "pendingCount": 0,
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=sukhvinder-singh-sukhu",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Sukhvinder_Singh_Sukhu_2022.jpg/500px-Sukhvinder_Singh_Sukhu_2022.jpg",
     "portfolios": [
       "Member of Legislative Assembly"
     ],
     "party": "INC",
     "openQuestionsCount": 0,
     "repType": "MLA",
-    "currentDesignation": "Chief Minister"
+    "currentDesignation": "Chief Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Sukhvinder_Singh_Sukhu_2022.jpg/500px-Sukhvinder_Singh_Sukhu_2022.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Sukhvinder_Singh_Sukhu_2022.jpg/500px-Sukhvinder_Singh_Sukhu_2022.jpg"
   },
   {
     "id": "sukhwinder-kumar-sukhi",
@@ -185194,7 +185296,7 @@
     "party": "DMK",
     "education": "Graduate",
     "pendingCount": 0,
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=udhayanidhi-stalin",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Udhayanidhi_Stalin_2023.jpg/500px-Udhayanidhi_Stalin_2023.jpg",
     "displayName": "Udhayanidhi Stalin",
     "status": "Active",
     "type": "MLA",
@@ -185229,7 +185331,9 @@
         "description": "Serving in the state cabinet.",
         "place": "Tamil Nadu"
       }
-    ]
+    ],
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Udhayanidhi_Stalin_2023.jpg/500px-Udhayanidhi_Stalin_2023.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Udhayanidhi_Stalin_2023.jpg/500px-Udhayanidhi_Stalin_2023.jpg"
   },
   {
     "id": "udhheshwari-paikra",
@@ -193418,7 +193522,7 @@
     "createdAt": 1786728751402,
     "totalReactionsCount": 0,
     "type": "MLA",
-    "status": "Active",
+    "status": "Elevated to Lok Sabha",
     "electionYear": "2022",
     "gender": "Male",
     "totalCommentsCount": 0,
@@ -193431,10 +193535,11 @@
     "seatType": "General",
     "state": "Uttar Pradesh",
     "termStart": "2022-03-10",
-    "portfolio": "Member of Legislative Assembly (MLA) - Majhawan",
+    "portfolio": "Member of Parliament (Lok Sabha) - Bhadohi",
     "agreeCount": 0,
     "repType": "MLA",
-    "name": "Vinod Kumar Bind"
+    "name": "Vinod Kumar Bind",
+    "statusNote": "Vacated Majhawan Assembly seat in June 2024 following election as MP for Bhadohi."
   },
   {
     "id": "vinod-narayan-jha",
@@ -197382,10 +197487,12 @@
     "answeredCount": 0,
     "state": "Uttar Pradesh",
     "pendingCount": 0,
-    "profilePhoto": "https://api.dicebear.com/10.x/avataaars/svg?seed=yogi-adityanath",
+    "profilePhoto": "https://upload.wikimedia.org/wikipedia/commons/0/05/Yogi_Adityanath_2026.jpg",
     "openQuestionsCount": 0,
     "website": "",
-    "currentDesignation": "Chief Minister"
+    "currentDesignation": "Chief Minister",
+    "profilePhotoUrl": "https://upload.wikimedia.org/wikipedia/commons/0/05/Yogi_Adityanath_2026.jpg",
+    "photoURL": "https://upload.wikimedia.org/wikipedia/commons/0/05/Yogi_Adityanath_2026.jpg"
   },
   {
     "id": "yoginder-singh-rana",
@@ -197817,7 +197924,7 @@
     "repType": "MLA",
     "funnyCount": 0,
     "constituency": "Ramgarh",
-    "status": "Active",
+    "status": "Deceased",
     "totalReactionsCount": 0,
     "createdAt": 1786728120199,
     "chamber": "Vidhan Sabha",
@@ -197828,6 +197935,8 @@
     "portfolios": [
       "Member of Legislative Assembly"
     ],
-    "age": 63
+    "age": 63,
+    "statusNote": "Passed away on September 14, 2024 while serving as MLA for Ramgarh.",
+    "termEnd": "2024-09-14"
   }
 ]

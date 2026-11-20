@@ -244,6 +244,19 @@ export default function LeaderDetail({ leaderId, onBack }) {
                   </h1>
                   <span className="badge badge-featured">{leader.party}</span>
                   <span className="badge badge-verified">{leader.type}</span>
+                  {leader.status && leader.status !== 'Active' && (
+                    <span 
+                      className="badge" 
+                      style={{ 
+                        backgroundColor: leader.status === 'Deceased' ? '#FEE2E2' : '#FEF3C7', 
+                        color: leader.status === 'Deceased' ? '#991B1B' : '#92400E',
+                        border: `1px solid ${leader.status === 'Deceased' ? '#FCA5A5' : '#FCD34D'}`,
+                        fontWeight: 700
+                      }}
+                    >
+                      {leader.status === 'Deceased' ? '🕊️ Deceased' : `🏛️ ${leader.status}`}
+                    </span>
+                  )}
                   
                   {/* Share Leader Profile Button */}
                   <button
@@ -273,6 +286,22 @@ export default function LeaderDetail({ leaderId, onBack }) {
                 {leader.portfolio && (
                   <div style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', color: 'var(--text-muted)', marginTop: '4px', fontStyle: 'italic' }}>
                     💼 {leader.portfolio}
+                  </div>
+                )}
+                {leader.statusNote && (
+                  <div style={{ 
+                    backgroundColor: leader.status === 'Deceased' ? '#FEF2F2' : '#FFFBEB',
+                    border: `1px solid ${leader.status === 'Deceased' ? '#FEE2E2' : '#FEF3C7'}`,
+                    borderRadius: '6px',
+                    padding: '8px 12px',
+                    marginTop: '8px',
+                    fontSize: '13px',
+                    color: leader.status === 'Deceased' ? '#991B1B' : '#92400E',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px'
+                  }}>
+                    <span>ℹ️</span> <strong>Status Note:</strong> {leader.statusNote}
                   </div>
                 )}
               </div>

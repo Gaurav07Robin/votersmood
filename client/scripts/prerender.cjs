@@ -394,7 +394,9 @@ for (const leader of leaders) {
             <span style="background: #0f172a; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">${party}</span>
             <span style="background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">${roleTag}</span>
             <span style="background: #f1f5f9; color: #334155; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">${leader.chamber || 'Legislative Assembly'}</span>
+            ${leader.status && leader.status !== 'Active' ? `<span style="background: ${leader.status === 'Deceased' ? '#fee2e2' : '#fef3c7'}; color: ${leader.status === 'Deceased' ? '#991b1b' : '#92400e'}; border: 1px solid ${leader.status === 'Deceased' ? '#fca5a5' : '#fcd34d'}; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">${leader.status === 'Deceased' ? '🕊️ Deceased' : '🏛️ ' + leader.status}</span>` : ''}
           </div>
+          ${leader.statusNote ? `<div style="background: ${leader.status === 'Deceased' ? '#fef2f2' : '#fffbeb'}; border: 1px solid ${leader.status === 'Deceased' ? '#fee2e2' : '#fef3c7'}; border-radius: 6px; padding: 8px 12px; margin-bottom: 8px; font-size: 13px; color: ${leader.status === 'Deceased' ? '#991b1b' : '#92400e'};"><strong>Status Note:</strong> ${leader.statusNote}</div>` : ''}
           <h1 style="font-size: 28px; font-weight: 800; color: #0f172a; margin: 0 0 4px 0;">${name}</h1>
           <p style="font-size: 14px; color: #64748b; margin: 0;">📍 ${constituency}, ${state} • 💼 ${portfolio}</p>
         </div>

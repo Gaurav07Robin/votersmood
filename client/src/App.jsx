@@ -5,16 +5,32 @@ import Navbar from './components/Navbar';
 import RegisterModal from './components/RegisterModal';
 import ErrorBoundary from './components/ErrorBoundary';
 import Home from './pages/Home';
-const Polls = React.lazy(() => import('./pages/Polls'));
-const Insights = React.lazy(() => import('./pages/Insights'));
-const Leaders = React.lazy(() => import('./pages/Leaders'));
-const LeaderDetail = React.lazy(() => import('./pages/LeaderDetail'));
-const Admin = React.lazy(() => import('./pages/Admin'));
-const ElectionsHub = React.lazy(() => import('./pages/ElectionsHub'));
-const ElectionYearDetail = React.lazy(() => import('./pages/ElectionYearDetail'));
-const ConstituencyResult = React.lazy(() => import('./pages/ConstituencyResult'));
-const ByElectionDetail = React.lazy(() => import('./pages/ByElectionDetail'));
-const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
+// Resilient dynamic chunk loader: reloads page once if a newly deployed chunk fails to load
+const lazyRetry = (componentImport) =>
+  React.lazy(async () => {
+    const refreshedKey = 'opinar_chunk_retry_' + window.location.pathname;
+    try {
+      return await componentImport();
+    } catch (error) {
+      if (!sessionStorage.getItem(refreshedKey)) {
+        sessionStorage.setItem(refreshedKey, 'true');
+        window.location.reload();
+        return { default: () => null };
+      }
+      throw error;
+    }
+  });
+
+const Polls = lazyRetry(() => import('./pages/Polls'));
+const Insights = lazyRetry(() => import('./pages/Insights'));
+const Leaders = lazyRetry(() => import('./pages/Leaders'));
+const LeaderDetail = lazyRetry(() => import('./pages/LeaderDetail'));
+const Admin = lazyRetry(() => import('./pages/Admin'));
+const ElectionsHub = lazyRetry(() => import('./pages/ElectionsHub'));
+const ElectionYearDetail = lazyRetry(() => import('./pages/ElectionYearDetail'));
+const ConstituencyResult = lazyRetry(() => import('./pages/ConstituencyResult'));
+const ByElectionDetail = lazyRetry(() => import('./pages/ByElectionDetail'));
+const PrivacyPolicy = lazyRetry(() => import('./pages/PrivacyPolicy'));
 
 const KNOWN_TABS = ['discussions', 'polls', 'insights', 'directory', 'trending', 'admin', 'elections', 'election', 'by-elections'];
 
@@ -221,6 +237,7 @@ function AppContent() {
       />
 
       <main style={{ flex: 1 }}>
+        <ErrorBoundary>
         <React.Suspense fallback={<div style={{padding:"40px", textAlign:"center", fontFamily:"var(--font-mono)", fontSize:"12px"}}>LOADING MODULE...</div>}>
         {activeTab === 'discussions' && <Home openRegisterModal={openRegisterModal} />}
         {activeTab === 'polls' && <Polls />}
@@ -286,7 +303,8 @@ function AppContent() {
           />
         )}
         {activeTab === 'admin' && <Admin />}
-              </React.Suspense>
+        </React.Suspense>
+        </ErrorBoundary>
       </main>
 
       
@@ -302,10 +320,12 @@ export default function App() {
   }
 
   return (
-    <AuthProvider>
-      <ToastProvider>
-        <AppContent />
-      </ToastProvider>
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <ToastProvider>
+          <AppContent />
+        </ToastProvider>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
