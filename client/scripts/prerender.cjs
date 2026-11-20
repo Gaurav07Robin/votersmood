@@ -211,6 +211,15 @@ for (const loc of cacheLocations) {
   }
 }
 
+// Index leaders by state for internal PageRank linking mesh
+const leadersByState = {};
+for (const leader of leaders) {
+  if (!leader || !leader.state) continue;
+  if (!leadersByState[leader.state]) leadersByState[leader.state] = [];
+  leadersByState[leader.state].push(leader);
+}
+console.log(`🗺️ Indexed leaders across ${Object.keys(leadersByState).length} States & UTs for internal mesh linking.`);
+
 let leaderCount = 0;
 for (const leader of leaders) {
   if (!leader || !leader.id || !leader.name) continue;
@@ -220,13 +229,21 @@ for (const leader of leaders) {
   const party = leader.party || 'Independent';
   const constituency = leader.constituency || 'Constituency';
   const state = leader.state || 'India';
-  const portfolio = leader.portfolio || (leader.type === 'MP_LS' ? 'Member of Parliament (Lok Sabha)' : 'Member of Legislative Assembly');
+  const stateSlug = state.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const roleTag = leader.type === 'MP_LS' || leader.repType === 'MP' ? 'MP' : 'MLA';
+  const portfolio = leader.portfolio || (roleTag === 'MP' ? 'Member of Parliament (Lok Sabha)' : 'Member of Legislative Assembly');
   const photo = leader.profilePhoto || leader.photoURL || 'https://www.opinar.in/og-image.jpg';
 
-  const title = `${name} - Political Profile, Career History & Constituency | Opinar`;
-  const description = `View ${name}'s verified political career, election history from ${constituency}, ${state}, ${party} leadership record, and ask open questions on Opinar.`;
-  const keywords = `${name}, ${party}, ${state} politics, ${name} ${constituency}, ${name} political career, ask question to ${name}, how to contact ${name} ${constituency} representative, ${name} election history`;
+  // High-CTR Click Magnet Title & Description
+  const title = `${name} (${party}) ${roleTag} ${constituency}: Election Track Record, Bio & Contact | Opinar`;
+  const description = `Explore ${name} (${party}), elected ${roleTag} representing ${constituency}, ${state}. Verified election track record, legislative performance, and citizen open questions on Opinar.`;
+  const keywords = `${name}, ${name} ${party}, ${roleTag} ${name}, ${name} ${constituency}, ${name} MLA, ${name} MP, ${constituency} election result, ask question to ${name}, how to contact ${name} ${constituency} representative, ${name} political career`;
   const canonical = `https://www.opinar.in/directory/${slug}`;
+
+  // Find 5 peer representatives from the same state for internal PageRank flow
+  const peers = (leadersByState[state] || [])
+    .filter(p => p.id !== slug)
+    .slice(0, 5);
 
   const schema = {
     "@context": "https://schema.org",
@@ -247,6 +264,35 @@ for (const leader of leaders) {
         }
       },
       {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.opinar.in/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Directory",
+            "item": "https://www.opinar.in/directory"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": state,
+            "item": `https://www.opinar.in/directory?state=${encodeURIComponent(state)}`
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": `${name} (${party})`,
+            "item": canonical
+          }
+        ]
+      },
+      {
         "@type": "FAQPage",
         "mainEntity": [
           {
@@ -254,7 +300,15 @@ for (const leader of leaders) {
             "name": `Which constituency does ${name} represent?`,
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": `${name} represents ${constituency} in ${state} as an elected representative with ${party}.`
+              "text": `${name} represents ${constituency} in ${state} as an elected ${roleTag} with ${party}.`
+            }
+          },
+          {
+            "@type": "Question",
+            "name": `Which political party does ${name} belong to?`,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": `${name} is an active elected representative affiliated with ${party} in ${state}.`
             }
           },
           {
@@ -270,25 +324,92 @@ for (const leader of leaders) {
     ]
   };
 
+  const peerLinksHtml = peers.length > 0 ? `
+    <section style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-top: 24px;">
+      <h2 style="font-size: 18px; font-weight: 700; color: #0f172a; margin: 0 0 16px 0;">
+        Elected Representatives from ${state}
+      </h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+        ${peers.map(p => `
+          <a href="https://www.opinar.in/directory/${p.id}" style="display: block; padding: 12px 16px; border: 1px solid #e2e8f0; border-radius: 8px; text-decoration: none; color: #0f172a; background: #f8fafc;">
+            <div style="font-weight: 700; font-size: 14px; margin-bottom: 2px;">${p.name}</div>
+            <div style="font-size: 12px; color: #64748b;">${p.party || 'Independent'} • ${p.constituency || state}</div>
+          </a>
+        `).join('')}
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <a href="https://www.opinar.in/elections/state/${stateSlug}" style="font-size: 13px; font-weight: 600; color: #0284c7; text-decoration: none;">
+          Explore All ${state} Assembly Election Results (1952–2026) &rarr;
+        </a>
+      </div>
+    </section>
+  ` : '';
+
+  const timelineHtml = (leader.careerTimeline && leader.careerTimeline.length > 0) ? `
+    <section style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-top: 24px;">
+      <h2 style="font-size: 18px; font-weight: 700; color: #0f172a; margin: 0 0 16px 0;">Political Career History & Milestones</h2>
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        ${leader.careerTimeline.map(m => `
+          <div style="border-left: 3px solid #0284c7; padding-left: 12px;">
+            <div style="font-size: 12px; font-weight: 700; color: #0284c7;">${m.year || ''} ${m.place ? '• ' + m.place : ''}</div>
+            <div style="font-weight: 700; font-size: 14px; color: #0f172a; margin: 2px 0;">${m.title || ''}</div>
+            <div style="font-size: 13px; color: #475569; line-height: 1.5;">${m.description || ''}</div>
+          </div>
+        `).join('')}
+      </div>
+    </section>
+  ` : '';
+
+  const faqHtml = `
+    <section style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-top: 24px;">
+      <h2 style="font-size: 18px; font-weight: 700; color: #0f172a; margin: 0 0 16px 0;">Frequently Asked Questions about ${name}</h2>
+      <div style="margin-bottom: 16px;">
+        <h3 style="font-size: 15px; font-weight: 600; color: #0f172a; margin: 0 0 4px 0;">Which constituency does ${name} represent?</h3>
+        <p style="font-size: 14px; color: #475569; margin: 0; line-height: 1.5;">${name} represents the ${constituency} constituency in ${state} as an elected ${roleTag} with ${party}.</p>
+      </div>
+      <div style="margin-bottom: 16px;">
+        <h3 style="font-size: 15px; font-weight: 600; color: #0f172a; margin: 0 0 4px 0;">Which political party does ${name} belong to?</h3>
+        <p style="font-size: 14px; color: #475569; margin: 0; line-height: 1.5;">${name} is affiliated with ${party} in ${state}.</p>
+      </div>
+      <div>
+        <h3 style="font-size: 15px; font-weight: 600; color: #0f172a; margin: 0 0 4px 0;">How can I ask an open question to ${name}?</h3>
+        <p style="font-size: 14px; color: #475569; margin: 0; line-height: 1.5;">You can post a verified citizen open question directly on ${name}'s official profile on Opinar to engage with other citizens and hold representatives accountable.</p>
+      </div>
+    </section>
+  `;
+
   const bodyHtml = `
     <div style="max-width: 1000px; margin: 0 auto; padding: 32px 24px; font-family: Inter, -apple-system, sans-serif;">
+      <nav aria-label="Breadcrumb" style="font-size: 13px; color: #64748b; margin-bottom: 20px;">
+        <a href="https://www.opinar.in/" style="color: #0284c7; text-decoration: none;">Home</a> &gt; 
+        <a href="https://www.opinar.in/directory" style="color: #0284c7; text-decoration: none;">Directory</a> &gt; 
+        <span style="color: #475569;">${state}</span> &gt; 
+        <span style="color: #0f172a; font-weight: 600;">${name}</span>
+      </nav>
+
       <header style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; margin-bottom: 24px; display: flex; gap: 20px; align-items: center; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-        <img src="${photo}" alt="${name}" style="width: 72px; height: 72px; border-radius: 12px; object-fit: cover; border: 1px solid #cbd5e1; background: #f8fafc;" onerror="this.style.display='none'" />
+        <img src="${photo}" alt="${name}" style="width: 76px; height: 76px; border-radius: 12px; object-fit: cover; border: 1px solid #cbd5e1; background: #f8fafc;" onerror="this.style.display='none'" />
         <div>
-          <div style="display: flex; gap: 8px; margin-bottom: 6px;">
+          <div style="display: flex; gap: 8px; margin-bottom: 6px; flex-wrap: wrap;">
             <span style="background: #0f172a; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">${party}</span>
-            <span style="background: #f1f5f9; color: #334155; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">${leader.type || 'Elected Representative'}</span>
+            <span style="background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">${roleTag}</span>
+            <span style="background: #f1f5f9; color: #334155; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600;">${leader.chamber || 'Legislative Assembly'}</span>
           </div>
           <h1 style="font-size: 28px; font-weight: 800; color: #0f172a; margin: 0 0 4px 0;">${name}</h1>
           <p style="font-size: 14px; color: #64748b; margin: 0;">📍 ${constituency}, ${state} • 💼 ${portfolio}</p>
         </div>
       </header>
+
       <section style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px;">
-        <h2 style="font-size: 18px; font-weight: 700; color: #0f172a; margin: 0 0 12px 0;">Political Track Record & Citizen Engagement</h2>
+        <h2 style="font-size: 18px; font-weight: 700; color: #0f172a; margin: 0 0 12px 0;">Political Track Record & Citizen Accountability</h2>
         <p style="font-size: 14.5px; color: #334155; line-height: 1.6; margin: 0;">
-          Verified political profile of ${name}, representing ${constituency} in ${state}. Verified citizens can review legislative performance, analyze election track records, and ask direct open questions on Opinar.
+          Verified political profile of <strong>${name}</strong>, representing <strong>${constituency}</strong> in <strong>${state}</strong> as an elected <strong>${roleTag}</strong> affiliated with <strong>${party}</strong>. Citizens and voters can analyze legislative history, track past election margins, and submit verified open questions on Opinar.
         </p>
       </section>
+
+      ${timelineHtml}
+      ${faqHtml}
+      ${peerLinksHtml}
     </div>`;
 
   writeRoute(`directory/${slug}`, {

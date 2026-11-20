@@ -21,6 +21,7 @@ const CATEGORIES = [
 export default function LeaderDetail({ leaderId, onBack }) {
   const [leader, setLeader] = useState(null);
   const [questions, setQuestions] = useState([]);
+  const [relatedLeaders, setRelatedLeaders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isShareOpen, setIsShareOpen] = useState(false);
   
@@ -40,10 +41,26 @@ export default function LeaderDetail({ leaderId, onBack }) {
       ]).then(([leaderData, postsData]) => {
         if (isMounted) {
           setLeader(leaderData);
+
+          // Fetch peer representatives from the same state for internal PageRank flow
+          if (leaderData?.state) {
+            api.getLeaders({ state: leaderData.state, limit: 8 }).then(data => {
+              const list = Array.isArray(data) ? data : (data?.leaders || []);
+              if (isMounted) {
+                setRelatedLeaders(list.filter(l => l.id !== leaderData.id).slice(0, 6));
+              }
+            }).catch(() => {});
+          }
+
           if (leaderData?.name) {
-            // 1. Generate SEO-optimized text
-            const pageTitle = `${leaderData.name} - Political Profile & Career History | Opinar`;
-            const pageDesc = `View the complete political career, election timeline, and ask open questions to ${leaderData.name}, ${leaderData.party} leader from ${leaderData.constituency}, ${leaderData.state}.`;
+            const roleTag = leaderData.type === 'MP_LS' || leaderData.repType === 'MP' ? 'MP' : 'MLA';
+            const partyBadge = leaderData.party ? `(${leaderData.party})` : '';
+            const constPart = leaderData.constituency ? `${leaderData.constituency}` : '';
+            const statePart = leaderData.state ? `, ${leaderData.state}` : '';
+
+            // High-CTR Click Magnet Title & Description
+            const pageTitle = `${leaderData.name} ${partyBadge} ${roleTag} ${constPart}: Election Track Record, Bio & Contact | Opinar`;
+            const pageDesc = `Explore ${leaderData.name} ${partyBadge}, elected ${roleTag} representing ${constPart}${statePart}. View verified election track record, legislative performance, and citizen open questions on Opinar.`;
             
             // 2. Update Document Title
             document.title = pageTitle;
@@ -104,17 +121,28 @@ export default function LeaderDetail({ leaderId, onBack }) {
 
   const photoUrl = leader?.profilePhoto || leader?.profilePhotoUrl || leader?.photoURL;
 
+  const roleLabel = leader?.type === 'MP_LS' || leader?.repType === 'MP' ? 'MP' : 'MLA';
+  const partyBadge = leader?.party ? `(${leader.party})` : '';
+  const constPart = leader?.constituency ? `${leader.constituency}` : '';
+  const statePart = leader?.state ? `, ${leader.state}` : '';
+  const highCtrTitle = leader?.name 
+    ? `${leader.name} ${partyBadge} ${roleLabel} ${constPart}: Election Track Record, Bio & Contact | Opinar`
+    : 'Leader Profile | Opinar';
+  const highCtrDesc = leader?.name 
+    ? `Explore ${leader.name} ${partyBadge}, elected ${roleLabel} representing ${constPart}${statePart}. View verified election track record, legislative performance, and citizen open questions on Opinar.`
+    : 'Track leader performance on Opinar.';
+
   return (
     <div className="container page-main-container" style={{ padding: '32px 24px', maxWidth: '1000px' }}>
 
       <Helmet>
-        <title>{leader?.name ? `${leader.name} | ${leader.portfolio || 'Politician'} - Opinar` : 'Leader Profile | Opinar'}</title>
-        <meta name="description" content={leader?.name ? `View ${leader.name}'s political track record, election history from ${leader.constituency || 'constituency'}, ${leader.state || 'India'}, and ask verified public questions on Opinar.` : 'Track leader performance on Opinar.'} />
-        <meta name="keywords" content={`${leader?.name || 'Indian politician'}, ${leader?.party || ''}, ${leader?.state || ''} politics, ${leader?.name || ''} ${leader?.constituency || ''}, ${leader?.name || ''} political career, ask question to ${leader?.name || ''}, how to contact ${leader?.name || ''} ${leader?.constituency || ''} representative, ${leader?.name || ''} election history and portfolio, public questions to ${leader?.name || ''} on Opinar`} />
+        <title>{highCtrTitle}</title>
+        <meta name="description" content={highCtrDesc} />
+        <meta name="keywords" content={`${leader?.name || 'Indian politician'}, ${leader?.name || ''} ${leader?.party || ''}, ${roleLabel} ${leader?.name || ''}, ${leader?.name || ''} ${leader?.constituency || ''}, ${leader?.name || ''} MLA, ${leader?.name || ''} MP, ${leader?.constituency || ''} election result, ask question to ${leader?.name || ''}, how to contact ${leader?.name || ''} ${leader?.constituency || ''} representative, ${leader?.name || ''} political career`} />
         <link rel="canonical" href={`https://www.opinar.in/directory/${leader?.id || leaderId || ''}`} />
 
-        <meta property="og:title" content={`${leader?.name || 'Politician'} Profile & Career | Opinar`} />
-        <meta property="og:description" content={`View ${leader?.name || 'leader'}'s political career, election timeline, and ask open questions on Opinar.`} />
+        <meta property="og:title" content={highCtrTitle} />
+        <meta property="og:description" content={highCtrDesc} />
         <meta property="og:url" content={`https://www.opinar.in/directory/${leader?.id || leaderId || ''}`} />
         <meta property="og:type" content="profile" />
 
@@ -136,6 +164,15 @@ export default function LeaderDetail({ leaderId, onBack }) {
                     "addressRegion": leader.state,
                     "addressCountry": "IN"
                   }
+                },
+                {
+                  "@type": "BreadcrumbList",
+                  "itemListElement": [
+                    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.opinar.in/" },
+                    { "@type": "ListItem", "position": 2, "name": "Directory", "item": "https://www.opinar.in/directory" },
+                    { "@type": "ListItem", "position": 3, "name": leader.state || "State", "item": `https://www.opinar.in/directory?state=${encodeURIComponent(leader.state || '')}` },
+                    { "@type": "ListItem", "position": 4, "name": `${leader.name} (${leader.party || 'Leader'})`, "item": `https://www.opinar.in/directory/${leader.id}` }
+                  ]
                 },
                 {
                   "@type": "FAQPage",
@@ -165,6 +202,19 @@ export default function LeaderDetail({ leaderId, onBack }) {
       </Helmet>
 
       
+      {/* Breadcrumb Navigation */}
+      {leader && (
+        <nav aria-label="Breadcrumb" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: 'var(--text-muted)', marginBottom: '16px', flexWrap: 'wrap' }}>
+          <a href="/" style={{ color: '#0284C7', textDecoration: 'none', fontWeight: 500 }}>Home</a>
+          <span>/</span>
+          <a href="/directory" onClick={(e) => { e.preventDefault(); onBack?.(); }} style={{ color: '#0284C7', textDecoration: 'none', fontWeight: 500 }}>Directory</a>
+          <span>/</span>
+          <span>{leader.state || 'State'}</span>
+          <span>/</span>
+          <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{leader.name}</span>
+        </nav>
+      )}
+
       {/* SEO Friendly Back Navigation Bar */}
       <button onClick={onBack} className="btn-ghost" style={{ marginBottom: '16px', fontSize: '13px', fontFamily: 'var(--font-mono)' }}>
         ← BACK TO ELECTED REPRESENTATIVES DIRECTORY
@@ -265,6 +315,74 @@ export default function LeaderDetail({ leaderId, onBack }) {
                       </div>
                     </div>
                   </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* VISIBLE FREQUENTLY ASKED QUESTIONS */}
+          <div style={{ marginTop: '32px', borderTop: '1px solid var(--border-subtle)', paddingTop: '24px' }}>
+            <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '20px', fontWeight: 800, color: 'var(--text-primary)', marginBottom: '16px' }}>
+              ❓ Frequently Asked Questions about {leader.name}
+            </h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '16px' }}>
+                <h4 style={{ fontSize: '15px', fontWeight: 700, margin: '0 0 6px 0', color: 'var(--text-primary)' }}>
+                  Which constituency does {leader.name} represent?
+                </h4>
+                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.5' }}>
+                  {leader.name} represents the <strong>{leader.constituency}</strong> constituency in <strong>{leader.state}</strong> as an elected {roleLabel} affiliated with <strong>{leader.party}</strong>.
+                </p>
+              </div>
+              <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '8px', padding: '16px' }}>
+                <h4 style={{ fontSize: '15px', fontWeight: 700, margin: '0 0 6px 0', color: 'var(--text-primary)' }}>
+                  How can I ask an open question to {leader.name}?
+                </h4>
+                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', margin: 0, lineHeight: '1.5' }}>
+                  Citizens can post verified public questions directly on {leader.name}'s official Opinar profile to debate local civic issues and demand representative accountability.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* RELATED REPRESENTATIVES FROM STATE (Internal PageRank Mesh) */}
+          {relatedLeaders.length > 0 && (
+            <div style={{ marginTop: '32px', borderTop: '1px solid var(--border-subtle)', paddingTop: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '8px' }}>
+                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '20px', fontWeight: 800, color: 'var(--text-primary)', margin: 0 }}>
+                  🏛️ Elected Representatives from {leader.state}
+                </h3>
+                {leader.state && (
+                  <a 
+                    href={`/elections/state/${leader.state.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                    style={{ fontSize: '13px', fontWeight: 600, color: '#0284C7', textDecoration: 'none' }}
+                  >
+                    View {leader.state} Assembly Elections &rarr;
+                  </a>
+                )}
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
+                {relatedLeaders.map(peer => (
+                  <a 
+                    key={peer.id}
+                    href={`/directory/${peer.id}`}
+                    style={{
+                      display: 'block',
+                      padding: '14px 16px',
+                      background: '#FFFFFF',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: '8px',
+                      textDecoration: 'none',
+                      color: 'var(--text-primary)',
+                      boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
+                      transition: 'border-color 0.2s'
+                    }}
+                  >
+                    <div style={{ fontWeight: 700, fontSize: '14px', marginBottom: '4px' }}>{peer.name}</div>
+                    <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+                      <span style={{ fontWeight: 600, color: '#0F172A' }}>{peer.party}</span> • {peer.constituency}
+                    </div>
+                  </a>
                 ))}
               </div>
             </div>
