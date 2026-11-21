@@ -27,11 +27,11 @@ try {
   }
   db = getFirestore(app);
 
-  // Connect to emulator if flag is set (backend equivalent of window.location.hostname === 'localhost')
-  if (process.env.USE_FIREBASE_EMULATOR === 'true') {
-    connectFirestoreEmulator(db, '127.0.0.1', 8080);
-    console.log('🔗 Connected to Firestore Local Emulator on 127.0.0.1:8080');
-  }
+  // Firebase emulator bypassed: production and local development connect directly to Cloud Firestore DB
+  // if (process.env.USE_FIREBASE_EMULATOR === 'true') {
+  //   connectFirestoreEmulator(db, '127.0.0.1', 8080);
+  //   console.log('🔗 Connected to Firestore Local Emulator on 127.0.0.1:8080');
+  // }
 } catch (error) {
   console.warn('⚠️ Server-side Firebase DB connection warning:', error.message);
 }
